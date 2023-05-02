@@ -1,0 +1,28 @@
+#header {
+    background-color: #002B44;
+    width: auto;
+    height: 50px;
+    color: #ECECEC;
+    text-align: center;
+}
+
+.flexboxLogo {
+    margin-left: 2%;
+    margin-right: 2%;
+    color: #ECECEC;
+    float : left;
+}
+.flexboxText {
+    padding-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+    color: #ECECEC;
+    float : left;
+}
+a {
+    color: #ECECEC;
+}
+body {
+    margin: 0%;
+    background-image: url("img/omnesLogoFond.gif");
+}
