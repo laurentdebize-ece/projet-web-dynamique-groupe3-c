@@ -12,6 +12,7 @@
     color: #ECECEC;
     float : left;
 }
+
 .flexboxText {
     padding-top: 1%;
     margin-left: 2%;
@@ -21,8 +22,82 @@
 }
 a {
     color: #ECECEC;
+    font-family: "openSansLight";
+    text-decoration: none;
+}
+footer{
+    /* background-attachment:fixed; */
+    background-color: #002B44;
+    color:#ECECEC;
+    font-family: "openSansLight";
+    font-size: x-small;
+    padding-top: 5px;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 5px;
+    height: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 body {
+    margin: 0 ;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #ECECEC;
+}
+@font-face {
+    font-family: openSansLight;
+    src: url(font/openSansLight.ttf);
+  }
+@font-face {
+    font-family: openSansBold;
+    src: url(font/openSansBold.ttf);
+  }
+h1{
+    text-align: center;
+    font-family: "openSansBold";
+    font-size:xx-large;
     margin: 0%;
-    background-image: url("img/omnesLogoFond.gif");
+}
+h2{
+    text-align: left;
+    font-family: "openSansLight";
+    font-weight: bold;
+    padding: 5%;
+}
+.legend{
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: left;
+    font-family: "openSansLight";
+}
+.floatLeft {
+    float: left;
+}
+.floatRight {
+    float: right;
+}
+#tailleImgOmnesSkills {
+    width:700px
+}
+.menuLogo {
+    width:45px;
+    height:45px;
+    padding-top: 2px;
+}
+#bodyProfil {
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    text-align: left;
+}
+.textProfil {
+    font-family: "openSansLight";
+    padding-left: 1%;
+    padding-bottom: 3%;
+}
+.textBoldProfil {
+    font-family: "openSansBold";
 }
