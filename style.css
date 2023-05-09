@@ -6,6 +6,23 @@
     text-align: center;
 }
 
+nav.nav {
+    display: flex;
+    list-style: none;
+}
+
+nav.nav li {
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top:1%;
+}
+
+.flex-contain {
+    text-align: center;
+    position: fixed;
+    right: 0;
+    top : 0;
+}
 .flexboxLogo {
     margin-left: 2%;
     margin-right: 2%;
@@ -87,11 +104,12 @@ h2{
     padding-top: 2px;
 }
 #bodyProfil {
-    margin-top: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 5%;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
     text-align: left;
+    height: 280px;
 }
 .textProfil {
     font-family: "openSansLight";
@@ -100,4 +118,11 @@ h2{
 }
 .textBoldProfil {
     font-family: "openSansBold";
+}
+#imgLyonCityProfil{
+    float: right;
+    height: 400px;
+    width: 50%;
+    /*margin-right: 3%;
+    margin-top: 2%;*/
 }
