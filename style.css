@@ -38,6 +38,7 @@ footer{
     height: 15px;
     display: flex;
     justify-content: space-between;
+
 }
 body {
     margin: 0 ;
@@ -45,7 +46,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-color: #ECECEC;
-}
+} 
 @font-face {
     font-family: openSansLight;
     src: url(font/openSansLight.ttf);
@@ -100,4 +101,58 @@ h2{
 }
 .textBoldProfil {
     font-family: "openSansBold";
+}
+.connexionPage {
+    background-image: url(img/ImagePageConnexion.png);
+    background-size: cover; /* l'image est redimensionnée pour couvrir toute la zone du conteneur */
+    background-repeat: no-repeat; /* l'image ne se répète pas */
+}
+.login-form {
+	width: 30%;
+    margin-left: 15%;
+	padding: 20px;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.login-form h3 {
+	margin: 0 0 20px;
+	text-align: center;
+}
+
+.login-form label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+	width: 92%;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	background: #f2f2f2;
+}
+
+.login-form input[type="submit"] {
+	width: 100%;
+	padding: 10px;
+    margin-bottom: 10px;
+	border: none;
+	border-radius: 5px;
+	background: #002B44;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.login-form input[type="submit"]:hover {
+	background: #002B70;
+}
+#tailleImgOmnesSkillsConnexionPage{
+    text-align: left;
+    padding-left: 40px;
+    width:60%;
+
 }
