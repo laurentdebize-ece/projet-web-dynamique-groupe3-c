@@ -103,3 +103,5 @@ CREATE TABLE  `compte/competence` (
 
 INSERT INTO `ecole` (`Nom`) VALUES ('Ecole 42');
 INSERT INTO `compte` (`Nom`, `Prenom`, `E_mail`, `MDP`, `Type_compte`) VALUES (`Gogo`, `Gadget`, `gg@gmail.com`, `gg`, `etudiant`);
+
+INSERT INTO (`ecole`) VALUES ('GUGUGAGASCHOOL');
