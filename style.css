@@ -1,47 +1,88 @@
+body {
+    margin: 0 ;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #ECECEC;
+}
+#taillePage {
+    min-height: 100%;
+    width: 100%;
+}
+.lienWhite {
+    color: #ECECEC;
+    font-family: "openSansLight";
+    text-decoration: none;
+}
+.lienBlue {
+    color: #002B44;
+    font-family: "openSansLight";
+    text-decoration: none;
+}
+h1{
+    text-align: center;
+    font-family: "openSansBold";
+    font-size:xx-large;
+    margin: 0%;
+}
+h2{
+    text-align: left;
+    font-family: "openSansLight";
+    font-weight: bold;
+    padding: 5%;
+}
+
+
+/*Menu*/
 #header {
     background-color: #002B44;
-    width: auto;
+    width: 100%;
     height: 50px;
     color: #ECECEC;
     text-align: center;
-}
-
-nav.nav {
-    display: flex;
-    list-style: none;
-}
-
-nav.nav li {
-    padding-left: 3%;
-    padding-right: 3%;
-    padding-top:1%;
-}
-
-.flex-contain {
-    text-align: center;
     position: fixed;
+}
+.flex-contain-menu {
+    text-align: center;
     right: 0;
     top : 0;
 }
-.flexboxLogo {
+.flexboxLogo-menu {
     margin-left: 2%;
     margin-right: 2%;
     color: #ECECEC;
     float : left;
 }
-
-.flexboxText {
+.flexboxText-menu {
     padding-top: 1%;
     margin-left: 2%;
     margin-right: 2%;
     color: #ECECEC;
     float : left;
 }
-a {
-    color: #ECECEC;
-    font-family: "openSansLight";
-    text-decoration: none;
+nav.nav {
+    display: flex;
+    list-style: none;
 }
+nav.nav li {
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top:1%;
+}
+
+
+/*Font*/
+@font-face {
+    font-family: openSansLight;
+    src: url(font/openSansLight.ttf);
+  }
+@font-face {
+    font-family: openSansBold;
+    src: url(font/openSansBold.ttf);
+}
+
+
+/*Footer*/
 footer{
     /* background-attachment:fixed; */
     background-color: #002B44;
@@ -56,60 +97,42 @@ footer{
     display: flex;
     justify-content: space-between;
 }
-body {
-    margin: 0 ;
-    background-size: auto;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: #ECECEC;
-}
-@font-face {
-    font-family: openSansLight;
-    src: url(font/openSansLight.ttf);
-  }
-@font-face {
-    font-family: openSansBold;
-    src: url(font/openSansBold.ttf);
-  }
-h1{
-    text-align: center;
-    font-family: "openSansBold";
-    font-size:xx-large;
-    margin: 0%;
-}
-h2{
-    text-align: left;
-    font-family: "openSansLight";
-    font-weight: bold;
-    padding: 5%;
-}
-.legend{
-    padding-left: 5%;
-    padding-right: 5%;
-    text-align: left;
-    font-family: "openSansLight";
-}
 .floatLeft {
     float: left;
 }
 .floatRight {
     float: right;
 }
-#tailleImgOmnesSkills {
-    width:700px
-}
+
+
+/*Home page*/
 .menuLogo {
     width:45px;
     height:45px;
     padding-top: 2px;
 }
+#tailleImgOmnesSkills {
+    width:700px
+    
+}
+#introHomePage {
+    padding-top: 50px;
+}
+.intro{
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: left;
+    font-family: "openSansLight";
+}
+
+
+/*Profil page*/
 #bodyProfil {
-    padding-top: 5%;
+    padding-top: 7%;
     padding-left: 5%;
     padding-right: 5%;
     padding-bottom: 5%;
     text-align: left;
-    height: 280px;
 }
 .textProfil {
     font-family: "openSansLight";
@@ -120,9 +143,25 @@ h2{
     font-family: "openSansBold";
 }
 #imgLyonCityProfil{
+    padding-top: 4%;
     float: right;
     height: 400px;
     width: 50%;
     /*margin-right: 3%;
     margin-top: 2%;*/
+}
+
+
+/*Matières page*/
+.flexboxMatieres{
+    margin-top: 7%;
+    margin-left: 2%;
+    margin-right: 2%;
+    height: 200px;
+    width: 200px;
+    background-color: #002B44;
+    color: #ECECEC;
+    float : left;
+    border-radius: 10px;
+    text-align: center;
 }
