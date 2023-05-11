@@ -128,4 +128,3 @@ INSERT INTO `ecole` (`Nom`) VALUES ('Ecole 42');
 
 
 
-INSERT INTO (`ecole`) VALUES ('GUGUGAGASCHOOL');
