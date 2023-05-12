@@ -1,0 +1,23 @@
+#bodyProfil {
+    padding-top: 7%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    text-align: left;
+}
+.textProfil {
+    font-family: "openSansLight";
+    padding-left: 1%;
+    padding-bottom: 3%;
+}
+.textBoldProfil {
+    font-family: "openSansBold";
+}
+#imgLyonCityProfil{
+    padding-top: 4%;
+    float: right;
+    height: 400px;
+    width: 50%;
+    /*margin-right: 3%;
+    margin-top: 2%;*/
+}

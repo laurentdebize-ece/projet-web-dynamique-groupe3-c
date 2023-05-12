@@ -12,7 +12,7 @@ réécrivez votre mot de passe: <input type="password" name="Nmotdepasse"><br>
 
 <?php
 try{
-$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskill;
+$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', 'root',
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
@@ -52,7 +52,7 @@ while ($donnees = $reponse->fetch()){
 					if($verif == 1) {
 						session_start();
 						$_SESSION['ID_Compte'] = $ID;
-						header('Location: homePage.html');
+						header('Location: ../homePage/homePage.html');
 						exit();
 					}
 					else {
@@ -62,7 +62,7 @@ while ($donnees = $reponse->fetch()){
 			else {
 				session_start();
 				$_SESSION['ID_Compte'] = $ID;
-				header('Location: homePage.html');
+				header('Location: ../homePage/homePage.html');
 				exit();
 			}
 		}

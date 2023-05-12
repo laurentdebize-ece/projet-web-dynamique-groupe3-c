@@ -43,22 +43,22 @@ h2{
     position: fixed;
 }
 .flex-contain-menu {
-    text-align: center;
-    right: 0;
-    top : 0;
+    display: flex;
+    flex-direction: row;
+}
+.menuLogo {
+    width:45px;
+    height:45px;
+    padding-top: 2px;
 }
 .flexboxLogo-menu {
     margin-left: 2%;
     margin-right: 2%;
-    color: #ECECEC;
-    float : left;
 }
 .flexboxText-menu {
     padding-top: 1%;
     margin-left: 2%;
     margin-right: 2%;
-    color: #ECECEC;
-    float : left;
 }
 nav.nav {
     display: flex;
