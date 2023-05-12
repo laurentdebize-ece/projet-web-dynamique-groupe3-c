@@ -17,19 +17,19 @@ catch (Exception $e)
 <head>
     <meta charset="utf-8">
     <title>OMNES MySkills - Compétences</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="../style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     <section id="taillePage">
      <section id="header">
         <div class=".flex-contain-menu">
-            <div class="flexboxLogo-menu"><a href="homePage.html" class="lienWhite"><img src="img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <div class="flexboxText-menu"><a href="mesMatieresPage.html" class="lienWhite">Mes matières</a></div>
+            <div class="flexboxLogo-menu"><a href="../homePage/homePage.html" class="lienWhite"><img src="img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
+            <div class="flexboxText-menu"><a href="../mesMatieresPage/mesMatieresPage.html" class="lienWhite">Mes matières</a></div>
             <div class="flexboxText-menu"><a href="mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
-            <div class="flexboxText-menu"><a href="competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
-            <div class="flexboxText-menu"><a href="toutesCompetencesPage.html" class="lienWhite">Toutes les compétences</a></div>
-            <div class="flexboxLogo-menu"><a href="profilPage.html" class="lienWhite"><img src="img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
+            <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
+            <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.html" class="lienWhite">Toutes les compétences</a></div>
+            <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.html" class="lienWhite"><img src="img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
     <section id="introHomePage">
