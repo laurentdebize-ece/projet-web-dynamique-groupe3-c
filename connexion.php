@@ -4,7 +4,7 @@
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-Pseudo: <input type="text" name="pseudo"><br>
+Email: <input type="text" name="mail"><br>
 Mot de passe: <input type="password" name="motdepasse"><br>
 <input type="submit">
 </form>
@@ -12,7 +12,7 @@ Mot de passe: <input type="password" name="motdepasse"><br>
 
 <?php
 try{
-$bdd = new PDO('mysql:host=localhost;dbname=test;
+$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskill;
 charset=utf8', 'root', 'root',
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
@@ -22,22 +22,22 @@ die('Erreur : ' . $e->getMessage());
 }
 ?>
 
-
 <?php
 $verif =0;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-$reponse = $bdd->query('SELECT * FROM test');
+$reponse = $bdd->query('SELECT * FROM compte');
 // On affiche chaque entree une a une
 	while ($donnees = $reponse->fetch()){
-		if ($donnees['pseudo'] == $_POST['pseudo'] && $donnees['MDP'] == $_POST['motdepasse']) {
-			$pseudo = $donnees['pseudo'];
+		if ($donnees['E_mail'] == $_POST['mail'] && $donnees['MDP'] == $_POST['motdepasse']) {
+			$mail = $donnees['E_mail'];
+			$ID = $donnees['ID_Compte'];
 			$verif = 1;
 			break;
 		}
 	}	
 		if($verif == 1) {
 			session_start();
-			$_SESSION['pseudo'] = $pseudo;
+			$_SESSION['ID_Compte'] = $ID;
 			header('Location: premiereconnexion.php');
 			exit();
 		}
