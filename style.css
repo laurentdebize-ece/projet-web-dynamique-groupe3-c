@@ -84,7 +84,8 @@ nav.nav li {
 
 /*Footer*/
 footer{
-    /* background-attachment:fixed; */
+    
+    width: 98%;
     background-color: #002B44;
     color:#ECECEC;
     font-family: "openSansLight";
@@ -186,6 +187,8 @@ footer{
 	background: #fff;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin-top: 7%;
+    margin-bottom: 8%;
 }
 .login-form h3 {
 	margin: 0 0 20px;
