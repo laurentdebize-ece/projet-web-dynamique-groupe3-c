@@ -43,22 +43,22 @@ h2{
     position: fixed;
 }
 .flex-contain-menu {
-    text-align: center;
-    right: 0;
-    top : 0;
+    display: flex;
+    flex-direction: row;
+}
+.menuLogo {
+    width:45px;
+    height:45px;
+    padding-top: 2px;
 }
 .flexboxLogo-menu {
     margin-left: 2%;
     margin-right: 2%;
-    color: #ECECEC;
-    float : left;
 }
 .flexboxText-menu {
     padding-top: 1%;
     margin-left: 2%;
     margin-right: 2%;
-    color: #ECECEC;
-    float : left;
 }
 nav.nav {
     display: flex;
@@ -113,11 +113,6 @@ footer{
 
 
 /*Home page*/
-.menuLogo {
-    width:45px;
-    height:45px;
-    padding-top: 2px;
-}
 #tailleImgOmnesSkills {
     width:700px
     
@@ -171,55 +166,4 @@ footer{
     float : left;
     border-radius: 10px;
     text-align: center;
-}
-.connexionPage {
-    background-image: url(img/ImagePageConnexion.png);
-    background-size: cover; /* l'image est redimensionnée pour couvrir toute la zone du conteneur */
-    background-repeat: no-repeat; /* l'image ne se répète pas */
-}
-
-/*Connexion page*/
-.login-form {
-	width: 30%;
-    margin-left: 15%;
-	padding: 20px;
-	background: #fff;
-	border-radius: 10px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-.login-form h3 {
-	margin: 0 0 20px;
-	text-align: center;
-}
-.login-form label {
-	display: block;
-	margin-bottom: 5px;
-}
-.login-form input[type="text"],
-.login-form input[type="password"] {
-	width: 92%;
-	padding: 10px;
-	border: none;
-	border-radius: 5px;
-	background: #f2f2f2;
-}
-.login-form input[type="submit"] {
-	width: 100%;
-	padding: 10px;
-    margin-bottom: 10px;
-	border: none;
-	border-radius: 5px;
-	background: #002B44;
-	color: #fff;
-	font-weight: bold;
-	cursor: pointer;
-}
-.login-form input[type="submit"]:hover {
-	background: #002B70;
-}
-#tailleImgOmnesSkillsConnexionPage{
-    text-align: left;
-    padding-left: 40px;
-    width:60%;
-
 }

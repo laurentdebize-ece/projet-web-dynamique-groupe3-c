@@ -2,17 +2,9 @@
 <html>
 <body>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
-Email: <input type="text" name="mail"><br>
-Mot de passe: <input type="password" name="motdepasse"><br>
-<input type="submit">
-</form>
-
-
 <?php
 try{
-$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskill;
+$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', 'root',
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
