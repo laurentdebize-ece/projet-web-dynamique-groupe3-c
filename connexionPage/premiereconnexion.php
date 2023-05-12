@@ -52,7 +52,7 @@ while ($donnees = $reponse->fetch()){
 					if($verif == 1) {
 						session_start();
 						$_SESSION['ID_Compte'] = $ID;
-						header('Location: ../homePage.html');
+						header('Location: ../homePage/homePage.html');
 						exit();
 					}
 					else {
@@ -62,7 +62,7 @@ while ($donnees = $reponse->fetch()){
 			else {
 				session_start();
 				$_SESSION['ID_Compte'] = $ID;
-				header('Location: ../homePage.html');
+				header('Location: ../homePage/homePage.html');
 				exit();
 			}
 		}
