@@ -12,9 +12,12 @@ réécrivez votre mot de passe: <input type="password" name="Nmotdepasse"><br>
 
 <?php
 try{
-$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
-charset=utf8', 'root', 'root',
-array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    $mdp="root";
+	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
+        $passeword="";//pas de mdp sous wamp
+    }
+	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
+charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
 {
