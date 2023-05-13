@@ -104,6 +104,17 @@ CREATE TABLE  `compte/competence` (
 
 
 INSERT INTO `ecole` (`Nom`) VALUES ('Ecole 42');
-INSERT INTO `compte` (`Nom`, `Prenom`, `E_mail`, `MDP`, `Type_compte`) VALUES (`Gogo`, `Gadget`, `gg@gmail.com`, `gg`, `etudiant`);
+/*INSERT INTO (`ecole`) VALUES ('GUGUGAGASCHOOL');*/
 
-INSERT INTO (`ecole`) VALUES ('GUGUGAGASCHOOL');
+INSERT INTO `compte` (`ID_Compte`,`Nom`, `Prenom`, `E_mail`, `MDP`, `Type_compte`,`Déjà_connecté`, `ID_Ecole`) VALUES 
+(1, 'Gogo', 'Gadget', 'gg@gmail.com', 'gg', 'etudiant', 1, 1),
+(2, 'aa', 'aa', 'aa@gmail.com', 'aa', 'etudiant', 0, 1),
+(3, 'bb', 'bb', 'bb@gmail.com', 'bb', 'admin', 1, 1),
+(4, 'cc', 'cc', 'cc@gmail.com', 'gg', 'admin', 0, 1);
+
+INSERT INTO `competence` (`ID_Competence`, `Nom`, `Theme`, `Acquisition`) VALUES
+(1, 'Mathématiques', 'Scientifique', ''),
+(2, 'Physique', 'Scientifique', ''),
+(3, 'Informatique', 'Scientifique', ''),
+(4, 'Anglais', 'Litteraire', ''),
+(5, 'Français', 'Litteraire', '');
