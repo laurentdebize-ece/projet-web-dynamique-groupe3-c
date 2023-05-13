@@ -107,12 +107,14 @@ try {
     $bdd->exec($sql);
 }
 
-$reponse = select($bdd, 'matiere', "Nom = 'Physique'");
+$reponse = select($bdd, 'ecole', "ID_Ecole = 1");
 foreach ($reponse as $donnees) {
-    echo "ID : " . $donnees['ID_Matiere'] . "<br>";
+    echo "ID : " . $donnees['ID_Ecole'] . "<br>";
     echo "Nom : " . $donnees['Nom'] . "<br>";
-    echo "Volume horaire : " . $donnees['Volume_horaire'] . "<br>";
 }
+
+$test = selectcible2($bdd, 'ecole', "ID_Ecole = 1");
+
 /*foreach ($donnees as $key => $value) {
 echo $key . ' : ' . $value . '<br>';
 }*/
