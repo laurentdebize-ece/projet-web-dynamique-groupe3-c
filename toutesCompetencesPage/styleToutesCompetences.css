@@ -2,3 +2,20 @@
     height: 500px;
     padding-top: 100px;
 }
+
+
+#textLigne1 {
+    font-family: "openSansBold";
+    font-size: x-large;
+    color: #002B44;
+}
+#textColonne1 {
+    font-family: "openSansLight";
+    font-weight: bold;
+    font-size: medium;
+    color: #002B44;
+}
+#textColonne {
+    font-family: "openSansLight";
+    color: #002B44;
+}

@@ -38,16 +38,21 @@ catch (Exception $e)
 
 
     <section id="bodyToutesCompetencesPage">
-    <?php
-    $reponse = $bdd->query('SELECT * FROM competence');
- while ($donnees = $reponse->fetch()){
-?>
-    <table>
-    <tr>
-        <td><?php echo $donnees['Nom']?></td>
- </tr> 
- </table>
- <?php } ?>
+        <table>
+            <tr id="textLigne1">
+                <td>Compétences</td>
+            </tr>
+        <?php $reponse = $bdd->query('SELECT * FROM competence');
+        while ($donnees = $reponse->fetch()){ ?>           
+            <tr id="textColonne1">
+                <td><?php echo $donnees['Nom']?></td>
+            </tr> 
+            <tr id="textColonne">
+                <td><?php if($donnees[]
+
+        <?php } ?>
+        </table>
+        
     </section>  
     <footer>
         <div class="floatLeft">Projet Développement Web</div>
