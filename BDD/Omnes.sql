@@ -56,7 +56,8 @@ CREATE TABLE  `matiere` (
 CREATE TABLE  `competence` (
     `ID_Competence` int(11) PRIMARY KEY AUTO_INCREMENT,
     `Nom` varchar(30) NOT NULL,
-    `Theme` varchar(30) NOT NULL
+    `Theme` varchar(30) NOT NULL,
+    `Acquisition` int
 );
 
 
