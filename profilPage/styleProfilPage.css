@@ -21,3 +21,13 @@
     /*margin-right: 3%;
     margin-top: 2%;*/
 }
+#boutonChangementMDP{
+    background-color: #002B44;
+    color: #ECECEC;
+    font-family: "openSansLight";
+    border: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

@@ -24,10 +24,11 @@ die('Erreur : ' . $e->getMessage());
 
 <?php
 session_start();
+
 if (!isset($_SESSION['ID_Compte'])) {
-  header('Location: connexion.php');
-  exit();
-}
+	header('Location: connexion.php');
+	exit();
+  }
 $ID = $_SESSION['ID_Compte'];
 $verif=0;
 ?>

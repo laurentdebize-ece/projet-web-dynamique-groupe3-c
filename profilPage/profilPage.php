@@ -1,3 +1,15 @@
+<?php
+try{
+$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
+charset=utf8', 'root', 'root',
+array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+}
+catch (Exception $e)
+{
+die('Erreur : ' . $e->getMessage());
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -17,19 +29,34 @@
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.html" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
             <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.html" class="lienWhite">Toutes les compétences</a></div>
-            <div class="flexboxLogo-menu"><a href="profilPage.html" class="lienWhite"><img src="../img/profilLogoActualPage.png" class="menuLogo" alt=" profilLogoActualPage "></a></div>
+            <div class="flexboxLogo-menu"><a href="profilPage.php" class="lienWhite"><img src="../img/profilLogoActualPage.png" class="menuLogo" alt=" profilLogoActualPage "></a></div>
         </div>
     </section>
     <img src="../img/lyonCity.jpg"  alt=" lyonCity " id="imgLyonCityProfil">
+
+    <?php 
+    /*session_start();
+    if(!isset( $_SESSION['ID_Compte'] )){
+        header('Location: ../connexionPage/connexion.php');
+        exit();
+    }
+    $_SESSION['ID_Compte'] = $ID;
+    
+    $reponse = $bdd->query('SELECT * FROM compte WHERE ID LIKE $ID');
+    $donnees = $reponse->fetch(); */?>
+
     <section id="bodyProfil">
         <div class="textBoldProfil">Nom</div>
-        <div class="textProfil">@BDDnom</div>
+        <div class="textProfil"> <?php echo $donnees['Nom']; ?></div>
         <div class="textBoldProfil">Prénom</div>
-        <div class="textProfil">@BDDprenom</div>
+        <div class="textProfil"><?php echo $donnees['Prenom']; ?>/div>
         <div class="textBoldProfil">Adresse e-mail</div>
-        <div class="textProfil">@BDDemail</div>
+        <div class="textProfil"><?php echo $donnees['E_mail']; ?></div>
         <div class="textBoldProfil">Mot de passe</div>
         <div class="textProfil">@BDDmdp</div>
+        <form(method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>")>
+            <input type="submit" id="boutonChangementMDP" name="ChangerMDP" value="Modifier">
+        </form>
     </section>  
 </section>
     <footer>
@@ -37,5 +64,7 @@
         <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
     </footer>
 </body>
+
+
 
 </html>
