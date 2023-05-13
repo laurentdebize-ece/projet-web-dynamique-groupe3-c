@@ -4,10 +4,19 @@
 
 <?php
 try{
-$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
+	$passeworld=$_POST['login'];
+	$passeworld=$_POST['passeword'];
+	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
+		$passeword="";//pas de mdp sous wamp
+	}
+	$requete=$bdd->prepare('SELECT userID FROM users WHERE login=? AND passeword=?');
+	$requete->execute(array($login, $passeword))
+
+
+/*$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', 'root',
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
+}*/
 catch (Exception $e)
 {
 die('Erreur : ' . $e->getMessage());
