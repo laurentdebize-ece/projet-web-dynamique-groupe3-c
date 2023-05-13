@@ -95,13 +95,12 @@ CREATE TABLE  `compte/competence` (
     FOREIGN KEY (`ID_Competence`) REFERENCES `competence`(`ID_Competence`),
     `Moyenne_professeur` int(2) NOT NULL,
     `Etat_competence`  varchar(30) NOT NULL,	
+    `Competence_valide_etudiant`varchar(30) NOT NULL,
+    `Competence_valide_professeur`varchar(30) NOT NULL,
     `Appreciation` varchar(100) NOT NULL
 );
 
 
 
-
 INSERT INTO `ecole` (`Nom`) VALUES ('Ecole 42');
-INSERT INTO `compte` (`Nom`, `Prenom`, `E_mail`, `MDP`, `Type_compte`) VALUES (`Gogo`, `Gadget`, `gg@gmail.com`, `gg`, `etudiant`);
-
-INSERT INTO (`ecole`) VALUES ('GUGUGAGASCHOOL');
+COMMIT;
