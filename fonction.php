@@ -122,6 +122,33 @@ function jointure($PDO, $table1, $table2, $cleEtrangere1, $cleEtrangere2,$where)
 
 ?>
 
+<?php
 
+function doubleJointure($PDO, $table1, $table2, $table3, $cleEtrangere1, $cleEtrangere2_1,$cleEtrangere2_2, $cleEtrangere3, $where) {
+    try {
+        $sql = "SELECT *
+                FROM $table1
+                INNER JOIN $table2 ON $table1.$cleEtrangere1 = $table2.$cleEtrangere2_1
+                INNER JOIN $table3 ON $table2.$cleEtrangere2_2 = $table3.$cleEtrangere3";
+        
+        if ($where != null) {
+            $sql .= " WHERE $where";
+        }
+        
+        $stmt = $PDO->prepare($sql);
+        $stmt->execute();
+        
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $results;
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+
+?>
 
 
