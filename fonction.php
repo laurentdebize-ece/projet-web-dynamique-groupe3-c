@@ -147,8 +147,31 @@ function doubleJointure($PDO, $table1, $table2, $table3, $cleEtrangere1, $cleEtr
     }
 }
 
-
-
 ?>
 
 
+<?php
+
+function supprimer($PDO, $table, $where)
+{
+    $sql = "DELETE FROM $table WHERE $where";
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute();
+    
+    return null;
+}
+
+?>
+
+<?php
+
+function ajouter($PDO, $table, $attribut, $valeur)
+{
+    $sql = "INSERT INTO $table ($attribut) VALUES ('$valeur')";
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute();
+    
+    return null;
+}
+
+?>
