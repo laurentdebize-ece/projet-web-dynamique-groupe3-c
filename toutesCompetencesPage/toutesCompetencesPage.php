@@ -56,50 +56,87 @@ $_SESSION['Type_compte'] = $Type_compte;
         <input type="radio" name="choixTriCompetences" value="5" id="selectChoixTriCompetences">Date décroissante</option>
         <input type="radio" name="choixTriCompetences" value="6" id="selectChoixTriCompetences">Matières</option>
         <input type="radio" name="choixTriCompetences" value="7" id="selectChoixTriCompetences">Professeur</option>
+        <input type="submit" value="valider">
 </form>
 
-<?php $_POST['choixTriCompetences']=6;
+<?php
 if(isset($_POST['choixTriCompetences'])){
-    echo 'aaa';
+    echo 'pasnull';
 }
 if(!isset($_POST['choixTriCompetences'])){
-    echo 'bb';
+    echo 'null';
 }?>
 <?php if(isset($_POST['choixTriCompetences'])){
     switch($_POST['choixTriCompetences']) {
         case 1 : //ordre alphabétique compétences
-            $reponseCompetence = $bdd->query("SELECT * FROM competence, compte_competence
-            WHERE competence.ID_Competence = compte_competence.ID_Competence
-            AND compte_competence.ID_compte='$ID' 
+            $reponseCompetence = $bdd->query("SELECT * FROM competence 
+            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
+            INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
+            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+            WHERE compte_competence.ID_Compte = '$ID'
             ORDER BY Nom ");
             break;
         case 2 : //ordre inalphabétique compétences
-            $reponseCompetence = $bdd->query("SELECT * FROM competence, compte_competence
-            WHERE competence.ID_Competence = compte_competence.ID_Competence
-            AND compte_competence.ID_compte='$ID' 
+            $reponseCompetence = $bdd->query("SELECT * FROM competence 
+            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
+            INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
+            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+            WHERE compte_competence.ID_Compte = '$ID' 
             ORDER BY Nom DESC");
             break;
         case 3 : //statut
-            $reponseCompetence = $bdd->query("SELECT * FROM competence, compte_competence
-            WHERE competence.ID_Competence = compte_competence.ID_Competence
-            AND compte_competence.ID_compte='$ID'
+            $reponseCompetence = $bdd->query("SELECT * FROM competence 
+            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
+            INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
+            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+            WHERE compte_competence.ID_Compte = '$ID'
             ORDER BY Etat_competence");
             break;
-        case 4 :
-            $reponseCompetence = $bdd->query("SELECT * FROM competence, compte_competence WHERE competence.ID_Competence = compte_competence.ID_Competence AND compte_competence.ID_compte='$ID' ORDER BY Date ASC");
+        case 4 : //date par ordre croissant
+            $reponseCompetence = $bdd->query("SELECT * FROM competence 
+            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
+            INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
+            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+            WHERE compte_competence.ID_Compte = '$ID'
+            ORDER BY Date ASC");
             break;
-        case 5 :
-            $reponseCompetence = $bdd->query("SELECT * FROM competence, compte_competence WHERE competence.ID_Competence = compte_competence.ID_Competence AND compte_competence.ID_compte='$ID' ORDER BY Date DESC");
+        case 5 : //date par ordre décroissant
+            $reponseCompetence = $bdd->query("SELECT * FROM competence 
+            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
+            INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
+            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+            WHERE compte_competence.ID_Compte = '$ID'
+            ORDER BY Date DESC");
             break;
-        case 6 :
-            $reponseCompetence = $bdd->query("SELECT * FROM competence, compte_competence, matiere_competence, matiere 
-            WHERE competence.ID_Competence = compte_competence.ID_Competence 
-            AND compte_competence.ID_compte='$ID' 
-            /*AND competence.ID_Competence = matiere_competence.ID_Competence*/
-            ORDER BY matiere.Nom");
+        case 6 : //matiere
+            $reponseCompetence = $bdd->query("SELECT * FROM competence 
+            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
+            INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
+            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+            WHERE compte_competence.ID_Compte = '$ID'
+            ORDER BY matiere.Nom_matiere");
             break;
-        case 7 :
-            $reponseCompetence = $bdd->query("SELECT * FROM competence, compte_competence WHERE competence.ID_Competence = compte_competence.ID_Competence AND compte_competence.ID_compte='$ID' ORDER BY Date DESC");
+        case 7 : //professseur
+            $reponseCompetence = $bdd->query("SELECT * FROM competence 
+            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
+            INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
+            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+            WHERE compte_competence.ID_Compte = '$ID'
+            ORDER BY matiere_competence.professeur");
             break;
         default :
             $reponseCompetence = $bdd->query("SELECT * FROM competence, compte_competence WHERE competence.ID_Competence = compte_competence.ID_Competence AND compte_competence.ID_compte='$ID'");
@@ -117,8 +154,8 @@ $reponseCompteCompetence = $bdd->query('SELECT * FROM compte_competence');?>
 
 <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
     <tr>
-        <td class="textColonne"><?php echo $donneesCompetence['matiere.Nom']?></td>
-        <td id="textColonne1"><?php echo $donneesCompetence['competence.Nom']?></td>
+        <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['Nom_matiere']?></td>
         <td class="textColonne"><?php echo $donneesCompetence['Etat_competence']?></td>
     </tr>
 <?php } ?>
