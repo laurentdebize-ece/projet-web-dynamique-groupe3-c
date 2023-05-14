@@ -42,15 +42,21 @@ catch (Exception $e)
             <tr id="textLigne1">
                 <td>Compétences</td>
             </tr>
-        <?php $reponse = $bdd->query('SELECT * FROM competence');
-        while ($donnees = $reponse->fetch()){ ?>           
+        <?php $reponseCompetence = $bdd->query('SELECT * FROM competence');
+        $reponseCompteCompetence = $bdd->query('SELECT * FROM compte_competence');
+        //$donneesCompteCompetence = $reponseCompteCompetence->fetch()
+        while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
             <tr id="textColonne1">
-                <td><?php echo $donnees['Nom']?></td>
+                <td><?php echo $donneesCompetence['Nom']?></td>
             </tr> 
             <tr id="textColonne">
-                <td><?php if($donnees[]
-
-        <?php } ?>
+            <?php if($CompteCompetence['ID_Compte']==1){?>
+                <td>
+                    valide
+                </td>
+            <?php }
+         } ?>
+            </tr>
         </table>
         
     </section>  
