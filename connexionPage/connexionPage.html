@@ -5,6 +5,7 @@
     <title>OMNES MySkills - Connexion</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleConnexionPage.css" rel="stylesheet" type="text/css">
+
 </head>
 <body class="connexionPage">
     <section>
@@ -16,14 +17,28 @@
                 <label for="mail">E-mail:</label>
                 <input type="text" name="mail" placeholder="Adresse e-mail" required><br><br>
                 <label for="motdepasse">Mot de passe:</label>
-                <input type="password" name="motdepasse" placeholder="Entrez votre mot de passe" required><br><br>
+                <input type="password" name="motdepasse" placeholder="Entrez votre mot de passe" required><br><br>    
                 <input type="submit" value="Connexion">
             </form>
+            <div id="errorMessage"></div>
         </div>
     </section>  
  <footer>
     <div class="floatLeft">Projet Développement Web</div>
     <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
     </footer>
+
+    <script>
+        // Récupération des paramètres de l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Vérification si le paramètre "error" est présent dans l'URL
+        if (urlParams.has("error") && urlParams.get("error") === "wrongpassword") {
+            // Affichage du message d'erreur
+            const errorMessage = document.getElementById("errorMessage");
+            errorMessage.innerHTML = "<p class='error'>Le mot de passe est incorrect. Veuillez réessayer.</p>";
+        }
+    </script>
+
 </body>
 </html>
