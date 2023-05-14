@@ -143,7 +143,7 @@ var_dump($doublejointure);
 
 
 //TEST MULTIPLE JOINTURE
-
+/*
 $reponseCompetence = "SELECT * FROM competence 
             INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
             INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
@@ -151,7 +151,7 @@ $reponseCompetence = "SELECT * FROM competence
             INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
             INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
             WHERE compte_competence.ID_Compte = '1'
-            GROUP BY Nom_matiere";
+            ";
 
 $exec = $bdd->prepare($reponseCompetence);
 $exec->execute();
@@ -167,7 +167,7 @@ foreach ($resultat as $reponses => $value) {
     
 }
 
+*/
 
-
-
+$test = ajouter($bdd, "competence", "Nom", "Maitrise_Matrice");
 ?>

@@ -52,19 +52,20 @@ function selectcible2($PDO, $table, $string, $where = null)
 ?>
 
 <?php
-
+/*
 function selection($PDO, $table, $where = null, $cibles = null, $cibles2 = null, $cibles3 = null, $cibles4 = null, $cible5)
 {
     $sql = "SELECT * FROM $table";
     if ($where != null) {
         $sql .= " WHERE $where";
     }
-    /*echo $sql;*/
+    
     $stmt = $PDO->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
+*/
 ?>
 
 <?php
@@ -152,8 +153,7 @@ function doubleJointure($PDO, $table1, $table2, $table3, $cleEtrangere1, $cleEtr
 
 <?php
 
-function supprimer($PDO, $table, $where)
-{
+function supprimer($PDO, $table, $where) {
     $sql = "DELETE FROM $table WHERE $where";
     $stmt = $PDO->prepare($sql);
     $stmt->execute();
@@ -163,15 +163,21 @@ function supprimer($PDO, $table, $where)
 
 ?>
 
+
 <?php
 
-function ajouter($PDO, $table, $attribut, $valeur)
-{
-    $sql = "INSERT INTO $table ($attribut) VALUES ('$valeur')";
-    $stmt = $PDO->prepare($sql);
-    $stmt->execute();
-    
-    return null;
+function modifier_Moyenne_Professeur($PDO, $table, $nouvelleMoyenne, $ID_Professeur) {
+    try {
+        $sql = "UPDATE $table SET moyenne_professeur = $nouvelleMoyenne WHERE $ID_Professeur = ";
+        
+        $stmt = $PDO->prepare($sql);
+        $stmt->execute();
+        
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+        return false;
+    }
 }
 
 ?>
