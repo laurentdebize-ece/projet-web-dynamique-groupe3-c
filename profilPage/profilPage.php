@@ -70,6 +70,7 @@ die('Erreur : ' . $e->getMessage());
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <input type="submit" id="boutonChangementMDP" name="ChangerMDP" value="Modifier">
+            <input type="submit" id="boutonDeconnexion" name="Deconnexion" value="Deconnecter">
         </form>
         <?php
         
@@ -81,6 +82,11 @@ die('Erreur : ' . $e->getMessage());
         header('Location: modifiercompte.php');
         exit();
         }
+        if ($_POST['Deconnexion']=="Deconnecter"){
+            session_start();
+            header('Location: ../connexionPage/connexionPage.html');
+            exit();
+            }
     }
     ?>
     </section>  
