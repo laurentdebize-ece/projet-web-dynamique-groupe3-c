@@ -10,10 +10,21 @@
 </head>
 
 <body>
+<?php
+session_start();
+
+if (!isset($_SESSION['ID_Compte'])) {
+	header('Location: ../connexionPage/premiereconnexion.php');
+	exit();
+  }
+$ID = $_SESSION['ID_Compte'];
+$_SESSION['ID_Compte'] = $ID;
+?>
+
     <section id="taillePage">
      <section id="header">
         <div class="flex-contain-menu">
-            <div class="flexboxLogo-menu"><a href="homePage.html" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
+            <div class="flexboxLogo-menu"><a href="homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
             <div class="flexboxText-menu"><a href="../mesMatieresPage/mesMatieresPage.html" class="lienWhite">Mes matières</a></div>
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
@@ -23,7 +34,7 @@
     </section>
     <section id="introHomePage">
         <h1> <img src="../img/omnesSkills.png"  alt=" omnesSkills " id="tailleImgOmnesSkills"> </h1>
-        <div class="intro">blaaaaaaaaaaaaaaaaaaaaablaaaaaaaaaaaaaaaaaaaaaaaaaaa<br>blaaaaaaaaaaaaaaaaaaaaaaaaaaablaaaaaaaaaaaaaaaaaaaaaaa</div>
+        <div class="intro">blaaaaaaaaaaaaaaaaaaaaablaaaaaaaaaaaaaaaaaaaaaaaaaaa<br>blaaaaaaaaaaaaaaaaaaaaaaaaaaablaaaaaaaaaaaaaaaaaaaaaaa </div>
     <section id="competencesPopulaires">
         <h2> Les compétences les plus populaires </h2>
         <div style="height:500px; width: 50px; background-color: #002B44; margin-bottom: 10px;"></div>

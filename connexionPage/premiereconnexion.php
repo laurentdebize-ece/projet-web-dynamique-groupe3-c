@@ -11,6 +11,7 @@ réécrivez votre mot de passe: <input type="password" name="Nmotdepasse"><br>
 </form>
 
 <?php
+
 try{
 $bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', 'root',
@@ -34,7 +35,6 @@ $verif=0;
 ?>
 
 
-
 <?php
 $reponse = $bdd->query('SELECT * FROM compte');
 
@@ -53,7 +53,7 @@ while ($donnees = $reponse->fetch()){
 					if($verif == 1) {
 						session_start();
 						$_SESSION['ID_Compte'] = $ID;
-						header('Location: ../homePage/homePage.html');
+						header('Location: ../homePage/homePage.php');
 						exit();
 					}
 					else {
@@ -61,52 +61,15 @@ while ($donnees = $reponse->fetch()){
 					}
 				}
 			else {
+				
+
 				session_start();
 				$_SESSION['ID_Compte'] = $ID;
-				header('Location: ../homePage/homePage.html');
+				header('Location: ../homePage/homePage.php');
 				exit();
 			}
 		}
 }	
-?>
-
-
-
-<?php
-/*
-if ($type=='0'){
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		if ($_POST['motdepasse']== $_POST['Nmotdepasse']) {
-			$motdepasse = $_POST['motdepasse'];
-			$type = 1;
-			$verif = 1;
-		}
-		if($verif == 1) {
-			session_start();
-			$_SESSION['pseudo'] = $pseudo;
-			$_SESSION['motdepasse'] = $motdepasse;
-			$_SESSION['type'] = $type;
-			header('Location: acceuil.php');
-			exit();
-		}
-		else {
-			echo "Nouveau mot de passe invalide.";
-		}
-	}
-}
-else {
-	session_start();
-		$_SESSION['pseudo'] = $pseudo;
-		$_SESSION['motdepasse'] = $motdepasse;
-		$_SESSION['type'] = $type;
-		header('Location: acceuil.php');
-		exit();
-}
-
-
-
-
-*/
 ?>
 
 </body>

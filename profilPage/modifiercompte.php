@@ -32,7 +32,7 @@ die('Erreur : ' . $e->getMessage());
 <?php
 session_start();
 if (!isset($_SESSION['ID_Compte'])) {
-  header('Location: profilPage.html');
+  header('Location: profilPage.php');
   exit();
 }
 $ID = $_SESSION['ID_Compte'];
@@ -90,7 +90,7 @@ while ($donnees = $reponse->fetch()){
 					if($verifmdp == 1 || $verifmail==1 ||$verifnom==1 || $verifprenom==1) {
 						session_start();
 						$_SESSION['ID_Compte'] = $ID;
-						header('Location: profilPage.html');
+						header('Location: profilPage.php');
 						exit();
 					}
 		}
