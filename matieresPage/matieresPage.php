@@ -70,9 +70,9 @@ if($Type_compte=="admin"){
         </section>
         <?php if($Type_compte=="admin"){?>
             <form method="POST" action="modifMatiere.php" id="formModifMatiere">
-                <input type="submit" name ="modifMatiere" value="Ajouter une matiere" class="boutonModif">
-                <input type="submit" name ="modifMatiere" value="Supprimer une matiere" class="boutonModif">
-                <input type="submit" name ="modifMatiere" value="Modifier une matiere" class="boutonModif">
+                <input type="submit" name ="modifMatiere" value="Ajouter" class="boutonModif">
+                <input type="submit" name ="modifMatiere" value="Supprimer" class="boutonModif">
+                <input type="submit" name ="modifMatiere" value="Modifier" class="boutonModif">
             </form>
         <?php }?>
     

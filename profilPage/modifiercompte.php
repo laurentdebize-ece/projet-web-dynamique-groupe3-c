@@ -82,13 +82,7 @@ while ($donnees = $reponse->fetch()){
 						$verifprenom = 1;
 						$Newprenom = $_POST['Newprenom'];
 						$sql = "UPDATE compte SET Prenom='$Newprenom' WHERE ID_Compte='$ID'";
-						$bdd->query($sql);						
-						
-						
-					}
-					
-					
-					
+						$bdd->query($sql);								
 }
 					if($verifmdp == 1 || $verifmail==1 ||$verifnom==1 || $verifprenom==1) {
 						session_start();

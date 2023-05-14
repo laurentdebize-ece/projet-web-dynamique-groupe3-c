@@ -21,9 +21,9 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
-require_once('fonction.php');
+require_once('../fonction.php');
 
-$reponseAjoutMatiere = $_POST['modifMatiere'];
+$reponseModifMatiere = $_POST['modifMatiere'];
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ $reponseAjoutMatiere = $_POST['modifMatiere'];
 
 <head>
     <meta charset="utf-8">
-    <title>OMNES MySkills - Ajouter une matière</title>
+    <title>OMNES MySkills - Modifier une matière</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleMatieres.css" rel="stylesheet" type="text/css">
 </head>
@@ -47,14 +47,37 @@ $reponseAjoutMatiere = $_POST['modifMatiere'];
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    <section>
-        <?php if($reponseAjoutMatiere=="Ajouter une matière"){ ?>
+    <section class="aaa">
+        <?php if(isset($reponseAjoutMatiere)){ ?>
+            <p>pas nul</p>
+        <?php } 
+        if(!isset($reponseAjoutMatiere)){ ?>
+            <p>nul</p>
+        <?php }
+        if($reponseModifMatiere=="Ajouter"){ ?>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="ajouterMatiere">
-                Nom de la matière : <input type="text" name="Newnom"><br>
+                Nom de la matière : <input type="text" name="NewNom"><br>
                 Volume horaire : <input type="number" name="NewVolumeHoraire"><br>
+                <input type="button" name="valider" value="Enregistrer">
             </form>
+            <?php 
+            if($_SERVER["REQUEST_METHOD"]=="POST"){
+            if($_POST['NewNom']==''){
+                echo'vide';
+            }
+            if($_POST['NewNom']!=''){
+                echo'non vide';
+            }
+                if(isset($_POST['valider'])){
+                    ajouter($bdd, 'matiere', 'Nom_matiere', $_POST['NewNom']);
+                    ajouter($bdd, 'matiere', 'Volume_horaire', $_POST['NewVolumeHoraire']);
+                    header('location: matieresPage.php');
+                    exit();
+                }
+            }
             
-        <?php } ?>
+            
+         }else{echo"noooooooooooooooooo";} ?>
     </section>
 </body>
 </html>

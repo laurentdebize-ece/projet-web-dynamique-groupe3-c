@@ -59,13 +59,6 @@ $_SESSION['Type_compte'] = $Type_compte;
         <input type="submit" value="valider">
 </form>
 
-<?php
-if(isset($_POST['choixTriCompetences'])){
-    echo 'pasnull';
-}
-if(!isset($_POST['choixTriCompetences'])){
-    echo 'null';
-}?>
 <?php if(isset($_POST['choixTriCompetences'])){
     switch($_POST['choixTriCompetences']) {
         case 1 : //ordre alphabétique compétences
@@ -139,22 +132,33 @@ if(!isset($_POST['choixTriCompetences'])){
             ORDER BY matiere_competence.professeur");
             break;
         default :
-            $reponseCompetence = $bdd->query("SELECT * FROM competence, compte_competence WHERE competence.ID_Competence = compte_competence.ID_Competence AND compte_competence.ID_compte='$ID'");
+        $reponseCompetence = $bdd->query("SELECT * FROM competence 
+            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
+            INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
+            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+            WHERE compte_competence.ID_Compte = '$ID'");
             break;
     }
 } else {
-    $reponseCompetence = $bdd->query("SELECT * FROM competence, compte_competence WHERE competence.ID_Competence = compte_competence.ID_Competence AND compte_competence.ID_compte='$ID'");
-}
-$reponseCompteCompetence = $bdd->query('SELECT * FROM compte_competence');?>
+    $reponseCompetence = $bdd->query("SELECT * FROM competence 
+        INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+        INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+        INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
+        INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
+        INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+        WHERE compte_competence.ID_Compte = '$ID'");}?>
 <table>
     <tr id="textLigne1">
         <td>Compétences</td>
+        <td>Matière</td>
         <td>Etat de la compétence</td>
     </tr>
-
 <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
     <tr>
         <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['ID_Competence']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Nom_matiere']?></td>
         <td class="textColonne"><?php echo $donneesCompetence['Etat_competence']?></td>
     </tr>
