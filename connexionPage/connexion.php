@@ -6,7 +6,7 @@
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
-        $passeword="";//pas de mdp sous wamp
+        $mdp="";//pas de mdp sous wamp
     }
 	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -38,7 +38,9 @@ $reponse = $bdd->query('SELECT * FROM compte');
 			exit();
 		}
 		else {
-			echo "Pseudo ou mot de passe erroné veuillez réessayer.";
+			session_start();
+			header('Location: connexionPage.html');
+			exit();
 		}
 }
 ?>
