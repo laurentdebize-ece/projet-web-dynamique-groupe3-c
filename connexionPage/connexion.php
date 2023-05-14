@@ -38,7 +38,9 @@ $reponse = $bdd->query('SELECT * FROM compte');
 			exit();
 		}
 		else {
-			echo "Pseudo ou mot de passe erroné veuillez réessayer.";
+			session_start();
+			header('Location: connexionPage.html');
+			exit();
 		}
 }
 ?>
