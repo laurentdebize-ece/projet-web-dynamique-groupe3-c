@@ -30,7 +30,7 @@ die('Erreur : ' . $e->getMessage());
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
             <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
-            <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.html" class="lienWhite">Mes compétences</a></div>
+            <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
             <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
             <div class="flexboxLogo-menu"><a href="profilPage.php" class="lienWhite"><img src="../img/profilLogoActualPage.png" class="menuLogo" alt=" profilLogoActualPage "></a></div>
@@ -70,6 +70,7 @@ die('Erreur : ' . $e->getMessage());
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <input type="submit" id="boutonChangementMDP" name="ChangerMDP" value="Modifier">
+            <input type="submit" id="boutonDeconnexion" name="Deconnexion" value="Deconnecter">
         </form>
         <?php
         
@@ -81,6 +82,11 @@ die('Erreur : ' . $e->getMessage());
         header('Location: modifiercompte.php');
         exit();
         }
+        if ($_POST['Deconnexion']=="Deconnecter"){
+            session_start();
+            header('Location: ../connexionPage/connexionPage.html');
+            exit();
+            }
     }
     ?>
     </section>  

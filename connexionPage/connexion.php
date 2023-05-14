@@ -19,28 +19,27 @@ die('Erreur : ' . $e->getMessage());
 ?>
 
 <?php
-$verif =0;
+$message = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $reponse = $bdd->query('SELECT * FROM compte');
-// On affiche chaque entree une a une
+$identifiants_corrects = false;
 	while ($donnees = $reponse->fetch()){
 		if ($donnees['E_mail'] == $_POST['mail'] && $donnees['MDP'] == $_POST['motdepasse']) {
 			$mail = $donnees['E_mail'];
 			$ID = $donnees['ID_Compte'];
-			$verif = 1;
+			$identifiants_corrects = true;
 			break;
 		}
 	}	
-		if($verif == 1) {
+		if($identifiants_corrects) {
 			session_start();
 			$_SESSION['ID_Compte'] = $ID;
 			header('Location: premiereconnexion.php');
 			exit();
 		}
 		else {
-			session_start();
-			header('Location: connexionPage.html');
-			exit();
+			header('Location: connexionPage.html?error=wrongpassword');
+        	exit();
 		}
 }
 ?>

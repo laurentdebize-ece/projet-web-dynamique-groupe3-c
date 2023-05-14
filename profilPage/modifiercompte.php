@@ -1,21 +1,47 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="utf-8">
+    <title>OMNES MySkills - Profil</title>
+    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="styleProfilPage.css" rel="stylesheet" type="text/css">
+    <link href="styleModifierComptes.css" rel="stylesheet" type="text/css">
+</head>
 <body>
+    <section id="header">
+        <div class="flex-contain-menu">
+            <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
+            <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
+            <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.html" class="lienWhite">Mes compétences</a></div>
+            <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
+            <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
+            <div class="flexboxLogo-menu"><a href="profilPage.php" class="lienWhite"><img src="../img/profilLogoActualPage.png" class="menuLogo" alt=" profilLogoActualPage "></a></div>
+        </div>
+	</section>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
-ne pas remplir le champ si vous voulez pas modifier un element
-<br>
-
-Nom : <input type="text" name="Newnom"><br>
-Prenom : <input type="text" name="Newprenom"><br>
-Email : <input type="text" name="Newmail"><br>
-
-
-Nouveau mot de passe: <input type="password" name="motdepasse"><br>
-réécrivez votre  nouveau mot de passe: <input type="password" name="Nmotdepasse"><br>
-<input type="submit">
-</form>
+	<section>
+		<img src="../img/lyonCity.jpg"  alt=" lyonCity " id="imgLyonCityProfil">
+			<div class="login-form2">
+				<h3>Mon compte</h3>
+				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+					Ne pas remplir le champ si vous ne voulez pas modifier l'element.
+					<br><br>
+					Nom : <input type="text" name="Newnom" placeholder="Nouveau nom"><br><br>
+					Prenom : <input type="text" name="Newprenom" placeholder="Changer prénom"><br><br>
+					Email : <input type="text" name="Newmail" placeholder="Changer Adresse mail"><br><br>
+					<label for="motdepasse1">Nouveau mot de passe :</label>
+					<input type="text" name="mdp1" placeholder="Nouveau mot de passe"><br><br>
+					<label for="motdepasse2">Réécrivez votre nouveau mot de passe :</label>
+					<input type="text" name="mdp2" placeholder="Confirmez mot de passe"><br><br>
+					<input type="submit" value="modifier"><br><br>
+				</form>
+			</div>
+		</section> 
+	<footer>
+    	<div class="floatLeft">Projet Développement Web</div>
+    	<div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
+    </footer>
+	
 <?php
 try{
     $mdp="root";
@@ -82,13 +108,7 @@ while ($donnees = $reponse->fetch()){
 						$verifprenom = 1;
 						$Newprenom = $_POST['Newprenom'];
 						$sql = "UPDATE compte SET Prenom='$Newprenom' WHERE ID_Compte='$ID'";
-						$bdd->query($sql);						
-						
-						
-					}
-					
-					
-					
+						$bdd->query($sql);								
 }
 					if($verifmdp == 1 || $verifmail==1 ||$verifnom==1 || $verifprenom==1) {
 						session_start();
@@ -96,7 +116,8 @@ while ($donnees = $reponse->fetch()){
 						header('Location: profilPage.php');
 						exit();
 					}
-		}
+				}
+			}
 }	
 ?>
 
