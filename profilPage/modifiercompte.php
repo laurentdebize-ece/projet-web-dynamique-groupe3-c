@@ -16,11 +16,14 @@ Nouveau mot de passe: <input type="password" name="motdepasse"><br>
 réécrivez votre  nouveau mot de passe: <input type="password" name="Nmotdepasse"><br>
 <input type="submit">
 </form>
-
 <?php
 try{
-$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
-charset=utf8', 'root', 'root',
+    $mdp="root";
+	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
+        $mdp="";//pas de mdp sous wamp
+    }
+	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
+charset=utf8', 'root', $mdp,
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)

@@ -2,7 +2,7 @@
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
-        $passeword="";//pas de mdp sous wamp
+        $mdp="";//pas de mdp sous wamp
     }
 	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills; 
     charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
