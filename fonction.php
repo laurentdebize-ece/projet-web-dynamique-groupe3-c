@@ -81,4 +81,47 @@ function insertion($PDO, $table, $attribut, $valeur)
 
 }*/
 
+
+
+function insertion($PDO,$table, $valeur_tableau)
+{
+  
+    $donnes = implode(", ", array_keys($valeur_tableau));
+    $valeurs_donnees = ":" . implode(", :", array_keys($valeur_tableau));
+    $sql = "INSERT INTO $table ($donnes) VALUES ($valeurs_donnees)";
+
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute($valeur_tableau);
+
+}
+
 ?>
+
+<?php
+function jointure($PDO, $table1, $table2, $cleEtrangere1, $cleEtrangere2,$where) {
+    try {
+        $sql = "SELECT *
+                FROM $table1
+                INNER JOIN $table2 ON $table1.$cleEtrangere1 = $table2.$cleEtrangere2";
+                if ($where != null) {
+                    $sql .= " WHERE $where";
+                }
+        
+        $stmt = $PDO->prepare($sql);
+        $stmt->execute();
+        
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $results;
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+        return null;
+    }
+}
+
+
+?>
+
+
+
+
