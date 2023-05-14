@@ -15,7 +15,7 @@ réécrivez votre mot de passe: <input type="password" name="Nmotdepasse"><br>
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
-        $passeword="";//pas de mdp sous wamp
+        $mdp="";//pas de mdp sous wamp
     }
 	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -43,6 +43,7 @@ $reponse = $bdd->query('SELECT * FROM compte');
 
 while ($donnees = $reponse->fetch()){
 		if ($donnees['ID_Compte'] == $ID) {
+		$Type_compte=$donnees['Type_compte'];
 		if ($donnees['Déjà_connecté']=='0'){
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					if ($_POST['motdepasse']== $_POST['Nmotdepasse']) {
@@ -56,7 +57,8 @@ while ($donnees = $reponse->fetch()){
 					if($verif == 1) {
 						session_start();
 						$_SESSION['ID_Compte'] = $ID;
-						header('Location: ../homePage/homePage.php');
+						$_SESSION['Type_compte'] = $Type_compte;
+						header('Location: ../homePage/homePage.php');						
 						exit();
 					}
 					else {
@@ -68,6 +70,7 @@ while ($donnees = $reponse->fetch()){
 
 				session_start();
 				$_SESSION['ID_Compte'] = $ID;
+				$_SESSION['Type_compte'] = $Type_compte;
 				header('Location: ../homePage/homePage.php');
 				exit();
 			}

@@ -5,7 +5,7 @@ USE Omnes_my_skills;
 
 CREATE TABLE  `ecole` (
     `ID_Ecole` int(11) PRIMARY KEY AUTO_INCREMENT,
-    `Nom` varchar(50) NOT NULL
+    `Nom_Ecole` varchar(50) NOT NULL
 );
 
 
@@ -29,12 +29,12 @@ CREATE TABLE  `classe` (
 
 CREATE TABLE  `compte` (
     `ID_Compte` int(11) PRIMARY KEY AUTO_INCREMENT,
-    `Nom` varchar(50) NOT NULL,
+    `Nom_Compte` varchar(50) NOT NULL,
     `Prenom` varchar(30) NOT NULL,
     `E_mail` varchar(50) NOT NULL,
     `MDP` varchar(30) NOT NULL,
     `Type_compte` varchar(30) NOT NULL,
-    `Déjà_connecté` boolean NOT NULL,
+    `Deja_connecte` boolean NOT NULL,
     `ID_Ecole` int(11) NOT NULL,
     FOREIGN KEY (`ID_Ecole`) REFERENCES `ecole`(`ID_Ecole`)
 );
@@ -42,26 +42,27 @@ CREATE TABLE  `compte` (
 
 CREATE TABLE  `filiere` (
     `ID_Filiere` int(11) PRIMARY KEY AUTO_INCREMENT,
-    `Nom` varchar(50) NOT NULL
+    `Nom_filiere` varchar(50) NOT NULL
 );
 
 
 CREATE TABLE  `matiere` (
     `ID_Matiere` int(11) PRIMARY KEY AUTO_INCREMENT,
-    `Nom` varchar(50) NOT NULL,
+    `Nom_Matiere` varchar(50) NOT NULL,
     `Volume_horaire` int(3)
 );
 
 
 CREATE TABLE  `competence` (
     `ID_Competence` int(11) PRIMARY KEY AUTO_INCREMENT,
-    `Nom` varchar(30) NOT NULL,
+    `Nom_Competence` varchar(30) NOT NULL,
+    `Date_Creation` int(4) NOT NULL,
     `Theme` varchar(30)
 );
 
 
 CREATE TABLE  `ecole_filiere` (
-    `ID_ecole/filiere` int(11) PRIMARY KEY AUTO_INCREMENT,
+    `ID_ecole_filiere` int(11) PRIMARY KEY AUTO_INCREMENT,
     `ID_Ecole` int(11) NOT NULL,
     `ID_Filiere` int(11) NOT NULL,
     FOREIGN KEY (`ID_Ecole`) REFERENCES `ecole`(`ID_Ecole`),
@@ -70,7 +71,7 @@ CREATE TABLE  `ecole_filiere` (
 
 
 CREATE TABLE  `compte_matiere` (
-    `ID_compte/matiere` int(11) PRIMARY KEY AUTO_INCREMENT,
+    `ID_compte_matiere` int(11) PRIMARY KEY AUTO_INCREMENT,
     `ID_Compte` int(11) NOT NULL,
     `ID_Matiere` int(11) NOT NULL,
     FOREIGN KEY (`ID_Compte`) REFERENCES `compte`(`ID_Compte`),
@@ -79,16 +80,17 @@ CREATE TABLE  `compte_matiere` (
 
 
 CREATE TABLE  `matiere_competence` (
-    `ID_matiere/competence` int(11) PRIMARY KEY AUTO_INCREMENT,
+    `ID_matiere_competence` int(11) PRIMARY KEY AUTO_INCREMENT,
     `ID_Matiere` int(11) NOT NULL,
     `ID_Competence` int(11) NOT NULL,
+    `Professeur` varchar(50) NOT NULL,
     FOREIGN KEY (`ID_Matiere`) REFERENCES `matiere`(`ID_Matiere`),
     FOREIGN KEY (`ID_Competence`) REFERENCES `competence`(`ID_Competence`) 
 );
 
 
 CREATE TABLE  `compte_competence` (
-    `ID_compte/competence` int(11) PRIMARY KEY AUTO_INCREMENT,
+    `ID_compte_competence` int(11) PRIMARY KEY AUTO_INCREMENT,
     `ID_Compte` int(11) NOT NULL,
     `ID_Competence` int(11) NOT NULL,
     FOREIGN KEY (`ID_Compte`) REFERENCES `compte`(`ID_Compte`),
@@ -100,20 +102,4 @@ CREATE TABLE  `compte_competence` (
     `Appreciation` varchar(100)
 );
 
-
-
-INSERT INTO `ecole` (`Nom`) VALUES ('Ecole 42');
-/*INSERT INTO (`ecole`) VALUES ('GUGUGAGASCHOOL');*/
-
-INSERT INTO `compte` (`ID_Compte`,`Nom`, `Prenom`, `E_mail`, `MDP`, `Type_compte`,`Déjà_connecté`, `ID_Ecole`) VALUES 
-(1, 'Gogo', 'Gadget', 'gg@gmail.com', 'gg', 'etudiant', 1, 1),
-(2, 'aa', 'aa', 'aa@gmail.com', 'aa', 'etudiant', 0, 1),
-(3, 'bb', 'bb', 'bb@gmail.com', 'bb', 'admin', 1, 1),
-(4, 'cc', 'cc', 'cc@gmail.com', 'gg', 'admin', 0, 1);
-
-INSERT INTO `competence` (`ID_Competence`,`Nom`, `Theme`) VALUES 
-(1, 'aaaaaaaaaaaaa', 'Scientifique'),
-(2, 'bbbbbbbbbbbbbbb', 'Scientifique'),
-(3, 'cccccccccccccccccccccc', 'Commerce'),
-(4, 'ddddddddddddddd', 'Commerce');
 
