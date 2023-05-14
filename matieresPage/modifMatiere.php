@@ -54,30 +54,28 @@ $reponseModifMatiere = $_POST['modifMatiere'];
         if(!isset($reponseAjoutMatiere)){ ?>
             <p>nul</p>
         <?php }
-        if($reponseModifMatiere=="Ajouter"){ ?>
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="ajouterMatiere">
+        if($reponseModifMatiere=="Ajouter"){ //Style a faire emma?>
+            <form method="POST" action="matieresPage.php" id="ajouterMatiere">
                 Nom de la matière : <input type="text" name="NewNom"><br>
-                Volume horaire : <input type="number" name="NewVolumeHoraire"><br>
-                <input type="button" name="valider" value="Enregistrer">
+                Volume horaire : <input type="number" name="NewVolumeHoraire" min="0"><br>
+                <input type="submit" name="validerAjout" value="Enregistrer">
             </form>
-            <?php 
-            if($_SERVER["REQUEST_METHOD"]=="POST"){
-            if($_POST['NewNom']==''){
-                echo'vide';
-            }
-            if($_POST['NewNom']!=''){
-                echo'non vide';
-            }
-                if(isset($_POST['valider'])){
-                    ajouter($bdd, 'matiere', 'Nom_matiere', $_POST['NewNom']);
-                    ajouter($bdd, 'matiere', 'Volume_horaire', $_POST['NewVolumeHoraire']);
-                    header('location: matieresPage.php');
-                    exit();
-                }
-            }
-            
-            
-         }else{echo"noooooooooooooooooo";} ?>
+        <?php }
+
+        if($reponseModifMatiere=="Supprimer"){//Style a faire emma?>
+        <form method="POST" action="matieresPage.php" id="supprimerMatiere">
+                Nom de la matière : <input type="text" name="NewNom"><br>
+                <input type="submit" name="validerSuppression" value="Enregistrer">
+        </form>
+        <?php }
+
+        if($reponseModifMatiere=="Modifier"){//Style a faire emma?>
+        <form method="POST" action="matieresPage.php" id="modifierMatiere">
+                Nom de la matière : <input type="text" name="NewNom"><br>
+                Volume horaire : <input type="number" name="NewVolumeHoraire" min="0"><br>
+                <input type="submit" name="validerModofication" value="Enregistrer">
+        </form>
+        <?php }?>
     </section>
 </body>
 </html>

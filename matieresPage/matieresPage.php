@@ -21,6 +21,28 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
+require_once('../fonction.php');
+
+if(isset($_POST['validerAjout'])){
+    $tab_matiere = [
+        "ID_matiere" => NULL,
+        "Nom_matiere" => $_POST['NewNom'],
+        "Volume_horaire" => $_POST['NewVolumeHoraire']
+    ];
+    insertion($bdd,"matiere", $tab_matiere);
+}
+
+if(isset($_POST['validerSupression'])){
+    //$tab_matiere = array('Nom_matiere' => $_POST['NewNom']);
+    //$sql=("DELETE FROM matiere WHERE Nom_matiere='$tab_matiere['Nom_matiere']'");
+    //$stmt = $PDO->prepare($sql);
+    //$stmt->execute();
+    supprimer($bdd, "matiere", "Nom_matiere=$nom");//Ca supprime passsssss
+} 
+
+if(isset($_POST['validerModification'])){
+    //modifier fonction
+}
 
 if($Type_compte=="admin"){
     $reponseMatiere = $bdd->query("SELECT * FROM matiere

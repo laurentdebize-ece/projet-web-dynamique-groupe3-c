@@ -116,7 +116,8 @@ while ($donnees = $reponse->fetch()){
 						header('Location: profilPage.php');
 						exit();
 					}
-		}
+				}
+			}
 }	
 ?>
 
