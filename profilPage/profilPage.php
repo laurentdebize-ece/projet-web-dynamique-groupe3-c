@@ -1,7 +1,11 @@
 <?php
 try{
-$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
-charset=utf8', 'root', 'root',
+    $mdp="root";
+	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
+        $passeword="";//pas de mdp sous wamp
+    }
+	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
+charset=utf8', 'root', $mdp,
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
@@ -28,7 +32,7 @@ die('Erreur : ' . $e->getMessage());
             <div class="flexboxText-menu"><a href="../mesMatieresPage/mesMatieresPage.html" class="lienWhite">Mes matières</a></div>
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.html" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
-            <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.html" class="lienWhite">Toutes les compétences</a></div>
+            <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
             <div class="flexboxLogo-menu"><a href="profilPage.php" class="lienWhite"><img src="../img/profilLogoActualPage.png" class="menuLogo" alt=" profilLogoActualPage "></a></div>
         </div>
     </section>
