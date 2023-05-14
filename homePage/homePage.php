@@ -13,12 +13,14 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['ID_Compte'])) {
+if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
 	exit();
   }
-$ID = $_SESSION['ID_Compte'];
-$_SESSION['ID_Compte'] = $ID;
+  $ID = $_SESSION['ID_Compte'];
+  $Type_compte = $_SESSION['Type_compte'];
+  $_SESSION['ID_Compte'] = $ID;
+  $_SESSION['Type_compte'] = $Type_compte;
 ?>
 
     <section id="taillePage">
