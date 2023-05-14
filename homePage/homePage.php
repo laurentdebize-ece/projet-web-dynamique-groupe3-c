@@ -47,10 +47,10 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     <section>
         <h4> Les compétences les plus populaires </h4>
         <div class="flex-container-mesMatieresHP">
-            <div class="flexboxMatieresHP"><a href="mathematiquesPage.php" class="lienWhite">Mathématiques</a></div>
-            <div class="flexboxMatieresHP"><a href="physiquePage.php" class="lienWhite">Physique</a></div>
-            <div class="flexboxMatieresHP"><a href="electroniquePage.php" class="lienWhite">Electronique</a></div>
-            <div class="flexboxMatieresHP"><a href="informatiquePage.php" class="lienWhite">Informatique</a></div>
+            <div class="flexboxMatieresHP"><a href="mathematiquesPage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
+            <div class="flexboxMatieresHP"><a href="physiquePage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
+            <div class="flexboxMatieresHP"><a href="electroniquePage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
+            <div class="flexboxMatieresHP"><a href="informatiquePage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
         </div>
     </section> 
     </section>  
