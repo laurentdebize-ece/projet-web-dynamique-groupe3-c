@@ -49,18 +49,18 @@ CREATE TABLE  `filiere` (
 CREATE TABLE  `matiere` (
     `ID_Matiere` int(11) PRIMARY KEY AUTO_INCREMENT,
     `Nom` varchar(50) NOT NULL,
-    `Volume_horaire` int(3) 
+    `Volume_horaire` int(3)
 );
 
 
 CREATE TABLE  `competence` (
     `ID_Competence` int(11) PRIMARY KEY AUTO_INCREMENT,
     `Nom` varchar(30) NOT NULL,
-    `Theme` varchar(30),
+    `Theme` varchar(30)
 );
 
 
-CREATE TABLE  `ecole/filiere` (
+CREATE TABLE  `ecole_filiere` (
     `ID_ecole/filiere` int(11) PRIMARY KEY AUTO_INCREMENT,
     `ID_Ecole` int(11) NOT NULL,
     `ID_Filiere` int(11) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE  `ecole/filiere` (
 );
 
 
-CREATE TABLE  `compte/matiere` (
+CREATE TABLE  `compte_matiere` (
     `ID_compte/matiere` int(11) PRIMARY KEY AUTO_INCREMENT,
     `ID_Compte` int(11) NOT NULL,
     `ID_Matiere` int(11) NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE  `compte/matiere` (
 );
 
 
-CREATE TABLE  `matiere/competence` (
+CREATE TABLE  `matiere_competence` (
     `ID_matiere/competence` int(11) PRIMARY KEY AUTO_INCREMENT,
     `ID_Matiere` int(11) NOT NULL,
     `ID_Competence` int(11) NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE  `matiere/competence` (
 );
 
 
-CREATE TABLE  `compte/competence` (
+CREATE TABLE  `compte_competence` (
     `ID_compte/competence` int(11) PRIMARY KEY AUTO_INCREMENT,
     `ID_Compte` int(11) NOT NULL,
     `ID_Competence` int(11) NOT NULL,
@@ -111,9 +111,9 @@ INSERT INTO `compte` (`ID_Compte`,`Nom`, `Prenom`, `E_mail`, `MDP`, `Type_compte
 (3, 'bb', 'bb', 'bb@gmail.com', 'bb', 'admin', 1, 1),
 (4, 'cc', 'cc', 'cc@gmail.com', 'gg', 'admin', 0, 1);
 
-/*INSERT INTO `compte/competence` (`ID_compte/competence`, `ID_Compte`, `ID_Competence`, `Moyenne_professeur`, `Etat_competence`, `Competence_valide_etudiant`, `Competence_valide_professeur`, `Appreciation`) VALUES
-(1, 1, 1,'', '', '', '', '', ''),
-(2, 2, 2,'', '', '', '', '', ''),
-(3, 3, 3,'', '', '', '', '', ''),
-(4, 4, 4,'', '', '', '', '', ''),
-(5, 5, 5,'', '', '', '', '', '');*/
+INSERT INTO `competence` (`ID_Competence`,`Nom`, `Theme`) VALUES 
+(1, 'aaaaaaaaaaaaa', 'Scientifique'),
+(2, 'bbbbbbbbbbbbbbb', 'Scientifique'),
+(3, 'cccccccccccccccccccccc', 'Commerce'),
+(4, 'ddddddddddddddd', 'Commerce');
+
