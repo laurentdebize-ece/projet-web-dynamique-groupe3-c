@@ -27,7 +27,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
      <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <div class="flexboxText-menu"><a href="../mesMatieresPage/mesMatieresPage.html" class="lienWhite">Mes matières</a></div>
+            <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
             <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
@@ -36,10 +36,22 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     </section>
     <section id="introHomePage">
         <h1> <img src="../img/omnesSkills.png"  alt=" omnesSkills " id="tailleImgOmnesSkills"> </h1>
-        <div class="intro">blaaaaaaaaaaaaaaaaaaaaablaaaaaaaaaaaaaaaaaaaaaaaaaaa<br>blaaaaaaaaaaaaaaaaaaaaaaaaaaablaaaaaaaaaaaaaaaaaaaaaaa </div>
-    <section id="competencesPopulaires">
-        <h2> Les compétences les plus populaires </h2>
-        <div style="height:500px; width: 50px; background-color: #002B44; margin-bottom: 10px;"></div>
+        <img src="../img/HomePageLyon.jpeg"  alt=" lyonHP" id="imgLyonHP">
+        <div class="intro">Ce site web permet aux professeurs de lister les compétences à
+            <br>acquérir dans leur matière, tandis que les étudiants pourront 
+            <br>s'auto-évaluer pour chaque compétence. Le but étant que les 
+            <br>étudiants comprendre leur niveau et à identifier les domaines
+            <br>dans lesquels ils doivent s'améliorer.</div>
+    
+    </section>
+    <section>
+        <h4> Les compétences les plus populaires </h4>
+        <div class="flex-container-mesMatieresHP">
+            <div class="flexboxMatieresHP"><a href="mathematiquesPage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
+            <div class="flexboxMatieresHP"><a href="physiquePage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
+            <div class="flexboxMatieresHP"><a href="electroniquePage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
+            <div class="flexboxMatieresHP"><a href="informatiquePage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
+        </div>
     </section> 
     </section>  
     <footer>
