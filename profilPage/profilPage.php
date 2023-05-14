@@ -2,7 +2,7 @@
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
-        $passeword="";//pas de mdp sous wamp
+        $mdp="";//pas de mdp sous wamp
     }
 	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', $mdp,
@@ -28,7 +28,7 @@ die('Erreur : ' . $e->getMessage());
     <section id="taillePage"></section>
      <section id="header">
         <div class="flex-contain-menu">
-            <div class="flexboxLogo-menu"><a href="../homePage/homePage.html" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
+            <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
             <div class="flexboxText-menu"><a href="../mesMatieresPage/mesMatieresPage.html" class="lienWhite">Mes matières</a></div>
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.html" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
@@ -39,34 +39,57 @@ die('Erreur : ' . $e->getMessage());
     <img src="../img/lyonCity.jpg"  alt=" lyonCity " id="imgLyonCityProfil">
 
     <?php 
-    /*session_start();
-    if(!isset( $_SESSION['ID_Compte'] )){
-        header('Location: ../connexionPage/connexion.php');
-        exit();
-    }
-    $_SESSION['ID_Compte'] = $ID;
-    
-    $reponse = $bdd->query('SELECT * FROM compte WHERE ID LIKE $ID');
-    $donnees = $reponse->fetch(); */?>
+    session_start();
 
+    if (!isset($_SESSION['ID_Compte'])) {
+        header('Location: ../homePage/homePage.php');
+        exit();
+      }
+    $ID = $_SESSION['ID_Compte'];
+    
+
+    $reponse = $bdd->query('SELECT * FROM compte');
+    while ($donnees = $reponse->fetch()){
+		if ($donnees['ID_Compte'] == $ID) {
+			$nom=$donnees['Nom'];
+			$prenom=$donnees['Prenom'];
+			$mail=$donnees['E_mail'];
+            $mdp=$donnees['MDP'];
+		}
+}
+?>
     <section id="bodyProfil">
         <div class="textBoldProfil">Nom</div>
-        <div class="textProfil"> <?php echo $donnees['Nom']; ?></div>
+        <div class="textProfil"> <?php echo $nom; ?></div>
         <div class="textBoldProfil">Prénom</div>
-        <div class="textProfil"><?php echo $donnees['Prenom']; ?>/div>
+        <div class="textProfil"><?php echo $prenom; ?></div>
         <div class="textBoldProfil">Adresse e-mail</div>
-        <div class="textProfil"><?php echo $donnees['E_mail']; ?></div>
+        <div class="textProfil"><?php echo $mail; ?></div>
         <div class="textBoldProfil">Mot de passe</div>
-        <div class="textProfil">@BDDmdp</div>
-        <form(method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>")>
+        <div class="textProfil"><?php echo $mdp; ?></div>
+
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>")>
             <input type="submit" id="boutonChangementMDP" name="ChangerMDP" value="Modifier">
         </form>
+        <?php
+        
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        echo 'tes';
+        if ($_POST['ChangerMDP']=="Modifier"){
+        session_start();
+        $_SESSION['ID_Compte'] = $ID;
+        header('Location: modifiercompte.php');
+        exit();
+        }
+    }
+    ?>
     </section>  
 </section>
     <footer>
         <div class="floatLeft">Projet Développement Web</div>
         <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
     </footer>
+
 </body>
 
 

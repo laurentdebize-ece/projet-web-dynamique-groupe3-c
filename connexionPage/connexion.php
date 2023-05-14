@@ -6,7 +6,7 @@
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
-        $passeword="";//pas de mdp sous wamp
+        $mdp="";//pas de mdp sous wamp
     }
 	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -38,51 +38,11 @@ $reponse = $bdd->query('SELECT * FROM compte');
 			exit();
 		}
 		else {
-			echo "Pseudo ou mot de passe erroné veuillez réessayer.";
+			session_start();
+			header('Location: connexionPage.html');
+			exit();
 		}
 }
-?>
-
-<?php
-/*
-$login = 'test1';
-$pass = 'test12';
-$verif=0;
-
-$tableau = array(
-array('login1','pass1','0'),
-array('login2','pass2','1'),
-array('login3','pass3','admin'),
-array('login4','pass4','eleve'),
-array('login5','pass5','prof')
-);
-
-
-?>
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  for ($i = 0; $i < count($tableau); $i++) {
-    if ($tableau[$i][0] == $_POST['pseudo'] && $tableau[$i][1] == $_POST['motdepasse']) {
-      $pseudo = $tableau[$i][0];
-      $motdepasse = $tableau[$i][1];
-      $type = $tableau[$i][2];
-      $verif = 1;
-      break;
-    }
-  }
-  if ($verif == 1) {
-		session_start();
-		$_SESSION['pseudo'] = $pseudo;
-		$_SESSION['motdepasse'] = $motdepasse;
-		$_SESSION['type'] = $type;
-		header('Location: MDP.php');
-		exit();
-  }
-  else {
-    echo "Pseudo ou mot de passe erroné veuillez réessayer.";
-  }
-}*/
 ?>
 
 </body>

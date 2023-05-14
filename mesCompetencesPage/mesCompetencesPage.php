@@ -2,7 +2,7 @@
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
-        $passeword="";//pas de mdp sous wamp
+        $mdp="";//pas de mdp sous wamp
     }
 	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', $mdp,
@@ -27,7 +27,7 @@ catch (Exception $e)
     <section id="taillePage">
      <section id="header">
         <div class=".flex-contain-menu">
-            <div class="flexboxLogo-menu"><a href="../homePage/homePage.html" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
+            <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
             <div class="flexboxText-menu"><a href="../mesMatieresPage/mesMatieresPage.html" class="lienWhite">Mes matières</a></div>
             <div class="flexboxText-menu"><a href="mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>

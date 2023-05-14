@@ -11,10 +11,11 @@ réécrivez votre mot de passe: <input type="password" name="Nmotdepasse"><br>
 </form>
 
 <?php
+
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
-        $passeword="";//pas de mdp sous wamp
+        $mdp="";//pas de mdp sous wamp
     }
 	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -37,12 +38,12 @@ $verif=0;
 ?>
 
 
-
 <?php
 $reponse = $bdd->query('SELECT * FROM compte');
 
 while ($donnees = $reponse->fetch()){
 		if ($donnees['ID_Compte'] == $ID) {
+		$Type_compte=$donnees['Type_compte'];
 		if ($donnees['Déjà_connecté']=='0'){
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					if ($_POST['motdepasse']== $_POST['Nmotdepasse']) {
@@ -56,7 +57,8 @@ while ($donnees = $reponse->fetch()){
 					if($verif == 1) {
 						session_start();
 						$_SESSION['ID_Compte'] = $ID;
-						header('Location: ../homePage/homePage.html');
+						$_SESSION['Type_compte'] = $Type_compte;
+						header('Location: ../homePage/homePage.php');						
 						exit();
 					}
 					else {
@@ -64,52 +66,16 @@ while ($donnees = $reponse->fetch()){
 					}
 				}
 			else {
+				
+
 				session_start();
 				$_SESSION['ID_Compte'] = $ID;
-				header('Location: ../homePage/homePage.html');
+				$_SESSION['Type_compte'] = $Type_compte;
+				header('Location: ../homePage/homePage.php');
 				exit();
 			}
 		}
 }	
-?>
-
-
-
-<?php
-/*
-if ($type=='0'){
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		if ($_POST['motdepasse']== $_POST['Nmotdepasse']) {
-			$motdepasse = $_POST['motdepasse'];
-			$type = 1;
-			$verif = 1;
-		}
-		if($verif == 1) {
-			session_start();
-			$_SESSION['pseudo'] = $pseudo;
-			$_SESSION['motdepasse'] = $motdepasse;
-			$_SESSION['type'] = $type;
-			header('Location: acceuil.php');
-			exit();
-		}
-		else {
-			echo "Nouveau mot de passe invalide.";
-		}
-	}
-}
-else {
-	session_start();
-		$_SESSION['pseudo'] = $pseudo;
-		$_SESSION['motdepasse'] = $motdepasse;
-		$_SESSION['type'] = $type;
-		header('Location: acceuil.php');
-		exit();
-}
-
-
-
-
-*/
 ?>
 
 </body>

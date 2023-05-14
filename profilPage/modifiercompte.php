@@ -16,11 +16,14 @@ Nouveau mot de passe: <input type="password" name="motdepasse"><br>
 réécrivez votre  nouveau mot de passe: <input type="password" name="Nmotdepasse"><br>
 <input type="submit">
 </form>
-
 <?php
 try{
-$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
-charset=utf8', 'root', 'root',
+    $mdp="root";
+	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
+        $mdp="";//pas de mdp sous wamp
+    }
+	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
+charset=utf8', 'root', $mdp,
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
@@ -32,7 +35,7 @@ die('Erreur : ' . $e->getMessage());
 <?php
 session_start();
 if (!isset($_SESSION['ID_Compte'])) {
-  header('Location: profilPage.html');
+  header('Location: profilPage.php');
   exit();
 }
 $ID = $_SESSION['ID_Compte'];
@@ -90,7 +93,7 @@ while ($donnees = $reponse->fetch()){
 					if($verifmdp == 1 || $verifmail==1 ||$verifnom==1 || $verifprenom==1) {
 						session_start();
 						$_SESSION['ID_Compte'] = $ID;
-						header('Location: profilPage.html');
+						header('Location: profilPage.php');
 						exit();
 					}
 		}
