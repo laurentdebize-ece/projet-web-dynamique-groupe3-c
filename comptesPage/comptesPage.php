@@ -37,14 +37,60 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
   $_SESSION['Type_compte'] = $Type_compte;
 
 
-/*if(isset($_POST['validerAjout'])){
-    $tab_matiere = [
-        "ID_matiere" => NULL,
-        "Nom_matiere" => $_POST['NewNom'],
-        "Volume_horaire" => $_POST['NewVolumeHoraire']
-    ];
-    insertion($bdd,"matiere", $tab_matiere);
-}
+  $reponse = $bdd->query('SELECT * FROM compte');
+  while ($donnees = $reponse->fetch()){
+          if ($donnees['ID_Compte'] == $ID) {
+              if ($donnees['Type_compte'] == 'Administrateur') {
+                  
+                  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    if(isset($_POST['validerAjout'])){ 
+                      $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                      $NewMDP = '';
+                      for ($i = 0; $i < 10; $i++) {
+                          $NewMDP .= $caracteres[rand(0, strlen($caracteres) - 1)];
+                      }
+                      
+                      $NewEmail = $_POST['NewEmail'];
+                      $NewTypeCompte = $_POST['NewTypeCompte'];
+                      $NewDejaCo = 0;
+                      $NewNom = $_POST['NewNom'];
+                      $NewPrenom = $_POST['NewPrenom'];
+                      $NewIDecole=1;
+                      
+                      $requete = $bdd->prepare("INSERT INTO compte (Nom, Prenom, E_mail, MDP,type_compte, Deja_connecte,ID_Ecole) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole)");
+                      $requete->bindParam(':NewNom', $NewNom);
+                      $requete->bindParam(':NewPrenom', $NewPrenom);
+                      $requete->bindParam(':NewEmail', $NewEmail);
+                      $requete->bindParam(':NewMDP', $NewMDP);
+                      $requete->bindParam(':NewTypeCompte', $NewTypeCompte);
+                      $requete->bindParam(':NewDejaCo', $NewDejaCo);
+                      $requete->bindParam(':NewIDecole', $NewIDecole);
+                      $requete->execute();
+                    }//Mettre le message un message d 'erreur
+                    if(isset($_POST['validerSuppression'])){
+                        echo"er";
+                        $reponse = $bdd->query('SELECT * FROM compte');
+                        while ($donnees = $reponse->fetch()){
+                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                if ($_POST['NewNom']== $donnees['Nom'] && $_POST['NewPrenom'] ==  $donnees['Prenom']) {
+                                    $comptesup=$_POST['NewNom'];
+                                    $sql = "DELETE FROM compte WHERE Nom ='$comptesup'";
+                                    $bdd->query($sql);
+                                } else {
+                                    echo "impossible de supprimer ce compte. <br>";//Mettre le message un message d 'erreur
+                                }
+
+                            }
+                        }               
+                    }
+                    //
+                }
+            }
+        }
+    }
+                      
+                      
+/*
 
 if(isset($_POST['validerSupression'])){
     //$tab_matiere = array('Nom_matiere' => $_POST['NewNom']);
