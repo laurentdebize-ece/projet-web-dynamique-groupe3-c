@@ -78,14 +78,17 @@ $reponse = $bdd->query('SELECT * FROM compte');
 while ($donnees = $reponse->fetch()){
 		if ($donnees['ID_Compte'] == $ID) {
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
-					if ($_POST['motdepasse']== $_POST['Nmotdepasse']) {
+					if ($_POST['mdp1']== $_POST['mdp2']) {
 						$verifmdp = 1;
-						if ( $_POST['motdepasse']!="" && $_POST['Nmotdepasse']!=""){
-							$motdepasse = $_POST['motdepasse'];
+						if ( $_POST['mdp1']!="" && $_POST['mdp2']!=""){
+							$motdepasse = $_POST['mdp1'];
 							$sql = "UPDATE compte SET MDP='$motdepasse' WHERE ID_Compte='$ID'";
-							$bdd->query($sql);						
+							$bdd->query($sql);
+
 						}
 						
+					}else {
+						echo 'Erreur les mots de passes sont différents';
 					}
 					
 					if ($_POST['Newmail']!="") {
