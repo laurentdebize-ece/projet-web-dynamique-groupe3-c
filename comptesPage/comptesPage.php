@@ -83,31 +83,19 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                             }
                         }               
                     }
-                    //
+                    /*
+if(isset($_POST['validerModification'])){
+    //modifier fonction
+}*/
                 }
             }
         }
     }
-                      
-                      
-/*
-
-if(isset($_POST['validerSupression'])){
-    //$tab_matiere = array('Nom_matiere' => $_POST['NewNom']);
-    //$sql=("DELETE FROM matiere WHERE `matiere`.`Nom_matiere`='$_POST['NewNom']'");
-    //$stmt = $PDO->prepare($sql);
-    //$stmt->execute();
-    supprimer($bdd, "matiere", "Nom_matiere=$nom");//Ca supprime passsssss
-} 
-
-if(isset($_POST['validerModification'])){
-    //modifier fonction
-}*/
-
+                                            
 ?>
      <section id="header">
         <div class="flex-contain-menu">
-            <div class="flexboxLogo-menu"><a href="homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
+            <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
             <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
