@@ -52,39 +52,54 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 </section>
 <section class="bodyModifCompte">
 <?php if($reponseModifCompte=="Ajouter"){ //Style a faire emma?>
-            <form method="POST" action="comptesPage.php" id="ajouterMatiere">
-                Nom : <input type="text" name="NewNom"><br>
-                Prénom : <input type="text" name="NewPrenom"><br>
-                E_mail : <input type="email" name="NewEmail"><br>
+    <div id="formulaireModifCompte"> 
+        <div class="login-form2">
+			<h3>Ajouter un compte</h3>
+            <form method="POST" action="comptesPage.php" id="ajouterCompte">
+                Nom : <input type="text" name="NewNom" placeholder="Entrez nom"required><br><br>
+                Prénom : <input type="text" name="NewPrenom" placeholder="Entrez prénom"required><br><br>
+                E_mail : <input type="text" name="NewEmail" placeholder="Entrez adresse mail"required><br><br>
                 Type de compte:<br>
                     <input type="radio" name="NewTypeCompte" value="Etudiant"> Etudiant
                     <input type="radio" name="NewTypeCompte" value="Professeur">Professeur
                     <input type="radio" name="NewTypeCompte" value="Administrateur">Administrateur
-                <br>
+                <br><br>
                 <input type="submit" name="validerAjout" value="Enregistrer">
             </form>
+        </div>
+    </div>
         <?php }
 
-        if($reponseModifCompte=="Supprimer"){//Style a faire emma?>
-        <form method="POST" action="comptesPage.php" id="supprimerMatiere">
-                Nom : <input type="text" name="NewNom"><br>
-                Prenom : <input type="text" name="NewPrenom"><br>
+if($reponseModifCompte=="Supprimer"){//Style a faire emma?>
+    <div id="formulaireModifCompte"> 
+        <div class="login-form2">
+			<h3>Supprimer un compte</h3>
+            <form method="POST" action="comptesPage.php" id="supprimerMatiere">
+                Nom : <input type="text" name="NewNom" placeholder="Entrez nom"required><br><br>
+                Prenom : <input type="text" name="NewPrenom" placeholder="Entrez prénom"required><br><br>
                 <input type="submit" name="validerSuppression" value="Enregistrer">
-        </form>
+            </form>
+        </div>
+    </div>
         <?php }
 
-        if($reponseModifCompte=="Modifier"){//Style a faire emma?>
-        <form method="POST" action="comptesPage.php" id="modifierMatiere">
-                Nom : <input type="text" name="NewNom"><br>
-                Prénom : <input type="text" name="NewPrenom"><br>
-                E_mail : <input type="email" name="NewEmail"><br>
+if($reponseModifCompte=="Modifier"){//Style a faire emma?>
+    <div id="formulaireModifCompte"> 
+        <div class="login-form2">
+			<h3>Modifier un compte</h3>
+            <form method="POST" action="comptesPage.php" id="modifierMatiere">
+                Nom : <input type="text" name="NewNom" placeholder="Entrez nom"required><br><br>
+                Prénom : <input type="text" name="NewPrenom" placeholder="Entrez prénom"required><br><br>
+                E_mail : <input type="text" name="NewEmail" placeholder="Entrez adresse mail"required><br><br>
                 Type de compte:<br>
                     <input type="radio" name="NewTypeCompte" value="Etudiant"> Etudiant
                     <input type="radio" name="NewTypeCompte" value="Professeur">Professeur
                     <input type="radio" name="NewTypeCompte" value="Administrateur">Administrateur
-                <br>
+                <br><br>
                 <input type="submit" name="validerAjout" value="Enregistrer">
-        </form>
+            </form>
+        </div>
+    </div>        
         <?php }?>
 </section>    
 <footer>
