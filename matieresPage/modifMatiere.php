@@ -50,14 +50,8 @@ $reponseModifMatiere = $_POST['modifMatiere'];
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    <section class="aaa">
-        <?php if(isset($reponseAjoutMatiere)){ ?>
-            <p>pas nul</p>
-        <?php } 
-        if(!isset($reponseAjoutMatiere)){ ?>
-            <p>nul</p>
-        <?php }
-        if($reponseModifMatiere=="Ajouter"){ //Style a faire emma?>
+    <section id="bodyModifMatiere">
+        <?php if($reponseModifMatiere=="Ajouter"){ //Style a faire emma?>
             <form method="POST" action="matieresPage.php" id="ajouterMatiere">
                 Nom de la matière : <input type="text" name="NewNom"><br>
                 Volume horaire : <input type="number" name="NewVolumeHoraire" min="0"><br>

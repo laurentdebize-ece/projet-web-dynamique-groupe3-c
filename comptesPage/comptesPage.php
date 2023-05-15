@@ -35,6 +35,29 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
   $Type_compte = $_SESSION['Type_compte'];
   $_SESSION['ID_Compte'] = $ID;
   $_SESSION['Type_compte'] = $Type_compte;
+
+
+/*if(isset($_POST['validerAjout'])){
+    $tab_matiere = [
+        "ID_matiere" => NULL,
+        "Nom_matiere" => $_POST['NewNom'],
+        "Volume_horaire" => $_POST['NewVolumeHoraire']
+    ];
+    insertion($bdd,"matiere", $tab_matiere);
+}
+
+if(isset($_POST['validerSupression'])){
+    //$tab_matiere = array('Nom_matiere' => $_POST['NewNom']);
+    //$sql=("DELETE FROM matiere WHERE `matiere`.`Nom_matiere`='$_POST['NewNom']'");
+    //$stmt = $PDO->prepare($sql);
+    //$stmt->execute();
+    supprimer($bdd, "matiere", "Nom_matiere=$nom");//Ca supprime passsssss
+} 
+
+if(isset($_POST['validerModification'])){
+    //modifier fonction
+}*/
+
 ?>
      <section id="header">
         <div class="flex-contain-menu">
@@ -49,7 +72,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    <section id="bodyComptesPage">
+    <section class="bodyComptesPage">
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriComptes">
         <input type="radio" name="choixTriComptes" value="1" id="selectChoixTriComptes">Nom</option>
         <input type="radio" name="choixTriComptes" value="2" id="selectChoixTriComptes">Prénom</option>
@@ -94,6 +117,11 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     </tr>
 <?php } ?>
 </table>
+<form method="POST" action="modifCompte.php" id="formModifCompte">
+    <input type="submit" name ="modifCompte" value="Ajouter" class="boutonModif">
+    <input type="submit" name ="modifCompte" value="Supprimer" class="boutonModif">
+    <input type="submit" name ="modifCompte" value="Modifier" class="boutonModif">
+</form>
 </section>
     <footer>
         <div class="floatLeft">Projet Développement Web</div>

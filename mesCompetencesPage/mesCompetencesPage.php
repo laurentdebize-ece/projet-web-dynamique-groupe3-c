@@ -50,7 +50,7 @@ $_SESSION['Type_compte'] = $Type_compte;
         </div>
     </section>
 
-<section id="bodyMesCompetencesPage">
+<section class="bodyPage">
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriCompetences">
         <input type="radio" name="choixTriCompetences" value="1" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>
         <input type="radio" name="choixTriCompetences" value="2" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>

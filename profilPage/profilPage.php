@@ -35,7 +35,6 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 </head>
 
 <body>
-    <section id="taillePage"></section>
      <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
@@ -52,15 +51,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     <img src="../img/lyonCity.jpg"  alt=" lyonCity " id="imgLyonCityProfil">
 
     <?php 
-    session_start();
-
-    if (!isset($_SESSION['ID_Compte'])) {
-        header('Location: ../homePage/homePage.php');
-        exit();
-      }
-    $ID = $_SESSION['ID_Compte'];
     
-
     $reponse = $bdd->query('SELECT * FROM compte');
     while ($donnees = $reponse->fetch()){
 		if ($donnees['ID_Compte'] == $ID) {
