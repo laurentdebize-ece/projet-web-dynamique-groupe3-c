@@ -19,6 +19,12 @@ body {
     font-family: "openSansLight";
     text-decoration: none;
 }
+.lienClique{
+    color: #3084b5;
+    font-family: "openSansLight";
+    font-weight: bolder;
+    text-decoration: none;
+}
 h1{
     text-align: center;
     font-family: "openSansBold";
