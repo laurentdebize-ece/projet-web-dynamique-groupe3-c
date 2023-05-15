@@ -4,7 +4,7 @@ try{
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
         $mdp="";//pas de mdp sous wamp
     }
-	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills; 
+	$bdd = new PDO('mysql:host=localhost;dbname=omnes_my_skills; 
     charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
@@ -100,7 +100,31 @@ INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_compet
                 <input type="submit" name ="modifMatiere" value="Modifier" class="boutonModif">
             </form>
         <?php }?>
-    
+
+
+
+        <?php if($Type_compte=="Prof"){?>
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="boutonModif">
+            <?php echo "soumettre une auto-evaluation" ?>
+            <input type="submit" name ="soumettreEval" value="soumettre une auto evaluation" class="boutonAutoEval">
+            </form>
+            <?php }?>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if ($_POST['soumettreEval']=="soumettre"){
+                //code sql qui notif l'eleve
+            }
+        }
+?>
+                
+        <?php if($Type_compte=="Etudiant"){?>
+            <form method="POST" action="../autoevaluation.php" id="AutoEval">
+            <?php echo "faire une auto-evaluation" ?>
+            <input type="submit" name ="faireEval" value="s'auto evaluer" class="boutonAutoEval">
+            </form>
+            <?php }?>
+
+
     <footer>
         <div class="floatLeft">Projet Développement Web</div>
         <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>

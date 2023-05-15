@@ -4,7 +4,7 @@ try{
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
         $mdp="";//pas de mdp sous wamp
     }
-	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
+	$bdd = new PDO('mysql:host=localhost;dbname=omnes_my_skills;
 charset=utf8', 'root', $mdp,
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
