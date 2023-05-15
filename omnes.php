@@ -169,5 +169,5 @@ foreach ($resultat as $reponses => $value) {
 
 */
 
-$test = ajouter($bdd, "competence", "Nom", "Maitrise_Matrice");
+
 ?>
