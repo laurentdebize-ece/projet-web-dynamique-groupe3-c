@@ -23,7 +23,7 @@ $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 require_once('../fonction.php');
 
-$reponseModifMatiere = $_POST['modifMatiere'];
+$reponseModifCompetence = $_POST['modifCompetence'];
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ $reponseModifMatiere = $_POST['modifMatiere'];
 
 <head>
     <meta charset="utf-8">
-    <title>OMNES MySkills - Modifier une matière</title>
+    <title>OMNES MySkills - Modifier une competence</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleMatieres.css" rel="stylesheet" type="text/css">
 </head>
@@ -40,51 +40,52 @@ $reponseModifMatiere = $_POST['modifMatiere'];
     <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
+            <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienClique">Matières</a></div>
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
-            <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
+            <div class="flexboxText-menu"><a href="toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
             <?php if($Type_compte=="Administrateur"){ ?>
                 <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
             <?php } ?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    <section id="bodyModifMatiere">
-        <?php if($reponseModifMatiere=="Ajouter"){ //Style a faire emma?>
-        <div id="formulaireMofifMatiere">	   
+    <section id="bodyModifCompetence">
+        <?php if($reponseModifCompetence=="Ajouter"){ //Style a faire emma?>
+        <div id="formulaireMofifCompetence">	   
             <div class="login-form2">
-				<h3>Ajouter une nouvelle matière</h3>
-                <form method="POST" action="matieresPage.php" id="ajouterMatiere">
-                    Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
-                    <!--NUMBER-->
-                    Volume horaire : <input type="text" name="NewVolumeHoraire" placeholder="Entrez volume horaire"required min="0"><br><br>
+				<h3>Ajouter une nouvelle compétence</h3>
+                <form method="POST" action="toutesCompetencesPage.php" id="ajouterCompetence">
+                    Nom de la compétence : <input type="text" name="NewNom" placeholder="Entrez compétence"required><br><br>
+                    Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
+                    Date de création : <input type="date" name="NewDate"><br><br>
                     <input type="submit" name="validerAjout" value="Enregistrer">
                 </form>
             </div>
         </div>        
         <?php }
 
-        if($reponseModifMatiere=="Supprimer"){//Style a faire emma?>
-        <div id="formulaireMofifMatiere">    
+        if($reponseModifCompetence=="Supprimer"){//Style a faire emma?>
+        <div id="formulaireMofifCompetence">    
             <div class="login-form2">
-				<h3>Supprimer une matière</h3>
-                <form method="POST" action="matieresPage.php" id="supprimerMatiere">
-                    Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
+				<h3>Supprimer une compétence</h3>
+                <form method="POST" action="toutesCompetencesPage.php" id="supprimerCompetence">
+                    Nom de la compétence : <input type="text" name="NewNom" placeholder="Entrez compétence"required><br><br>
+                    Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
                     <input type="submit" name="validerSuppression" value="Enregistrer">
                 </form>
             </div>
         </div>    
         <?php }
 
-        if($reponseModifMatiere=="Modifier"){//Style a faire emma?>
-        <div id="formulaireMofifMatiere"> 
+        if($reponseModifCompetence=="Modifier"){//Style a faire emma?>
+        <div id="formulaireMofifCompetence"> 
             <div class="login-form2">
-				<h3>Modifier une matière</h3>
-                <form method="POST" action="matieresPage.php" id="modifierMatiere">
+				<h3>Modifier une compétence</h3>
+                <form method="POST" action="toutesCompetencesPage.php" id="modifierCompetence">
                     Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
-                    <!--NUMBER-->
-                    Volume horaire : <input type="text" name="NewVolumeHoraire" placeholder="Entrez nouveau volume horaire"required min="0"><br><br>
+                    Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
+                    Date de création : <input type="date" name="NewDate"><br><br>
                     <input type="submit" name="validerModofication" value="Enregistrer">
                 </form>
             </div>

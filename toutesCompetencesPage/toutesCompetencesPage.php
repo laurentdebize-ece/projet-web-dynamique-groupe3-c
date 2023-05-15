@@ -21,6 +21,30 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
+require_once('../fonction.php');
+
+/*if(isset($_POST['validerAjout'])){
+    $tab_matiere = [
+        "ID_Competence" => NULL,
+        "Nom_competence" => $_POST['NewNom'],
+        "Date_Creation" => $_POST['NewDate'],
+        "Theme" => $_POST['NewTheme']
+    ];
+    insertion($bdd,"competence", $tab_matiere);
+}
+
+if(isset($_POST['validerSupression'])){
+    //$tab_matiere = array('Nom_matiere' => $_POST['NewNom']);
+    //$sql=("DELETE FROM matiere WHERE `matiere`.`Nom_matiere`='$_POST['NewNom']'");
+    //$stmt = $PDO->prepare($sql);
+    //$stmt->execute();
+    //supprimer($bdd, "competence", "Nom_matiere=$nom");//Ca supprime passsssss
+} 
+
+if(isset($_POST['validerModification'])){
+    //modifier fonction
+}
+*/
 ?>
 
 
@@ -50,8 +74,61 @@ $_SESSION['Type_compte'] = $Type_compte;
         </div>
     </section>
 
-<section id="bodyToutesCompetencesPage">
+    <section id="bodyToutesCompetencesPage">
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriCompetences">
+        <input type="radio" name="choixTriCompetences" value="1" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>
+        <input type="radio" name="choixTriCompetences" value="2" id="selectChoixTriCompetences">Ordre alphabétique décroissant</option>
+        <input type="radio" name="choixTriCompetences" value="3" id="selectChoixTriCompetences">Thème</option>
+        <input type="radio" name="choixTriCompetences" value="4" id="selectChoixTriCompetences">Date croissante</option>
+        <input type="radio" name="choixTriCompetences" value="5" id="selectChoixTriCompetences">Date décroissante</option>
+        <input type="submit" value="valider">
+</form>
 
+<?php if(isset($_POST['choixTriCompetences'])){
+    switch($_POST['choixTriCompetences']) {
+        case 1 : //ordre alphabétique compétences
+            $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence ORDER BY Nom_competence");
+            break;
+        case 2 : //ordre inalphabétique compétences
+            $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence ORDER BY Nom_competence DESC");
+            break;
+        case 3 : //thème
+            $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence ORDER BY Theme");
+            break;
+        case 4 : //date par ordre croissant
+            $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence ORDER BY Date_Creation ASC");
+            break;
+        case 5 : //date par ordre décroissant
+            $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence ORDER BY Date_Creation DESC");
+            break;
+        default :
+        $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence");
+            break;
+    }
+} else {
+    $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence");
+}?>
+<table>
+    <tr id="textLigne1">
+        <td>Compétence</td>
+        <td>Thème</td>
+        <td>Date de création</td>
+    </tr>
+<?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
+    <tr>
+        <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['Theme']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['Date_Creation']?></td>
+    </tr>
+<?php } ?>
+</table>
+<?php if($Type_compte=="Administrateur"){?>
+            <form method="POST" action="modifCompetence.php" id="formModifCompetence">
+                <input type="submit" name ="modifCompetence" value="Ajouter" class="boutonModif">
+                <input type="submit" name ="modifCompetence" value="Supprimer" class="boutonModif">
+                <input type="submit" name ="modifCompetence" value="Modifier" class="boutonModif">
+            </form>
+        <?php }?>
     </section>  
     <footer>
         <div class="floatLeft">Projet Développement Web</div>
