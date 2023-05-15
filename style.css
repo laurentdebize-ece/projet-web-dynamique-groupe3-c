@@ -19,6 +19,12 @@ body {
     font-family: "openSansLight";
     text-decoration: none;
 }
+.lienClique{
+    color: #3084b5;
+    font-family: "openSansLight";
+    font-weight: bolder;
+    text-decoration: none;
+}
 h1{
     text-align: center;
     font-family: "openSansBold";
@@ -44,6 +50,8 @@ h2{
 }
 .flex-contain-menu {
     display: flex;
+    justify-content: center;
+    align-content: center;
     flex-direction: row;
 }
 .menuLogo {
@@ -52,13 +60,15 @@ h2{
     padding-top: 2px;
 }
 .flexboxLogo-menu {
-    margin-left: 2%;
-    margin-right: 2%;
+    margin-left: 4%;
+    margin-right: 4%;
 }
 .flexboxText-menu {
-    padding-top: 1%;
-    margin-left: 2%;
-    margin-right: 2%;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    margin-left: 4%;
+    margin-right: 4%;
 }
 nav.nav {
     display: flex;
@@ -123,6 +133,7 @@ footer{
     padding-left: 10px;
     padding-right: 10px;
 }
+/*Formulaire*/
 .login-form2 {
 	width: 30%;
     margin-left: 10%;
