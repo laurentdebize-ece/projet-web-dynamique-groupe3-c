@@ -53,7 +53,7 @@ $_SESSION['Type_compte'] = $Type_compte;
 <section id="bodyMesCompetencesPage">
 <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriCompetences">
         <input type="radio" name="choixTriCompetences" value="1" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>
-        <input type="radio" name="choixTriCompetences" value="2" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>
+        <input type="radio" name="choixTriCompetences" value="2" id="selectChoixTriCompetences">Ordre alphabétique décroissant</option>
         <input type="radio" name="choixTriCompetences" value="3" id="selectChoixTriCompetences">Statut</option>
         <input type="radio" name="choixTriCompetences" value="4" id="selectChoixTriCompetences">Date croissante</option>
         <input type="radio" name="choixTriCompetences" value="5" id="selectChoixTriCompetences">Date décroissante</option>
@@ -98,7 +98,7 @@ $_SESSION['Type_compte'] = $Type_compte;
             INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
             INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
             WHERE compte.ID_Compte = '$ID'
-            ORDER BY Date ASC");
+            ORDER BY Date_Creation ASC");
             break;
         case 5 : //date par ordre décroissant
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
@@ -107,7 +107,7 @@ $_SESSION['Type_compte'] = $Type_compte;
             INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
             INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
             WHERE compte.ID_Compte = '$ID'
-            ORDER BY Date DESC");
+            ORDER BY Date_Creation DESC");
             break;
         case 6 : //matiere
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
