@@ -32,17 +32,6 @@ if(isset($_POST['validerAjout'])){
     insertion($bdd,"matiere", $tab_matiere);
 }
 
-if(isset($_POST['validerSupression'])){
-    //$tab_matiere = array('Nom_matiere' => $_POST['NewNom']);
-    //$sql=("DELETE FROM matiere WHERE `matiere`.`Nom_matiere`='$_POST['NewNom']'");
-    //$stmt = $PDO->prepare($sql);
-    //$stmt->execute();
-    supprimer($bdd, "matiere", "Nom_matiere=$nom");//Ca supprime passsssss
-} 
-
-if(isset($_POST['validerModification'])){
-    //modifier fonction
-}
 
 if($Type_compte=="admin"){
     $reponseMatiere = $bdd->query(/

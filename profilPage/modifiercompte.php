@@ -2,10 +2,9 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>OMNES MySkills - Profil</title>
+    <title>OMNES MySkills - Modifier compte</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleProfilPage.css" rel="stylesheet" type="text/css">
-    <link href="styleModifierComptes.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <section id="header">
@@ -19,8 +18,9 @@
         </div>
 	</section>
 
-	<section>
+	<section id="bodyModifierCompte">
 		<img src="../img/lyonCity.jpg"  alt=" lyonCity " id="imgLyonCityProfil">
+		<div id="formulaireMofifCompte">	
 			<div class="login-form2">
 				<h3>Mon compte</h3>
 				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -36,12 +36,15 @@
 					<input type="submit" value="modifier"><br><br>
 				</form>
 			</div>
-		</section> 
+		</div>
+	</section> 
 	<footer>
     	<div class="floatLeft">Projet Développement Web</div>
     	<div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
     </footer>
-	
+</body>
+</html>
+
 <?php
 try{
     $mdp="root";
@@ -69,11 +72,7 @@ $verifmdp = 0;
 $verifmail = 0;
 $verifnom = 0;
 $verifprenom = 0;
-?>
 
-
-
-<?php
 $reponse = $bdd->query('SELECT * FROM compte');
 
 while ($donnees = $reponse->fetch()){
@@ -120,6 +119,3 @@ while ($donnees = $reponse->fetch()){
 			}
 }	
 ?>
-
-</body>
-</html>
