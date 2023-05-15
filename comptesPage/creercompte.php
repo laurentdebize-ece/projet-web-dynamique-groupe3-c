@@ -3,14 +3,13 @@
 <body>
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
 Email: <input type="text" name="Email2"><br>
 Nom :  <input type="text" name="Nom2"><br>
 Prenom :  <input type="text" name="Prenom2"><br> 
 role:<br>
-<input type="radio" name="role2" value="eleve"> éleve
-<input type="radio" name="role2" value="prof">professeur
-<input type="radio" name="role2" value="admin">administration
+<input type="radio" name="role2" value="Etudiant"> Etudiant
+<input type="radio" name="role2" value="Professeur">Professeur
+<input type="radio" name="role2" value="Administrateur">Administrateur
 <br>
 <input type="submit">
 </form>
@@ -41,7 +40,7 @@ $ID = $_SESSION['ID_compte'];
 $reponse = $bdd->query('SELECT * FROM compte');
 while ($donnees = $reponse->fetch()){
 		if ($donnees['ID_Compte'] == $ID) {
-			if ($donnees['Type_compte'] == 'admin') {
+			if ($donnees['Type_compte'] == 'Administrateur') {
 				echo 'Creation compte ';
 				
 				
@@ -60,7 +59,7 @@ while ($donnees = $reponse->fetch()){
 					$prenom2 = $_POST['Prenom2'];
 					$IDecole=1;
 					
-					$requete = $bdd->prepare("INSERT INTO compte (Nom, Prenom, E_mail, MDP,type_compte, Déjà_connecté,ID_Ecole) VALUES ( :nom2, :prenom2, :Email2, :MDP2,:Typecompte2, :dejaco2, :IDecole)");
+					$requete = $bdd->prepare("INSERT INTO compte (Nom, Prenom, E_mail, MDP,type_compte, Deja_connecte,ID_Ecole) VALUES ( :nom2, :prenom2, :Email2, :MDP2,:Typecompte2, :dejaco2, :IDecole)");
 					$requete->bindParam(':nom2', $nom2);
 					$requete->bindParam(':prenom2', $prenom2);
 					$requete->bindParam(':Email2', $Email2);

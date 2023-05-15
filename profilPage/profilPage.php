@@ -83,7 +83,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
         if ($_POST['ChangerMDP']=="Modifier"){
         session_start();
         $_SESSION['ID_Compte'] = $ID;
-        header('Location: modifiercompte.php');
+        header('Location: modifierMonProfil.php');
         exit();
         }
         if ($_POST['Deconnexion']=="Deconnecter"){
