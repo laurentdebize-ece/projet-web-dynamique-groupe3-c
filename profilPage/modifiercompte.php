@@ -14,7 +14,10 @@
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.html" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
             <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
-            <div class="flexboxLogo-menu"><a href="profilPage.php" class="lienWhite"><img src="../img/profilLogoActualPage.png" class="menuLogo" alt=" profilLogoActualPage "></a></div>
+            <?php if($Type_compte=="admin"){ ?>
+                <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
+            <?php } ?>
+			<div class="flexboxLogo-menu"><a href="profilPage.php" class="lienWhite"><img src="../img/profilLogoActualPage.png" class="menuLogo" alt=" profilLogoActualPage "></a></div>
         </div>
 	</section>
 
