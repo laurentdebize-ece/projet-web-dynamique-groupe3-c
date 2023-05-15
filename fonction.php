@@ -13,10 +13,9 @@ function select($PDO, $table, $where = null)
     return $result;
 }
 
-?>
 
 
-<?php
+
 
 /*function selectcible($PDO, $table, $where = null, $cibles)
 {
@@ -29,9 +28,9 @@ function select($PDO, $table, $where = null)
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }*/
-?>
 
-<?php
+
+
 
 $colonne = array('ID_Matiere', 'Nom', 'Volume_horaire');
 $string = implode(",", $colonne);
@@ -49,25 +48,26 @@ function selectcible2($PDO, $table, $string, $where = null)
 
 }
 
-?>
 
-<?php
+
 /*
+
 function selection($PDO, $table, $where = null, $cibles = null, $cibles2 = null, $cibles3 = null, $cibles4 = null, $cible5)
 {
     $sql = "SELECT * FROM $table";
     if ($where != null) {
         $sql .= " WHERE $where";
     }
-    echo $sql;
+    
     $stmt = $PDO->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
-}*/
-?>
+}
+*/
 
-<?php
+
+
 /*
 function insertion($PDO, $table, $attribut, $valeur)
 {
@@ -95,9 +95,9 @@ function insertion($PDO,$table, $valeur_tableau)
 
 }
 
-?>
 
-<?php
+
+
 function jointure($PDO, $table1, $table2, $cleEtrangere1, $cleEtrangere2,$where) {
     try {
         $sql = "SELECT *
@@ -120,9 +120,9 @@ function jointure($PDO, $table1, $table2, $cleEtrangere1, $cleEtrangere2,$where)
 }
 
 
-?>
 
-<?php
+
+
 
 function doubleJointure($PDO, $table1, $table2, $table3, $cleEtrangere1, $cleEtrangere2_1,$cleEtrangere2_2, $cleEtrangere3, $where) {
     try {
@@ -147,13 +147,12 @@ function doubleJointure($PDO, $table1, $table2, $table3, $cleEtrangere1, $cleEtr
     }
 }
 
-?>
 
 
-<?php
 
-function supprimer($PDO, $table, $where)
-{
+
+
+function supprimer($PDO, $table, $where) {
     $sql = "DELETE FROM $table WHERE $where";
     $stmt = $PDO->prepare($sql);
     $stmt->execute();
@@ -161,17 +160,32 @@ function supprimer($PDO, $table, $where)
     return null;
 }
 
-?>
 
-<?php
 
-function ajouter($PDO, $table, $attribut, $valeur)
-{
-    $sql = "INSERT INTO $table ($attribut) VALUES ('$valeur')";
-    $stmt = $PDO->prepare($sql);
-    $stmt->execute();
-    
-    return null;
+
+
+//Pour les compétences tranverses = pas tt de suite
+/*
+function modifier_Moyenne_Professeur($PDO, $table, $nouvelleMoyenne, $ID_Professeur, $ID_Eleve) {
+    try {
+        $sql = "UPDATE $table SET moyenne_professeur = $nouvelleMoyenne WHERE $ID_Professeur = ";
+        
+        $stmt = $PDO->prepare($sql);
+        $stmt->execute();
+        
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+        return false;
+    }
 }
+*/
+
+
+
 
 ?>
+
+
+
+
