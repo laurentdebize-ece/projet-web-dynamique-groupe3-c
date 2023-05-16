@@ -17,7 +17,7 @@ try{
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
         $mdp="";//pas de mdp sous wamp
     }
-	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
+	$bdd = new PDO('mysql:host=localhost;dbname=omnes_my_skills;
 charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
@@ -44,13 +44,13 @@ $reponse = $bdd->query('SELECT * FROM compte');
 while ($donnees = $reponse->fetch()){
 		if ($donnees['ID_Compte'] == $ID) {
 		$Type_compte=$donnees['Type_compte'];
-		if ($donnees['Déjà_connecté']=='0'){
+		if ($donnees['Deja_connecte']=='0'){
 				if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					if ($_POST['motdepasse']== $_POST['Nmotdepasse']) {
 						$motdepasse = $_POST['motdepasse'];
 						$type = 1;
 						$verif = 1;
-						$sql = "UPDATE compte SET MDP='$motdepasse', Déjà_connecté='$type' WHERE ID_Compte='$ID'";
+						$sql = "UPDATE compte SET MDP='$motdepasse', Deja_connecte='$type' WHERE ID_Compte='$ID'";
 						$bdd->query($sql);
 					}
 }
@@ -65,7 +65,7 @@ while ($donnees = $reponse->fetch()){
 						echo "Nouveau mot de passe invalide.";
 					}
 				}
-			else {
+			else if (($donnees['Deja_connecte']=='1')) {
 				
 
 				session_start();

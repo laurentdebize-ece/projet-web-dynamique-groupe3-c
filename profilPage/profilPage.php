@@ -4,7 +4,7 @@ try{
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
         $mdp="";//pas de mdp sous wamp
     }
-	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
+	$bdd = new PDO('mysql:host=localhost;dbname=omnes_my_skills;
 charset=utf8', 'root', $mdp,
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
@@ -55,7 +55,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     $reponse = $bdd->query('SELECT * FROM compte');
     while ($donnees = $reponse->fetch()){
 		if ($donnees['ID_Compte'] == $ID) {
-			$nom=$donnees['Nom'];
+			$nom=$donnees['Nom_Compte'];
 			$prenom=$donnees['Prenom'];
 			$mail=$donnees['E_mail'];
             $mdp=$donnees['MDP'];

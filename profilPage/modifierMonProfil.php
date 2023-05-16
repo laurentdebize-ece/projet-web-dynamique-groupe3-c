@@ -4,7 +4,7 @@ try{
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
         $mdp="";//pas de mdp sous wamp
     }
-	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
+	$bdd = new PDO('mysql:host=localhost;dbname=omnes_my_skills;
 charset=utf8', 'root', $mdp,
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
@@ -55,7 +55,7 @@ while ($donnees = $reponse->fetch()){
 					if ($_POST['Newnom']!="") {
 						$verifnom = 1;
 						$Newnom = $_POST['Newnom'];
-						$sql = "UPDATE compte SET Nom='$Newnom' WHERE ID_Compte='$ID'";
+						$sql = "UPDATE compte SET Nom_Compte ='$Newnom' WHERE ID_Compte='$ID'";
 						$bdd->query($sql);						
 						
 						
@@ -110,7 +110,7 @@ while ($donnees = $reponse->fetch()){
 					<br><br>
 					Nom : <input type="text" name="Newnom" placeholder="Nouveau nom"><br><br>
 					Prenom : <input type="text" name="Newprenom" placeholder="Changer prénom"><br><br>
-					Email : <input type="text" name="Newmail" placeholder="Changer Adresse mail"><br><br>
+					Email : <input type="mail" name="Newmail" placeholder="Changer Adresse mail"><br><br>
 					<label for="motdepasse1">Nouveau mot de passe :</label>
 					<input type="text" name="mdp1" placeholder="Nouveau mot de passe"><br><br>
 					<label for="motdepasse2">Réécrivez votre nouveau mot de passe :</label>
