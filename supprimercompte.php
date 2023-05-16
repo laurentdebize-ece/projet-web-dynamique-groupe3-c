@@ -43,7 +43,7 @@ while ($donnees = $reponse->fetch()){
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($_POST['ID2']== $donnees['ID_Compte'] && $_POST['ID2'] != $ID) {
             $comptesup=$_POST['ID2'];
-            $sql = "DELETE FROM compte WHERE ID_Compte='$comptesup'";
+            $sql = "DELETE FROM compte WHERE ID_Compte='$comptesup'"; //rajouter pour aussi les tables compte_comptetence et compte_matiere
             $bdd->query($sql);
             echo "<script>alert('Compte supprimé');</script>";
             session_start();

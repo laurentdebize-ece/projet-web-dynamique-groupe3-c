@@ -34,7 +34,7 @@ if(isset($_POST['validerAjout'])){
 
 
 if($Type_compte=="admin"){
-    $reponseMatiere = $bdd->query(/
+    $reponseMatiere = $bdd->query(
 "SELECT Nom_matiere FROM matiere
         INNER JOIN matiere_competence ON matiere.ID_matiere = matiere_competence.ID_matiere
         INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_competence");
