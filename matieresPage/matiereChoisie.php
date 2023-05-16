@@ -22,31 +22,21 @@ $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 require_once('../fonction.php');
-
-if(isset($_POST['validerAjout'])){
-    $tab_matiere = [
-        "ID_matiere" => NULL,
-        "Nom_matiere" => $_POST['NewNom'],
-        "Volume_horaire" => $_POST['NewVolumeHoraire']
-    ];
-    insertion($bdd,"matiere", $tab_matiere);
-}
+$Nom_Matiere_Choisie = $_POST['Matiere'];
 
 
 if($Type_compte=="admin"){
-    $reponseMatiere = $bdd->query(
-"SELECT Nom_matiere FROM matiere
+    $reponseCompetence = $bdd->query("SELECT * FROM matiere
         INNER JOIN matiere_competence ON matiere.ID_matiere = matiere_competence.ID_matiere
         INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_competence");
 } else {
-    $reponseMatiere = $bdd->query(" SELECT * FROM competence 
-        INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-        INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
-        INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
-        INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
-        INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-        WHERE compte_competence.ID_Compte = '$ID'
-        /*GROUP BY Nom_matiere*/");
+    $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+    INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+    INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+    INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+    INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+    WHERE compte.ID_Compte = '$ID'
+    AND matiere.Nom_Matiere = '$Nom_Matiere_Choisie'");
 }
 ?>
 
@@ -65,15 +55,32 @@ if($Type_compte=="admin"){
     <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <div class="flexboxText-menu"><a href="matieresPage.php" class="lienWhite">Matières</a></div>
+            <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
             <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
+            <?php if($Type_compte=="Administrateur"){ ?>
+                <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
+            <?php } ?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    <section id="mesMatieres">
-
+    <section id="competencesParMatiere">
+    <table>
+    <tr id="textLigne1">
+        <td>Compétences</td>
+        <td>Matière</td>
+        <td>Etat de la compétence</td>
+    </tr>
+<?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
+    <tr>
+        <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['ID_Competence']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['Nom_matiere']?></td>
+        <td class="textColonne"><?php echo $donneesCompetence['Etat_competence']?></td>
+    </tr>
+<?php } ?>
+</table>
         </section>
     
     <footer>

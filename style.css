@@ -152,6 +152,8 @@ footer{
 	margin-bottom: 5px;
 }
 .login-form2 input[type="text"],
+.login-form2 input[type="email"],
+.login-form2 input[type="number"],
 .login-form2 input[type="password"] {
 	width: 92%;
 	padding: 10px;

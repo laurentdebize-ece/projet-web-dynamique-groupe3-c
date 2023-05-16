@@ -28,6 +28,7 @@ if (!isset($_SESSION['ID_compte'])) {
 }
 $ID = $_SESSION['ID_compte'];
 
+
 $reponse = $bdd->query('SELECT * FROM compte');
 while ($donnees = $reponse->fetch()){
     echo 'Nom: ';
