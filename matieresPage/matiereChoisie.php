@@ -22,7 +22,7 @@ $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 require_once('../fonction.php');
-
+$Nom_Matiere_Choisie = $_POST['Matiere'];
 
 
 if($Type_compte=="admin"){
@@ -30,14 +30,13 @@ if($Type_compte=="admin"){
         INNER JOIN matiere_competence ON matiere.ID_matiere = matiere_competence.ID_matiere
         INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_competence");
 } else {
-    $reponseCompetence = $bdd->query(" SELECT * FROM competence 
-        INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-        INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
-        INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
-        INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
-        INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-        WHERE compte_competence.ID_Compte = '$ID'
-        /*GROUP BY Nom_matiere*/");
+    $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+    INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+    INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+    INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+    INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+    WHERE compte.ID_Compte = '$ID'
+    AND matiere.Nom_Matiere = '$Nom_Matiere_Choisie'");
 }
 ?>
 

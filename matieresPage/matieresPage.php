@@ -90,11 +90,13 @@ INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_compet
         </div>
     </section>
     <section id="mesMatieres">
-        <div class="flex-container-mesMatieres">
-            <?php while($donneesMatiere = $reponseMatiere->fetch()) { ?>
-                <div class="flexboxMatieres"><a href="matiereChoisie.php" class="lienWhite"><?php echo $donneesMatiere['Nom_matiere'] ?></a></div>
-            <?php } ?>
-        </div>
+        <!--<div class="flex-container-mesMatieres">-->
+        <form method="POST" action="matiereChoisie.php" id="formChoisirMatiere">
+            <?php while($donneesMatiere = $reponseMatiere->fetch()) {  ?>
+                <input type="submit" name ="Matiere" value= <?php echo $donneesMatiere['Nom_matiere'];?> class="boutonMatiere">
+                <?php } ?>
+        </form>
+        <!--</div>-->
         </section>
         <?php if($Type_compte=="Administrateur"){?>
             <form method="POST" action="modifMatiere.php" id="formModifMatiere">

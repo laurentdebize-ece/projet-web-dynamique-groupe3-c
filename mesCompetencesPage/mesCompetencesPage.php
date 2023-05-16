@@ -144,24 +144,22 @@ $_SESSION['Type_compte'] = $Type_compte;
     INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
     WHERE compte.ID_Compte = '$ID' ");
 }?>
-
 <table>
     <tr id="textLigne1">
-        <td>Compétences</td>
-        <td>Matière</td>
-        <td>Etat de la compétence</td>
+        <td>Compétence</td>
+        <td>Thème</td>
+        <td>Date de création</td>
     </tr>
 <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
     <tr>
         <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
-        <td id="textColonne"><?php echo $donneesCompetence['Nom_matiere']?></td>
-        <td class="textColonne"><?php echo $donneesCompetence['Etat_competence']?></td>
-        <td id="textColonne"><?php echo $donneesCompetence['Professeur']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['Theme']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Date_Creation']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['Professeur']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['Nom_matiere']?></td>
     </tr>
 <?php } ?>
-</table>
-        
+</table>  
     </section>  
     <footer>
         <div class="floatLeft">Projet Développement Web</div>

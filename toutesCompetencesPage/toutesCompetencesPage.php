@@ -119,6 +119,12 @@ if(isset($_POST['validerModification'])){
         <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Theme']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Date_Creation']?></td>
+        <td>
+            <button onclick="supprimerMesCompetence()">Supprimer</button>
+        </td>
+        <td>
+            <button onclick="ajouterMesCompetence()">Ajouter</button>
+        </td>
     </tr>
 <?php } ?>
 </table>
