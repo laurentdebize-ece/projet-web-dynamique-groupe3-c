@@ -111,7 +111,7 @@ if(isset($_POST['validerModification'])){
             <?php }
             if($Type_compte=="Administrateur"){ ?>
                 <div class="flexboxText-menu"><a href="comptesPage/comptesPage.php" class="lienClique">Comptes</a></div>
-            <?php }
+            <?php } ?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
