@@ -44,7 +44,7 @@ if(isset($_POST['validerModification'])){
     //modifier fonction
 }
 
-if($Type_compte=="admin"){
+if($Type_compte=="Administrateur"){
     $reponseMatiere = $bdd->query("SELECT Nom_matiere FROM matiere" /*"SELECT * FROM matiere
     INNER JOIN matiere_competence ON matiere.ID_matiere = matiere_competence.ID_matiere
 INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_competence"*/ );
@@ -83,6 +83,9 @@ INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_compet
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
             <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
+            <?php if($Type_compte=="Administrateur"){ ?>
+                <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
+            <?php } ?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
@@ -93,7 +96,7 @@ INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_compet
             <?php } ?>
         </div>
         </section>
-        <?php if($Type_compte=="admin"){?>
+        <?php if($Type_compte=="Administrateur"){?>
             <form method="POST" action="modifMatiere.php" id="formModifMatiere">
                 <input type="submit" name ="modifMatiere" value="Ajouter" class="boutonModif">
                 <input type="submit" name ="modifMatiere" value="Supprimer" class="boutonModif">

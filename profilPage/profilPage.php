@@ -12,6 +12,16 @@ catch (Exception $e)
 {
 die('Erreur : ' . $e->getMessage());
 }
+session_start();
+
+if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
+	header('Location: ../connexionPage/premiereconnexion.php');
+	exit();
+  }
+  $ID = $_SESSION['ID_Compte'];
+  $Type_compte = $_SESSION['Type_compte'];
+  $_SESSION['ID_Compte'] = $ID;
+  $_SESSION['Type_compte'] = $Type_compte;
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +35,6 @@ die('Erreur : ' . $e->getMessage());
 </head>
 
 <body>
-    <section id="taillePage"></section>
      <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
@@ -33,25 +42,20 @@ die('Erreur : ' . $e->getMessage());
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
             <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
+            <?php if($Type_compte=="Administrateur"){ ?>
+                <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
+            <?php } ?>
             <div class="flexboxLogo-menu"><a href="profilPage.php" class="lienWhite"><img src="../img/profilLogoActualPage.png" class="menuLogo" alt=" profilLogoActualPage "></a></div>
         </div>
     </section>
     <img src="../img/lyonCity.jpg"  alt=" lyonCity " id="imgLyonCityProfil">
 
     <?php 
-    session_start();
-
-    if (!isset($_SESSION['ID_Compte'])) {
-        header('Location: ../homePage/homePage.php');
-        exit();
-      }
-    $ID = $_SESSION['ID_Compte'];
     
-
     $reponse = $bdd->query('SELECT * FROM compte');
     while ($donnees = $reponse->fetch()){
 		if ($donnees['ID_Compte'] == $ID) {
-			$nom=$donnees['Nom'];
+			$nom=$donnees['Nom_Compte'];
 			$prenom=$donnees['Prenom'];
 			$mail=$donnees['E_mail'];
             $mdp=$donnees['MDP'];
@@ -79,7 +83,7 @@ die('Erreur : ' . $e->getMessage());
         if ($_POST['ChangerMDP']=="Modifier"){
         session_start();
         $_SESSION['ID_Compte'] = $ID;
-        header('Location: modifiercompte.php');
+        header('Location: modifierMonProfil.php');
         exit();
         }
         if ($_POST['Deconnexion']=="Deconnecter"){

@@ -8,17 +8,24 @@
     color: #ECECEC;
     float : left;
     border-radius: 10px;
-    text-align: center;
+    /*text-align: center;*/
+    justify-content: center;
+    align-items: center;
+    display:flex;
 }
 .flex-container-mesMatieres{
-    min-height: 300px;
-}
-.aaa{
-    min-height: 300px;
-    padding-top:100px;
-    color: red;
-}
-#ajouterMatiere{
-    color:blueviolet;
+    /*min-height: 300px;*/
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 20px;
 }
 
+#competencesParMatiere{
+    padding-top: 50px;
+}
+#bodyModifMatiere{
+    padding-top: 50px;
+}
+#formulaireMofifMatiere{
+    padding: 150px;
+}

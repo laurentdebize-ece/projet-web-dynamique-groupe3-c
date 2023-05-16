@@ -29,29 +29,41 @@ $ID = $_SESSION['ID_compte'];
 ?>
 
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+
 
 <?php
 $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_competence ON Compte.ID_compte = compte_competence.ID_compte INNER JOIN competence ON compte_competence.ID_competence = competence.ID_competence');
+
 while ($donnees = $reponse->fetch()){
-    if ($donnees['ID_Compte'] == $ID) {
-        echo $donnees['Nom_competence' ];
-        echo '<input type="radio" name="autoeval" value="nonacquis">'. "non acquis";
-        echo '<input type="radio" name="autoeval" value="encoursacquis">'."en cours d'acquisition" ;
-        echo '<input type="radio" name="autoeval" value="acquis">'. "acquis";
-        echo '<input type="submit">' . '<br>';
+    if ($donnees['ID_Compte'] == $ID) { ?>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <?php echo $donnees['Nom_competence' ]; 
+        $idcompet =$donnees['ID_compte_competence']; ?>
+        <input type="radio" name=" <?php echo $idcompet; ?>" value="nonacquis"> non acquis
+        <input type="radio" name=" <?php echo $idcompet;?>" value="encoursacquis">en cours d'acquisition
+        <input type="radio" name=" <?php echo $idcompet; ?>" value="acquis">acquis
+        <br><br>
+    <?php
     }
-}
-?>
-</form>
+}?>
+<input type="submit" name="submit" value="Evaluer">
+    </form>
 
 
 
 
 <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // code sql pour attribuer l'eval 
+if (isset($_POST['submit'])) {
+    foreach ($_POST as $idcompet => $value) {
+        if ($idcompet != "submit") {
+            echo "Compétence évaluée : " . $idcompet . "<br>";
+            echo "Note : " . $value . "<br>";
+
+            $sql ="UPDATE compte_competence SET Etat_competence='$value' WHERE ID_Compte = '$ID' AND ID_compte_competence = '$idcompet'";
+            $bdd -> query($sql);
+        }
     }
+}
 ?>
 
 

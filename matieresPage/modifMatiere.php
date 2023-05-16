@@ -44,37 +44,49 @@ $reponseModifMatiere = $_POST['modifMatiere'];
             <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
             <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
+            <?php if($Type_compte=="Administrateur"){ ?>
+                <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
+            <?php } ?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    <section class="aaa">
-        <?php if(isset($reponseAjoutMatiere)){ ?>
-            <p>pas nul</p>
-        <?php } 
-        if(!isset($reponseAjoutMatiere)){ ?>
-            <p>nul</p>
-        <?php }
-        if($reponseModifMatiere=="Ajouter"){ //Style a faire emma?>
-            <form method="POST" action="matieresPage.php" id="ajouterMatiere">
-                Nom de la matière : <input type="text" name="NewNom"><br>
-                Volume horaire : <input type="number" name="NewVolumeHoraire" min="0"><br>
-                <input type="submit" name="validerAjout" value="Enregistrer">
-            </form>
+    <section id="bodyModifMatiere">
+        <?php if($reponseModifMatiere=="Ajouter"){ //Style a faire emma?>
+        <div id="formulaireMofifMatiere">	   
+            <div class="login-form2">
+				<h3>Ajouter une nouvelle matière</h3>
+                <form method="POST" action="matieresPage.php" id="ajouterMatiere">
+                    Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
+                    Volume horaire : <input type="text" name="NewVolumeHoraire" placeholder="Entrez volume horaire"required min="0"><br><br>
+                    <input type="submit" name="validerAjout" value="Enregistrer">
+                </form>
+            </div>
+        </div>        
         <?php }
 
         if($reponseModifMatiere=="Supprimer"){//Style a faire emma?>
-        <form method="POST" action="matieresPage.php" id="supprimerMatiere">
-                Nom de la matière : <input type="text" name="NewNom"><br>
-                <input type="submit" name="validerSuppression" value="Enregistrer">
-        </form>
+        <div id="formulaireMofifMatiere">    
+            <div class="login-form2">
+				<h3>Supprimer une matière</h3>
+                <form method="POST" action="matieresPage.php" id="supprimerMatiere">
+                    Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
+                    <input type="submit" name="validerSuppression" value="Enregistrer">
+                </form>
+            </div>
+        </div>    
         <?php }
 
         if($reponseModifMatiere=="Modifier"){//Style a faire emma?>
-        <form method="POST" action="matieresPage.php" id="modifierMatiere">
-                Nom de la matière : <input type="text" name="NewNom"><br>
-                Volume horaire : <input type="number" name="NewVolumeHoraire" min="0"><br>
-                <input type="submit" name="validerModofication" value="Enregistrer">
-        </form>
+        <div id="formulaireMofifMatiere"> 
+            <div class="login-form2">
+				<h3>Supprimer une matière</h3>
+                <form method="POST" action="matieresPage.php" id="modifierMatiere">
+                    Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
+                    Volume horaire : <input type="text" name="NewVolumeHoraire" placeholder="Entrez nouveau volume horaire"required min="0"><br><br>
+                    <input type="submit" name="validerModofication" value="Enregistrer">
+                </form>
+            </div>
+        </div>
         <?php }?>
     </section>
 </body>
