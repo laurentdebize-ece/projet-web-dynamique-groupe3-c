@@ -119,9 +119,9 @@ while ($donnees = $reponse->fetch()){
 					Prenom : <input type="text" name="Newprenom" placeholder="Changer prénom"><br><br>
 					Email : <input type="mail" name="Newmail" placeholder="Changer Adresse mail"><br><br>
 					<label for="motdepasse1">Nouveau mot de passe :</label>
-					<input type="text" name="mdp1" placeholder="Nouveau mot de passe"><br><br>
+					<input type="password" name="mdp1" placeholder="Nouveau mot de passe"><br><br>
 					<label for="motdepasse2">Réécrivez votre nouveau mot de passe :</label>
-					<input type="text" name="mdp2" placeholder="Confirmez mot de passe"><br><br>
+					<input type="password" name="mdp2" placeholder="Confirmez mot de passe"><br><br>
 					<input type="submit" value="modifier"><br><br>
 				</form>
 			</div>
