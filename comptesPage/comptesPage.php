@@ -57,7 +57,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       $NewPrenom = $_POST['NewPrenom'];
                       $NewIDecole=1;
                       
-                      $requete = $bdd->prepare("INSERT INTO compte (Nom, Prenom, E_mail, MDP,type_compte, Deja_connecte,ID_Ecole) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole)");
+                      $requete = $bdd->prepare("INSERT INTO compte (Nom_Compte, Prenom, E_mail, MDP,type_compte, Deja_connecte,ID_Ecole) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole)");
                       $requete->bindParam(':NewNom', $NewNom);
                       $requete->bindParam(':NewPrenom', $NewPrenom);
                       $requete->bindParam(':NewEmail', $NewEmail);

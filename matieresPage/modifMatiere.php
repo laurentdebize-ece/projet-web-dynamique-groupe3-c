@@ -76,7 +76,7 @@ $reponseModifMatiere = $_POST['modifMatiere'];
         <?php }
 
         if($reponseModifMatiere=="Supprimer"){
-            supprimer($bdd, "matiere", "Nom_Matiere LIKE $Nom_Matiere_Choisie" );
+            supprimer($bdd, "matiere", "Nom_matiere LIKE '$Nom_Matiere_Choisie'" );
         }
 
         if($reponseModifMatiere=="Modifier"){?>
