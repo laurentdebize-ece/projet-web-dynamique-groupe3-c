@@ -43,7 +43,9 @@ $reponseModifCompetence = $_POST['modifCompetence'];
             <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
             <?php } ?>
-            <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
+            <?php if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
+            <?php } ?>
             <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
                 <div class="flexboxText-menu"><a href="toutesCompetencesPage.php" class="lienClique">Toutes les compétences</a></div>

@@ -21,6 +21,7 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
+$Nom_Matiere_Choisie = $_SESSION['Nom_Matiere_Choisie'];
 require_once('../fonction.php');
 
 $reponseModifMatiere = $_POST['modifMatiere'];
@@ -42,16 +43,18 @@ $reponseModifMatiere = $_POST['modifMatiere'];
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
             <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
-            <?php } ?>
-            <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
-            <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
+            <?php }
+            if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
+            <?php }
+            if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
                 <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
-                <?php } ?>
-            <?php if($Type_compte=="Professeur"){ ?>
+            <?php }
+            if($Type_compte=="Professeur"){ ?>
                 <div class="flexboxText-menu"><a href="../evaluationsPage/evaluationsPage.php" class="lienWhite">Evaluations</a></div>
-            <?php } ?>
-            <?php if($Type_compte=="Administrateur"){ ?>
+            <?php }
+            if($Type_compte=="Administrateur"){ ?>
                 <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
             <?php } ?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
@@ -72,19 +75,11 @@ $reponseModifMatiere = $_POST['modifMatiere'];
         </div>        
         <?php }
 
-        if($reponseModifMatiere=="Supprimer"){//Style a faire emma?>
-        <div id="formulaireMofifMatiere">    
-            <div class="login-form2">
-				<h3>Supprimer une matière</h3>
-                <form method="POST" action="matieresPage.php" id="supprimerMatiere">
-                    Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
-                    <input type="submit" name="validerSuppression" value="Enregistrer">
-                </form>
-            </div>
-        </div>    
-        <?php }
+        if($reponseModifMatiere=="Supprimer"){
+            supprimer($bdd, "matiere", "Nom_Matiere LIKE $Nom_Matiere_Choisie" );
+        }
 
-        if($reponseModifMatiere=="Modifier"){//Style a faire emma?>
+        if($reponseModifMatiere=="Modifier"){?>
         <div id="formulaireMofifMatiere"> 
             <div class="login-form2">
 				<h3>Modifier une matière</h3>
