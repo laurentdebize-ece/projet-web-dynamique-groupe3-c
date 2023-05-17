@@ -99,7 +99,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <input type="submit" id="boutonChangementMDP" name="ChangerMDP" value="Modifier">
-            <input type="submit" id="boutonDeconnexion" name="Deconnexion" value="Deconnecter">
+            <input type="submit" id="boutonDeconnexion" name="Deconnexion" value="Déconnecter">
         </form>
         <?php
         
@@ -111,7 +111,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
         header('Location: modifierMonProfil.php');
         exit();
         }
-        if ($_POST['Deconnexion']=="Deconnecter"){
+        if ($_POST['Deconnexion']=="Déconnecter"){
             session_start();
             header('Location: ../connexionPage/connexionPage.html');
             exit();

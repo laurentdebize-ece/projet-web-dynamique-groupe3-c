@@ -27,7 +27,7 @@ $verifmdp = 0;
 $verifmail = 0;
 $verifnom = 0;
 $verifprenom = 0;
-
+$erreur=0;
 $reponse = $bdd->query('SELECT * FROM compte');
 
 while ($donnees = $reponse->fetch()){
@@ -39,11 +39,10 @@ while ($donnees = $reponse->fetch()){
 							$motdepasse = $_POST['mdp1'];
 							$sql = "UPDATE compte SET MDP='$motdepasse' WHERE ID_Compte='$ID'";
 							$bdd->query($sql);
-
 						}
 						
 					}else {
-						echo 'Erreur les mots de passes sont différents';
+						$erreur=1;
 					}
 					if($Type_compte=="Administrateur"){
 					if ($_POST['Newmail']!="") {
@@ -86,6 +85,7 @@ while ($donnees = $reponse->fetch()){
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleProfilPage.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
 <section id="header">
         <div class="flex-contain-menu">
@@ -121,11 +121,20 @@ while ($donnees = $reponse->fetch()){
 						Nom : <input type="text" name="Newnom" placeholder="Nouveau nom"><br><br>
 						Prénom : <input type="text" name="Newprenom" placeholder="Changer prénom"><br><br>
 						Email : <input type="mail" name="Newmail" placeholder="Changer Adresse mail"><br><br>
-					<?php } ?>
-					<label for="motdepasse1">Nouveau mot de passe :</label>
-					<input type="password" name="mdp1" placeholder="Nouveau mot de passe"><br><br>
-					<label for="motdepasse2">Réécrivez votre nouveau mot de passe :</label>
-					<input type="password" name="mdp2" placeholder="Confirmez mot de passe"><br><br>
+						<label for="motdepasse1">Nouveau mot de passe :</label>
+						<input type="password" name="mdp1" placeholder="Nouveau mot de passe"><br><br>
+						<label for="motdepasse2">Réécrivez votre nouveau mot de passe :</label>
+						<input type="password" name="mdp2" placeholder="Confirmez mot de passe"><br><br>
+					<?php }
+					else { ?>
+						<label for="motdepasse1">Nouveau mot de passe :</label>
+						<input type="password" name="mdp1" placeholder="Nouveau mot de passe" required><br><br>
+						<label for="motdepasse2">Réécrivez votre nouveau mot de passe :</label>
+						<input type="password" name="mdp2" placeholder="Confirmez mot de passe" required><br>
+						<?php if($erreur!=0){ ?>
+							<p style='color:red'>Veuillez rentrer des mots de passe identiques.<br></p>
+						<?php }
+					} ?>
 					<input type="submit" value="modifier"><br><br>
 				</form>
 			</div>
