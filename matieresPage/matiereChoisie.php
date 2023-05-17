@@ -23,8 +23,8 @@ $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 require_once('../fonction.php');
 $Nom_Matiere_Choisie = $_POST['Matiere'];
-?> 
-
+$_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
+?>
 <?php 
 if($Type_compte=="Etudiant"){?>
             <form method="POST" action="../autoevaluation.php" id="AutoEval">
@@ -62,14 +62,23 @@ else {
 </head>
 
 <body>
-    <section id="header">
+<section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
-            <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
-            <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
-            <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
-            <?php if($Type_compte=="Administrateur"){ ?>
+            <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
+            <?php }
+            if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
+            <?php }
+            if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
+                <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
+            <?php }
+            if($Type_compte=="Professeur"){ ?>
+                <div class="flexboxText-menu"><a href="../evaluationsPage/evaluationsPage.php" class="lienWhite">Evaluations</a></div>
+            <?php }
+            if($Type_compte=="Administrateur"){ ?>
                 <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
             <?php } ?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
@@ -91,6 +100,12 @@ else {
     </tr>
 <?php } ?>
 </table>
+<?php if($Type_compte=="Administrateur"){?>
+            <form method="POST" action="modifMatiere.php"  id="formModifMatiere">
+                <input type="submit" name ="modifMatiere" value="Supprimer" class="boutonModif">
+                <input type="submit" name ="modifMatiere" value="Modifier" class="boutonModif">
+            </form>
+        <?php }?>
         </section>
     
     <footer>
