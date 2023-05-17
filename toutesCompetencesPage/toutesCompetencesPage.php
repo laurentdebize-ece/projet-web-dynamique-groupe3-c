@@ -90,6 +90,7 @@ if(isset($_POST['validerModification'])){
         <input type="radio" name="choixTriCompetences" value="3" id="selectChoixTriCompetences">Thème</option>
         <input type="radio" name="choixTriCompetences" value="4" id="selectChoixTriCompetences">Date croissante</option>
         <input type="radio" name="choixTriCompetences" value="5" id="selectChoixTriCompetences">Date décroissante</option>
+        <input type="radio" name="choixTriCompetences" value="6" id="selectChoixTriCompetences">Non ajoutée</option>
         <input type="submit" value="valider">
     </form>
 
@@ -109,6 +110,16 @@ if(isset($_POST['validerModification'])){
             break;
         case 5 : //date par ordre décroissant
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence ORDER BY Date_Creation DESC");
+            break;
+        case 6 : //compétence que je n'ai pas
+            $reponseCompetence = "SELECT DISTINCT competence.Nom_competence, competence.ID_Competence FROM competence
+            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            WHERE Nom_matiere = $Matiere AND competence.ID_Competence NOT IN (
+            SELECT compte_competence.ID_Competence 
+            FROM compte_competence 
+            INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence 
+            WHERE compte_competence.ID_Compte = '$ID')";
             break;
         default :
         $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence");
