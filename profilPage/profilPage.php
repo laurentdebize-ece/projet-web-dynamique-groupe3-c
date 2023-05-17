@@ -73,9 +73,11 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     $reponse = $bdd->query('SELECT * FROM compte');
     while ($donnees = $reponse->fetch()){
 		if ($donnees['ID_Compte'] == $ID) {
-			$nom=$donnees['Nom_Compte'];
-			$prenom=$donnees['Prenom'];
-			$mail=$donnees['E_mail'];
+            //if($Type_compte == "Administrateur") {
+                $nom=$donnees['Nom_Compte'];
+                $prenom=$donnees['Prenom'];
+                $mail=$donnees['E_mail'];
+            //}
             $mdp=$donnees['MDP'];
 		}
 }
