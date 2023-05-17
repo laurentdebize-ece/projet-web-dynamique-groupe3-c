@@ -120,13 +120,6 @@ INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_compet
             }
         }
 ?>
-                
-        <?php if($Type_compte=="Etudiant"){?>
-            <form method="POST" action="../autoevaluation.php" id="AutoEval">
-            <?php echo "faire une auto-evaluation" ?>
-            <input type="submit" name ="faireEval" value="s'auto evaluer" class="boutonAutoEval">
-            </form>
-            <?php }?>
 
 
     <footer>
