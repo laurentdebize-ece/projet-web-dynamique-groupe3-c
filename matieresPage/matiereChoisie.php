@@ -23,13 +23,23 @@ $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 require_once('../fonction.php');
 $Nom_Matiere_Choisie = $_POST['Matiere'];
+?> 
 
+<?php 
+if($Type_compte=="Etudiant"){?>
+            <form method="POST" action="../autoevaluation.php" id="AutoEval">
+            <?php echo "faire une auto-evaluation" ?>
+            <input type="submit" name ="faireEval" value="s'auto evaluer" class="boutonAutoEval">
+            </form>
+            <?php }
 
 if($Type_compte=="admin"){
     $reponseCompetence = $bdd->query("SELECT * FROM matiere
         INNER JOIN matiere_competence ON matiere.ID_matiere = matiere_competence.ID_matiere
         INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_competence");
-} else {
+}
+
+else {
     $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
     INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
     INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
