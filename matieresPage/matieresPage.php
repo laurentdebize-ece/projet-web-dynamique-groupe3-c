@@ -32,14 +32,6 @@ if(isset($_POST['validerAjout'])){
     insertion($bdd,"matiere", $tab_matiere);
 }
 
-if(isset($_POST['validerSupression'])){
-    //$tab_matiere = array('Nom_matiere' => $_POST['NewNom']);
-    //$sql=("DELETE FROM matiere WHERE `matiere`.`Nom_matiere`='$_POST['NewNom']'");
-    //$stmt = $PDO->prepare($sql);
-    //$stmt->execute();
-    supprimer($bdd, "matiere", "Nom_matiere=$nom");//Ca supprime passsssss
-} 
-
 if(isset($_POST['validerModification'])){
     //modifier fonction
 }
@@ -102,7 +94,7 @@ INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_compet
         <!--<div class="flex-container-mesMatieres">-->
         <form method="POST" action="matiereChoisie.php" id="formChoisirMatiere">
             <?php while($donneesMatiere = $reponseMatiere->fetch()) {  ?>
-                <input type="submit" name ="Matiere" value= <?php echo $donneesMatiere['Nom_matiere'];?> class="boutonMatiere">
+                <input type="submit" name ="Matiere" value= <?php echo $donneesMatiere['Nom_matiere'];?> class="boutonMatiere"><!--EMMAAAAAA-->
                 <?php } ?>
         </form>
         <!--</div>-->

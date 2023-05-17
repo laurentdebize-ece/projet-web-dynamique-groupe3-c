@@ -22,7 +22,15 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
   $Type_compte = $_SESSION['Type_compte'];
   $_SESSION['ID_Compte'] = $ID;
   $_SESSION['Type_compte'] = $Type_compte;
-?>
+
+  function compterCaracteresMDP($chaineCaracteres) {
+    $n = 0;
+    for ($i = 0; $i < strlen($chaineCaracteres); $i++) {
+        $n++;
+    }
+    return $n;
+}?>
+
 
 <!DOCTYPE html>
 <html>
@@ -32,6 +40,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     <title>OMNES MySkills - Profil</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleProfilPage.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -79,7 +88,12 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
         <div class="textBoldProfil">Adresse e-mail</div>
         <div class="textProfil"><?php echo $mail; ?></div>
         <div class="textBoldProfil">Mot de passe</div>
-        <div class="textProfil"><?php echo $mdp; ?></div>
+        <div class="textProfil">
+        <?php $nbCaracteresMDP = compterCaracteresMDP($mdp);
+        for($i=0; $i<$nbCaracteresMDP; $i++){
+            echo '*';
+        }?>
+        </div>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <input type="submit" id="boutonChangementMDP" name="ChangerMDP" value="Modifier">

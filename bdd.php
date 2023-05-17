@@ -9,7 +9,7 @@ try {
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
         $mdp="";//pas de mdp sous wamp
     }
-	$bdd = new PDO('mysql:host=localhost;dbname=omnes_my_skills;
+	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', $mdp,
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     
@@ -18,7 +18,7 @@ array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 
 try {
-    $bdd->exec('USE Omnes_my_skills;');
+    $bdd->exec('USE omnesmyskills;');
 } catch (PDOException $e) {
     $sql = file_get_contents('./BDD/Omnes.sql');
     $bdd->exec($sql);
@@ -40,7 +40,7 @@ insertion($bdd, "Compte", $tablo_compte);
 
 
 //////////////////////////////////////////INSERTION COMPTE_COMPETENCE////////////////////////////////////////////
-
+/*
 $tablo_compte_competence = [
     "ID_compte_competence" => null,
     "ID_Compte" => 2, 
@@ -54,14 +54,14 @@ $tablo_compte_competence = [
 ];
 insertion($bdd, "compte_competence", $tablo_compte_competence);
 
-
+*/
 
 //////////////////////////////////////////INSERTION COMPTE_MATIERE////////////////////////////////////////////
 /*
 $tablo_compte_matiere = [
     "ID_compte_matiere" => null,
-    "ID_Compte" => 4, 
-    "ID_Matiere" => 3
+    "ID_Compte" => 1, 
+    "ID_Matiere" => 13
 ];
 insertion($bdd, "compte_matiere", $tablo_compte_matiere);
 */

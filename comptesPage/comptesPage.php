@@ -153,6 +153,7 @@ if(isset($_POST['validerModification'])){
     </tr>
 <?php while ($donneesComptes = $reponseComptes->fetch()){ ?> 
     <tr>
+        <td class="textColonne"><?php echo $donneesComptes['ID_Compte']?></td>
         <td id="textColonne1"><?php echo $donneesComptes['Nom_Compte']?></td>
         <td id="textColonne"><?php echo $donneesComptes['Prenom']?></td>
         <td id="textColonne"><?php echo $donneesComptes['E_mail']?></td>
