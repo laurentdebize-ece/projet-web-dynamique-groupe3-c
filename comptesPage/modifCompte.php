@@ -72,7 +72,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
         </div>
     </section>
 <section class="bodyModifCompte">
-<?php if($reponseModifCompte=="Ajouter"){ //Style a faire emma?>
+<?php if($reponseModifCompte=="Ajouter"){?>
     <div id="formulaireModifCompte"> 
         <div class="login-form2">
 			<h3>Ajouter un compte</h3>

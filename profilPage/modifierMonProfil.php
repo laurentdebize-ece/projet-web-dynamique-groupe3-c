@@ -1,4 +1,5 @@
 <?php
+//Connexion au serveur
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -44,7 +45,7 @@ while ($donnees = $reponse->fetch()){
 					}else {
 						echo 'Erreur les mots de passes sont différents';
 					}
-					
+					if($Type_compte=="Administrateur"){
 					if ($_POST['Newmail']!="") {
 						$verifmail = 1;
 						$Newmail = $_POST['Newmail'];
@@ -65,7 +66,7 @@ while ($donnees = $reponse->fetch()){
 						$Newprenom = $_POST['Newprenom'];
 						$sql = "UPDATE compte SET Prenom='$Newprenom' WHERE ID_Compte='$ID'";
 						$bdd->query($sql);								
-}
+}					}
 					if($verifmdp == 1 || $verifmail==1 ||$verifnom==1 || $verifprenom==1) {
 						session_start();
 						$_SESSION['ID_Compte'] = $ID;
@@ -115,11 +116,12 @@ while ($donnees = $reponse->fetch()){
 			<div class="login-form2">
 				<h3>Mon compte</h3>
 				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-					Ne pas remplir le champ si vous ne voulez pas modifier l'element.
-					<br><br>
-					Nom : <input type="text" name="Newnom" placeholder="Nouveau nom"><br><br>
-					Prenom : <input type="text" name="Newprenom" placeholder="Changer prénom"><br><br>
-					Email : <input type="mail" name="Newmail" placeholder="Changer Adresse mail"><br><br>
+					<?php if($Type_compte == "Administrateur") { ?>
+						Ne pas remplir le champ si vous ne voulez pas modifier l'element.<br><br>
+						Nom : <input type="text" name="Newnom" placeholder="Nouveau nom"><br><br>
+						Prénom : <input type="text" name="Newprenom" placeholder="Changer prénom"><br><br>
+						Email : <input type="mail" name="Newmail" placeholder="Changer Adresse mail"><br><br>
+					<?php } ?>
 					<label for="motdepasse1">Nouveau mot de passe :</label>
 					<input type="password" name="mdp1" placeholder="Nouveau mot de passe"><br><br>
 					<label for="motdepasse2">Réécrivez votre nouveau mot de passe :</label>

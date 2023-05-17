@@ -67,8 +67,7 @@ $reponseModifMatiere = $_POST['modifMatiere'];
 				<h3>Ajouter une nouvelle matière</h3>
                 <form method="POST" action="matieresPage.php" id="ajouterMatiere">
                     Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
-                    <!--NUMBER-->
-                    Volume horaire : <input type="text" name="NewVolumeHoraire" placeholder="Entrez volume horaire"required min="0"><br><br>
+                    Volume horaire : <input type="number" name="NewVolumeHoraire" placeholder="Entrez volume horaire"required min="0"><br><br>
                     <input type="submit" name="validerAjout" value="Enregistrer">
                 </form>
             </div>
@@ -85,8 +84,7 @@ $reponseModifMatiere = $_POST['modifMatiere'];
 				<h3>Modifier une matière</h3>
                 <form method="POST" action="matieresPage.php" id="modifierMatiere">
                     Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
-                    <!--NUMBER-->
-                    Volume horaire : <input type="text" name="NewVolumeHoraire" placeholder="Entrez nouveau volume horaire"required min="0"><br><br>
+                    Volume horaire : <input type="number" name="NewVolumeHoraire" placeholder="Entrez nouveau volume horaire"required min="0"><br><br>
                     <input type="submit" name="validerModofication" value="Enregistrer">
                 </form>
             </div>
