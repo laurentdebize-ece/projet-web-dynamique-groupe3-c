@@ -29,7 +29,7 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
     <?php 
     if($Type_compte=="Etudiant"){?>
                 <form method="POST" action="../autoevaluation.php" id="AutoEval">
-                <?php echo "faire une auto-evaluation" ?>
+                <?php echo '<span style="font-family: openSansLight;">faire une auto-evaluation</span>' ?>
                 <input type="submit" name ="faireEval" value="s'auto evaluer" class="boutonAutoEval">
                 </form>
                 <?php }
