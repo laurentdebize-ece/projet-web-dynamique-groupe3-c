@@ -2,10 +2,6 @@
     height: 500px;
     padding-top: 100px;
 }
-
-table{
-    margin-left: 5%;
-}
 #textLigne1 {
     font-family: "openSansBold";
     font-size: large;
@@ -23,8 +19,6 @@ table{
     font-family: "openSansLight";
     color: #002B44;
 }
-
-
 .checkCompetences{
     padding-top: 5px;
     padding-left: 10px;
