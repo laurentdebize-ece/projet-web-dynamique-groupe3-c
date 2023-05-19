@@ -60,17 +60,18 @@ $_SESSION['Type_compte'] = $Type_compte;
     </section>
 
 <section id="bodyMesCompetencesPage">
-<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriCompetences">
-        <input type="radio" name="choixTriCompetences" value="1" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>
-        <input type="radio" name="choixTriCompetences" value="2" id="selectChoixTriCompetences">Ordre alphabétique décroissant</option>
-        <input type="radio" name="choixTriCompetences" value="3" id="selectChoixTriCompetences">Statut</option>
-        <input type="radio" name="choixTriCompetences" value="4" id="selectChoixTriCompetences">Date croissante</option>
-        <input type="radio" name="choixTriCompetences" value="5" id="selectChoixTriCompetences">Date décroissante</option>
-        <input type="radio" name="choixTriCompetences" value="6" id="selectChoixTriCompetences">Matières</option>
-        <input type="radio" name="choixTriCompetences" value="7" id="selectChoixTriCompetences">Professeur</option>
-        <input type="submit" value="valider">
-</form>
-
+    <div class="login-form3">
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriCompetences">
+                <input type="radio" name="choixTriCompetences" value="1" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>
+                <input type="radio" name="choixTriCompetences" value="2" id="selectChoixTriCompetences">Ordre alphabétique décroissant</option>
+                <input type="radio" name="choixTriCompetences" value="3" id="selectChoixTriCompetences">Statut</option>
+                <input type="radio" name="choixTriCompetences" value="4" id="selectChoixTriCompetences">Date croissante</option>
+                <input type="radio" name="choixTriCompetences" value="5" id="selectChoixTriCompetences">Date décroissante</option>
+                <input type="radio" name="choixTriCompetences" value="6" id="selectChoixTriCompetences">Matières</option>
+                <input type="radio" name="choixTriCompetences" value="7" id="selectChoixTriCompetences">Professeur</option>
+                <input type="submit" value="valider">
+        </form>
+    </div>
 <?php if(isset($_POST['choixTriCompetences'])){
     switch($_POST['choixTriCompetences']) {
         case 1 : //ordre alphabétique compétences
@@ -155,9 +156,11 @@ $_SESSION['Type_compte'] = $Type_compte;
 }?>
 <table>
     <tr id="textLigne1">
-        <td>Compétence</td>
-        <td>Thème</td>
-        <td>Date de création</td>
+        <th>Compétences</th>
+        <th>Thème</th>
+        <th>Date de création</th>
+        <th>Prof</th>
+        <th>Matière</th>
     </tr>
 <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
     <tr>

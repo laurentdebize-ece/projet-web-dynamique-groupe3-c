@@ -58,6 +58,17 @@ function selection_nouvelles_competences($bdd,$ID,$Matiere) {
 
 }
 
+function selection_4_last_competences($bdd) {
+
+    $sql = "SELECT Nom_competence FROM competence ORDER BY Date_Creation 
+    LIMIT 4";
+
+    $exec = $bdd->prepare($sql);
+    $exec->execute();
+
+    $reponses = $exec->fetchAll(PDO::FETCH_ASSOC);
+    return $reponses;
+}
     
             
 
@@ -138,12 +149,26 @@ function selection($PDO, $table, $where = null, $cibles = null, $cibles2 = null,
 
 /////////////////////////////////////////////FONCTION POUR LES MODIFICATIONS DE LA BDD/////////////////////////////////////////////
 
-function supprimer($PDO, $table, $where) {
+function supprimer($PDO, $table, $where) { //pour les attributs non clés
     $sql = "DELETE FROM $table WHERE $where";
     $stmt = $PDO->prepare($sql);
     $stmt->execute();
     
     return null;
+}
+
+function supprimer_matiere($PDO, $IDMATIERE) {
+
+    $sql2 = "DELETE FROM matiere_competence WHERE ID_Matiere = $IDMATIERE";
+    $sql3 = "DELETE FROM compte_matiere WHERE ID_Matiere = $IDMATIERE";
+    $sql = "DELETE FROM matiere WHERE ID_Matiere = $IDMATIERE";
+
+    $stmt2 = $PDO->prepare($sql2);
+    $stmt3 = $PDO->prepare($sql3);
+    $stmt = $PDO->prepare($sql);
+    $stmt2->execute();
+    $stmt3->execute();
+    $stmt->execute();
 }
 function supprimer_compte($PDO, $ID) {
     $sql = "DELETE FROM compte WHERE ID_Compte = $ID";
@@ -172,6 +197,17 @@ function insertion($PDO,$table, $valeur_tableau)
 
 }
 
+
+function update($bdd,$table,$colonne,$valeur) {
+
+    $sql = "UPDATE $table SET $colonne = $valeur";
+    
+    $exec = $bdd->prepare($sql);
+    $exec->execute();
+    $reponses = $exec->fetchAll(PDO::FETCH_ASSOC);
+
+    return $reponses;
+}
 /*
 function insertion($PDO, $table, $attribut, $valeur)
 {
