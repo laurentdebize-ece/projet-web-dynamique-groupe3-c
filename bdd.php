@@ -40,7 +40,7 @@ insertion($bdd, "Compte", $tablo_compte);
 
 
 //////////////////////////////////////////INSERTION COMPTE_COMPETENCE////////////////////////////////////////////
-
+/*
 $tablo_compte_competence = [
     "ID_compte_competence" => null,
     "ID_Compte" => 2, 
@@ -53,7 +53,7 @@ $tablo_compte_competence = [
 
 ];
 insertion($bdd, "compte_competence", $tablo_compte_competence);
-
+*/
 
 
 //////////////////////////////////////////INSERTION COMPTE_MATIERE////////////////////////////////////////////
