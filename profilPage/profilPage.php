@@ -22,7 +22,15 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
   $Type_compte = $_SESSION['Type_compte'];
   $_SESSION['ID_Compte'] = $ID;
   $_SESSION['Type_compte'] = $Type_compte;
-?>
+
+  function compterCaracteresMDP($chaineCaracteres) {
+    $n = 0;
+    for ($i = 0; $i < strlen($chaineCaracteres); $i++) {
+        $n++;
+    }
+    return $n;
+}?>
+
 
 <!DOCTYPE html>
 <html>
@@ -32,20 +40,30 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     <title>OMNES MySkills - Profil</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleProfilPage.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 
 <body>
-     <section id="header">
+<section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
-            <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
-            <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
-            <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
-            <?php if($Type_compte=="Administrateur"){ ?>
+            <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
+            <?php }
+            if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
+            <?php }
+            if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
+                <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
+                <?php }
+            if($Type_compte=="Professeur"){ ?>
+                <div class="flexboxText-menu"><a href="../evaluationsPage/evaluationsPage.php" class="lienWhite">Evaluations</a></div>
+            <?php }
+            if($Type_compte=="Administrateur"){ ?>
                 <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
             <?php } ?>
-            <div class="flexboxLogo-menu"><a href="profilPage.php" class="lienWhite"><img src="../img/profilLogoActualPage.png" class="menuLogo" alt=" profilLogoActualPage "></a></div>
+            <div class="flexboxLogo-menu"><a href="profilPage.php" class="lienClique"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
     <img src="../img/lyonCity.jpg"  alt=" lyonCity " id="imgLyonCityProfil">
@@ -55,9 +73,11 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     $reponse = $bdd->query('SELECT * FROM compte');
     while ($donnees = $reponse->fetch()){
 		if ($donnees['ID_Compte'] == $ID) {
-			$nom=$donnees['Nom_Compte'];
-			$prenom=$donnees['Prenom'];
-			$mail=$donnees['E_mail'];
+            //if($Type_compte == "Administrateur") {
+                $nom=$donnees['Nom_Compte'];
+                $prenom=$donnees['Prenom'];
+                $mail=$donnees['E_mail'];
+            //}
             $mdp=$donnees['MDP'];
 		}
 }
@@ -70,11 +90,16 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
         <div class="textBoldProfil">Adresse e-mail</div>
         <div class="textProfil"><?php echo $mail; ?></div>
         <div class="textBoldProfil">Mot de passe</div>
-        <div class="textProfil"><?php echo $mdp; ?></div>
+        <div class="textProfil">
+        <?php $nbCaracteresMDP = compterCaracteresMDP($mdp);
+        for($i=0; $i<$nbCaracteresMDP; $i++){
+            echo '*';
+        }?>
+        </div>
 
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <input type="submit" id="boutonChangementMDP" name="ChangerMDP" value="Modifier">
-            <input type="submit" id="boutonDeconnexion" name="Deconnexion" value="Deconnecter">
+            <input type="submit" id="boutonDeconnexion" name="Deconnexion" value="Déconnecter">
         </form>
         <?php
         
@@ -86,7 +111,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
         header('Location: modifierMonProfil.php');
         exit();
         }
-        if ($_POST['Deconnexion']=="Deconnecter"){
+        if ($_POST['Deconnexion']=="Déconnecter"){
             session_start();
             header('Location: ../connexionPage/connexionPage.html');
             exit();

@@ -152,7 +152,6 @@ footer{
 	margin-bottom: 5px;
 }
 .login-form2 input[type="text"],
-.login-form2 input[type="email"],
 .login-form2 input[type="number"],
 .login-form2 input[type="password"] {
 	width: 92%;
@@ -173,5 +172,45 @@ footer{
 	cursor: pointer;
 }
 .login-form2 input[type="submit"]:hover {
+	background: #002B70;
+}
+
+table {
+    margin-left: 40px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 90%;
+    border-collapse: collapse;
+    font-family: "openSansLight";
+    color: #002B44;
+    font-size: large;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+.login-form3 input[type="submit"] {
+    margin-left: 10px;
+    width: auto;
+	padding: 10px;
+    margin-bottom: 10px;
+	border: none;
+	border-radius: 5px;
+	background: #002B44;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
+.login-form3 input[type="submit"]:hover {
 	background: #002B70;
 }
