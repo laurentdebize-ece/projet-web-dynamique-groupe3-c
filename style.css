@@ -95,7 +95,6 @@ nav.nav li {
 
 /*Footer*/
 footer{
-    
     width: 98%;
     background-color: #002B44;
     color:#ECECEC;
@@ -239,7 +238,7 @@ table {
     height: 15px;
     width: 15px;
     margin: 0 2px;
-    background-color: #3084b5;
+    background-color: #002B70;
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.6s ease;
@@ -262,5 +261,5 @@ table {
     font-weight: lighter;
 }
 .login-form3 input[type="submit"]:hover {
-	background: #3084b5;
+	background: #002B70;
 }

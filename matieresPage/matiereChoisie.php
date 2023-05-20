@@ -90,14 +90,12 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         <table>
         <tr id="textLigne1">
             <th>Compétences</th>
-            <th>Compétences</th>
             <th>Matière</th>
             <th>Etat de la compétence</th>
         </tr>
     <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
         <tr>
             <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
-            <td id="textColonne"><?php echo $donneesCompetence['ID_Competence']?></td>
             <td id="textColonne"><?php echo $donneesCompetence['Nom_matiere']?></td>
             <td class="textColonne"><?php echo $donneesCompetence['Etat_competence']?></td>
         </tr>
@@ -105,8 +103,8 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
     </table>
     <?php if($Type_compte=="Administrateur"){?>
                 <form method="POST" action="modifMatiere.php"  id="formModifMatiere">
-                    <input type="submit" name ="modifMatiere" value="Supprimer" class="boutonModif">
-                    <input type="submit" name ="modifMatiere" value="Modifier" class="boutonModif">
+                    <input type="submit" name ="modifMatiere" value="Supprimer">
+                    <input type="submit" name ="modifMatiere" value="Modifier">
                 </form>
             <?php }?>
     </div>        

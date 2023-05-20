@@ -96,11 +96,12 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
             echo '*';
         }?>
         </div>
-
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <input type="submit" id="boutonChangementMDP" name="ChangerMDP" value="Modifier">
-            <input type="submit" id="boutonDeconnexion" name="Deconnexion" value="Déconnecter">
-        </form>
+        <div class="login-form3">
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <input type="submit" name="ChangerMDP" value="Modifier">
+                <input type="submit" name="Deconnexion" value="Déconnecter">
+            </form>
+        </div>
         <?php
         
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
