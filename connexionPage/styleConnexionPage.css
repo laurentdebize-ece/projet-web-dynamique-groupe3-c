@@ -16,6 +16,7 @@
 	display: block;
 	margin-bottom: 5px;
 }
+.login-form2 input[type="mail"],
 .login-form input[type="text"],
 .login-form input[type="password"] {
 	width: 92%;

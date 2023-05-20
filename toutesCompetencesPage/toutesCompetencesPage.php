@@ -5,7 +5,7 @@ try{
         $mdp="";//pas de mdp sous wamp
     }
 	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills; 
-    charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch (Exception $e)
 {
@@ -84,15 +84,17 @@ if(isset($_POST['validerModification'])){
     </section>
 
     <section id="bodyToutesCompetencesPage">
-    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriCompetences">
-        <input type="radio" name="choixTriCompetences" value="1" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>
-        <input type="radio" name="choixTriCompetences" value="2" id="selectChoixTriCompetences">Ordre alphabétique décroissant</option>
-        <input type="radio" name="choixTriCompetences" value="3" id="selectChoixTriCompetences">Thème</option>
-        <input type="radio" name="choixTriCompetences" value="4" id="selectChoixTriCompetences">Date croissante</option>
-        <input type="radio" name="choixTriCompetences" value="5" id="selectChoixTriCompetences">Date décroissante</option>
-        <input type="radio" name="choixTriCompetences" value="6" id="selectChoixTriCompetences">Non ajoutée</option>
-        <input type="submit" value="valider">
-    </form>
+    <div class="login-form3">
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriCompetences">
+            <input type="radio" name="choixTriCompetences" value="1" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>
+            <input type="radio" name="choixTriCompetences" value="2" id="selectChoixTriCompetences">Ordre alphabétique décroissant</option>
+            <input type="radio" name="choixTriCompetences" value="3" id="selectChoixTriCompetences">Thème</option>
+            <input type="radio" name="choixTriCompetences" value="4" id="selectChoixTriCompetences">Date croissante</option>
+            <input type="radio" name="choixTriCompetences" value="5" id="selectChoixTriCompetences">Date décroissante</option>
+            <input type="radio" name="choixTriCompetences" value="6" id="selectChoixTriCompetences">Non ajoutée</option>
+            <input type="submit" value="valider">
+        </form>
+    </div>    
 
 <?php if(isset($_POST['choixTriCompetences'])){
     switch($_POST['choixTriCompetences']) {
@@ -130,9 +132,9 @@ if(isset($_POST['validerModification'])){
 }?>
 <table>
     <tr id="textLigne1">
-        <td>Compétence</td>
-        <td>Thème</td>
-        <td>Date de création</td>
+        <th>Compétence</th>
+        <th>Thème</th>
+        <th>Date de création</th>
     </tr>
 <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
     <tr>
