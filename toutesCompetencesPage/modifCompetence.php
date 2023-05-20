@@ -33,7 +33,7 @@ $reponseModifCompetence = $_POST['modifCompetence'];
     <meta charset="utf-8">
     <title>OMNES MySkills - Modifier une competence</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
-    <link href="styleMatieres.css" rel="stylesheet" type="text/css">
+    <link href="styleToutesCompetences.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

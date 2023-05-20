@@ -1,4 +1,4 @@
-.flexboxMatieres{
+/*.flexboxMatieres{
     margin-top: 7%;
     margin-left: 2%;
     margin-right: 2%;
@@ -8,17 +8,17 @@
     color: #ECECEC;
     float : left;
     border-radius: 10px;
-    /*text-align: center;*/
+    /*text-align: center;
     justify-content: center;
     align-items: center;
     display:flex;
 }
 .flex-container-mesMatieres{
-    /*min-height: 300px;*/
+    /*min-height: 300px;
     display: flex;
     flex-direction: row;
     padding-bottom: 20px;
-}
+}*/
 
 #competencesParMatiere{
     padding-top: 50px;
@@ -29,6 +29,28 @@
 #formulaireMofifMatiere{
     padding: 150px;
 }
-#mesMatieres{
-    padding-top: 50px;
+#bodyMesMatieres{
+    padding-top: 80px;
+}
+#formModifMatiere{
+    margin-left: 10px;
+}
+
+.boutonMatiere{
+    background-color: #002B44;
+    color: #ECECEC;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 30px;
+	border: none;
+	border-radius: 20px;
+    font-family: "openSansLight";
+    font-weight: bolder;
+    font-size: large;
+    cursor: pointer;
+}
+.boutonMatiere:hover {
+	background: #3084b5;
 }

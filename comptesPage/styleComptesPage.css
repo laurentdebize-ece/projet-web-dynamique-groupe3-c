@@ -1,8 +1,8 @@
 .bodyComptesPage{
-    padding-top: 50px;
+    padding-top: 80px;
 }
-.bodyModifCompte{
-    padding-top: 50px;
+#bodyModifCompte{
+    padding-top: 100px;
 }
 #formulaireModifCompte{
     padding: 100px;

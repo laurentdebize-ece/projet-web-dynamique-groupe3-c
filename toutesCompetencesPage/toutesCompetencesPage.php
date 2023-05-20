@@ -85,13 +85,15 @@ if(isset($_POST['validerModification'])){
 
     <section id="bodyToutesCompetencesPage">
     <div class="login-form3">
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriCompetences">
-            <input type="radio" name="choixTriCompetences" value="1" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>
-            <input type="radio" name="choixTriCompetences" value="2" id="selectChoixTriCompetences">Ordre alphabétique décroissant</option>
-            <input type="radio" name="choixTriCompetences" value="3" id="selectChoixTriCompetences">Thème</option>
-            <input type="radio" name="choixTriCompetences" value="4" id="selectChoixTriCompetences">Date croissante</option>
-            <input type="radio" name="choixTriCompetences" value="5" id="selectChoixTriCompetences">Date décroissante</option>
-            <input type="radio" name="choixTriCompetences" value="6" id="selectChoixTriCompetences">Non ajoutée</option>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="formChoixTri">
+            <input type="radio" name="choixTriCompetences" value="1" class="selectChoixTri">Ordre alphabétique croissant</option>
+            <input type="radio" name="choixTriCompetences" value="2" class="selectChoixTri">Ordre alphabétique décroissant</option>
+            <input type="radio" name="choixTriCompetences" value="3" class="selectChoixTri">Thème</option>
+            <input type="radio" name="choixTriCompetences" value="4" class="selectChoixTri">Date croissante</option>
+            <input type="radio" name="choixTriCompetences" value="5" class="selectChoixTri">Date décroissante</option>
+            <?php if($Type_compte == "Etudiant") { ?>
+                <input type="radio" name="choixTriCompetences" value="6" class="selectChoixTri">Non ajoutée</option>
+            <?php } ?>
             <input type="submit" value="valider">
         </form>
     </div>    
@@ -152,17 +154,19 @@ if(isset($_POST['validerModification'])){
 <?php } ?>
 </table>
 <?php if($Type_compte=="Administrateur"){?>
-            <form method="POST" action="modifCompetence.php" id="formModifCompetence">
-                <input type="submit" name ="modifCompetence" value="Ajouter" class="boutonModif">
-                <input type="submit" name ="modifCompetence" value="Supprimer" class="boutonModif">
-                <input type="submit" name ="modifCompetence" value="Modifier" class="boutonModif">
-            </form>
-        <?php }?>
-    </section>  
-    <footer>
-        <div class="floatLeft">Projet Développement Web</div>
-        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
-    </footer>
+    <div class="login-form3">
+        <form method="POST" action="modifCompetence.php" id="formModifCompetence">
+            <input type="submit" name ="modifCompetence" value="Ajouter" class="boutonModif">
+            <input type="submit" name ="modifCompetence" value="Supprimer" class="boutonModif">
+            <input type="submit" name ="modifCompetence" value="Modifier" class="boutonModif">
+        </form>
+    </div>
+<?php }?>
+</section>  
+<footer>
+    <div class="floatLeft">Projet Développement Web</div>
+    <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
+</footer>
 </body>
 
 </html>

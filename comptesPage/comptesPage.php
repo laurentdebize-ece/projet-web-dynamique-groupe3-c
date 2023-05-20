@@ -127,13 +127,15 @@ if(isset($_POST['validerModification'])){
         </div>
     </section>
     <section class="bodyComptesPage">
-<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriComptes">
-        <input type="radio" name="choixTriComptes" value="1" id="selectChoixTriComptes">Nom</option>
-        <input type="radio" name="choixTriComptes" value="2" id="selectChoixTriComptes">Prénom</option>
-        <input type="radio" name="choixTriComptes" value="3" id="selectChoixTriComptes">Ecole</option>
-        <input type="radio" name="choixTriComptes" value="4" id="selectChoixTriComptes">Type de compte</option>
-        <input type="submit" value="valider">
-</form>
+        <div class="login-form3">
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="formChoixTri">
+                <input type="radio" name="choixTriComptes" value="1" class="selectChoixTri">Nom</option>
+                <input type="radio" name="choixTriComptes" value="2" class="selectChoixTri">Prénom</option>
+                <input type="radio" name="choixTriComptes" value="3" class="selectChoixTri">Ecole</option>
+                <input type="radio" name="choixTriComptes" value="4" class="selectChoixTri">Type de compte</option>
+                <input type="submit" value="valider">
+            </form>
+        </div>
 
 <?php if(isset($_POST['choixTriComptes'])){
     switch($_POST['choixTriComptes']) {
@@ -153,8 +155,7 @@ if(isset($_POST['validerModification'])){
             $reponseComptes = $bdd->query(" SELECT * FROM compte ");
             break;
     }
-} else {$reponseComptes = $bdd->query(" SELECT * FROM compte ");}
-?>
+} else {$reponseComptes = $bdd->query(" SELECT * FROM compte ");} ?>
 <table>
     <tr id="textLigne1">
         <td>Nom</td>
@@ -164,7 +165,6 @@ if(isset($_POST['validerModification'])){
     </tr>
 <?php while ($donneesComptes = $reponseComptes->fetch()){ ?> 
     <tr>
-        <td class="textColonne"><?php echo $donneesComptes['ID_Compte']?></td>
         <td id="textColonne1"><?php echo $donneesComptes['Nom_Compte']?></td>
         <td id="textColonne"><?php echo $donneesComptes['Prenom']?></td>
         <td id="textColonne"><?php echo $donneesComptes['E_mail']?></td>
@@ -172,11 +172,13 @@ if(isset($_POST['validerModification'])){
     </tr>
 <?php } ?>
 </table>
-<form method="POST" action="modifCompte.php" id="formModifCompte">
-    <input type="submit" name ="modifCompte" value="Ajouter" class="boutonModif">
-    <input type="submit" name ="modifCompte" value="Supprimer" class="boutonModif">
-    <input type="submit" name ="modifCompte" value="Modifier" class="boutonModif">
-</form>
+<div class="login-form3">
+    <form method="POST" action="modifCompte.php" >
+        <input type="submit" name ="modifCompte" value="Ajouter" >
+        <input type="submit" name ="modifCompte" value="Supprimer" class="boutonModif">
+        <input type="submit" name ="modifCompte" value="Modifier" class="boutonModif">
+    </form>
+</div>
 </section>
     <footer>
         <div class="floatLeft">Projet Développement Web</div>

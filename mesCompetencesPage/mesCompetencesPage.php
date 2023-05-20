@@ -61,14 +61,14 @@ $_SESSION['Type_compte'] = $Type_compte;
 
 <section id="bodyMesCompetencesPage">
     <div class="login-form3">
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formChoixTriCompetences">
-                <input type="radio" name="choixTriCompetences" value="1" id="selectChoixTriCompetences">Ordre alphabétique croissant</option>
-                <input type="radio" name="choixTriCompetences" value="2" id="selectChoixTriCompetences">Ordre alphabétique décroissant</option>
-                <input type="radio" name="choixTriCompetences" value="3" id="selectChoixTriCompetences">Statut</option>
-                <input type="radio" name="choixTriCompetences" value="4" id="selectChoixTriCompetences">Date croissante</option>
-                <input type="radio" name="choixTriCompetences" value="5" id="selectChoixTriCompetences">Date décroissante</option>
-                <input type="radio" name="choixTriCompetences" value="6" id="selectChoixTriCompetences">Matières</option>
-                <input type="radio" name="choixTriCompetences" value="7" id="selectChoixTriCompetences">Professeur</option>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="formChoixTri">
+                <input type="radio" name="choixTriCompetences" value="1" class="selectChoixTri">Ordre alphabétique croissant</option>
+                <input type="radio" name="choixTriCompetences" value="2" class="selectChoixTri">Ordre alphabétique décroissant</option>
+                <input type="radio" name="choixTriCompetences" value="3" class="selectChoixTri">Statut</option>
+                <input type="radio" name="choixTriCompetences" value="4" class="selectChoixTri">Date croissante</option>
+                <input type="radio" name="choixTriCompetences" value="5" class="selectChoixTri">Date décroissante</option>
+                <input type="radio" name="choixTriCompetences" value="6" class="selectChoixTri">Matières</option>
+                <input type="radio" name="choixTriCompetences" value="7" class="selectChoixTri">Professeur</option>
                 <input type="submit" value="valider">
         </form>
     </div>
