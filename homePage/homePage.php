@@ -47,11 +47,12 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     <section id="introHomePage">
         <h1> <img src="../img/omnesSkills.png"  alt=" omnesSkills " id="tailleImgOmnesSkills"> </h1>
         <img src="../img/HomePageLyon.jpeg"  alt=" lyonHP" id="imgLyonHP">
-        <div class="intro">Ce site web permet aux professeurs de lister les compétences à
-            <br>acquérir dans leur matière, tandis que les étudiants pourront 
-            <br>s'auto-évaluer pour chaque compétence. Le but étant que les 
-            <br>étudiants comprendre leur niveau et à identifier les domaines
-            <br>dans lesquels ils doivent s'améliorer.</div>
+        <div class="intro">
+            Ce site web permet aux professeurs de lister les compétences à
+            acquérir dans leur matière, tandis que les étudiants pourront 
+            s'auto-évaluer pour chaque compétence. Le but étant que les 
+            étudiants comprendre leur niveau et à identifier les domaines
+            dans lesquels ils doivent s'améliorer.</div>
     
     </section>
     <section>
