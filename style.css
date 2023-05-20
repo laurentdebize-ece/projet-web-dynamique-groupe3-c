@@ -259,6 +259,7 @@ table {
 	font-weight: bold;
 	cursor: pointer;
     font-family: "openSansLight";
+    font-weight: lighter;
 }
 .login-form3 input[type="submit"]:hover {
 	background: #3084b5;
