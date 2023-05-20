@@ -28,7 +28,6 @@ if (!isset($_SESSION['ID_compte'])&& !isset($_SESSION['Nom_Matiere_Choisie'])) {
 $ID = $_SESSION['ID_Compte'];
 $NomMatiere=$_SESSION['Nom_Matiere_Choisie'];
 ?>
-<?php echo $ID?>
 
 <?php
 $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_competence ON Compte.ID_compte = compte_competence.ID_compte INNER JOIN competence ON compte_competence.ID_competence = competence.ID_competence INNER JOIN matiere_competence ON competence.ID_competence = matiere_competence.ID_Competence INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere');
@@ -58,6 +57,8 @@ if (isset($_POST['submit'])) {
             echo "Note : " . $value . "<br>";
 
             $sql ="UPDATE compte_competence SET Etat_competence='$value' WHERE ID_Compte = '$ID' AND ID_compte_competence = '$idcompet'";
+            $bdd -> query($sql);
+            $sql ="UPDATE compte_competence SET Competence_valide_etudiant='valide' WHERE ID_Compte = '$ID' AND ID_compte_competence = '$idcompet'";
             $bdd -> query($sql);
         }
     }

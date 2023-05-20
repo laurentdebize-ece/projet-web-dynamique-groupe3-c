@@ -88,10 +88,24 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                 <div id="etudiantChamps" style="display: none;">
                     Classe : <input type="number" name="NewClasse" placeholder="Entrez classe" min=0  ><br><br>
                     Promo : <input type="text" name="NewPromo" placeholder="Entrez promo"><br><br>
-                    Ecole : <input type="text" name="NewEcole" placeholder="Entrez école"><br><br>
+                    Ecole : <br>
+                    <?php 
+                        $reponse2 = $bdd->query('SELECT * FROM ecole');
+                        while ($donnees2 = $reponse2->fetch()){
+                    ?>
+                    <input type="radio" name="NewEcole" value =" <?php echo $donnees2['Nom'] ?>" >
+
+<?php       echo $donnees2['Nom'] . "<br><br>";  } ?>
                 </div>
                 <div id="professeurChamps" style="display: none;">
-                    Matière : <input type="text" name="NewMatiere" placeholder="Entrez matière"><br><br>
+                    Matière : <br>
+                    <?php 
+                        $reponse2 = $bdd->query('SELECT * FROM matiere');
+                        while ($donnees2 = $reponse2->fetch()){
+                    ?>
+                    <input type="radio" name="NewMatiere" value =" <?php echo $donnees2['Nom_matiere'] ?>" >
+
+<?php       echo $donnees2['Nom_matiere'] . "<br><br>";  } ?>
                 </div>
                 <input type="submit" name="validerAjout" value="Enregistrer">
             </form>
