@@ -130,7 +130,7 @@ while ($donnees = $reponse->fetch()){
 						<label for="motdepasse1">Nouveau mot de passe :</label>
 						<input type="password" name="mdp1" placeholder="Nouveau mot de passe" required><br><br>
 						<label for="motdepasse2">Réécrivez votre nouveau mot de passe :</label>
-						<input type="password" name="mdp2" placeholder="Confirmez mot de passe" required><br>
+						<input type="password" name="mdp2" placeholder="Confirmez mot de passe" required><br><br>
 						<?php if($erreur!=0){ ?>
 							<p style='color:red'>Veuillez rentrer des mots de passe identiques.<br></p>
 						<?php }
