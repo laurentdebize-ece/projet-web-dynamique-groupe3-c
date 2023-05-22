@@ -228,8 +228,7 @@ table {
   tr:nth-child(even) {
     background-color: #ECECEC;
   }
-
-
+  
 /*Formulaire de tri*/
 .formChoixTri{
     text-align: right;

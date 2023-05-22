@@ -76,9 +76,9 @@ $Type_compte=$_SESSION['Type_compte'];
         <?php
         }
     }?>
-<div class="login-form4">
-    <input type="submit" name="submit" value="Evaluer">
-        </form>
+    <div class="login-form4">
+        <input type="submit" name="submit" value="Evaluer">
+</form>
 </div>
 </tr>
 
@@ -88,9 +88,6 @@ $Type_compte=$_SESSION['Type_compte'];
     if (isset($_POST['submit'])) {
         foreach ($_POST as $idcompet => $value) {
             if ($idcompet != "submit") {
-                echo "Compétence évaluée : " . $idcompet . "<br>";
-                echo "Note : " . $value . "<br>";
-
                 $sql ="UPDATE compte_competence SET Etat_competence='$value' WHERE ID_Compte = '$ID' AND ID_compte_competence = '$idcompet'";
                 $bdd -> query($sql);
                 $sql ="UPDATE compte_competence SET Competence_valide_etudiant='valide' WHERE ID_Compte = '$ID' AND ID_compte_competence = '$idcompet'";
