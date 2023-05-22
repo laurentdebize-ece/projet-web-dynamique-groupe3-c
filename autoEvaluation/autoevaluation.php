@@ -60,42 +60,49 @@ $Type_compte=$_SESSION['Type_compte'];
 
 
 
-<?php
-$reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_competence ON Compte.ID_compte = compte_competence.ID_compte INNER JOIN competence ON compte_competence.ID_competence = competence.ID_competence INNER JOIN matiere_competence ON competence.ID_competence = matiere_competence.ID_Competence INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere');
-while ($donnees = $reponse->fetch()){
-    if ($donnees['ID_Compte'] == $ID && $donnees['Nom_matiere']==$NomMatiere ) { ?>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <?php echo $donnees['Nom_competence' ]; 
-        $idcompet =$donnees['ID_compte_competence']; ?>
-        <input type="radio" name=" <?php echo $idcompet; ?>" value="nonacquis"> non acquis.
-        <input type="radio" name=" <?php echo $idcompet;?>" value="encoursacquis">en cours d'acquisition
-        <input type="radio" name=" <?php echo $idcompet; ?>" value="acquis">acquis
-        <br><br>
+<table>
     <?php
-    }
-}?>
-<input type="submit" name="submit" value="Evaluer">
-    </form>
+    $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_competence ON Compte.ID_compte = compte_competence.ID_compte INNER JOIN competence ON compte_competence.ID_competence = competence.ID_competence INNER JOIN matiere_competence ON competence.ID_competence = matiere_competence.ID_Competence INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere');
+    while ($donnees = $reponse->fetch()){
+        if ($donnees['ID_Compte'] == $ID && $donnees['Nom_matiere']==$NomMatiere ) { ?>
+            <tr>
+                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <td><?php echo $donnees['Nom_competence' ]; 
+                $idcompet =$donnees['ID_compte_competence']; ?></td>
+                <td><input type="radio" name=" <?php echo $idcompet; ?>" value="nonacquis"> non acquis</td>
+                <td><input type="radio" name=" <?php echo $idcompet;?>" value="encoursacquis">en cours d'acquisition</td>
+                <td><input type="radio" name=" <?php echo $idcompet; ?>" value="acquis">acquis</td>
+                <br><br>
+        <?php
+        }
+    }?>
+<div class="login-form4">
+    <input type="submit" name="submit" value="Evaluer">
+        </form>
+</div>
+</tr>
 
 
 
+    <?php
+    if (isset($_POST['submit'])) {
+        foreach ($_POST as $idcompet => $value) {
+            if ($idcompet != "submit") {
+                echo "Compétence évaluée : " . $idcompet . "<br>";
+                echo "Note : " . $value . "<br>";
 
-<?php
-if (isset($_POST['submit'])) {
-    foreach ($_POST as $idcompet => $value) {
-        if ($idcompet != "submit") {
-            echo "Compétence évaluée : " . $idcompet . "<br>";
-            echo "Note : " . $value . "<br>";
-
-            $sql ="UPDATE compte_competence SET Etat_competence='$value' WHERE ID_Compte = '$ID' AND ID_compte_competence = '$idcompet'";
-            $bdd -> query($sql);
-            $sql ="UPDATE compte_competence SET Competence_valide_etudiant='valide' WHERE ID_Compte = '$ID' AND ID_compte_competence = '$idcompet'";
-            $bdd -> query($sql);
+                $sql ="UPDATE compte_competence SET Etat_competence='$value' WHERE ID_Compte = '$ID' AND ID_compte_competence = '$idcompet'";
+                $bdd -> query($sql);
+                $sql ="UPDATE compte_competence SET Competence_valide_etudiant='valide' WHERE ID_Compte = '$ID' AND ID_compte_competence = '$idcompet'";
+                $bdd -> query($sql);
+            }
         }
     }
-}
-?>
-
-
+    ?>
+</table>
+<footer>
+        <div class="floatLeft">Projet Développement Web</div>
+        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
+    </footer>
 </body>
 </html>
