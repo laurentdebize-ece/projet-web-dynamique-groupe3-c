@@ -101,15 +101,15 @@ CREATE TABLE  `compte` (
 INSERT INTO `compte` (`ID_Compte`, `Nom_Compte`, `Prenom`, `E_mail`, `MDP`, `Type_compte`, `Deja_connecte`, `ID_Ecole`, `ID_Promotion`, `ID_Classe`) VALUES
 (1, 'VIRET', 'Pierre', 'pierreviret@gmail.com', '1111','Etudiant',1,1,1,3),
 (2, 'MASSON', 'Charles', 'Charlesmasson@gmail.com', 'xpzcl421','Etudiant',1,1,1,3),
-(3, 'BOJ', 'Lucas', 'pierreviret@gmail.com', 'cpcnifz361q','Etudiant',1,1,2,5),
-(4, 'JSP', 'Noemie', 'pierreviret@gmail.com', '2882ssscsww','Etudiant',1,2,3,8),
-(5, 'BATHEROSSEDSLORTO', 'Emma', 'pierreviret@gmail.com', '852wcdhus','Etudiant',1,2,3,7),
-(6, 'CHAPERON', 'Axel', 'pierreviret@gmail.com', '72ccdid28z8','Etudiant',1,2,1,1),
-(7, 'DEBIZE', 'Laurent', 'pierreviret@gmail.com', '1234','Professeur',1,1,0,0),
-(8, 'BONFILS', 'Anne', 'pierreviret@gmail.com', 'daeb2252c','Professeur',1,1,0,0),
-(9, 'DEDECKER', 'Samira', 'pierreviret@gmail.com', 'zfqju451','Professeur',1,1,0,0),
-(10, 'HINTZY', 'Antoine', 'pierreviret@gmail.com', 'zkeenxsi581','Professeur',1,1,0,0),
-(11, 'DIEU', 'LUKEH', 'pierreviret@gmail.com', '0000','Administrateur',1,1,0,0);
+(3, 'BOJ', 'Lucas', 'Lucasboj@gmail.com', 'cpcnifz361q','Etudiant',1,1,2,5),
+(4, 'RUAT', 'Noemie', 'NoemieRuat@gmail.com', '2882ssscsww','Etudiant',1,2,3,8),
+(5, 'BATHEROSSEDSLORTO', 'Emma', 'EmmaBatherosse@gmail.com', '852wcdhus','Etudiant',1,2,3,7),
+(6, 'CHAPERON', 'Axel', 'AxelChap@gmail.com', '72ccdid28z8','Etudiant',1,2,1,1),
+(7, 'DEBIZE', 'Laurent', 'LaurentDebize@gmail.com', '1234','Professeur',1,1,0,3),
+(8, 'BONFILS', 'Anne', 'AnneBonfils@gmail.com', 'daeb2252c','Professeur',1,1,0,3),
+(9, 'DEDECKER', 'Samira', 'SamiraDedecker@gmail.com', 'zfqju451','Professeur',1,1,0,2),
+(10, 'HINTZY', 'Antoine', 'AntoineLEHintzy@gmail.com', 'zkeenxsi581','Professeur',1,1,0,3),
+(11, 'DIEU', 'LUKEH', 'ALED@gmail.com', '0000','Administrateur',1,1,0,0);
 
 
 
