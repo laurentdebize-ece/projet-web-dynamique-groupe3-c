@@ -12,7 +12,6 @@
         <section>
         <div class="login-form">
             <h3>Première connexion</h3>
-            <form method="post" action="connexion.php">
 			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				Modifiez votre mot de passe : <br><input type="password" name="motdepasse" placeholder="Entrez votre mot de passe" required><br><br>
 				Réécrivez votre mot de passe : <br><input type="password" name="Nmotdepasse" placeholder="Entrez à nouveau votre mot de passe" required><br><br>

@@ -139,6 +139,7 @@ footer{
 	display: block;
 	margin-bottom: 5px;
 }
+.login-form2 select, input[type="mail"],
 .login-form2 input[type="text"],
 .login-form2 input[type="number"],
 .login-form2 input[type="password"] {
