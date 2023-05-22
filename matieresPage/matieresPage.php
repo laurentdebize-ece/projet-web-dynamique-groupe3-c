@@ -44,6 +44,7 @@ if(isset($_POST['validerModification'])){
 		$bdd->query($modificationMatiere); 
     }
 }
+if(isset($_POST['validerSuppression'])){
 if($_POST['validerSuppression']=="Valider"){
     $reponse=$bdd->query("SELECT ID_Matiere FROM matiere WHERE Nom_matiere='$NomMatiere'");
     while ($donnees = $reponse->fetch()){ 
@@ -58,7 +59,7 @@ if($_POST['validerSuppression']=="Valider"){
     $stmt1->execute();
     $stmt2->execute();
     $stmt3->execute();
-}
+}}
 if($Type_compte=="Administrateur"){
     $reponseMatiere = $bdd->query("SELECT Nom_matiere FROM matiere");
 } else {

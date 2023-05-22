@@ -59,47 +59,34 @@ $reponseModifCompetence = $_POST['modifCompetence'];
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    <section id="bodyModifCompetence">
-        <?php if($reponseModifCompetence=="Ajouter"){ //Style a faire emma?>
-        <div id="formulaireMofifCompetence">	   
-            <div class="login-form2">
+    <section>
+        <img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
+		<div id="formulaireModification">	
+        <div class="login-form2">
+        <form method="POST" action="toutesCompetencesPage.php">
+            <?php if($reponseModifCompetence=="Ajouter"){?>	   
 				<h3>Ajouter une nouvelle compétence</h3>
-                <form method="POST" action="toutesCompetencesPage.php" id="ajouterCompetence">
                     Nom de la compétence : <input type="text" name="NewNom" placeholder="Entrez compétence"required><br><br>
                     Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
                     Date de création : <input type="date" name="NewDate"><br><br>
                     <input type="submit" name="validerAjout" value="Enregistrer">
-                </form>
-            </div>
-        </div>        
-        <?php }
-
-        if($reponseModifCompetence=="Supprimer"){//Style a faire emma?>
-        <div id="formulaireMofifCompetence">    
-            <div class="login-form2">
-				<h3>Supprimer une compétence</h3>
-                <form method="POST" action="toutesCompetencesPage.php" id="supprimerCompetence">
+            <?php }
+            if($reponseModifCompetence=="Supprimer"){?>
+                    <h3>Supprimer une compétence</h3>
                     Nom de la compétence : <input type="text" name="NewNom" placeholder="Entrez compétence"required><br><br>
                     Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
-                    <input type="submit" name="validerSuppression" value="Enregistrer">
-                </form>
-            </div>
-        </div>    
-        <?php }
-
-        if($reponseModifCompetence=="Modifier"){//Style a faire emma?>
-        <div id="formulaireMofifCompetence"> 
-            <div class="login-form2">
-				<h3>Modifier une compétence</h3>
-                <form method="POST" action="toutesCompetencesPage.php" id="modifierCompetence">
+                    <input type="submit" name="validerSuppression" value="Enregistrer">  
+                <?php }
+                if($reponseModifCompetence=="Modifier"){?>
+                    <h3>Modifier une compétence</h3>
                     Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
                     Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
                     Date de création : <input type="date" name="NewDate"><br><br>
-                    <input type="submit" name="validerModofication" value="Enregistrer">
+                   <input type="submit" name="validerModification" value="Enregistrer">
+                <?php }?>
                 </form>
             </div>
-        </div>
-        <?php }?>
+        </div>        
     </section>
 </body>
 </html>
