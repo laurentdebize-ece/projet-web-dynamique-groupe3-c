@@ -34,10 +34,11 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
                 </form>
                 <?php }
 
-    if($Type_compte=="admin"){
+    if($Type_compte=="Administrateur"){
         $reponseCompetence = $bdd->query("SELECT * FROM matiere
             INNER JOIN matiere_competence ON matiere.ID_matiere = matiere_competence.ID_matiere
-            INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_competence");
+            INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_competence
+            WHERE Nom_matiere LIKE '$Nom_Matiere_Choisie'");
     }
 
     else {
@@ -91,13 +92,17 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         <tr id="textLigne1">
             <th>Compétences</th>
             <th>Matière</th>
-            <th>Etat de la compétence</th>
+            <?php if($Type_compte!="Administrateur"){?>
+                <th>Etat de la compétence</th>
+            <?php } ?>
         </tr>
     <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
         <tr>
             <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
             <td id="textColonne"><?php echo $donneesCompetence['Nom_matiere']?></td>
-            <td class="textColonne"><?php echo $donneesCompetence['Etat_competence']?></td>
+            <?php if($Type_compte!="Administrateur"){?>
+                <td class="textColonne"><?php echo $donneesCompetence['Etat_competence']?></td>
+            <?php } ?>
         </tr>
     <?php } ?>
     </table>

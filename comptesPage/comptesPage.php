@@ -173,10 +173,15 @@ if(isset($_POST['validerModification'])){
 <?php } ?>
 </table>
 <div class="login-form3">
-    <form method="POST" action="modifCompte.php" >
+    <form method="POST" action="modifCompte.php" class="floatLeft">
         <input type="submit" name ="modifCompte" value="Ajouter" >
-        <input type="submit" name ="modifCompte" value="Supprimer" class="boutonModif">
-        <input type="submit" name ="modifCompte" value="Modifier" class="boutonModif">
+        <input type="submit" name ="modifCompte" value="Supprimer">
+        <input type="submit" name ="modifCompte" value="Modifier">
+        </form>
+    <form method="POST" action="creerEcolePromoClasse.php" class="floatRight">
+        <input type="submit" name ="creerEcolePromoClasse" value="Créer une école">
+        <input type="submit" name ="creerEcolePromoClasse" value="Créer une promo">
+        <input type="submit" name ="creerEcolePromoClasse" value="Créer une classe">
     </form>
 </div>
 </section>

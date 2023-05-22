@@ -21,6 +21,27 @@
         document.getElementById("etudiantChamps").style.display = "none";
         document.getElementById("professeurChamps").style.display = "none";
     }
+    function showPromos(idEcole) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("promoSelect").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "getPromotions.php?idEcole=" + idEcole, true);
+        xhttp.send();
+    }
+    function showClasses(idPromo) {
+        console.log(idPromo);
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("classeSelect").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "getClasses.php?idPromo=" + idPromo, true);
+        xhttp.send();
+    }
     </script>
 <body>
 <?php
@@ -48,7 +69,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
   $_SESSION['ID_Compte'] = $ID;
   $_SESSION['Type_compte'] = $Type_compte;
 
-    $reponseModifCompte = $_POST['modifCompte'];?>  
+$reponseModifCompte = $_POST['modifCompte'];?>  
      <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
@@ -86,16 +107,19 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                     <input type="radio" name="NewTypeCompte" value="Administrateur" onclick="cacherExtraChamps()">Administrateur
                     <br><br>
                 <div id="etudiantChamps" style="display: none;">
-                    Classe : <input type="number" name="NewClasse" placeholder="Entrez classe" min=0  ><br><br>
-                    Promo : <input type="text" name="NewPromo" placeholder="Entrez promo"><br><br>
-                    Ecole : <br>
-                    <?php 
-                        $reponse2 = $bdd->query('SELECT * FROM ecole');
-                        while ($donnees2 = $reponse2->fetch()){
-                    ?>
-                    <input type="radio" name="NewEcole" value =" <?php echo $donnees2['Nom'] ?>" >
-
-<?php       echo $donnees2['Nom'] . "<br><br>";  } ?>
+                    Ecole : <select name="NewEcole" id="ecoleSelect" onchange="showPromos(this.value)" >
+                        <option>Choisir</option>
+                        <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
+                        while ($donneesEcole = $reponseEcole->fetch()){ ?>
+                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom'] ?></option>
+                        <?php } ?> 
+                    </select><br><br>
+                    Promo : <select name="NewPromo" id="promoSelect" onchange="showClasses(this.value)">
+                        <option>Choisir</option>
+                    </select><br><br>
+                    Classe : <select name="NewClasse" id="classeSelect">
+                        <option>Choisir</option>
+                    </select><br><br>
                 </div>
                 <div id="professeurChamps" style="display: none;">
                     Matière : <br>
@@ -113,7 +137,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     </div>
         <?php }
 
-if($reponseModifCompte=="Supprimer"){//Style a faire emma?>
+if($reponseModifCompte=="Supprimer"){?>
     <div id="formulaireModifCompte"> 
         <div class="login-form2">
 			<h3>Supprimer un compte</h3>
@@ -126,7 +150,7 @@ if($reponseModifCompte=="Supprimer"){//Style a faire emma?>
     </div>
         <?php }
 
-if($reponseModifCompte=="Modifier"){//Style a faire emma?>
+if($reponseModifCompte=="Modifier"){?>
     <div id="formulaireModifCompte"> 
         <div class="login-form2">
 			<h3>Modifier un compte</h3>
