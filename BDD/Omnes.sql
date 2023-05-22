@@ -136,7 +136,7 @@ INSERT INTO `filiere` (`ID_Filiere`, `Nom_filiere`) VALUES
 
 CREATE TABLE  `matiere` (
     `ID_Matiere` int(11) PRIMARY KEY AUTO_INCREMENT,
-    `Nom_Matiere` varchar(50) NOT NULL,
+    `Nom_matiere` varchar(50) NOT NULL,
     `Volume_horaire` int(3)
 );
 
@@ -157,12 +157,12 @@ INSERT INTO `matiere` (`ID_Matiere`, `Nom_matiere`, `Volume_horaire`) VALUES
 
 CREATE TABLE  `competence` (
     `ID_Competence` int(11) PRIMARY KEY AUTO_INCREMENT,
-    `Nom_Competence` varchar(30) NOT NULL,
+    `Nom_competence` varchar(30) NOT NULL,
     `Date_Creation` date NOT NULL,
     `Theme` varchar(30)
 );
 
-INSERT INTO `competence` (`ID_Competence`, `Nom_Competence`, `Date_Creation`, `Theme`) VALUES
+INSERT INTO `competence` (`ID_Competence`, `Nom_competence`, `Date_Creation`, `Theme`) VALUES
 (1, 'Matrices', '2018-01-01', 'Mathematiques'),
 (2, 'Vecteurs', '2018-02-01', 'Physique'),
 (3, 'PCB', '2018-03-01', 'Electronique'),
@@ -242,22 +242,9 @@ INSERT INTO `matiere_competence` (`ID_matiere_competence`, `ID_Matiere`, `ID_Com
 (2, 4, 5, 'DEBIZE'),
 (3, 1, 3, 'BONFILS'),
 (4, 2, 2, 'DEDECKER'),
-(5, 2, 2, 'DEDECKER'),
-(6, 1, 1, 'BONFILS'),
-(7, 4, 5, 'DEBIZE'),
-(8, 4, 5, 'DEBIZE'),
-(9, 4, 4, 'HINTZY'),
-(10, 4, 4, 'HINTZY'),
-(11, 4, 5, 'DEBIZE'),
-(12, 1, 1, 'BONFILS'),
-(13, 1, 9, 'BONFILS'),
-(14, 1, 9, 'BONFILS'),
-(15, 2, 2, 'DEDECKER'),
-(16, 4, 4, 'HINTZY'),
-(17, 2, 2, 'DEDECKER'),
-(18, 4, 4, 'HINTZY'),
-(19, 4, 5, 'DEBIZE'),
-(20, 1, 1, 'BONFILS');
+(5, 1, 1, 'BONFILS'),
+(6, 1, 9, 'BONFILS');
+
 
 
 CREATE TABLE  `compte_competence` (
