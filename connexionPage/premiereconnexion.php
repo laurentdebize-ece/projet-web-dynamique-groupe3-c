@@ -14,8 +14,8 @@
             <h3>Première connexion</h3>
             <form method="post" action="connexion.php">
 			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-				modifiez votre mot de passe : <input type="password" name="motdepasse" placeholder="Entrez votre mot de passe" required><br><br>
-				réécrivez votre mot de passe : <input type="password" name="Nmotdepasse" placeholder="Entrez à nouveau votre mot de passe" required><br><br>
+				Modifiez votre mot de passe : <br><input type="password" name="motdepasse" placeholder="Entrez votre mot de passe" required><br><br>
+				Réécrivez votre mot de passe : <br><input type="password" name="Nmotdepasse" placeholder="Entrez à nouveau votre mot de passe" required><br><br>
 				<input type="submit" value="Connexion">
 			</form>
             <div id="errorMessage"></div>
