@@ -14,43 +14,23 @@
     font-family: "openSansBold";
 }
 #imgLyonCityProfil{
-    padding-top: 4%;
+    margin-top: 50px;
     float: right;
     height: 400px;
     width: 50%;
-    /*margin-right: 3%;
-    margin-top: 2%;*/
-}
-#boutonChangementMDP{
-    background-color: #002B44;
-    color: #ECECEC;
-    font-family: "openSansLight";
-    border: none;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-#boutonDeconnexion{
-    background-color: #002B44;
-    color: #ECECEC;
-    font-family: "openSansLight";
-    border: none;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 
 /*Modifier compte*/
 #bodyModifierCompte{
 	padding-top: 50px;
+    height: 100%;
 }
-#formulaireMofifCompte{
-    margin-top: 20px;
+#formulaireModificationProfil{
+    padding-top: 7%;
+    padding-left: 9%;
 }
+
 #imgLyonCityProfil2{
     padding-top: 4%;
     float: right;

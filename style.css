@@ -125,12 +125,11 @@ footer{
 /*Formulaire ajout/modification*/
 .login-form2 {
 	width: 30%;
-    margin-left: 10%;
 	padding: 20px;
 	background: #ECECEC;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    margin-bottom: 7%;
+    /*margin-bottom: 7%;*/
 }
 .login-form2 h3 {
 	margin: 0 0 20px;
@@ -147,7 +146,7 @@ footer{
 	padding: 10px;
 	border: none;
 	border-radius: 5px;
-	background: #ECECEC;
+	background: #d7d5d5a4;
 }
 .login-form2 input[type="submit"] {
 	width: 100%;
@@ -174,7 +173,17 @@ footer{
 	border-radius: 5px;
     background-color: #ECECEC;
 }
-
+.tailleImgFormualaire{
+    float: right;
+    margin-left: 5%;
+    margin-top: 50px;
+    width: 50%;
+    height: 600px;
+}
+.formulaireModification{
+    padding-top: 12%;
+    padding-left: 9%;
+}
 
 
 

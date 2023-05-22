@@ -60,36 +60,33 @@ $reponseModifMatiere = $_POST['modifMatiere'];
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    <section id="bodyModifMatiere">
-        <?php if($reponseModifMatiere=="Ajouter"){ //Style a faire emma?>
-        <div id="formulaireMofifMatiere">	   
+    <section>
+        <img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
+        <div class="formulaireModification">	   
             <div class="login-form2">
+            <?php if($reponseModifMatiere=="Ajouter"){?>
 				<h3>Ajouter une nouvelle matière</h3>
                 <form method="POST" action="matieresPage.php" id="ajouterMatiere">
                     Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
                     Volume horaire : <input type="number" name="NewVolumeHoraire" placeholder="Entrez volume horaire"required min="0"><br><br>
                     <input type="submit" name="validerAjout" value="Enregistrer">
-                </form>
-            </div>
-        </div>        
-        <?php }
-
-        if($reponseModifMatiere=="Supprimer"){
-            supprimer($bdd, "matiere", "Nom_matiere LIKE '$Nom_Matiere_Choisie'" );
-        }
-
-        if($reponseModifMatiere=="Modifier"){?>
-        <div id="formulaireMofifMatiere"> 
-            <div class="login-form2">
-				<h3>Modifier une matière</h3>
-                <form method="POST" action="matieresPage.php" id="modifierMatiere">
+                    <?php }
+                    if($reponseModifMatiere=="Supprimer"){
+                        supprimer($bdd, "matiere", "Nom_matiere LIKE '$Nom_Matiere_Choisie'" );
+                    }
+                    if($reponseModifMatiere=="Modifier"){?>
+                    <h3>Modifier une matière</h3>
                     Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
                     Volume horaire : <input type="number" name="NewVolumeHoraire" placeholder="Entrez nouveau volume horaire"required min="0"><br><br>
-                    <input type="submit" name="validerModofication" value="Enregistrer">
+                    <input type="submit" name="validerModification" value="Enregistrer">
+                    <?php }?>
                 </form>
             </div>
         </div>
-        <?php }?>
     </section>
+    <footer>
+    	<div class="floatLeft">Projet Développement Web</div>
+    	<div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
+    </footer>
 </body>
 </html>

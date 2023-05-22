@@ -110,9 +110,9 @@ while ($donnees = $reponse->fetch()){
         </div>
     </section>
 
-	<section id="bodyModifierCompte">
-		<img src="../img/lyonCity.jpg"  alt=" lyonCity " id="imgLyonCityProfil">
-		<div id="formulaireMofifCompte">	
+	<section>
+		<img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
+		<div id="formulaireModificationProfil">	
 			<div class="login-form2">
 				<h3>Mon compte</h3>
 				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">

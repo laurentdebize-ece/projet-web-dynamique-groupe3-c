@@ -6,7 +6,30 @@
     <title>OMNES MySkills - Création</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleComptesPage.css" rel="stylesheet" type="text/css">
-</head>
+    </head>
+<script>
+            function showPromos(idEcole) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("promoSelect").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "getPromotions.php?idEcole=" + idEcole, true);
+        xhttp.send();
+    }
+    function showClasses(idPromo) {
+        console.log(idPromo);
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("classeSelect").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "getClasses.php?idPromo=" + idPromo, true);
+        xhttp.send();
+    }
+    </script>
 
 <body>
 <?php
@@ -30,7 +53,6 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
 	exit();
 }
-require_once('getPromos.php');
 $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
@@ -59,7 +81,9 @@ $reponseCreation = $_POST['creerEcolePromoClasse'];?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    <section id="bodyCreerEcolePromoClasse">
+    <section>
+    <img src="../img/paris.jpg"  alt=" parisCity " class="tailleImgFormualaire">
+    <div class="formulaireModification">
         <div class="login-form2">
             <form method="POST" action="comptesPage.php" id="ajouterCompte">
                 <?php if($reponseCreation == "Créer une école"){ ?>
@@ -83,20 +107,21 @@ $reponseCreation = $_POST['creerEcolePromoClasse'];?>
                 <h3>Ajouter une classe</h3>
                 Numéro du groupe : <input type="number" name="NewNumGroupe" placeholder="Entrez numéro du groupe"required min=0><br><br>
                 Nombre d'étudiants : <input type="number" name="NewNombreEtudiants" placeholder="Entrez nombre d'étudiants"required min=0><br><br>
-                Ecole : <select name="NewEcole">
+                Ecole : <select name="NewEcole" id="selectEcole" onchange="showPromos(this.value)">
+                    <option>Choisir</option>
                     <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                     while ($donneesEcole = $reponseEcole->fetch()){ ?>
-                    <option value="<?php $donneesEcole['ID_Ecole'] ?>"><?php echo $donneesEcole['Nom'] ?></option>
+                    <option value="<?php echo $donneesEcole['ID_Ecole'] ?>"><?php echo $donneesEcole['Nom'] ?></option>
                     <?php } ?>  
                 </select><br><br>
-                Promotion : <select name="NewPromotion">
-                    <option value="<?php $donneesPromo['ID_Promotion'] ?>"><?php echo $donneesPromo['Annee_fin'] ?></option>
-                    <?php } ?>  
+                Promotion : <select name="NewPromotion" id="promoSelect">
+                    <option>Choisir</option>
                 </select><br><br>
                 <input type="submit" name="validerAjoutClasse" value="Enregistrer">
                 <?php } ?>
                 
             </form>
+        </div>
     </div>
   </section>
   <footer>
