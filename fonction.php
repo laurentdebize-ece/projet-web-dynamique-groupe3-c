@@ -205,6 +205,7 @@ function update($bdd,$table,$colonne,$valeur) {
     $exec = $bdd->prepare($sql);
     $exec->execute();
     $reponses = $exec->fetchAll(PDO::FETCH_ASSOC);
+    
 
     return $reponses;
 }
