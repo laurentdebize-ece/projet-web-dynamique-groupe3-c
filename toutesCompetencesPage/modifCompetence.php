@@ -21,6 +21,8 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
+$IdCompetenceChoisie=$_POST['selectCompetence'];
+$_SESSION['ID_Competence']=$IdCompetenceChoisie;
 require_once('../fonction.php');
 
 $reponseModifCompetence = $_POST['modifCompetence'];
@@ -71,12 +73,13 @@ $reponseModifCompetence = $_POST['modifCompetence'];
                     Date de création : <input type="date" name="NewDate"><br><br>
                     <input type="submit" name="validerAjout" value="Enregistrer">
             <?php }
-            if($reponseModifCompetence=="Supprimer"){?>
-                    <h3>Supprimer une compétence</h3>
-                    Nom de la compétence : <input type="text" name="NewNom" placeholder="Entrez compétence"required><br><br>
-                    Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
-                    <input type="submit" name="validerSuppression" value="Enregistrer">  
+            if($reponseModifCompetence=="Supprimer"){
+                if(isset($_POST['selectCompetence'])){?>
+                    <h3>Etes vous sur de vouloir supprimer la compétence ?</h3>
+                    <input type="submit" name="validerSuppression" value="Valider"> 
+                    <input type="submit" name="validerSuppression" value="Annuler"> 
                 <?php }
+            }
                 if($reponseModifCompetence=="Modifier"){?>
                     <h3>Modifier une compétence</h3>
                     Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
