@@ -24,16 +24,6 @@ $_SESSION['Type_compte'] = $Type_compte;
 require_once('../fonction.php');
 $Nom_Matiere_Choisie = $_POST['Matiere'];
 $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
-?>
-<div class="login-form3">
-    <?php 
-    if($Type_compte=="Etudiant"){?>
-                <form method="POST" action="../autoevaluation.php" id="AutoEval">
-                <?php echo '<span style="font-family: openSansLight;">faire une auto-evaluation</span>' ?>
-                <input type="submit" name ="faireEval" value="s'auto evaluer" class="boutonAutoEval">
-                </form>
-                <?php }
-
     if($Type_compte=="Administrateur"){
         $reponseCompetence = $bdd->query("SELECT * FROM matiere
             INNER JOIN matiere_competence ON matiere.ID_matiere = matiere_competence.ID_matiere
@@ -49,9 +39,7 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
         WHERE compte.ID_Compte = '$ID'
         AND matiere.Nom_Matiere = '$Nom_Matiere_Choisie'");
-    }
-    ?>
-</div>
+    }?>
 
 <!DOCTYPE html>
 <html>
@@ -87,7 +75,6 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         </div>
     </section>
     <section id="competencesParMatiere">
-    <div class="login-form3">
         <table>
         <tr id="textLigne1">
             <th>Compétences</th>
@@ -106,12 +93,18 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         </tr>
     <?php } ?>
     </table>
+    <div class="login-form3">
     <?php if($Type_compte=="Administrateur"){?>
                 <form method="POST" action="modifMatiere.php"  id="formModifMatiere">
                     <input type="submit" name ="modifMatiere" value="Supprimer">
                     <input type="submit" name ="modifMatiere" value="Modifier">
                 </form>
-            <?php }?>
+        <?php }
+        if($Type_compte=="Etudiant"){?>
+                <form method="POST" action="../autoEvaluation/autoevaluation.php" id="AutoEval">
+                <input type="submit" name ="faireEval" value="Auto-évaluation">
+                </form>
+        <?php } ?>
     </div>        
         </section>
     

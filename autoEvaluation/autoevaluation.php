@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
-
-
 <?php
 try{
     $mdp="root";
@@ -16,18 +11,54 @@ catch (Exception $e)
 {
     die('Erreur : ' . $e->getMessage());
 }
-?>
 
-
-<?php
 session_start();
-if (!isset($_SESSION['ID_compte'])&& !isset($_SESSION['Nom_Matiere_Choisie'])) {
+if (!isset($_SESSION['ID_compte']) && !isset($_SESSION['Nom_Matiere_Choisie']) && !isset($_SESSION['Type_compte'])) {
     header('Location: matiereChoisie.php');
     exit();
 }
 $ID = $_SESSION['ID_Compte'];
 $NomMatiere=$_SESSION['Nom_Matiere_Choisie'];
+$Type_compte=$_SESSION['Type_compte'];
 ?>
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>OMNES MySkills - Auto-évaluation</title>
+    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="styleAutoEvaluation.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<section id="header">
+        <div class="flex-contain-menu">
+            <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
+            <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
+            <?php }
+            if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
+            <?php }
+            if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
+                <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
+            <?php }
+            if($Type_compte=="Professeur"){ ?>
+                <div class="flexboxText-menu"><a href="../evaluationsPage/evaluationsPage.php" class="lienWhite">Evaluations</a></div>
+            <?php }
+            if($Type_compte=="Administrateur"){ ?>
+                <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
+            <?php } ?>
+            <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
+        </div>
+    </section>
+    <section id="competencesParMatiere">
+
+
 
 <?php
 $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_competence ON Compte.ID_compte = compte_competence.ID_compte INNER JOIN competence ON compte_competence.ID_competence = competence.ID_competence INNER JOIN matiere_competence ON competence.ID_competence = matiere_competence.ID_Competence INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere');
