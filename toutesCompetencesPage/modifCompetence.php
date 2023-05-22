@@ -61,7 +61,7 @@ $reponseModifCompetence = $_POST['modifCompetence'];
     </section>
     <section>
         <img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
-		<div id="formulaireModification">	
+		<div class="formulaireModification">	
         <div class="login-form2">
         <form method="POST" action="toutesCompetencesPage.php">
             <?php if($reponseModifCompetence=="Ajouter"){?>	   
