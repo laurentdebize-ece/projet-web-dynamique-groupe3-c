@@ -13,20 +13,16 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
-// Récupérer l'ID de l'école depuis la requête GET
 $idEcole = $_GET['idEcole'];
 
-// Effectuer la requête pour récupérer les promotions associées à l'école
 $requete = $bdd->prepare('SELECT * FROM promotion WHERE ID_Ecole = :idEcole');
 $requete->bindParam(':idEcole', $idEcole);
 $requete->execute();
 
-// Construire les options du menu déroulant des promotions
 $options = '';
 while ($donnees = $requete->fetch()) {
     $options .= '<option value="'.$donnees['ID_Promotion'].'">'.$donnees['Annee_fin'].'</option>';
 }
 
-// Retourner les options au format HTML
 echo $options;
 ?>
