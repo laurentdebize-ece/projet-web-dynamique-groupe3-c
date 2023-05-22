@@ -37,8 +37,22 @@ $tablo_compte = [
 ];
 insertion($bdd, "Compte", $tablo_compte);
 */
+/*
+$tablo_classe = [
+    "ID_Classe" => null,
+    "Num_groupe" => "3",
+    "Nombre_etudiant" => "30",
+    "ID_Promotion" => 1
+];
+insertion($bdd, "Classe", $tablo_classe);
 
-
+$tablo_promotion = [
+    "ID_Promotion" => null,
+    "Annee_debut" => "2008",
+    "Annee_fin" => "2013",
+    "ID_Ecole" => 2
+];
+insertion($bdd, "Promotion", $tablo_promotion);
 //////////////////////////////////////////INSERTION COMPTE_COMPETENCE////////////////////////////////////////////
 /*
 /*

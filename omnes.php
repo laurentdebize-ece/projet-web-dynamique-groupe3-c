@@ -5,7 +5,7 @@ try {
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
         $mdp="";//pas de mdp sous wamp
     }
-	$bdd = new PDO('mysql:host=localhost;dbname=omnes_my_skills;
+	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills;
 charset=utf8', 'root', $mdp,
 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     
@@ -14,19 +14,19 @@ array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 
 try {
-    $bdd->exec('USE Omnes_my_skills;');
+    $bdd->exec('USE omnesmyskills;');
 } catch (PDOException $e) {
     $sql = file_get_contents('./BDD/Omnes.sql');
     $bdd->exec($sql);
 }
 
 
-/*
-$vachercher = jointure($bdd, "compte", "Ecole", "ID_Ecole", "ID_Ecole", "ID_Compte = 4");
+
+$vachercher = jointure($bdd, "compte", "Ecole", "ID_Ecole", "ID_Ecole", "ID_Compte = 1");
 
 foreach ($vachercher as $reponses => $value) {
     echo $value["ID_Compte"] ."<br>";
-    echo $value["Nom"] ."<br>";
+    echo $value["Nom_Compte"] ."<br>";
     echo $value["Prenom"] ."<br>";
     echo $value["E_mail"] ."<br>";
     echo $value["MDP"] ."<br>";
@@ -35,7 +35,7 @@ foreach ($vachercher as $reponses => $value) {
     echo $value["ID_Ecole"] ."<br>";
     
 }
-*/
+
 
 /*
 $doublejointure = doubleJointure($bdd, "compte", "compte_competence", "competence", "ID_Compte", "ID_Compte","ID_Competence", "ID_Competence", "compte.ID_Compte = 1"); //on peut mettre la condi que sur des attri de la première table 
@@ -105,8 +105,8 @@ foreach ($resultat as $reponses => $value) {
 }
 */
 
-
-$resultat = selection_nouvelles_competences($bdd,"2");
+/*
+$resultat = selection_nouvelles_competences($bdd,"2","physique");
 
 foreach ($resultat as $reponses => $value) {
 
@@ -114,4 +114,4 @@ foreach ($resultat as $reponses => $value) {
     echo $value["ID_Competence"] ."<br>";
     
 }
-?>
+?>*/

@@ -21,25 +21,35 @@
         document.getElementById("etudiantChamps").style.display = "none";
         document.getElementById("professeurChamps").style.display = "none";
     }
-    function showPromos(idEcole) {
+    function showPromosEcole(idEcole) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("promoSelect").innerHTML = this.responseText;
             }
         };
-        xhttp.open("GET", "getPromotions.php?idEcole=" + idEcole, true);
+        xhttp.open("GET", "getPromotionsEcole.php?idEcole=" + idEcole, true);
         xhttp.send();
     }
-    function showClasses(idPromo) {
-        console.log(idPromo);
+    function showClassesPromo(idPromo) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("classeSelect").innerHTML = this.responseText;
             }
         };
-        xhttp.open("GET", "getClasses.php?idPromo=" + idPromo, true);
+        xhttp.open("GET", "getClassesPromo.php?idPromo=" + idPromo, true);
+        xhttp.send();
+    }
+    function showClassesEcole(idEcole) {
+        console.log(idEcole);
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("classeSelectByEcole").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "getClassesEcole.php?idEcole=" + idEcole, true);
         xhttp.send();
     }
     </script>
@@ -68,8 +78,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
   $Type_compte = $_SESSION['Type_compte'];
   $_SESSION['ID_Compte'] = $ID;
   $_SESSION['Type_compte'] = $Type_compte;
-
-$reponseModifCompte = $_POST['modifCompte'];?>  
+  $reponseModifCompte = $_POST['modifCompte'];?>  
      <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
@@ -80,7 +89,7 @@ $reponseModifCompte = $_POST['modifCompte'];?>
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <?php }
             if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
+                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.php" class="lienWhite">Compétences transverses</a></div>
                 <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
             <?php }
             if($Type_compte=="Professeur"){ ?>
@@ -94,7 +103,7 @@ $reponseModifCompte = $_POST['modifCompte'];?>
     </section>
 <section>
     <img src="../img/paris.jpg"  alt=" parisCity " class="tailleImgFormualaire">
-    <div id="formulaireModification">
+    <div id="formulaireModificationCompte">
         <div class="login-form2">
             <form method="POST" action="comptesPage.php" id="ajouterCompte">
             <?php if($reponseModifCompte=="Ajouter"){?>
@@ -108,14 +117,14 @@ $reponseModifCompte = $_POST['modifCompte'];?>
                     <input type="radio" name="NewTypeCompte" value="Administrateur" onclick="cacherExtraChamps()">Administrateur
                     <br><br>
                 <div id="etudiantChamps" style="display: none;">
-                    Ecole : <select name="NewEcole" id="ecoleSelect" onchange="showPromos(this.value)" >
+                    Ecole : <select name="NewEcole" id="ecoleSelect" onchange="showPromosEcole(this.value)" >
                         <option>Choisir</option>
                         <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                         while ($donneesEcole = $reponseEcole->fetch()){ ?>
                             <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom'] ?></option>
                         <?php } ?> 
                     </select><br><br>
-                    Promo : <select name="NewPromo" id="promoSelect" onchange="showClasses(this.value)">
+                    Promo : <select name="NewPromo" id="promoSelect" onchange="showClassesPromo(this.value)">
                         <option>Choisir</option>
                     </select><br><br>
                     Classe : <select name="NewClasse" id="classeSelect">
@@ -123,13 +132,23 @@ $reponseModifCompte = $_POST['modifCompte'];?>
                     </select><br><br>
                 </div>
                 <div id="professeurChamps" style="display: none;">
-                    Matière : <br>
-                    <?php 
-                        $reponse2 = $bdd->query('SELECT * FROM matiere');
-                        while ($donnees2 = $reponse2->fetch()){
-                    ?>
-                    <input type="radio" name="NewMatiere" value =" <?php echo $donnees2['Nom_matiere'] ?>" >
-                    <?php echo $donnees2['Nom_matiere'] . "<br><br>";  } ?>
+                    Ecole : <select name="NewEcole" id="ecoleSelect" onchange="showClassesEcole(this.value)" >
+                        <option>Choisir</option>
+                        <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
+                        while ($donneesEcole = $reponseEcole->fetch()){ ?>
+                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom'] ?></option>
+                        <?php } ?> 
+                    </select><br><br>
+                    Classe : <select name="NewClasse" id="classeSelectByEcole">
+                        <option>Choisir</option>
+                    </select><br><br>
+                    Matière : <select name="NewMatiere" id="matiereSelect">
+                        <option>Choisir</option>
+                        <?php $reponseMatiere = $bdd->query('SELECT * FROM matiere');
+                        while ($donneesMatiere = $reponseMatiere->fetch()){ ?>
+                            <option value="<?php echo $donneesMatiere['ID_Matiere']?>"><?php echo $donneesMatiere['Nom_matiere'] ?></option>
+                        <?php } ?> 
+                    </select><br><br>
                 </div>
                 <input type="submit" name="validerAjout" value="Enregistrer">
                 <?php }

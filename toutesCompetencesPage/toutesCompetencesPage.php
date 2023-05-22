@@ -21,13 +21,15 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
+$recup_ID_Competence=$_SESSION['ID_Competence'];
 require_once('../fonction.php');
 
 if (isset($_POST['selectCompetence'])) {
     $competenceId = $_POST['selectCompetence'];
     echo $competenceId;
 }
-/*if(isset($_POST['validerAjout'])){
+
+if(isset($_POST['validerAjout'])){
     $tab_matiere = [
         "ID_Competence" => NULL,
         "Nom_competence" => $_POST['NewNom'],
@@ -36,19 +38,32 @@ if (isset($_POST['selectCompetence'])) {
     ];
     insertion($bdd,"competence", $tab_matiere);
 }
-
-if(isset($_POST['validerSupression'])){
-    //$tab_matiere = array('Nom_matiere' => $_POST['NewNom']);
-    //$sql=("DELETE FROM matiere WHERE `matiere`.`Nom_matiere`='$_POST['NewNom']'");
-    //$stmt = $PDO->prepare($sql);
-    //$stmt->execute();
-    //supprimer($bdd, "competence", "Nom_matiere=$nom");//Ca supprime passsssss
-} 
-
+/*
 if(isset($_POST['validerModification'])){
-    //modifier fonction
+    if($_POST['NewNom']!=''){
+        $NewNom=$_POST['NewNom'];
+        $modificationMatiere = "UPDATE matiere SET Nom_matiere = '$NewNom' WHERE Nom_matiere='$NomMatiere'";
+		$bdd->query($modificationMatiere);
+    }
+    if($_POST['NewVolumeHoraire']!=''){
+        $NewVolumeHoraire=$_POST['NewVolumeHoraire'];
+        $modificationMatiere = "UPDATE matiere SET Volume_horaire = '$NewVolumeHoraire' WHERE Nom_matiere='$NomMatiere'";
+		$bdd->query($modificationMatiere); 
+    }
+}*/
+if(isset($_POST['validerSuppression'])){
+    if($_POST['validerSuppression']=="Valider"){
+        $sql1="DELETE FROM compte_competence WHERE ID_Competence=$recup_ID_Competence";
+        $sql2="DELETE FROM matiere_competence WHERE matiere_competence.ID_Competence=$recup_ID_Competence";
+        $sql3="DELETE FROM competence WHERE ID_Competence=$recup_ID_Competence";
+        $stmt1=$bdd->prepare($sql1);
+        $stmt2=$bdd->prepare($sql2);
+        $stmt3=$bdd->prepare($sql3);
+        $stmt1->execute();
+        $stmt2->execute();
+        $stmt3->execute();
+    }
 }
-*/
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +87,7 @@ if(isset($_POST['validerModification'])){
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <?php }
             if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
+                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.php" class="lienWhite">Compétences transverses</a></div>
                 <div class="flexboxText-menu"><a href="toutesCompetencesPage.php" class="lienClique">Toutes les compétences</a></div>
                 <?php }
             if($Type_compte=="Professeur"){ ?>
@@ -141,20 +156,14 @@ if(isset($_POST['validerModification'])){
         <th>Date de création</th>
         <th>Sélection</th>
     </tr>
-    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formCompetences">
-<?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
+    <form method="POST" action="modifCompetence.php">
+        <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
     <tr>
         <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Theme']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Date_Creation']?></td>
         <?php if($Type_compte=="Administrateur" || $Type_compte=="Professeur") { ?>
-            <td id="textColonneSelection">
-            <?php if(!isset($competenceId) || $donneesCompetence['ID_Competence']!=$competenceId){?>
-                <input type="radio" name="selectCompetence" value="<?php echo $donneesCompetence['ID_Competence']?>" onchange="document.getElementById('formCompetences').submit()">
-            <?php } else {?>
-                <img src="../img/check.png" alt="check" class="imageCheck">
-            <?php } ?>
-            </td>
+            <td id="textColonneSelection"> <input type="radio" name="selectCompetence" value="<?php echo $donneesCompetence['ID_Competence']?>"></td>
         <?php }
         
         /*if($Type_compte=="Etudiant"){ 
@@ -166,12 +175,9 @@ if(isset($_POST['validerModification'])){
         
     </tr>
     <?php } ?>
-    </form>
-
 </table>
 <?php if($Type_compte=="Administrateur"){?>
     <div class="login-form3">
-        <form method="POST" action="modifCompetence.php">
             <input type="submit" name ="modifCompetence" value="Ajouter" class="boutonModif">
             <input type="submit" name ="modifCompetence" value="Supprimer" class="boutonModif">
             <input type="submit" name ="modifCompetence" value="Modifier" class="boutonModif">

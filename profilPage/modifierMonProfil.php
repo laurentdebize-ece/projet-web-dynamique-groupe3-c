@@ -97,7 +97,7 @@ while ($donnees = $reponse->fetch()){
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <?php }
             if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
+                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.php" class="lienWhite">Compétences transverses</a></div>
                 <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
             <?php }
             if($Type_compte=="Professeur"){ ?>
@@ -130,7 +130,7 @@ while ($donnees = $reponse->fetch()){
 						<label for="motdepasse1">Nouveau mot de passe :</label>
 						<input type="password" name="mdp1" placeholder="Nouveau mot de passe" required><br><br>
 						<label for="motdepasse2">Réécrivez votre nouveau mot de passe :</label>
-						<input type="password" name="mdp2" placeholder="Confirmez mot de passe" required><br>
+						<input type="password" name="mdp2" placeholder="Confirmez mot de passe" required><br><br>
 						<?php if($erreur!=0){ ?>
 							<p style='color:red'>Veuillez rentrer des mots de passe identiques.<br></p>
 						<?php }

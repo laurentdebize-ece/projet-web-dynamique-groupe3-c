@@ -21,6 +21,10 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
+if(isset($_POST['selectCompetence'])){
+    $IdCompetenceChoisie=$_POST['selectCompetence'];
+    $_SESSION['ID_Competence']=$IdCompetenceChoisie;
+}
 require_once('../fonction.php');
 
 $reponseModifCompetence = $_POST['modifCompetence'];
@@ -47,7 +51,7 @@ $reponseModifCompetence = $_POST['modifCompetence'];
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <?php } ?>
             <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.html" class="lienWhite">Compétences transverses</a></div>
+                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.php" class="lienWhite">Compétences transverses</a></div>
                 <div class="flexboxText-menu"><a href="toutesCompetencesPage.php" class="lienClique">Toutes les compétences</a></div>
                 <?php } ?>
             <?php if($Type_compte=="Professeur"){ ?>
@@ -64,26 +68,35 @@ $reponseModifCompetence = $_POST['modifCompetence'];
 		<div class="formulaireModification">	
         <div class="login-form2">
         <form method="POST" action="toutesCompetencesPage.php">
-            <?php if($reponseModifCompetence=="Ajouter"){?>	   
+            <?php if($reponseModifCompetence=="Ajouter"){ ?>
 				<h3>Ajouter une nouvelle compétence</h3>
                     Nom de la compétence : <input type="text" name="NewNom" placeholder="Entrez compétence"required><br><br>
                     Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
                     Date de création : <input type="date" name="NewDate"><br><br>
                     <input type="submit" name="validerAjout" value="Enregistrer">
             <?php }
-            if($reponseModifCompetence=="Supprimer"){?>
-                    <h3>Supprimer une compétence</h3>
-                    Nom de la compétence : <input type="text" name="NewNom" placeholder="Entrez compétence"required><br><br>
-                    Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
-                    <input type="submit" name="validerSuppression" value="Enregistrer">  
+            if($reponseModifCompetence=="Supprimer"){
+                if(isset($_POST['selectCompetence'])){?>
+                    <h3>Etes vous sur de vouloir supprimer la compétence ?</h3>
+                    <input type="submit" name="validerSuppression" value="Valider"> 
+                    <input type="submit" name="validerSuppression" value="Annuler"> 
+                <?php } else {?>
+                    <h3>Veuillez sélectionner une compétence à supprimer !</h3>
+                    <input type="submit" name="retourMeni" value="Retour">
                 <?php }
-                if($reponseModifCompetence=="Modifier"){?>
+            }
+                if($reponseModifCompetence=="Modifier"){
+                    if(isset($_POST['selectCompetence'])){?>
                     <h3>Modifier une compétence</h3>
                     Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
                     Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
                     Date de création : <input type="date" name="NewDate"><br><br>
                    <input type="submit" name="validerModification" value="Enregistrer">
-                <?php }?>
+                   <?php } else {?>
+                    <h3>Veuillez sélectionner une compétence à supprimer !</h3>
+                    <input type="submit" name="retourMeni" value="Retour">
+                <?php }
+                 }?>
                 </form>
             </div>
         </div>        
