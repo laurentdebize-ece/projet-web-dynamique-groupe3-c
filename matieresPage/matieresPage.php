@@ -21,6 +21,7 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
+$NomMatiere=$_SESSION['Nom_Matiere_Choisie'];
 require_once('../fonction.php');
 
 if(isset($_POST['validerAjout'])){
@@ -31,28 +32,40 @@ if(isset($_POST['validerAjout'])){
     ];
     insertion($bdd,"matiere", $tab_matiere);
 }
-
 if(isset($_POST['validerModification'])){
-    //modifier fonction
+    if($_POST['NewNom']!=''){
+        $NewNom=$_POST['NewNom'];
+        $modificationMatiere = "UPDATE matiere SET Nom_matiere = '$NewNom' WHERE Nom_matiere='$NomMatiere'";
+		$bdd->query($modificationMatiere);
+    }
+    if($_POST['NewVolumeHoraire']!=''){
+        $NewVolumeHoraire=$_POST['NewVolumeHoraire'];
+        $modificationMatiere = "UPDATE matiere SET Volume_horaire = '$NewVolumeHoraire' WHERE Nom_matiere='$NomMatiere'";
+		$bdd->query($modificationMatiere); 
+    }
 }
-
+if($_POST['validerSuppression']=="Valider"){
+    $reponse=$bdd->query("SELECT ID_Matiere FROM matiere WHERE Nom_matiere='$NomMatiere'");
+    while ($donnees = $reponse->fetch()){ 
+        $recupIdMatiere=$donnees['ID_Matiere'];
+    }
+    $sql1="DELETE FROM compte_matiere WHERE compte_matiere.ID_Matiere=$recupIdMatiere";
+    $sql2="DELETE FROM matiere_competence WHERE matiere_competence.ID_Matiere=$recupIdMatiere";
+    $sql3="DELETE FROM matiere WHERE ID_Matiere=$recupIdMatiere";
+    $stmt1=$bdd->prepare($sql1);
+    $stmt2=$bdd->prepare($sql2);
+    $stmt3=$bdd->prepare($sql3);
+    $stmt1->execute();
+    $stmt2->execute();
+    $stmt3->execute();
+}
 if($Type_compte=="Administrateur"){
-    $reponseMatiere = $bdd->query("SELECT Nom_matiere FROM matiere" /*"SELECT * FROM matiere
-    INNER JOIN matiere_competence ON matiere.ID_matiere = matiere_competence.ID_matiere
-INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_competence"*/ );
+    $reponseMatiere = $bdd->query("SELECT Nom_matiere FROM matiere");
 } else {
     $reponseMatiere = $bdd->query("SELECT Nom_matiere FROM matiere 
         INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
         INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
-        WHERE compte.ID_Compte = '$ID'"
-        /*"SELECT * FROM competence 
-        INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-        INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
-        INNER JOIN compte_matiere ON matiere.ID_Matiere = compte_matiere.ID_Matiere
-        INNER JOIN compte ON compte_matiere.ID_Compte = compte.ID_Compte
-        INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-        WHERE compte_competence.ID_Compte = '$ID'
-        GROUP BY Nom_matiere"*/);
+        WHERE compte.ID_Compte = '$ID'");
 }
 ?>
 
@@ -91,13 +104,11 @@ INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_compet
         </div>
     </section>
     <section id="bodyMesMatieres">
-        <!--<div class="flex-container-mesMatieres">-->
         <form method="POST" action="matiereChoisie.php">
             <?php while($donneesMatiere = $reponseMatiere->fetch()) {  ?>
                 <input type="submit" name ="Matiere" value= <?php echo $donneesMatiere['Nom_matiere'];?> class="boutonMatiere">
                 <?php } ?>
         </form>
-        <!--</div>-->
         </section>
         <?php if($Type_compte=="Administrateur"){?>
             <div class="login-form3">
