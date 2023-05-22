@@ -23,6 +23,10 @@ $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 require_once('../fonction.php');
 
+if (isset($_POST['selectCompetence'])) {
+    $competenceId = $_POST['selectCompetence'];
+    echo $competenceId;
+}
 /*if(isset($_POST['validerAjout'])){
     $tab_matiere = [
         "ID_Competence" => NULL,
@@ -47,7 +51,6 @@ if(isset($_POST['validerModification'])){
 */
 ?>
 
-
 <!DOCTYPE html>
 <html>
 
@@ -56,7 +59,6 @@ if(isset($_POST['validerModification'])){
     <title>OMNES MySkills - Toutes les compétences</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleToutesCompetences.css" rel="stylesheet" type="text/css">
-
 </head>
 
 <body>
@@ -137,13 +139,25 @@ if(isset($_POST['validerModification'])){
         <th>Compétence</th>
         <th>Thème</th>
         <th>Date de création</th>
+        <th>Sélection</th>
     </tr>
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formCompetences">
 <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
     <tr>
         <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Theme']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Date_Creation']?></td>
-        <?php /*if($Type_compte=="Etudiant"){ 
+        <?php if($Type_compte=="Administrateur" || $Type_compte=="Professeur") { ?>
+            <td id="textColonneSelection">
+            <?php if(!isset($competenceId) || $donneesCompetence['ID_Competence']!=$competenceId){?>
+                <input type="radio" name="selectCompetence" value="<?php echo $donneesCompetence['ID_Competence']?>" onchange="document.getElementById('formCompetences').submit()">
+            <?php } else {?>
+                <img src="../img/check.png" alt="check" class="imageCheck">
+            <?php } ?>
+            </td>
+        <?php }
+        
+        /*if($Type_compte=="Etudiant"){ 
             if(){ ?>
                 <td><button onclick="ajouterMesCompetence()">Ajouter</button></td>
             <?php }else{ ?>
@@ -151,11 +165,13 @@ if(isset($_POST['validerModification'])){
         } */?>
         
     </tr>
-<?php } ?>
+    <?php } ?>
+    </form>
+
 </table>
 <?php if($Type_compte=="Administrateur"){?>
     <div class="login-form3">
-        <form method="POST" action="modifCompetence.php" id="formModifCompetence">
+        <form method="POST" action="modifCompetence.php">
             <input type="submit" name ="modifCompetence" value="Ajouter" class="boutonModif">
             <input type="submit" name ="modifCompetence" value="Supprimer" class="boutonModif">
             <input type="submit" name ="modifCompetence" value="Modifier" class="boutonModif">
