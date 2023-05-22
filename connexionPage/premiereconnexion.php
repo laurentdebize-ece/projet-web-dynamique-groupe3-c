@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
-1ere connexion
-modifier votre mot de passe: <input type="password" name="motdepasse"><br>
-réécrivez votre mot de passe: <input type="password" name="Nmotdepasse"><br>
-<input type="submit">
-</form>
+<head>
+    <meta charset="utf-8">
+    <title>OMNES MySkills - Connexion</title>
+    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="styleConnexionPage.css" rel="stylesheet" type="text/css">
+</head>
+<body class="connexionPage">
+<section>
+        <img src="../img/omnesSkills.png"  alt=" omnesSkills " id="tailleImgOmnesSkillsConnexionPage">
+        <section>
+        <div class="login-form">
+            <h3>Première connexion</h3>
+			<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+				Modifiez votre mot de passe : <br><input type="password" name="motdepasse" placeholder="Entrez votre mot de passe" required><br><br>
+				Réécrivez votre mot de passe : <br><input type="password" name="Nmotdepasse" placeholder="Entrez à nouveau votre mot de passe" required><br><br>
+				<input type="submit" value="Connexion">
+			</form>
+            <div id="errorMessage"></div>
+        </div>
+    </section>  
+ <footer>
+    <div class="floatLeft">Projet Développement Web</div>
+    <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
+    </footer>
 
 <?php
 

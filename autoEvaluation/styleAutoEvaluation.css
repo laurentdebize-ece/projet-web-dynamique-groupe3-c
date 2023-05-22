@@ -1,0 +1,21 @@
+.login-form4 input[type="submit"] {
+    margin-left: 43%;
+    margin-top: 45px;
+    width: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-bottom: 10px;
+	border: none;
+	border-radius: 5px;
+	background: #002B44;
+	color: #ECECEC;
+	font-weight: bold;
+	cursor: pointer;
+    font-family: "openSansLight";
+    font-weight: lighter;
+}
+.login-form4 input[type="submit"]:hover {
+	background: #002B70;
+}
