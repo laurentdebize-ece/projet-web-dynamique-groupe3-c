@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>OMNES MySkills - Accueil</title>
-    <link href="../style.css" rel="stylesheet" type="text/css">
-    <link href="styleHomePage.css" rel="stylesheet" type="text/css">
-
-</head>
-
-<body>
 <?php
+try{
+    $mdp="root";
+	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
+        $mdp="";//pas de mdp sous wamp
+    }
+	$bdd = new PDO('mysql:host=localhost;dbname=omnesmyskills; 
+    charset=utf8', 'root', $mdp, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+}
+catch (Exception $e)
+{
+    die('Erreur : ' . $e->getMessage());
+}
+
 session_start();
 
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
@@ -21,7 +22,21 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
   $Type_compte = $_SESSION['Type_compte'];
   $_SESSION['ID_Compte'] = $ID;
   $_SESSION['Type_compte'] = $Type_compte;
+  require_once('../fonction.php');
 ?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OMNES MySkills - Accueil</title>
+    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="styleHomePage.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
      <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
@@ -56,12 +71,11 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     
     </section>
     <section>
-        <h4> Les compétences les plus populaires </h4>
+        <h4> Les compétences dernières compétences ajoutées </h4>
         <div class="flex-container-mesMatieresHP">
-            <div class="flexboxMatieresHP"><a href="mathematiquesPage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
-            <div class="flexboxMatieresHP"><a href="physiquePage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
-            <div class="flexboxMatieresHP"><a href="electroniquePage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
-            <div class="flexboxMatieresHP"><a href="informatiquePage.php" class="lienWhite"><br><br><br>C'est censé être des compétences</a></div>
+        <?php foreach (selection_4_last_competences($bdd) as $reponses => $value) { ?>
+            <div class="flexboxMatieresHP"><br><br><br><?php echo $value["Nom_competence"] ?></a></div>
+        <?php }?>
         </div>
     </section>  
     <footer>
