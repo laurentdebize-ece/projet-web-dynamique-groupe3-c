@@ -55,7 +55,7 @@ $tablo_promotion = [
 insertion($bdd, "Promotion", $tablo_promotion);
 //////////////////////////////////////////INSERTION COMPTE_COMPETENCE////////////////////////////////////////////
 /*
-/*
+*/
 $tablo_compte_competence = [
     "ID_compte_competence" => null,
     "ID_Compte" => 2, 
@@ -68,7 +68,8 @@ $tablo_compte_competence = [
 
 ];
 insertion($bdd, "compte_competence", $tablo_compte_competence);
-*/
+
+
 
 
 //////////////////////////////////////////INSERTION COMPTE_MATIERE////////////////////////////////////////////
@@ -84,7 +85,7 @@ insertion($bdd, "compte_matiere", $tablo_compte_matiere);
 
 
 //////////////////////////////////////////INSERTION MATIERE_COMPETENCE////////////////////////////////////////////
-/*
+
 $tablo_matiere_competence = [
     "ID_matiere_competence" => null,
     "ID_Matiere" => 3, 
@@ -92,11 +93,11 @@ $tablo_matiere_competence = [
     "Professeur" => "HINTZY"
 ];
 insertion($bdd, "matiere_competence", $tablo_matiere_competence);
-*/
+
 
 
 ///////////////////////////////////INSERTION COMPETENCE ET EN MM TEMPS DANS METIERE_COMPETENCE//////////////////////////////////////////
-
+/*
 $tablo_competence = [
     "ID_Competence" => null,
     "Nom_Competence" => $recupNom = "Maitrise_Python5",
@@ -119,7 +120,7 @@ $tablo_matiere_competence = [
     "Professeur" => "HINTZYLE10E"
 ];
 insertion($bdd, "matiere_competence", $tablo_matiere_competence);
-
+*/
 
 //////////////////////////////////////////INSERTION MATIERE///////////////////////////////////////////
 /*
@@ -144,4 +145,33 @@ insertion($bdd, "Ecole", $tablo_ecole);
 supprimer_compte($bdd,"compte","compte_competence","compte_matiere","4");
 */
 
+
+///////////////////////////////////////////////INSERTION COMPTE DANS CLASSES////////////////////////////////////////////
+/*
+$tablo_compte = [
+    "ID_Compte" => null, 
+    "Nom_Compte" => $recupNomCompte = "ARRIETA",
+    "Prenom" => "Lukeh",
+    "E_mail" => $recupEmail = "iso@gmail.com",
+    "MDP" => "aetsxeb45",
+    "Type_compte" => "Professeur",
+    "Deja_connecte" => 1,
+    "ID_Ecole" => 1
+];
+insertion($bdd, "Compte", $tablo_compte);
+
+$sql = "SELECT ID_Compte FROM Compte WHERE Nom_Compte ='$recupNomCompte' AND E_mail = '$recupEmail'";
+
+$exec = $bdd->prepare($sql);
+$exec->execute();
+
+$ID_compte = $exec->fetchAll(PDO::FETCH_ASSOC);
+
+$tablo_compte_classe = [
+    "ID_compte_classe" => null, 
+    "ID_Compte" => $ID_compte[0]['ID_Compte'],
+    "ID_Classe" => //la classe que tu voulais,
+];
+insertion($bdd, "matiere_competence", $tablo_matiere_competence);
+*/
 ?>

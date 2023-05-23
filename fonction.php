@@ -201,6 +201,7 @@ function insertion($PDO,$table, $valeur_tableau)
 }
 
 
+
 function update($bdd,$table,$colonne,$valeur) {
     $sql = "UPDATE $table SET $colonne = $valeur";
     
