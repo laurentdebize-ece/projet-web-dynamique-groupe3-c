@@ -115,12 +115,14 @@ if (isset($_POST['submit'])) {
     foreach ($_POST as $idcompet => $value) {
         if ($idcompet != "submit") {
             if ($value!=""){
-            $sql ="UPDATE compte_competence SET Appreciation='$value' WHERE ID_Compte = '$etudiant' AND ID_compte_competence = '$idcompet'";
+            $valuesecu = htmlspecialchars($value, ENT_QUOTES, 'UTF-8' );
+            $sql ="UPDATE compte_competence SET Appreciation='$valuesecu' WHERE ID_Compte = '$etudiant' AND ID_compte_competence = '$idcompet'";
             $bdd -> query($sql);
             $sql ="UPDATE compte_competence SET Competence_valide_Professeur='valide' WHERE ID_Compte = '$etudiant' AND ID_compte_competence = '$idcompet'";
             $bdd -> query($sql);
         }
     }
+    
 }
 }
 }

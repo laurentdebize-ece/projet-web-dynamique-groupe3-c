@@ -36,7 +36,7 @@ while ($donnees = $reponse->fetch()){
 					if ($_POST['mdp1']== $_POST['mdp2']) {
 						$verifmdp = 1;
 						if ( $_POST['mdp1']!="" && $_POST['mdp2']!=""){
-							$motdepasse = $_POST['mdp1'];
+							$motdepasse = htmlspecialchars($_POST['mdp1'], ENT_QUOTES, 'UTF-8');
 							$sql = "UPDATE compte SET MDP='$motdepasse' WHERE ID_Compte='$ID'";
 							$bdd->query($sql);
 						}
@@ -47,22 +47,21 @@ while ($donnees = $reponse->fetch()){
 					if($Type_compte=="Administrateur"){
 					if ($_POST['Newmail']!="") {
 						$verifmail = 1;
-						$Newmail = $_POST['Newmail'];
+						$Newmail =htmlentities($_POST['Newmail'], ENT_QUOTES, 'UTF-8');
 						$sql = "UPDATE compte SET E_mail='$Newmail' WHERE ID_Compte='$ID'";
 						$bdd->query($sql);						
 					}
 					
 					if ($_POST['Newnom']!="") {
 						$verifnom = 1;
-						$Newnom = $_POST['Newnom'];
+						$Newnom = htmlspecialchars($_POST['Newnom'], ENT_QUOTES, 'UTF-8');
 						$sql = "UPDATE compte SET Nom_Compte ='$Newnom' WHERE ID_Compte='$ID'";
 						$bdd->query($sql);						
-						
 						
 					}
 					if ($_POST['Newprenom']!="") {
 						$verifprenom = 1;
-						$Newprenom = $_POST['Newprenom'];
+						$Newprenom = htmlspecialchars($_POST['Newprenom'], ENT_QUOTES, 'UTF-8');
 						$sql = "UPDATE compte SET Prenom='$Newprenom' WHERE ID_Compte='$ID'";
 						$bdd->query($sql);								
 }					}

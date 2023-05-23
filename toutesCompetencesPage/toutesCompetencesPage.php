@@ -48,29 +48,29 @@ while($donneesCompetenceQuiMappartient = $reponseCompetenceQuiMappartient->fetch
 if(isset($_POST['validerAjout'])){
     $tab_matiere = [
         "ID_Competence" => NULL,
-        "Nom_competence" => $_POST['NewNom'],
+        "Nom_competence" => htmlspecialchars($_POST['NewNom'], ENT_QUOTES, 'UTF-8'),
         "Date_Creation" => $_POST['NewDate'],
-        "Theme" => $_POST['NewTheme']
+        "Theme" => htmlspecialchars($_POST['NewTheme'], ENT_QUOTES, 'UTF-8')
     ];
     insertion($bdd,"competence", $tab_matiere);
 }
 //MODIFIER UNE COMPETENCE
 if(isset($_POST['validerModification'])){
     if ($_POST['NewNom']){
-        $newNom = $_POST['NewNom'];
+        $newNom = htmlspecialchars($_POST['NewNom'], ENT_QUOTES, 'UTF-8');
         echo $newNom;
         $sql = "UPDATE competence SET Nom_competence = '$newNom' WHERE ID_Competence = '$recup_ID_Competence'";
         $bdd->query($sql);
     }
     
     if ($_POST['NewTheme'] != ''){
-        $newTheme = $_POST['NewTheme'];
+        $newTheme =htmlspecialchars($_POST['NewTheme'], ENT_QUOTES, 'UTF-8');
         echo $newTheme;
         $sql = "UPDATE competence SET Theme = '$newTheme' WHERE ID_Competence = '$recup_ID_Competence'";
         $bdd->query($sql);
     }
     if ($_POST['NewDate'] != ''){
-        $newDate = $_POST['NewDate'];
+        $newDate =htmlspecialchars($_POST['NewDate'], ENT_QUOTES, 'UTF-8');
         echo $newDate;
         $sql = "UPDATE competence SET Date_Creation = '$newDate' WHERE ID_Competence = '$recup_ID_Competence'";
         $bdd->query($sql);
