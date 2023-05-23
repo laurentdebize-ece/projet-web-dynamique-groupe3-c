@@ -2,7 +2,7 @@
 <html>
 <body>
 
-
+//CONNEXION
 <?php
 try{
     $mdp="root";
@@ -20,6 +20,7 @@ catch (Exception $e)
 ?>
 
 
+//RECUPERATION DES DONNEES
 <?php
 session_start();
 if (!isset($_SESSION['ID_compte'])) {
@@ -40,7 +41,7 @@ while ($donnees = $reponse->fetch()){
     echo '<br>Identifiant: ';
     echo $donnees['ID_Compte'];
     echo '<br> <br>';
-
+//SUPPRIMER UN COMPTE
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($_POST['ID2']== $donnees['ID_Compte'] && $_POST['ID2'] != $ID) {
             $comptesup=$_POST['ID2'];

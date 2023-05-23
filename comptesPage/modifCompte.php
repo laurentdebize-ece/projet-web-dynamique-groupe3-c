@@ -56,6 +56,7 @@
 <body>
 <?php
 
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -69,6 +70,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
@@ -102,11 +104,13 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
+    //MODIFIER UN COMPTE
 <section>
     <img src="../img/paris.jpg"  alt=" parisCity " class="tailleImgFormualaire">
     <div id="formulaireModificationCompte">
         <div class="login-form2">
             <form method="POST" action="comptesPage.php" id="ajouterCompte">
+                //AJOUTER UN COMPTE
             <?php if($reponseModifCompte=="Ajouter"){?>
 			    <h3>Ajouter un compte</h3>
                 Nom : <input type="text" name="NewNom" placeholder="Entrez nom"required><br><br>
@@ -138,7 +142,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                         <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                         while ($donneesEcole = $reponseEcole->fetch()){ ?>
                             <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
-                        <?php } ?> 
+                            <?php } ?>
                     </select><br><br>
                     Classe : <div id="classeSelectProf"></div><br>
                     Matière : <select name="NewMatiere" id="matiereSelectProf">
@@ -151,7 +155,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                 </div>
                 <input type="submit" name="validerAjout" value="Enregistrer">
                 <?php }
-
+                //SUPPRIMER UN COMPTE
                 if($reponseModifCompte=="Supprimer"){
                 if(isset($_POST['selectCompte'])){?>
                     <h3>Etes vous sur de vouloir supprimer le compte ?</h3>
@@ -162,6 +166,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                     <input type="submit" name="retourMenu" value="Retour">
                 <?php }
                 }
+                //MODIFIER LES CHAMPS D'UN COMPTE
                 if($reponseModifCompte=="Modifier"){
                 if(isset($_POST['selectCompte'])){?>
                 <h3>Modifier un compte</h3>

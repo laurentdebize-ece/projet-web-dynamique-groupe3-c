@@ -86,7 +86,10 @@ while ($donnees = $reponse->fetch()){
     ?>
 
     <div class="login-form3">
-    <?php if($action=="Auto Evaluation"){    
+    <br> <br>
+            <?php
+        //LANCER UNE AUTOEVALUATION EN TANT QUE PROF    
+        if($action=="Auto Evaluation"){    
             $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <section id="titre"><br><br><br>
@@ -112,7 +115,7 @@ while ($donnees = $reponse->fetch()){
                     </form>
                 <?php
                 
-           }
+           
 
             if (isset($_POST['soumettre_evaluation'])) {
                 echo"<br> <br>";
@@ -144,6 +147,8 @@ while ($donnees = $reponse->fetch()){
                     }
                 }
             }
+        //EVALUER UN ETUDIANT EN TANT QUE PROF    
+        }
         else if($action=="Evaluation"){
             ?><section id="titre"><br><br>
         <h7>Evaluer un étudiant : <br></h7>
@@ -192,8 +197,7 @@ while ($donnees = $reponse->fetch()){
                             }?> </div><br><br>
                             <input type="submit" name="appreciation" value ="Donner appreciation">
                                                     </form>
-        <?php                    
-        }
+        <?php 
         if (isset($_POST['etudiant'])) {
             echo $_POST['etudiant'];
             session_start();
@@ -204,7 +208,61 @@ while ($donnees = $reponse->fetch()){
             $_SESSION['etudiant'] = $_POST['etudiant'];
             header('Location: appreciation.php');
             exit();
+        }                   
         }
+
+
+
+
+
+
+        else if($action=="Ajouter Classe"){
+            $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <section id="titre"><br><br><br>
+            <h7>Auto évaluation : <br></h7>
+            <div id="promo"> <br>promo :
+                <select name="choixPromo" id="selectPromo" onchange="showClasses(this.value)">
+        
+                    <?php
+                    while ($donneespromo = $reponsepromo->fetch()) { 
+                        if ($donneespromo['ID_Ecole'] == $ID_Ecole && $donneespromo['ID_Promotion'] != 0) {
+                            ?>
+                            <option value="<?php echo $donneespromo['ID_Promotion'];?>"><?php echo $donneespromo['Annee_fin'];?>  </option>
+                            <?php
+                        }
+                    } ?></div>
+                </select>
+                <br> <br>classe :
+                <select name="choixClasse" id="selectClasse" >
+                        <option>choisir</option>
+                    </select>
+                       <br><br><br>
+                        <input type="submit" name="choisirclasse" value="Soumettre">
+                    </form>
+                <?php
+                
+           
+
+            if (isset($_POST['choisirclasse'])) {
+                echo"<br> <br>";
+                if (isset($_POST['choixPromo']) && isset($_POST['choixClasse'])) {
+                    $choixPromo = $_POST['choixPromo'];
+                    $choixClasse = $_POST['choixClasse'];
+                    echo "vous avez été ajouté à la classe :<br>";
+                    echo $choixClasse;
+
+                    $sql = "INSERT INTO compte_classe (ID_Compte, ID_Classe) VALUES ('$ID', '$choixClasse')";
+                    $bdd->query($sql);
+                }
+            }
+
+        
+        
+        
+        
+        }
+        
 
 }
 

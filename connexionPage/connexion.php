@@ -3,6 +3,8 @@
 <body>
 
 <?php
+
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){

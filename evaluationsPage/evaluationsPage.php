@@ -11,7 +11,7 @@
 
 <body>
 <?php
-
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -25,6 +25,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
@@ -71,6 +72,11 @@ if ($Type_compte == "Professeur") {?>
 <img src="../img/nyCity.jpg"  alt=" nyCity " id="tailleImgEval"><!--https://www.artheroes.fr/-->
 <section id="bodyEvaluationsPage">
 <div id="zoneBoutonsEval">
+//EVALUATION DES ELEVES PAR LE PROF
+if ($Type_compte == "Professeur") {
+    ?>
+    <br> <br><br><br>
+ <div class="login-form3">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <input type="submit" name="valideaction" value="Evaluation" class="boutonEval"><br>
         <input type="submit" name="valideaction" value="Auto Evaluation" class="boutonEval">

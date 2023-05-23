@@ -1,5 +1,6 @@
 <?php
 
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -12,7 +13,7 @@ catch (Exception $e)
 {
     die('Erreur : ' . $e->getMessage());
 }
-
+//RECUPERATION DES DONNES
 $idEcole = $_GET['idEcole'];
 
 $requete = $bdd->prepare('SELECT * FROM promotion WHERE ID_Ecole = :idEcole');
