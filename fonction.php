@@ -158,7 +158,7 @@ function supprimer($PDO, $table, $where) { //pour les attributs non clés
 }
 
 function supprimer_matiere($PDO, $IDMATIERE) {
-
+    
     $sql2 = "DELETE FROM matiere_competence WHERE ID_Matiere = $IDMATIERE";
     $sql3 = "DELETE FROM compte_matiere WHERE ID_Matiere = $IDMATIERE";
     $sql = "DELETE FROM matiere WHERE ID_Matiere = $IDMATIERE";
@@ -174,12 +174,15 @@ function supprimer_compte($PDO, $ID) {
     $sql = "DELETE FROM compte WHERE ID_Compte = $ID";
     $sql2 = "DELETE FROM compte_competence WHERE ID_Compte = $ID";
     $sql3 = "DELETE FROM compte_matiere WHERE ID_Compte = $ID";
+    $sql4 = "DELETE FROM compte_classe WHERE ID_Compte = $ID";
 
     $stmt2 = $PDO->prepare($sql2);
     $stmt3 = $PDO->prepare($sql3);
+    $stmt4 = $PDO->prepare($sql4);
     $stmt = $PDO->prepare($sql);
     $stmt2->execute();
     $stmt3->execute();
+    $stmt4->execute();
     $stmt->execute();
 //On doit d'abord supprimer des tables où l'ID du compte est comme clé étrangère avant de supprimer le compte//
     return null;
@@ -239,10 +242,6 @@ function modifier_Moyenne_Professeur($PDO, $table, $nouvelleMoyenne, $ID_Profess
     }
 }
 */
-
-
-
-
 
 
 

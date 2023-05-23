@@ -21,7 +21,7 @@ try {
 }
 
 
-
+/*
 $vachercher = jointure($bdd, "compte", "Ecole", "ID_Ecole", "ID_Ecole", "ID_Compte = 1");
 
 foreach ($vachercher as $reponses => $value) {
@@ -35,7 +35,7 @@ foreach ($vachercher as $reponses => $value) {
     echo $value["ID_Ecole"] ."<br>";
     
 }
-
+*/
 
 /*
 $doublejointure = doubleJointure($bdd, "compte", "compte_competence", "competence", "ID_Compte", "ID_Compte","ID_Competence", "ID_Competence", "compte.ID_Compte = 1"); //on peut mettre la condi que sur des attri de la première table 

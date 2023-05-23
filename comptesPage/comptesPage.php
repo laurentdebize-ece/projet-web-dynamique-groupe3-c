@@ -31,25 +31,27 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
 	exit();
   }
+  require_once('../fonction.php');
   $ID = $_SESSION['ID_Compte'];
   $Type_compte = $_SESSION['Type_compte'];
   $_SESSION['ID_Compte'] = $ID;
   $_SESSION['Type_compte'] = $Type_compte;
-
-
+  if(isset($_SESSION['selectCompte'])){
+    $Compte_Select = $_SESSION['selectCompte'];
+  }
   $reponse = $bdd->query('SELECT * FROM compte');
   while ($donnees = $reponse->fetch()){
           if ($donnees['ID_Compte'] == $ID) {
               if ($donnees['Type_compte'] == 'Administrateur') {
                   
                   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    //Ajouter
                     if(isset($_POST['validerAjout'])){ 
                       $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                       $NewMDP = '';
                       for ($i = 0; $i < 6; $i++) {
                           $NewMDP .= $caracteres[rand(0, strlen($caracteres) - 1)];
                       }
-                      
                       $NewEmail = $_POST['NewEmail'];
                       $NewTypeCompte = $_POST['NewTypeCompte'];
                       $NewDejaCo = 0;
@@ -72,7 +74,6 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                         $NewClasse = $_POST['NewClasseProf'];
                         $NewPromo = 0;
                       }
-                      
                       $requete = $bdd->prepare("INSERT INTO compte (Nom_Compte, Prenom, E_mail, MDP,Type_compte, Deja_connecte,ID_Ecole,ID_Promotion,ID_Classe) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole, :NewPromo, :NewClasse)");
                       $requete->bindParam(':NewNom', $NewNom);
                       $requete->bindParam(':NewPrenom', $NewPrenom);
@@ -84,22 +85,12 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       $requete->bindParam(':NewPromo', $NewPromo);
                       $requete->bindParam(':NewClasse', $NewClasse);
                       $requete->execute();
-                    }//Mettre le message un message d 'erreur
+                    }
+                    //Supprimer
                     if(isset($_POST['validerSuppression'])){
-                        echo"er";
-                        $reponse = $bdd->query('SELECT * FROM compte');
-                        while ($donnees = $reponse->fetch()){
-                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                if ($_POST['NewNom']== $donnees['Nom'] && $_POST['NewPrenom'] ==  $donnees['Prenom']) {
-                                    $comptesup=$_POST['NewNom'];
-                                    $sql = "DELETE FROM compte WHERE Nom ='$comptesup'";
-                                    $bdd->query($sql);
-                                } else {
-                                    echo "impossible de supprimer ce compte. <br>";//Mettre le message un message d 'erreur
-                                }
-
-                            }
-                        }               
+                        if($_POST['validerSuppression']=="Valider"){
+                            supprimer_compte($bdd, $Compte_Select);
+                        }                        
                     }
                     /*
 if(isset($_POST['validerModification'])){
@@ -188,26 +179,30 @@ if(isset($_POST['validerModification'])){
 } else {$reponseComptes = $bdd->query(" SELECT * FROM compte ");} ?>
 <table>
     <tr id="textLigne1">
-        <td>Nom</td>
-        <td>Prénom</td>
-        <td>Adresse mail</td>
-        <td>Type de compte</td>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Adresse mail</th>
+        <th>Type de compte</th>
+        <th>Sélection</th>
     </tr>
+    <form method="POST" action="modifCompte.php">
 <?php while ($donneesComptes = $reponseComptes->fetch()){ ?> 
     <tr>
         <td id="textColonne1"><?php echo $donneesComptes['Nom_Compte']?></td>
         <td id="textColonne"><?php echo $donneesComptes['Prenom']?></td>
         <td id="textColonne"><?php echo $donneesComptes['E_mail']?></td>
         <td class="textColonne"><?php echo $donneesComptes['Type_compte']?></td>
+        <td id="textColonneSelection"> <input type="radio" name="selectCompte" value="<?php echo $donneesComptes['ID_Compte']?>"></td>
     </tr>
 <?php } ?>
 </table>
 <div class="login-form3">
-    <form method="POST" action="modifCompte.php" class="floatLeft">
+    <div class="floatLeft">
         <input type="submit" name ="modifCompte" value="Ajouter" >
         <input type="submit" name ="modifCompte" value="Supprimer">
         <input type="submit" name ="modifCompte" value="Modifier">
         </form>
+        </div>
     <form method="POST" action="creerEcolePromoClasse.php" class="floatRight">
         <input type="submit" name ="creerEcolePromoClasse" value="Créer une école">
         <input type="submit" name ="creerEcolePromoClasse" value="Créer une promo">

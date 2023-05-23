@@ -92,24 +92,22 @@ CREATE TABLE  `compte` (
     `Deja_connecte` boolean NOT NULL,
     `ID_Ecole` int(11) NOT NULL,
     `ID_Promotion` int(11) NOT NULL,	
-    `ID_Classe` int(11) NOT NULL,
     FOREIGN KEY (`ID_Ecole`) REFERENCES `ecole`(`ID_Ecole`),
-    FOREIGN KEY (`ID_Promotion`) REFERENCES `promotion`(`ID_Promotion`),
-    FOREIGN KEY (`ID_Classe`) REFERENCES `classe`(`ID_Classe`)
+    FOREIGN KEY (`ID_Promotion`) REFERENCES `promotion`(`ID_Promotion`)
 );
 
-INSERT INTO `compte` (`ID_Compte`, `Nom_Compte`, `Prenom`, `E_mail`, `MDP`, `Type_compte`, `Deja_connecte`, `ID_Ecole`, `ID_Promotion`, `ID_Classe`) VALUES
-(1, 'VIRET', 'Pierre', 'pierreviret@gmail.com', '1111','Etudiant',1,1,1,3),
-(2, 'MASSON', 'Charles', 'Charlesmasson@gmail.com', 'xpzcl421','Etudiant',1,1,1,3),
-(3, 'BOJ', 'Lucas', 'Lucasboj@gmail.com', 'cpcnifz361q','Etudiant',1,1,2,5),
-(4, 'RUAT', 'Noemie', 'NoemieRuat@gmail.com', '2882ssscsww','Etudiant',1,2,3,8),
-(5, 'BATHEROSSEDSLORTO', 'Emma', 'EmmaBatherosse@gmail.com', '852wcdhus','Etudiant',1,2,3,7),
-(6, 'CHAPERON', 'Axel', 'AxelChap@gmail.com', '72ccdid28z8','Etudiant',1,2,1,1),
-(7, 'DEBIZE', 'Laurent', 'LaurentDebize@gmail.com', '1234','Professeur',1,1,0,3),
-(8, 'BONFILS', 'Anne', 'AnneBonfils@gmail.com', 'daeb2252c','Professeur',1,1,0,3),
-(9, 'DEDECKER', 'Samira', 'SamiraDedecker@gmail.com', 'zfqju451','Professeur',1,1,0,2),
-(10, 'HINTZY', 'Antoine', 'AntoineLEHintzy@gmail.com', 'zkeenxsi581','Professeur',1,1,0,3),
-(11, 'DIEU', 'LUKEH', 'ALED@gmail.com', '0000','Administrateur',1,1,0,0);
+INSERT INTO `compte` (`ID_Compte`, `Nom_Compte`, `Prenom`, `E_mail`, `MDP`, `Type_compte`, `Deja_connecte`, `ID_Ecole`, `ID_Promotion`) VALUES
+(1, 'VIRET', 'Pierre', 'pierreviret@gmail.com', '1111','Etudiant',1,1,1),
+(2, 'MASSON', 'Charles', 'Charlesmasson@gmail.com', 'xpzcl421','Etudiant',1,1,1),
+(3, 'BOJ', 'Lucas', 'Lucasboj@gmail.com', 'cpcnifz361q','Etudiant',1,1,2),
+(4, 'RUAT', 'Noemie', 'NoemieRuat@gmail.com', '2882ssscsww','Etudiant',1,2,3),
+(5, 'BATHEROSSE', 'Emma', 'EmmaBatherosse@gmail.com', '852wcdhus','Etudiant',1,2,3),
+(6, 'CHAPERON', 'Axel', 'AxelChap@gmail.com', '72ccdid28z8','Etudiant',1,2,1),
+(7, 'DEBIZE', 'Laurent', 'LaurentDebize@gmail.com', '1234','Professeur',1,1,0),
+(8, 'BONFILS', 'Anne', 'AnneBonfils@gmail.com', 'daeb2252c','Professeur',1,1,0),
+(9, 'DEDECKER', 'Samira', 'SamiraDedecker@gmail.com', 'zfqju451','Professeur',1,1,0),
+(10, 'HINTZY', 'Antoine', 'AntoineLEHintzy@gmail.com', 'zkeenxsi581','Professeur',1,1,0),
+(11, 'DIEU', 'LUKEH', 'ALED@gmail.com', '0000','Administrateur',1,1,0);
 
 
 
@@ -195,6 +193,29 @@ INSERT INTO `ecole_filiere` (`ID_ecole_filiere`,`ID_Ecole`,`ID_Filiere`) VALUES
 
 
 
+CREATE TABLE `compte_classe` (
+    `ID_compte_classe` int(11) PRIMARY KEY AUTO_INCREMENT,
+    `ID_Compte` int(11) NOT NULL,
+    `ID_Classe` int(11) NOT NULL,
+    FOREIGN KEY (`ID_Compte`) REFERENCES `compte`(`ID_Compte`),
+    FOREIGN KEY (`ID_Classe`) REFERENCES `classe`(`ID_Classe`) 
+);	
+
+
+INSERT INTO `compte_classe` (`ID_compte_classe`, `ID_Compte`, `ID_Classe`) VALUES 
+(1,1,3),
+(2,2,3),
+(3,3,5),
+(4,4,8),
+(5,5,7),
+(6,6,1),
+(7,7,3),
+(8,8,3),
+(9,9,2),
+(10,10,3),
+(11,11,0);
+
+
 CREATE TABLE  `compte_matiere` (
     `ID_compte_matiere` int(11) PRIMARY KEY AUTO_INCREMENT,
     `ID_Compte` int(11) NOT NULL,
@@ -222,9 +243,6 @@ INSERT INTO `compte_matiere` (`ID_compte_matiere`, `ID_Compte`, `ID_Matiere`) VA
 (15,8,1),
 (16,9,2),
 (17,10,4);
-
-
-
 
 
 CREATE TABLE  `matiere_competence` (
