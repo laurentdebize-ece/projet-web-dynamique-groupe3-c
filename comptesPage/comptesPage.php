@@ -91,10 +91,76 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                             supprimer_compte($bdd, $Compte_Select);
                         }                        
                     }
-                    /*
-if(isset($_POST['validerModification'])){
-    //modifier fonction
-}*/
+
+
+
+                    //Modifier
+                    if(isset($_POST['validerModification'])){
+                        if ($_POST['NewEmail']!="") {
+                            $NewEmail = htmlspecialchars($_POST['NewEmail'], ENT_QUOTES, 'UTF-8');
+                            $sql = "UPDATE compte SET E_mail='$NewEmail' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                        }
+                        if($_POST['NewNom']!="") {
+                            $NewNom = htmlspecialchars($_POST['NewNom'], ENT_QUOTES, 'UTF-8');
+                            $sql = "UPDATE compte SET Nom='$NewNom' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                        }
+                        if($_POST['NewPrenom']!="") {
+                            $NewPrenom = htmlspecialchars($_POST['NewPrenom'], ENT_QUOTES, 'UTF-8');
+                            $sql = "UPDATE compte SET Prenom='$NewPrenom' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                        }
+                        if($_POST['NewTypeCompte']!="") {
+                            $NewTypeCompte = $_POST['NewTypeCompte'];
+                            $sql = "UPDATE compte SET Type_compte='$NewTypeCompte' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                        }	
+                        if($NewTypeCompte =="Administrateur") {
+                            $NewIDecole = 0;
+                            $NewPromo = 0;
+                            $NewClasse = 0;
+                            $sql = "UPDATE compte SET ID_Ecole='$NewIDecole' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                            $sql = "UPDATE compte SET ID_Promotion='$NewPromo' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                            $sql = "UPDATE compte SET ID_Classe='$NewClasse' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                        }
+                        if($NewTypeCompte=="Etudiant") {
+                            if($_POST['NewEcole']!="") {
+                                $NewIDecole = $_POST['NewEcole'];
+                                $sql = "UPDATE compte SET ID_Ecole='$NewIDecole' WHERE ID_Compte='$Compte_Select'";
+                                $bdd->query($sql);
+                            }
+                            if($_POST['NewPromo']!="") {
+                                $NewPromo = $_POST['NewPromo'];
+                                $sql = "UPDATE compte SET ID_Promotion='$NewPromo' WHERE ID_Compte='$Compte_Select'";
+                                $bdd->query($sql);
+                            }
+                            //$NewClasse = $_POST['NewClasse'];
+                        }
+                      
+                        if($NewTypeCompte=="Professeur") {
+                            if($_POST['NewEcoleProf']!="") {
+                                $NewIDecole = $_POST['NewEcoleProf'];
+                                $sql = "UPDATE compte SET ID_Ecole='$NewIDecole' WHERE ID_Compte='$Compte_Select'";
+                                $bdd->query($sql);
+                            }
+                                $NewPromo = 0;
+                                $sql = "UPDATE compte SET ID_Promotion='$NewPromo' WHERE ID_Compte='$Compte_Select'";
+                                $bdd->query($sql);
+                            
+                
+                        }
+
+
+
+
+
+
+
+}
                 }
             }
         }

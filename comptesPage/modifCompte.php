@@ -133,7 +133,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                     </select><br><br>
                 </div>
                 <div id="professeurChamps" style="display: none;">
-                    Ecole : <select name="NewEcole" id="ecoleSelectProf" onchange="showClassesProf(this.value)" >
+                    Ecole : <select name="NewEcoleProf" id="ecoleSelectProf" onchange="showClassesProf(this.value)" >
                         <option>Choisir</option>
                         <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                         while ($donneesEcole = $reponseEcole->fetch()){ ?>
@@ -162,7 +162,8 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                     <input type="submit" name="retourMenu" value="Retour">
                 <?php }
                 }
-                if($reponseModifCompte=="Modifier"){?>
+                if($reponseModifCompte=="Modifier"){
+                if(isset($_POST['selectCompte'])){?>
                 <h3>Modifier un compte</h3>
                 Nom : <input type="text" name="NewNom" placeholder="Entrez nom"required><br><br>
                 Prénom : <input type="text" name="NewPrenom" placeholder="Entrez prénom"required><br><br>
@@ -188,7 +189,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                     </select><br><br>
                 </div>
                 <div id="professeurChamps" style="display: none;">
-                    Ecole : <select name="NewEcole" id="ecoleSelectProf" onchange="showClassesProf(this.value)" >
+                    Ecole : <select name="NewEcoleProf" id="ecoleSelectProf" onchange="showClassesProf(this.value)" >
                         <option>Choisir</option>
                         <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                         while ($donneesEcole = $reponseEcole->fetch()){ ?>
@@ -204,8 +205,15 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                         <?php } ?> 
                     </select><br><br>
                 </div>
-                <input type="submit" name="validerAjout" value="Enregistrer">
-                <?php }?>
+                <input type="submit" name="validerModification" value="Enregistrer">
+                <?php 
+                }
+                else {?>
+                    <h3>Veuillez sélectionner un compte à modifier !</h3>
+                    <input type="submit" name="retourMenu" value="Retour">
+                <?php }
+            }
+                ?>
             </form>
         </div>
     </div>

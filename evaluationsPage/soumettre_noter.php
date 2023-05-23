@@ -117,6 +117,7 @@ if ($Type_compte == "Professeur") {
            }
 
             if (isset($_POST['soumettre_evaluation'])) {
+                echo"<br> <br>";
                 if (isset($_POST['choixPromo']) && isset($_POST['choixClasse'])) {
                     $choixPromo = $_POST['choixPromo'];
                     $choixClasse = $_POST['choixClasse'];
