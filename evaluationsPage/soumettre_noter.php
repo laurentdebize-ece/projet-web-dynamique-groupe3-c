@@ -91,7 +91,7 @@ if ($Type_compte == "Professeur") {
         if($action=="Auto Evaluation"){    
             $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <section id="titre">
+            <section id="titre"><br><br><br>
             <h7>Auto évaluation : <br></h7>
             <div id="promo"> <br>promo :
                 <select name="choixPromo" id="selectPromo" onchange="showClasses(this.value)">
@@ -146,7 +146,7 @@ if ($Type_compte == "Professeur") {
                 }
             }
         else if($action=="Evaluation"){
-            ?><section id="titre">
+            ?><section id="titre"><br><br>
         <h7>Evaluer un étudiant : <br></h7>
     <?php
                             $reponsepromo2 = $bdd->query('SELECT * FROM promotion');?>

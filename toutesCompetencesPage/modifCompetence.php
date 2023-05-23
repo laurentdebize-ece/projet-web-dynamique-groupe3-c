@@ -89,7 +89,7 @@ $reponseModifCompetence = $_POST['modifCompetence'];?>
                     Date de création : <input type="date" name="NewDate"><br><br>
                    <input type="submit" name="validerModification" value="Enregistrer">
                 <?php } else {?>
-                    <h3>Veuillez sélectionner une compétence à supprimer !</h3>
+                    <h3>Veuillez sélectionner une compétence à modifier !</h3>
                     <input type="submit" name="retourmodif" value="Retour">
                 <?php }
             }?>
