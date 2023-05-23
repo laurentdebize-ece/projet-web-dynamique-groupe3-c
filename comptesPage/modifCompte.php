@@ -143,7 +143,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                         <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                         while ($donneesEcole = $reponseEcole->fetch()){ ?>
                             <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
-                        <?php } ?> 
+                            <?php } ?>
                     </select><br><br>
                     Classe : <div id="classeSelectProf"></div><br>
                     Matière : <select name="NewMatiere" id="matiereSelectProf">

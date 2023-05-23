@@ -70,18 +70,18 @@ if(isset($_POST['validerAjoutCompetenceProf'])){
 //SUPPRESSION COMPETENCE DANS UNE MATIERE (PROFIL PROF)
 if(isset($_POST['validerSuppressionCompetenceProf'])){
     if($_POST['validerSuppressionCompetenceProf']=="Retour"){
-        header('Location: matiereChoisie.php');
+        header('Location: matieresPage.php');
         exit();
     }
     if($_POST['validerSuppressionCompetenceProf']=="Annuler"){
-        header('Location: matiereChoisie.php');
+        header('Location: matieresPage.php');
         exit();
     }
     if($_POST['validerSuppressionCompetenceProf']=="Valider"){
         $sql="DELETE FROM matiere_competence WHERE ID_Competence=$ID_Competence_Select";
         $stmt=$bdd->prepare($sql);
         $stmt->execute();
-        header('Location: matiereChoisie.php');
+        header('Location: matieresPage.php');
         exit();
     }
 }

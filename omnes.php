@@ -21,6 +21,7 @@ try {
     $bdd->exec($sql);
 }
 
+///////////////////////////////CE FICHIER SERT A FAIRE DES TEST DE SELECTION ET AUTRES DANS LA BDD///////////////////////////////
 
 /*
 $vachercher = jointure($bdd, "compte", "Ecole", "ID_Ecole", "ID_Ecole", "ID_Compte = 1");

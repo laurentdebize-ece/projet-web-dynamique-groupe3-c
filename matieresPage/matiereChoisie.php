@@ -27,6 +27,9 @@ require_once('../fonction.php');
 if(isset($_POST['Matiere'])){
     $Nom_Matiere_Choisie = $_POST['Matiere'];
 }
+if(isset($_POST['Matiere'])){
+    $Nom_Matiere_Choisie = $_POST['Matiere'];
+}
 $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
 
 //SELECTION DES COMPETENCES EN FONCTION DE LA MATIERE
@@ -36,7 +39,7 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
             INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_competence
             WHERE Nom_matiere LIKE '$Nom_Matiere_Choisie'");
     }
-    if($Type_compte=="Professeur"){
+    else if($Type_compte=="Professeur"){
         $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
                 INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
                 INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere

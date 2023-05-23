@@ -57,7 +57,6 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    
 
 <?php
 $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_matiere ON compte.ID_Compte= compte_matiere.ID_Compte');
@@ -68,15 +67,19 @@ while ($donnees = $reponse->fetch()){
     $ID_Matiere=$donnees['ID_Matiere'];
     }
 }
-//EVALUATION DES ELEVES PAR LE PROF
-if ($Type_compte == "Professeur") {
+
+if ($Type_compte == "Professeur") { //EVALUATION DES ELEVES PAR LE PROF?>
+<img src="../img/nyCity.jpg"  alt=" nyCity " id="tailleImgEval"><!--https://www.artheroes.fr/-->
+<section id="bodyEvaluationsPage">
+<div id="zoneBoutonsEval">
+<?php if ($Type_compte == "Professeur") {
     ?>
-    <br> <br><br><br>
- <div class="login-form3">
+ <div class="zoneBoutonsEval">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <input type="submit" name="valideaction" value="Evaluation">
-        <input type="submit" name="valideaction" value="Auto Evaluation">
+        <input type="submit" name="valideaction" value="Evaluation" class="boutonEval"><br>
+        <input type="submit" name="valideaction" value="Auto Evaluation" class="boutonEval">
     </form>
+</div>
     <?php
     if (isset($_POST['valideaction'])) {
 				session_start();
@@ -85,50 +88,12 @@ if ($Type_compte == "Professeur") {
                 $_SESSION['action'] = $_POST['valideaction'];
 				header('Location: soumettre_noter.php');
 				exit();
-        }
+        }?>
+        </section>
+    <?php }
+}
+    ?>
 
-        ?><section id="titre">
-        <h7>Liste de vos etudiants : <br></h7>
-    <?php
-        $reponsepromo2 = $bdd->query('SELECT * FROM promotion');?>
-        <div id="promotion">
-        <?php while ($donneespromo2 = $reponsepromo2->fetch()) { 
-            if ($donneespromo2['ID_Ecole'] == $ID_Ecole && $donneespromo2['ID_Promotion'] != 0) {
-                $promo=$donneespromo2['ID_Promotion'];
-                echo "<br>Promotion : " . $donneespromo2['Annee_fin']." <br>";
-
-                $reponseclasse2 = $bdd->prepare('SELECT * FROM classe INNER JOIN promotion ON classe.ID_Promotion = promotion.ID_Promotion WHERE promotion.ID_Promotion = :promo AND promotion.ID_Ecole = :ID_Ecole');
-                $reponseclasse2->bindParam(':promo', $promo);
-                $reponseclasse2->bindParam(':ID_Ecole', $ID_Ecole);
-                $reponseclasse2->execute();?>
-                <div id="groupe">
-                <?php while ($donneesclasse2 = $reponseclasse2->fetch()) { 
-                    if ($donneesclasse2['ID_Promotion'] == $promo && $donneespromo2['ID_Ecole'] == $ID_Ecole) {
-                        $classe=$donneesclasse2['ID_Classe'];
-                        echo "<br>Groupe " . $donneesclasse2['Num_groupe']."<br>";
-                        $reponseetudiant = $bdd->prepare('SELECT * FROM compte INNER JOIN compte_classe ON compte.ID_Compte=compte_classe.ID_Compte WHERE compte.ID_Promotion = :promo AND compte.ID_Ecole = :ID_Ecole AND compte.Type_compte = "Etudiant"');
-                        $reponseetudiant->bindParam(':promo', $promo);
-                        $reponseetudiant->bindParam(':ID_Ecole', $ID_Ecole);
-                        $reponseetudiant->execute();?>
-                        <div id="etudiant">
-                        <?php while ($donneesetudiant = $reponseetudiant->fetch()) { 
-                            if ($donneesetudiant['ID_Classe'] == $classe && $donneesclasse2['ID_Promotion'] == $promo && $donneespromo2['ID_Ecole'] == $ID_Ecole) {
-                               echo $donneesetudiant['Nom'].' '. $donneesetudiant['Prenom'] ."<br>";
-                            }
-                        }?> </div><?php
-
-
-                    }
-                }?> </div><?php
-
-            }
-        }?> </div><?php
-    }
-
-?>
-</div>
-</section>
-<br> <br>
 <footer>
         <div class="floatLeft">Projet Développement Web</div>
         <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>

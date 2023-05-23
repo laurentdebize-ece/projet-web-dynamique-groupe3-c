@@ -9,8 +9,7 @@
 
 
     <script>
-
-    function showClasses(idPromo) {
+    function showClasses(idPromo) { //AFFICHAGE DES CLASSES EN FONCTION DES PROMOS
         console.log(idPromo);
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -42,7 +41,6 @@ catch (Exception $e)
 
 //RECUPERATION DES DONNEES
 session_start();
-
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: evaluationsPage.php');
 	exit();
@@ -82,10 +80,11 @@ while ($donnees = $reponse->fetch()){
     $ID_Ecole=$donnees['ID_Ecole'];
     $ID_Matiere=$donnees['ID_Matiere'];
     }
-}
-
-if ($Type_compte == "Professeur") {
+}?>
+<img src="../img/nyCity.jpg"  alt=" nyCity " id="tailleImgEval"><!--https://www.artheroes.fr/-->
+<?php if ($Type_compte == "Professeur") {
     ?>
+
     <div class="login-form3">
     <br> <br>
             <?php
@@ -94,8 +93,8 @@ if ($Type_compte == "Professeur") {
             $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <section id="titre"><br><br><br>
-            <h7>Auto évaluation : <br></h7>
-            <div id="promo"> <br>promo :
+            <h4>Auto évaluation :</h4>
+            <div id="promo">Promo :
                 <select name="choixPromo" id="selectPromo" onchange="showClasses(this.value)">
         
                     <?php
@@ -116,7 +115,7 @@ if ($Type_compte == "Professeur") {
                     </form>
                 <?php
                 
-           }
+           
 
             if (isset($_POST['soumettre_evaluation'])) {
                 echo"<br> <br>";
@@ -149,6 +148,7 @@ if ($Type_compte == "Professeur") {
                 }
             }
         //EVALUER UN ETUDIANT EN TANT QUE PROF    
+        }
         else if($action=="Evaluation"){
             ?><section id="titre"><br><br>
         <h7>Evaluer un étudiant : <br></h7>
@@ -197,8 +197,7 @@ if ($Type_compte == "Professeur") {
                             }?> </div><br><br>
                             <input type="submit" name="appreciation" value ="Donner appreciation">
                                                     </form>
-        <?php                    
-        }
+        <?php 
         if (isset($_POST['etudiant'])) {
             echo $_POST['etudiant'];
             session_start();
@@ -209,7 +208,61 @@ if ($Type_compte == "Professeur") {
             $_SESSION['etudiant'] = $_POST['etudiant'];
             header('Location: appreciation.php');
             exit();
+        }                   
         }
+
+
+
+
+
+
+        else if($action=="Ajouter Classe"){
+            $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <section id="titre"><br><br><br>
+            <h7>Auto évaluation : <br></h7>
+            <div id="promo"> <br>promo :
+                <select name="choixPromo" id="selectPromo" onchange="showClasses(this.value)">
+        
+                    <?php
+                    while ($donneespromo = $reponsepromo->fetch()) { 
+                        if ($donneespromo['ID_Ecole'] == $ID_Ecole && $donneespromo['ID_Promotion'] != 0) {
+                            ?>
+                            <option value="<?php echo $donneespromo['ID_Promotion'];?>"><?php echo $donneespromo['Annee_fin'];?>  </option>
+                            <?php
+                        }
+                    } ?></div>
+                </select>
+                <br> <br>classe :
+                <select name="choixClasse" id="selectClasse" >
+                        <option>choisir</option>
+                    </select>
+                       <br><br><br>
+                        <input type="submit" name="choisirclasse" value="Soumettre">
+                    </form>
+                <?php
+                
+           
+
+            if (isset($_POST['choisirclasse'])) {
+                echo"<br> <br>";
+                if (isset($_POST['choixPromo']) && isset($_POST['choixClasse'])) {
+                    $choixPromo = $_POST['choixPromo'];
+                    $choixClasse = $_POST['choixClasse'];
+                    echo "vous avez été ajouté à la classe :<br>";
+                    echo $choixClasse;
+
+                    $sql = "INSERT INTO compte_classe (ID_Compte, ID_Classe) VALUES ('$ID', '$choixClasse')";
+                    $bdd->query($sql);
+                }
+            }
+
+        
+        
+        
+        
+        }
+        
 
 }
 

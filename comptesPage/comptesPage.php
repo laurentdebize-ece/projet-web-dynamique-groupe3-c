@@ -159,7 +159,6 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                                 $sql = "UPDATE compte SET ID_Promotion='$NewPromo' WHERE ID_Compte='$Compte_Select'";
                                 $bdd->query($sql);
                             }
-                            //$NewClasse = $_POST['NewClasse'];
                         }
                       
                         if($NewTypeCompte=="Professeur") {
