@@ -53,7 +53,12 @@ $_SESSION['Type_compte'] = $Type_compte;
             <?php } ?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
-    </section>
+    </section><br><br><br>
+    <div class="container">
+  <div class="centered-text">
+    <p>Fonctionnalités à venir</p>
+  </div>
+</div>
     <footer>
         <div class="floatLeft">Projet Développement Web</div>
         <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>

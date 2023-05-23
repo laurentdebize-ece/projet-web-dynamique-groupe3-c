@@ -77,86 +77,59 @@ while ($donnees = $reponse->fetch()){
     }
 }
 
-if ($Type_compte=="Professeur") {
-    $reponse4 = $bdd->query('SELECT * FROM promotion');
+if ($Type_compte == "Professeur") {
     ?>
     <br> <br>
+    
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        promo :
-        
-        <select name="choixPromo" id="choix">
-            <?php
-            while ($donnees4 = $reponse4->fetch()){ 
-                if ($donnees4['ID_Ecole'] == $ID_Ecole) {
-                    ?>
-                    <option value="<?php echo $donnees4['ID_Promotion'];?>"><?php echo $donnees4['Anne_fin'];?> </option>
-                <?php 
-                }
-            } ?>
-        </select>
-        <input type="submit" name="validechoixpromo" value="choisir">
+        <input type="submit" name="valideaction" value="evaluation">
+        <input type="submit" name="valideaction" value="auto evaluation">
     </form>
-
     <?php
-    if (isset($_POST['validechoixpromo'])) {
-        if (isset($_POST['choixPromo'])) {
-            echo 'classe :';
-            $choixPromo = $_POST['choixPromo'];
-            echo $choixPromo;
-            $reponse5 = $bdd->prepare('SELECT * FROM classe INNER JOIN promotion ON classe.ID_Promotion = promotion.ID_Promotion WHERE promotion.ID_Promotion = :promo');
-            $reponse5->bindParam(':promo', $choixPromo);
-            $reponse5->execute();
-            ?>
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <select name="choixClasse" id="choix">
-                    <?php while ($donnees5 = $reponse5->fetch()){ 
-                        if ($donnees5['ID_Promotion'] == $choixPromo) {
-                            ?>
-                            <option value="<?php echo $donnees5['ID_Classe'];?>"><?php echo $donnees5['Num_groupe'];?> </option>
-                        <?php 
-                        }
-                    } ?>
-                </select>
-                <input type="hidden" name="choixPromo" value="<?php echo $choixPromo; ?>">
-                <input type="submit" name="soumettre_evaluation" value="Soumettre">
-            </form>
-        <?php
+    if (isset($_POST['valideaction'])) {
+				session_start();
+				$_SESSION['ID_Compte'] = $ID;
+				$_SESSION['Type_compte'] = $Type_compte;
+                $_SESSION['action'] = $_POST['valideaction'];
+				header('Location: soumettre_noter.php');
+				exit();
         }
-    }
-}
 
-if (isset($_POST['soumettre_evaluation'])) {
-    if (isset($_POST['choixPromo']) && isset($_POST['choixClasse'])) {
-        $choixPromo = $_POST['choixPromo'];
-        $choixClasse = $_POST['choixClasse'];
-        echo "ID Promo choisie : $choixPromo<br>";
-        echo "ID Classe choisie : $choixClasse<br>";
-        echo "ID matiere : $ID_Matiere<br>";
-        echo "Auto evaluation soumise aux etudiants <br>";
+        echo "liste de vos etudiants : <br>";
+        $reponsepromo2 = $bdd->query('SELECT * FROM promotion');
+        while ($donneespromo2 = $reponsepromo2->fetch()) { 
+            if ($donneespromo2['ID_Ecole'] == $ID_Ecole) {
+                $promo=$donneespromo2['ID_Promotion'];
+                echo "Promotion : " . $donneespromo2['Annee_fin']." :<br>";
+                
 
-        
-        $reponse3 = $bdd->query('SELECT * FROM promotion INNER JOIN compte ON promotion.ID_Ecole=compte.ID_Ecole AND promotion.ID_Promotion= compte.ID_Promotion 
-        INNER JOIN compte_matiere ON compte.ID_compte=compte_matiere.ID_Compte 
-        INNER JOIN matiere_competence ON compte_matiere.ID_Matiere=matiere_competence.ID_Matiere 
-        INNER JOIN competence ON matiere_competence.ID_Competence=competence.ID_Competence
-        INNER JOIN compte_competence ON compte.ID_Compte=compte_competence.ID_Compte AND competence.ID_competence=compte_competence.ID_competence');
-        while ($donnees3 = $reponse3->fetch()){
-            if ($donnees3['ID_Ecole'] == $ID_Ecole && $donnees3['ID_Matiere']==$ID_Matiere && $donnees3['Type_compte']!='professeur ' && $donnees3['ID_Promotion']==$choixPromo && $donnees3['ID_Classe']== $choixClasse) {
-                $ID_Compte_soumettre = $donnees3['ID_Compte'];
+                $reponseclasse2 = $bdd->prepare('SELECT * FROM classe INNER JOIN promotion ON classe.ID_Promotion = promotion.ID_Promotion WHERE promotion.ID_Promotion = :promo AND promotion.ID_Ecole = :ID_Ecole');
+                $reponseclasse2->bindParam(':promo', $promo);
+                $reponseclasse2->bindParam(':ID_Ecole', $ID_Ecole);
+                $reponseclasse2->execute();
+                while ($donneesclasse2 = $reponseclasse2->fetch()) { 
+                    if ($donneesclasse2['ID_Promotion'] == $promo && $donneespromo2['ID_Ecole'] == $ID_Ecole) {
+                        $classe=$donneesclasse2['ID_Classe'];
+                        echo "- Groupe : " . $donneesclasse2['Num_groupe']."<br>";
+                        $reponseetudiant = $bdd->prepare('SELECT * FROM compte WHERE ID_Classe = :classe AND ID_Promotion = :promo AND ID_Ecole = :ID_Ecole AND Type_compte = "Etudiant"');
+                        $reponseetudiant->bindParam(':classe', $classe);
+                        $reponseetudiant->bindParam(':promo', $promo);
+                        $reponseetudiant->bindParam(':ID_Ecole', $ID_Ecole);
+                        $reponseetudiant->execute();
+                        while ($donneesetudiant = $reponseetudiant->fetch()) { 
+                            if ($donneesetudiant['ID_Classe'] == $classe && $donneesclasse2['ID_Promotion'] == $promo && $donneespromo2['ID_Ecole'] == $ID_Ecole) {
+                                echo "-- Etudiant : " . $donneesetudiant['Nom_Compte'].' '. $donneesetudiant['Prenom'] ."<br>";
+                            }
+                        }
 
 
-                if ($donnees3['ID_Compte'] == $ID_Compte_soumettre && $donnees3['ID_Matiere']==$ID_Matiere ) {
-                    $ID_Competence_soumettre=$donnees3['ID_Competence'];
-                    if ($donnees3['Competence_valide_etudiant']!='valide'){
-                        $sql = "UPDATE compte_competence SET Etat_competence = 'urgent' WHERE ID_Compte = '$ID_Compte_soumettre' AND ID_competence ='$ID_Competence_soumettre'";
-                        $bdd -> query($sql);
                     }
                 }
+
             }
-        }
-        
+        } 
     }
-}
+
 ?>
 
 

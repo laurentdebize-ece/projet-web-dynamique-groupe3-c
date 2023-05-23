@@ -15,7 +15,7 @@
                 document.getElementById("promoSelect").innerHTML = this.responseText;
             }
         };
-        xhttp.open("GET", "getPromotions.php?idEcole=" + idEcole, true);
+        xhttp.open("GET", "getPromotionsEcole.php?idEcole=" + idEcole, true);
         xhttp.send();
     }
     function showClasses(idPromo) {
@@ -26,7 +26,7 @@
                 document.getElementById("classeSelect").innerHTML = this.responseText;
             }
         };
-        xhttp.open("GET", "getClasses.php?idPromo=" + idPromo, true);
+        xhttp.open("GET", "getClassesPromo.php?idPromo=" + idPromo, true);
         xhttp.send();
     }
     </script>
@@ -98,7 +98,7 @@ $reponseCreation = $_POST['creerEcolePromoClasse'];?>
                 Ecole : <select name="NewEcole">
                     <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                     while ($donneesEcole = $reponseEcole->fetch()){ ?>
-                    <option value="<?php $donneesEcole['ID_Ecole'] ?>"><?php echo $donneesEcole['Nom'] ?></option>
+                    <option value="<?php $donneesEcole['ID_Ecole'] ?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
                     <?php } ?>
                 </select><br><br>
                 <input type="submit" name="validerAjoutPromo" value="Enregistrer">
@@ -111,7 +111,7 @@ $reponseCreation = $_POST['creerEcolePromoClasse'];?>
                     <option>Choisir</option>
                     <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                     while ($donneesEcole = $reponseEcole->fetch()){ ?>
-                    <option value="<?php echo $donneesEcole['ID_Ecole'] ?>"><?php echo $donneesEcole['Nom'] ?></option>
+                    <option value="<?php echo $donneesEcole['ID_Ecole'] ?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
                     <?php } ?>  
                 </select><br><br>
                 Promotion : <select name="NewPromotion" id="promoSelect">
