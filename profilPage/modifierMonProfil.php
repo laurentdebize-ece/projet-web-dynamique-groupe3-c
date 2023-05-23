@@ -116,7 +116,7 @@ while ($donnees = $reponse->fetch()){
 				<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 					<?php if($Type_compte == "Administrateur") { ?>
 						Ne pas remplir le champ si vous ne voulez pas modifier l'element.<br><br>
-						Nom : <input type="text" name="Newnom" placeholder="Nouveau nom"><br><br>
+						Nom : <input type="text" name="Newnom" placeholder="Changer nom"><br><br>
 						Prénom : <input type="text" name="Newprenom" placeholder="Changer prénom"><br><br>
 						Email : <input type="mail" name="Newmail" placeholder="Changer Adresse mail"><br><br>
 						<label for="motdepasse1">Nouveau mot de passe :</label>
@@ -133,7 +133,7 @@ while ($donnees = $reponse->fetch()){
 							<p style='color:red'>Veuillez rentrer des mots de passe identiques.<br></p>
 						<?php }
 					} ?>
-					<input type="submit" value="modifier"><br><br>
+					<input type="submit" value="modifier"><br>
 				</form>
 			</div>
 		</div>
