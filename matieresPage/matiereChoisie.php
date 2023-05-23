@@ -98,6 +98,7 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
                 <form method="POST" action="modifMatiere.php"  id="formModifMatiere">
                     <input type="submit" name ="modifMatiere" value="Supprimer">
                     <input type="submit" name ="modifMatiere" value="Modifier">
+                    <input type="submit" name ="modifMatiere" value="Ajouter un professeur">
                 </form>
         <?php }
         if($Type_compte=="Etudiant"){?>

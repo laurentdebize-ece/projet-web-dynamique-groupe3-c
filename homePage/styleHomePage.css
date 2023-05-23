@@ -17,16 +17,21 @@
     margin-bottom: 40px;
     display: flex;
     flex-direction: row;
+    margin-left: 60px;
 }
 .flexboxMatieresHP{
     text-align: center;
-    height: 200px;
+    font-family: "openSansLight";
+    height: 160px;
     width: 200px;
     border-radius: 10px;
     background-color: #002B44;
     color: #ECECEC;
     margin-left: 40px;
     margin-right: 40px;
+}
+.flexboxMatieresHP:hover{
+    background: #002B70;
 }
 h4{
     text-align: left;

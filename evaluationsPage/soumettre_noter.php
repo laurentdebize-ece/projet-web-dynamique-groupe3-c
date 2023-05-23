@@ -80,6 +80,7 @@ while ($donnees = $reponse->fetch()){
 
 if ($Type_compte == "Professeur") {
     ?>
+    <div class="login-form3">
     <br> <br>
             <?php
         if($action=="auto evaluation"){    
@@ -104,7 +105,6 @@ if ($Type_compte == "Professeur") {
                 if (isset($_POST['choixPromo'])) {
                     echo 'classe :';
                     $choixPromo = $_POST['choixPromo'];
-                    echo $choixPromo;
                     $reponseclasse = $bdd->prepare('SELECT * FROM classe INNER JOIN promotion ON classe.ID_Promotion = promotion.ID_Promotion WHERE promotion.ID_Promotion = :promo');
                     $reponseclasse->bindParam(':promo', $choixPromo);
                     $reponseclasse->execute();
@@ -120,7 +120,7 @@ if ($Type_compte == "Professeur") {
                             } ?>
                         </select>
                         <input type="hidden" name="choixPromo" value="<?php echo $choixPromo; ?>">
-                        <input type="submit" name="soumettre_evaluation" value="Soumettre">
+                        <input type="submit" name="soumettre_evaluation" value="Soumettre">Soumettre</option>
                     </form>
                 <?php
                 }
@@ -130,9 +130,6 @@ if ($Type_compte == "Professeur") {
                 if (isset($_POST['choixPromo']) && isset($_POST['choixClasse'])) {
                     $choixPromo = $_POST['choixPromo'];
                     $choixClasse = $_POST['choixClasse'];
-                    echo "ID Promo choisie : $choixPromo<br>";
-                    echo "ID Classe choisie : $choixClasse<br>";
-                    echo "ID matiere : $ID_Matiere<br>";
                     echo "Auto evaluation soumise aux etudiants <br>";
 
                     $reponsesenvoyer = $bdd->query('SELECT * FROM promotion INNER JOIN compte ON promotion.ID_Ecole=compte.ID_Ecole AND promotion.ID_Promotion= compte.ID_Promotion 
@@ -202,7 +199,7 @@ if ($Type_compte == "Professeur") {
 
                                 }
                             }?>
-                            <input type="submit" name="appreciation" value ="Donner appreciation">
+                            <input type="submit" name="appreciation" value ="Donner appreciation">Donner appreciation</option>
                                                     </form>
         <?php                    
         }
@@ -221,5 +218,6 @@ if ($Type_compte == "Professeur") {
 }
 
 ?>
+</div>
 </body>
 </html>
