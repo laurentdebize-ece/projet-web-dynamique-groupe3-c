@@ -1,4 +1,5 @@
 <?php
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -12,6 +13,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNNEES
 session_start();
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
@@ -22,9 +24,9 @@ $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 $NomMatiere=$_SESSION['Nom_Matiere_Choisie'];
-
 require_once('../fonction.php');
 
+//CREER UNE MATIERE
 if(isset($_POST['validerAjout'])){
     $tab_matiere = [
         "ID_matiere" => NULL,
@@ -33,6 +35,7 @@ if(isset($_POST['validerAjout'])){
     ];
     insertion($bdd,"matiere", $tab_matiere);
 }
+//MODIFIER UNE MATIERE
 if(isset($_POST['validerModification'])){
     if($_POST['NewNom']!=''){
         $NewNom=$_POST['NewNom'];
@@ -45,8 +48,9 @@ if(isset($_POST['validerModification'])){
 		$bdd->query($modificationMatiere); 
     }
 }
+//SUPPRIMER UNE MATIERE
 if(isset($_POST['validerSuppression'])){
-if($_POST['validerSuppression']=="Valider"){
+    if($_POST['validerSuppression']=="Valider"){
     $reponse=$bdd->query("SELECT ID_Matiere FROM matiere WHERE Nom_matiere='$NomMatiere'");
     while ($donnees = $reponse->fetch()){ 
         $recupIdMatiere=$donnees['ID_Matiere'];
@@ -60,8 +64,10 @@ if($_POST['validerSuppression']=="Valider"){
     $stmt1->execute();
     $stmt2->execute();
     $stmt3->execute();
+    }
 }
-}
+
+//
 if(isset($_POST['validerAjoutProf'])){
     if($_POST['validerAjoutProf']=="Valider"){
         $reponse=$bdd->query("SELECT ID_Matiere FROM matiere WHERE Nom_matiere='$NomMatiere'");
@@ -73,9 +79,11 @@ if(isset($_POST['validerAjoutProf'])){
             "ID_Compte" => $_POST['professeurSelect'],
             "ID_Matiere" => $recupIdMatiere
         ];
-        insertion($bdd,"compte_matiere", $tab_compte_matiere);//Au secourssssssss
+        insertion($bdd,"compte_matiere", $tab_compte_matiere);
     }
 }
+
+//SELECTION DES MATIERES
 if($Type_compte=="Administrateur"){
     $reponseMatiere = $bdd->query("SELECT Nom_matiere FROM matiere");
 } else {

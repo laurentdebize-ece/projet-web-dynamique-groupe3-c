@@ -1,4 +1,5 @@
 <?php
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -12,6 +13,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
@@ -22,8 +24,12 @@ $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 require_once('../fonction.php');
-$Nom_Matiere_Choisie = $_POST['Matiere'];
+if(isset($_POST['Matiere'])){
+    $Nom_Matiere_Choisie = $_POST['Matiere'];
+}
 $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
+
+//SELECTION DES COMPETENCES EN FONCTION DE LA MATIERE
     if($Type_compte=="Administrateur"){
         $reponseCompetence = $bdd->query("SELECT * FROM matiere
             INNER JOIN matiere_competence ON matiere.ID_matiere = matiere_competence.ID_matiere
@@ -47,15 +53,6 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         WHERE compte.ID_Compte = '$ID'
         AND matiere.Nom_Matiere = '$Nom_Matiere_Choisie'");
     }
-if(isset($_POST['validerAjout'])){
-    $tab_competence = [
-        "ID_Competence" => NULL,
-        "Nom_competence" => $_POST['NewNom'],
-        "Date_Creation" => $_POST['NewDate'],
-        "Theme" => $_POST['NewTheme']
-    ];
-    insertion($bdd,"competence", $tab_competence);/*aaaaaaaaaaaaaaaaaledddddddddddddddddddd*/
-}
 ?>
 
 <!DOCTYPE html>
@@ -116,7 +113,7 @@ if(isset($_POST['validerAjout'])){
                     <input type="submit" name ="modifMatiere" value="Ajouter un professeur">
                 </form>
         <?php }
-        else if($Type_compte=="Professeur"){?>
+       if($Type_compte=="Professeur"){?>
             <div class="login-form3">
                 <form method="POST" action="modifCompetenceProf.php">
                     <input type="submit" name ="modifCompetenceProf" value="Ajouter une compétence">

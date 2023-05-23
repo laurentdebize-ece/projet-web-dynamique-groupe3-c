@@ -1,4 +1,5 @@
 <?php
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -12,9 +13,10 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
-	header('Location: ../connexionPage/premiereconnexion.php');
+	header('Location: matiereChoisie.php');
 	exit();
   }
 $ID = $_SESSION['ID_Compte'];
@@ -22,9 +24,46 @@ $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 $Nom_Matiere_Choisie = $_SESSION['Nom_Matiere_Choisie'];
+$_SESSION['Nom_Matiere_Choisie'] = $Nom_Matiere_Choisie;
 require_once('../fonction.php');
+if(isset($_POST['modifMatiere'])){
+    $reponseModifMatiere = $_POST['modifMatiere'];
+}
 
-$reponseModifMatiere = $_POST['modifMatiere'];
+
+//CREATION COMPETENCE DANS UNE MATIERE (PROFIL PROF)
+if(isset($_POST['validerAjoutCompetenceProf'])){
+    $recupNom=$_POST['NewNom'];
+    $recupDate=$_POST['NewDate'];
+    $tablo_competence = [
+        "ID_Competence" => null,
+        "Nom_Competence" => $recupNom,
+        "Date_Creation" => $recupDate,
+        "Theme" => $_POST['NewTheme']
+    ];
+    insertion($bdd, "competence", $tablo_competence);
+    $reponseCompetence = $bdd->query("SELECT ID_Competence FROM competence ORDER BY ID_Competence DESC LIMIT 1");
+    while ($donneesCompetence = $reponseCompetence->fetch()){ 
+        $recupIdCompetence=$donneesCompetence['ID_Competence'];
+    }
+    $reponseMatiere=$bdd->query("SELECT ID_Matiere FROM matiere WHERE Nom_matiere='$Nom_Matiere_Choisie'");
+    while ($donneesMatiere = $reponseMatiere->fetch()){ 
+        $recupIdMatiere=$donneesMatiere['ID_Matiere'];
+    }
+    $reponseCompte=$bdd->query("SELECT Nom FROM compte WHERE ID_Compte='$ID'");
+    while ($donneesCompte = $reponseCompte->fetch()){ 
+        $recupNomCompte=$donneesCompte['Nom'];
+    }
+    $tablo_matiere_competence = [
+        "ID_matiere_competence" => null,
+        "ID_Matiere" => $recupIdMatiere, 
+        "ID_Competence" => $recupIdCompetence,
+        "Professeur" => $recupNomCompte
+    ];
+    insertion($bdd, "matiere_competence", $tablo_matiere_competence);
+    header('Location: matieresPage.php');
+	exit();
+}
 ?>
 
 <!DOCTYPE html>
