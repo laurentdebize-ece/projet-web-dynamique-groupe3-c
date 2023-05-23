@@ -1,4 +1,5 @@
 <?php
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -11,12 +12,13 @@ catch (Exception $e)
 {
     die('Erreur : ' . $e->getMessage());
 }
-
+//RECUPERATION DES DONNEES
 session_start();
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
 	exit();
   }
+require_once('../fonction.php');
 $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
@@ -24,43 +26,57 @@ $_SESSION['Type_compte'] = $Type_compte;
 if(isset($_SESSION['ID_Competence'])){
     $recup_ID_Competence=$_SESSION['ID_Competence'];
 }
-require_once('../fonction.php');
-
 if (isset($_POST['selectCompetence'])) {
     $competenceId = $_POST['selectCompetence'];
-    echo $competenceId;
+}
+if (isset($_POST['selectCompetenceEtudiant'])) {
+    $competenceId2 = $_POST['selectCompetenceEtudiant'];
+}
+//SELECTIONNER LES COMPETENCES QUI APPARTIENNENT AU COMPTE
+ $reponseCompetenceQuiMappartient = $bdd->query("SELECT DISTINCT * FROM competence
+        INNER JOIN compte_competence ON competence.ID_Competence = compte_competence.ID_Competence
+        INNER JOIN compte ON compte_competence.ID_Compte = compte.ID_Compte
+        WHERE compte.ID_Compte = $ID");
+$i=0;
+while($donneesCompetenceQuiMappartient = $reponseCompetenceQuiMappartient->fetch()){
+    $tab_Competence_Appartient[$i] = $donneesCompetenceQuiMappartient['ID_Competence'];
+    $i++;
 }
 
+
+//CREER UNE COMPETENCE
 if(isset($_POST['validerAjout'])){
     $tab_matiere = [
         "ID_Competence" => NULL,
-        "Nom_competence" => $_POST['NewNom'],
+        "Nom_competence" => htmlspecialchars($_POST['NewNom'], ENT_QUOTES, 'UTF-8'),
         "Date_Creation" => $_POST['NewDate'],
-        "Theme" => $_POST['NewTheme']
+        "Theme" => htmlspecialchars($_POST['NewTheme'], ENT_QUOTES, 'UTF-8')
     ];
     insertion($bdd,"competence", $tab_matiere);
 }
+//MODIFIER UNE COMPETENCE
 if(isset($_POST['validerModification'])){
     if ($_POST['NewNom']){
-        $newNom = $_POST['NewNom'];
+        $newNom = htmlspecialchars($_POST['NewNom'], ENT_QUOTES, 'UTF-8');
         echo $newNom;
         $sql = "UPDATE competence SET Nom_competence = '$newNom' WHERE ID_Competence = '$recup_ID_Competence'";
         $bdd->query($sql);
     }
     
     if ($_POST['NewTheme'] != ''){
-        $newTheme = $_POST['NewTheme'];
+        $newTheme =htmlspecialchars($_POST['NewTheme'], ENT_QUOTES, 'UTF-8');
         echo $newTheme;
         $sql = "UPDATE competence SET Theme = '$newTheme' WHERE ID_Competence = '$recup_ID_Competence'";
         $bdd->query($sql);
     }
     if ($_POST['NewDate'] != ''){
-        $newDate = $_POST['NewDate'];
+        $newDate =htmlspecialchars($_POST['NewDate'], ENT_QUOTES, 'UTF-8');
         echo $newDate;
         $sql = "UPDATE competence SET Date_Creation = '$newDate' WHERE ID_Competence = '$recup_ID_Competence'";
         $bdd->query($sql);
     }
 }
+//SUPPRIMER UNE COMPETENCE
 if(isset($_POST['validerSuppression'])){
     if($_POST['validerSuppression']=="Valider"){
         $sql1="DELETE FROM compte_competence WHERE ID_Competence=$recup_ID_Competence";
@@ -73,6 +89,21 @@ if(isset($_POST['validerSuppression'])){
         $stmt2->execute();
         $stmt3->execute();
     }
+}
+//S'AJOUTER UNE COMPETENCE
+if(isset($_POST['selectCompetenceEtudiant'])){
+    $tab_compte_competence = [
+        "ID_compte_competence" => NULL,
+        "ID_Compte" => $ID,
+        "ID_Competence" => $_POST['selectCompetenceEtudiant'],
+        "Moyenne_professeur" => NULL,
+        "Etat_competence" => 'Non Evalue',
+        "Competence_valide_etudiant" => 'Non Evalue',
+        "Competence_valide_professeur" => 'Non Evalue',
+        "Appreciation" => 'Aucune'
+    ];
+    insertion($bdd,"compte_competence", $tab_compte_competence);
+    header("Location: ".$_SERVER['PHP_SELF']);
 }
 ?>
 
@@ -107,7 +138,7 @@ if(isset($_POST['validerSuppression'])){
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-
+//SELECTION DU TRI DES COMPETENCES
     <section id="bodyToutesCompetencesPage">
     <div class="login-form3">
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="formChoixTri">
@@ -123,7 +154,8 @@ if(isset($_POST['validerSuppression'])){
         </form>
     </div>    
 
-<?php if(isset($_POST['choixTriCompetences'])){
+<?php //TRI DES COMPETENCES
+if(isset($_POST['choixTriCompetences'])){
     switch($_POST['choixTriCompetences']) {
         case 1 : //ordre alphabétique compétences
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence ORDER BY Nom_competence");
@@ -141,14 +173,12 @@ if(isset($_POST['validerSuppression'])){
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence ORDER BY Date_Creation DESC");
             break;
         case 6 : //compétence que je n'ai pas
-            $reponseCompetence = "SELECT DISTINCT competence.Nom_competence, competence.ID_Competence FROM competence
-            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
-            WHERE Nom_matiere = $Matiere AND competence.ID_Competence NOT IN (
+            $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence
+            WHERE competence.ID_Competence NOT IN (
             SELECT compte_competence.ID_Competence 
             FROM compte_competence 
             INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence 
-            WHERE compte_competence.ID_Compte = '$ID')";
+            WHERE compte_competence.ID_Compte = $ID)");
             break;
         default :
         $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence");
@@ -156,7 +186,38 @@ if(isset($_POST['validerSuppression'])){
     }
 } else {
     $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM competence");
-}?>
+}
+if($Type_compte=="Etudiant"){ //AFFICHAGE DE L'INTERFACE ETUDIANTE ?>
+<table>
+    <tr id="textLigne1">
+        <th>Compétence</th>
+        <th>Thème</th>
+        <th>Date de création</th>
+        <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant") { ?>
+        <th>Sélection</th>
+        <?php } ?>
+    </tr>
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="formCompetencesEtudiant">
+        <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
+    <tr>
+        <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['Theme']?></td>
+        <td id="textColonne"><?php echo $donneesCompetence['Date_Creation']?></td>
+        
+        <?php if (in_array($donneesCompetence['ID_Competence'], $tab_Competence_Appartient)) { ?>
+        <td id="textColonneSelection">
+            <img src="../img/check.png" alt="check" class="imageCheck">
+        </td>
+        <?php } else { ?>
+        <td id="textColonneSelection">
+            <input type="radio" name="selectCompetenceEtudiant" value="<?php echo $donneesCompetence['ID_Competence']?>" onchange="document.getElementById('formCompetencesEtudiant').submit()">
+        </td>  
+        <?php } ?>    
+    </tr>
+    <?php } ?>
+    </form>
+</table>
+<?php } else { //AFFICHAGE DE L'INTERFACE DES AUTRES UTILISATEURS (ADMIN)?>
 <table>
     <tr id="textLigne1">
         <th>Compétence</th>
@@ -172,21 +233,14 @@ if(isset($_POST['validerSuppression'])){
         <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Theme']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Date_Creation']?></td>
-        <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant") { ?>
+        <?php if($Type_compte=="Administrateur") { ?>
             <td id="textColonneSelection"> <input type="radio" name="selectCompetence" value="<?php echo $donneesCompetence['ID_Competence']?>"></td>
-        <?php }
-        
-        /*if($Type_compte=="Etudiant"){ 
-            if(){ ?>
-                <td><button onclick="ajouterMesCompetence()">Ajouter</button></td>
-            <?php }else{ ?>
-            <?php }
-        } */?>
-        
+        <?php }?>        
     </tr>
     <?php } ?>
 </table>
-<?php if($Type_compte=="Administrateur"){?>
+<?php }
+if($Type_compte=="Administrateur"){?>
     <div class="login-form3">
             <input type="submit" name ="modifCompetence" value="Ajouter">
             <input type="submit" name ="modifCompetence" value="Supprimer">

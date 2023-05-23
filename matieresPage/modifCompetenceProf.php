@@ -1,4 +1,5 @@
 <?php
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -12,6 +13,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
@@ -25,8 +27,13 @@ if(isset($_POST['selectCompetence'])){
     $IdCompetenceChoisie=$_POST['selectCompetence'];
     $_SESSION['ID_Competence']=$IdCompetenceChoisie;
 }
-require_once('../fonction.php');
 $reponseModifCompetenceProf = $_POST['modifCompetenceProf'];
+$NomMatiere=$_SESSION['Nom_Matiere_Choisie'];
+$_SESSION['Nom_Matiere_Choisie']=$NomMatiere;
+if(isset($_POST['selectCompetenceProf'])){
+    $_SESSION['Competence_Select'] = $_POST['selectCompetenceProf'];
+}
+require_once('../fonction.php');
 ?>
 
 <!DOCTYPE html>
@@ -64,17 +71,27 @@ $reponseModifCompetenceProf = $_POST['modifCompetenceProf'];
         <img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
 		<div class="formulaireModification">	
         <div class="login-form2">
-        <form method="POST" action="mesCompetencesPage.php">
+        <form method="POST" action="modifMatiere.php">
             <?php
             if($reponseModifCompetenceProf=="Ajouter une compétence"){?>
                 <h3>Ajouter une nouvelle compétence</h3>
                     Nom de la compétence : <input type="text" name="NewNom" placeholder="Entrez compétence"required><br><br>
                     Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
                     Date de création : <input type="date" name="NewDate"><br><br>
-                    <input type="submit" name="validerAjout" value="Enregistrer">
-            <?php }?>
-                </form>
-            </div>
+                    <input type="submit" name="validerAjoutCompetenceProf" value="Enregistrer">
+            <?php }
+                if($reponseModifCompetenceProf=="Supprimer une compétence"){
+                    if(isset($_POST['selectCompetenceProf'])){?>
+                    <h3>Voulez-vous supprimer la compétence ?</h3>
+                    <input type="submit" name="validerSuppressionCompetenceProf" value="Valider">
+                    <input type="submit" name="validerSuppressionCompetenceProf" value="Annuler">
+                    <?php } else {?>
+                        <h3>Veuillez sélectionner une compétence</h3>
+                        <input type="submit" name="validerSuppressionCompetenceProf" value="Retour">
+                <?php } 
+            } ?>
+        </form>
+        </div>
         </div>        
     </section>
 </body>

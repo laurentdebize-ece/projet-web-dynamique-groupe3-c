@@ -1,4 +1,5 @@
 <?php
+//CONNEXION
 require_once('fonction.php');
 try {
     $mdp="root";

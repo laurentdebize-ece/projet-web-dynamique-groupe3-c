@@ -11,7 +11,7 @@
 
 <body>
 <?php
-
+//CONNEXION
 use function PHPSTORM_META\sql_injection_subst;
 
 try{
@@ -27,6 +27,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
@@ -84,6 +85,7 @@ while ($donneesetu = $reponseetu->fetch()){
         echo '<div style="text-align: center;">Vous regardez le compte de l\'étudiant : '.$donneesetu['Nom'].' '.$donneesetu['Prenom'].'</div>';
     }
 }
+//AFFICHAGE ET MODIFICATION DES APPRECIATIONS
 ?><table>
     <tr id="textLigne1">
         <th>Compétence</th>
@@ -115,12 +117,14 @@ if (isset($_POST['submit'])) {
     foreach ($_POST as $idcompet => $value) {
         if ($idcompet != "submit") {
             if ($value!=""){
-            $sql ="UPDATE compte_competence SET Appreciation='$value' WHERE ID_Compte = '$etudiant' AND ID_compte_competence = '$idcompet'";
+            $valuesecu = htmlspecialchars($value, ENT_QUOTES, 'UTF-8' );
+            $sql ="UPDATE compte_competence SET Appreciation='$valuesecu' WHERE ID_Compte = '$etudiant' AND ID_compte_competence = '$idcompet'";
             $bdd -> query($sql);
             $sql ="UPDATE compte_competence SET Competence_valide_Professeur='valide' WHERE ID_Compte = '$etudiant' AND ID_compte_competence = '$idcompet'";
             $bdd -> query($sql);
         }
     }
+    
 }
 }
 }

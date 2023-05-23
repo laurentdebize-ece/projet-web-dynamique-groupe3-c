@@ -1,5 +1,6 @@
 <?php
 
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -12,7 +13,7 @@ catch (Exception $e)
 {
     die('Erreur : ' . $e->getMessage());
 }
-
+//RECUPERATION DES DONNEES
 $idPromo = $_GET['idPromo'];
 
 $requete = $bdd->prepare('SELECT * FROM classe WHERE ID_Promotion = :idPromo');

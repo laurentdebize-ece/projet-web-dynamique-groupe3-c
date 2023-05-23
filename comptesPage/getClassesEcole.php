@@ -1,5 +1,5 @@
 <?php
-
+//CONNEXION
 try {
     $mdp = "root";
     if (strstr($_SERVER['DOCUMENT_ROOT'], "wamp")) {
@@ -9,7 +9,7 @@ try {
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
-
+// RECUPERATION DES DONNEES
 $idEcole = $_GET['idEcole'];
 
 $requete = $bdd->prepare("SELECT * FROM ecole 

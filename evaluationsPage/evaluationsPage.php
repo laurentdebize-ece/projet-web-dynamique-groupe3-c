@@ -11,7 +11,7 @@
 
 <body>
 <?php
-
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -25,6 +25,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
@@ -67,7 +68,7 @@ while ($donnees = $reponse->fetch()){
     $ID_Matiere=$donnees['ID_Matiere'];
     }
 }
-
+//EVALUATION DES ELEVES PAR LE PROF
 if ($Type_compte == "Professeur") {
     ?>
     <br> <br><br><br>

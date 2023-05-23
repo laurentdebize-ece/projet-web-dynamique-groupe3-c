@@ -1,4 +1,5 @@
 <?php
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -12,11 +13,13 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
 	exit();
-  }
+}
+require_once('../fonction.php');
 $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
@@ -25,7 +28,6 @@ if(isset($_POST['selectCompetence'])){
     $IdCompetenceChoisie=$_POST['selectCompetence'];
     $_SESSION['ID_Competence']=$IdCompetenceChoisie;
 }
-require_once('../fonction.php');
 $reponseModifCompetence = $_POST['modifCompetence'];?>
 
 <!DOCTYPE html>
@@ -59,6 +61,7 @@ $reponseModifCompetence = $_POST['modifCompetence'];?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
+    //MODIFICATION DES COMPTENCES
     <section>
         <img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
 		<div class="formulaireModification">	

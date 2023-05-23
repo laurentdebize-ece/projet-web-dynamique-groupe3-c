@@ -1,4 +1,5 @@
 <?php
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -12,6 +13,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
@@ -22,8 +24,12 @@ $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 require_once('../fonction.php');
-$Nom_Matiere_Choisie = $_POST['Matiere'];
+if(isset($_POST['Matiere'])){
+    $Nom_Matiere_Choisie = $_POST['Matiere'];
+}
 $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
+
+//SELECTION DES COMPETENCES EN FONCTION DE LA MATIERE
     if($Type_compte=="Administrateur"){
         $reponseCompetence = $bdd->query("SELECT * FROM matiere
             INNER JOIN matiere_competence ON matiere.ID_matiere = matiere_competence.ID_matiere
@@ -47,15 +53,6 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         WHERE compte.ID_Compte = '$ID'
         AND matiere.Nom_Matiere = '$Nom_Matiere_Choisie'");
     }
-if(isset($_POST['validerAjout'])){
-    $tab_competence = [
-        "ID_Competence" => NULL,
-        "Nom_competence" => $_POST['NewNom'],
-        "Date_Creation" => $_POST['NewDate'],
-        "Theme" => $_POST['NewTheme']
-    ];
-    insertion($bdd,"competence", $tab_competence);/*aaaaaaaaaaaaaaaaaledddddddddddddddddddd*/
-}
 ?>
 
 <!DOCTYPE html>
@@ -90,6 +87,7 @@ if(isset($_POST['validerAjout'])){
         </div>
     </section>
     <section id="competencesParMatiere">
+<?php if($Type_compte!="Professeur"){ ?>
         <table>
         <tr id="textLigne1">
             <th>Compétences</th>
@@ -109,33 +107,48 @@ if(isset($_POST['validerAjout'])){
     <?php } ?>
     </table>
     <div class="login-form3">
-    <?php if($Type_compte=="Administrateur"){?>
+        <?php if($Type_compte=="Administrateur"){?>
                 <form method="POST" action="modifMatiere.php"  id="formModifMatiere">
                     <input type="submit" name ="modifMatiere" value="Supprimer">
                     <input type="submit" name ="modifMatiere" value="Modifier">
                     <input type="submit" name ="modifMatiere" value="Ajouter un professeur">
                 </form>
         <?php }
-        else if($Type_compte=="Professeur"){?>
-            <div class="login-form3">
-                <form method="POST" action="modifCompetenceProf.php">
-                    <input type="submit" name ="modifCompetenceProf" value="Ajouter une compétence">
-                    <input type="submit" name ="modifCompetenceProf" value="Supprimer une compétence">
-                </form>
-            </div>
-        <?php }
-        else if($Type_compte=="Etudiant"){?>
+        if($Type_compte=="Etudiant"){?>
                 <form method="POST" action="../autoEvaluation/autoevaluation.php" id="AutoEval">
                 <input type="submit" name ="faireEval" value="Auto-évaluation">
                 </form>
         <?php } ?>
     </div>        
-        </section>
+<?php } else { //INTERFACE PROFESSEUR?>
+    <table>
+        <tr id="textLigne1">
+            <th>Compétences</th>
+            <th>Matière</th>
+            <th>Sélection</th>
+        </tr>
+        <form method="POST" action="modifCompetenceProf.php">
+        <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
+        <tr>
+            <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
+            <td id="textColonne"><?php echo $donneesCompetence['Nom_matiere']?></td>
+            <td id="textColonneSelection"> <input type="radio" name="selectCompetenceProf" value="<?php echo $donneesCompetence['ID_Competence']?>"></td>
+        </tr>
+        <?php } ?>
+    </table>
+    <div class="login-form3">
+        <input type="submit" name ="modifCompetenceProf" value="Ajouter une compétence">
+        <input type="submit" name ="modifCompetenceProf" value="Supprimer une compétence">
+     </div>
+     </form> 
+<?php } ?>
+</section>
     
-    <footer>
-        <div class="floatLeft">Projet Développement Web</div>
-        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
-    </footer>
+<footer>
+    <div class="floatLeft">Projet Développement Web</div>
+    <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
+</footer>
+
 </body>
 
 </html>
