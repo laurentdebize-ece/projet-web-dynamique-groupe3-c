@@ -40,11 +40,9 @@ $reponseModifMatiere = $_POST['modifMatiere'];
 <body>
 <section id="header">
         <div class="flex-contain-menu">
-            <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
-            <?php }
-            if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
+        <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
+            <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
+            <?php if($Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <?php }
             if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
@@ -87,14 +85,16 @@ $reponseModifMatiere = $_POST['modifMatiere'];
                     <?php $reponseProfesseurs=$bdd->query("SELECT * FROM compte WHERE Type_compte='Professeur'");
                     while ($donneesProfesseurs = $reponseProfesseurs->fetch()){ ?>
                         <label>
-                        <input type="radio" name="professeurSelect" value="<?php echo $donneesProfesseurs['Nom']?>">
+                        <input type="radio" name="professeurSelect" value="<?php echo $donneesProfesseurs['ID_Compte']?>">
                         <span style="font-family: openSansLight;"><?php echo $donneesProfesseurs['Nom']?></span>
                         </label>
                  <?php } ?>
                  <br>
                  <input type="submit" name="validerAjoutProf" value="Enregistrer">
-                 <?php } ?>
+                <input type="submit" name="validerAjoutProf" value="Annuler">
+                <?php } ?>
                 </form>
+                
             </div>
         </div>
     </section>

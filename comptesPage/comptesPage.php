@@ -128,10 +128,8 @@ if(isset($_POST['validerModification'])){
     <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
-            <?php }
-            if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
+            <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
+            <?php if($Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <?php }
             if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
@@ -188,7 +186,7 @@ if(isset($_POST['validerModification'])){
     <form method="POST" action="modifCompte.php">
 <?php while ($donneesComptes = $reponseComptes->fetch()){ ?> 
     <tr>
-        <td id="textColonne1"><?php echo $donneesComptes['Nom_Compte']?></td>
+        <td id="textColonne1"><?php echo $donneesComptes['Nom']?></td>
         <td id="textColonne"><?php echo $donneesComptes['Prenom']?></td>
         <td id="textColonne"><?php echo $donneesComptes['E_mail']?></td>
         <td class="textColonne"><?php echo $donneesComptes['Type_compte']?></td>

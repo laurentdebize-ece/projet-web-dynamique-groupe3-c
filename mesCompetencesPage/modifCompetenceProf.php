@@ -21,18 +21,26 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
+if(isset($_POST['selectCompetence'])){
+    $IdCompetenceChoisie=$_POST['selectCompetence'];
+    $_SESSION['ID_Competence']=$IdCompetenceChoisie;
+}
+require_once('../fonction.php');
+$reponseModifCompetenceProf = $_POST['modifCompetenceProf'];
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>OMNES MySkills - Compétences transverses</title>
+    <title>OMNES MySkills - Modifier une competence</title>
     <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="styleToutesCompetences.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    <section id="header">
+<section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
             <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
@@ -40,27 +48,34 @@ $_SESSION['Type_compte'] = $Type_compte;
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <?php }
             if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="competencesTransversesPage.php" class="lienClique">Compétences transverses</a></div>
-                <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
-            <?php } 
-            if($Type_compte=="Professeur"){ ?>
+                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.php" class="lienWhite">Compétences transverses</a></div>
+                <div class="flexboxText-menu"><a href="toutesCompetencesPage.php" class="lienClique">Toutes les compétences</a></div>
+                <?php } ?>
+            <?php if($Type_compte=="Professeur"){ ?>
                 <div class="flexboxText-menu"><a href="../evaluationsPage/evaluationsPage.php" class="lienWhite">Evaluations</a></div>
-            <?php }
-            if($Type_compte=="Administrateur"){ ?>
+            <?php } ?>
+            <?php if($Type_compte=="Administrateur"){ ?>
                 <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
             <?php } ?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
-    </section><br><br><br>
-    <div class="container">
-  <div class="centered-text">
-    <p>Fonctionnalités à venir</p>
-  </div>
-</div>
-    <footer>
-        <div class="floatLeft">Projet Développement Web</div>
-        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
-    </footer>
+    </section>
+    <section>
+        <img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
+		<div class="formulaireModification">	
+        <div class="login-form2">
+        <form method="POST" action="mesCompetencesPage.php">
+            <?php
+            if($reponseModifCompetenceProf=="Ajouter une compétence"){?>
+                <h3>Ajouter une nouvelle compétence</h3>
+                    Nom de la compétence : <input type="text" name="NewNom" placeholder="Entrez compétence"required><br><br>
+                    Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
+                    Date de création : <input type="date" name="NewDate"><br><br>
+                    <input type="submit" name="validerAjout" value="Enregistrer">
+            <?php }?>
+                </form>
+            </div>
+        </div>        
+    </section>
 </body>
-
 </html>

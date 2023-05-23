@@ -90,10 +90,8 @@ if(isset($_POST['validerSuppression'])){
 <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
-            <?php }
-            if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
+            <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
+            <?php if($Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <?php }
             if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
@@ -188,9 +186,9 @@ if(isset($_POST['validerSuppression'])){
 </table>
 <?php if($Type_compte=="Administrateur"){?>
     <div class="login-form3">
-            <input type="submit" name ="modifCompetence" value="Ajouter" class="boutonModif">
-            <input type="submit" name ="modifCompetence" value="Supprimer" class="boutonModif">
-            <input type="submit" name ="modifCompetence" value="Modifier" class="boutonModif">
+            <input type="submit" name ="modifCompetence" value="Ajouter">
+            <input type="submit" name ="modifCompetence" value="Supprimer">
+            <input type="submit" name ="modifCompetence" value="Modifier">
         </form>
     </div>
 <?php }?>
