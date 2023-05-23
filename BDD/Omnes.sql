@@ -84,7 +84,7 @@ INSERT INTO `classe` (`ID_Classe`, `Num_groupe`, `ID_Promotion`) VALUES
 
 CREATE TABLE  `compte` (
     `ID_Compte` int(11) PRIMARY KEY AUTO_INCREMENT,
-    `Nom_Compte` varchar(50) NOT NULL,
+    `Nom` varchar(50) NOT NULL,
     `Prenom` varchar(30) NOT NULL,
     `E_mail` varchar(50) NOT NULL,
     `MDP` varchar(30) NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE  `compte` (
     FOREIGN KEY (`ID_Promotion`) REFERENCES `promotion`(`ID_Promotion`)
 );
 
-INSERT INTO `compte` (`ID_Compte`, `Nom_Compte`, `Prenom`, `E_mail`, `MDP`, `Type_compte`, `Deja_connecte`, `ID_Ecole`, `ID_Promotion`) VALUES
+INSERT INTO `compte` (`ID_Compte`, `Nom`, `Prenom`, `E_mail`, `MDP`, `Type_compte`, `Deja_connecte`, `ID_Ecole`, `ID_Promotion`) VALUES
 (1, 'VIRET', 'Pierre', 'pierreviret@gmail.com', '1111','Etudiant',1,1,1),
 (2, 'MASSON', 'Charles', 'Charlesmasson@gmail.com', 'xpzcl421','Etudiant',1,1,1),
 (3, 'BOJ', 'Lucas', 'Lucasboj@gmail.com', 'cpcnifz361q','Etudiant',1,1,2),
@@ -151,7 +151,7 @@ INSERT INTO `matiere` (`ID_Matiere`, `Nom_matiere`, `Volume_horaire`) VALUES
 (10, 'Gestion', 50),
 (11, 'Humanite', 5),
 (12, 'SI', 30),
-(13, 'Sport', 10);
+(13, 'Informatique', 10);
 
 CREATE TABLE  `competence` (
     `ID_Competence` int(11) PRIMARY KEY AUTO_INCREMENT,
@@ -173,7 +173,26 @@ INSERT INTO `competence` (`ID_Competence`, `Nom_competence`, `Date_Creation`, `T
 (10, 'Maxwell', '2018-12-01', 'Physique'),
 (11, 'Alcolemie', '2003-10-17', 'BDE'),
 (12, 'Dessins', '2018-11-01', 'SI'),
-(13, 'Courrir', '2018-02-01', 'Sport');
+(13, 'Courrir', '2018-02-01', 'Physique'),
+(14, 'Methode_Get', '2018-02-01', 'Informatique'),
+(15, 'Methode_Post', '2018-02-01', 'Informatique'),
+(16, 'Maitrise_Boostrap', '2018-02-01', 'Informatique'),
+(17, 'SQL', '2018-02-01', 'Informatique'),
+(18, 'Creation_BDD', '2018-02-01', 'Informatique'),
+(19, 'Maitrise_HTML', '2018-02-01', 'Informatique'),
+(20, 'MEA', '2018-02-01', 'Informatique'),
+(21, 'MLD', '2018-02-01', 'Informatique'),
+(22, 'Normalisation', '2018-02-01', 'Informatique'),
+(23, 'Algebre_Relationnelle', '2018-02-01', 'Informatique'),
+(24, 'Liaison_PHP_BDD', '2018-02-01', 'Informatique'),
+(25, 'Installer_MAMP_WAMP', '2018-02-01', 'Informatique'),
+(26, 'Maitrise_Pyhton', '2018-02-01', 'Informatique'),
+(27, 'Protection_injection_sql', '2018-02-01', 'Informatique'),
+(28, 'Cybersecurite', '2018-02-01', 'Informatique'),
+(29, 'Raylib', '2018-02-01', 'Informatique'),
+(30, 'Alegro', '2018-02-01', 'Informatique'),
+(31, 'Maitrise_JavaScript', '2018-02-01', 'Informatique'),
+(32, 'Maitrise_CSS', '2018-02-01', 'Informatique');
 
 
 CREATE TABLE  `ecole_filiere` (

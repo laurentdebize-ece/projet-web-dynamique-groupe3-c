@@ -60,7 +60,7 @@ function selection_nouvelles_competences($bdd,$ID,$Matiere) {
 
 function selection_4_last_competences($bdd) {
 
-    $sql = "SELECT Nom_competence FROM competence ORDER BY Date_Creation 
+    $sql = "SELECT Nom_competence FROM competence ORDER BY Date_Creation DESC
     LIMIT 4";
 
     $exec = $bdd->prepare($sql);

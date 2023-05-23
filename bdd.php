@@ -75,11 +75,12 @@ insertion($bdd, "compte_competence", $tablo_compte_competence);
 /*
 $tablo_compte_matiere = [
     "ID_compte_matiere" => null,
-    "ID_Compte" => 1, 
-    "ID_Matiere" => 13
+    "ID_Compte" => 7, 
+    "ID_Matiere" => 2
 ];
 insertion($bdd, "compte_matiere", $tablo_compte_matiere);
 */
+
 
 
 //////////////////////////////////////////INSERTION MATIERE_COMPETENCE////////////////////////////////////////////
@@ -94,16 +95,30 @@ insertion($bdd, "matiere_competence", $tablo_matiere_competence);
 */
 
 
-//////////////////////////////////////////INSERTION COMPETENCE//////////////////////////////////////////
-/*
+///////////////////////////////////INSERTION COMPETENCE ET EN MM TEMPS DANS METIERE_COMPETENCE//////////////////////////////////////////
+
 $tablo_competence = [
     "ID_Competence" => null,
-    "Nom" => "Maitrise_Python",
-    "Date_Creation" => 2018,
+    "Nom_Competence" => $recupNom = "Maitrise_Python5",
+    "Date_Creation" => $recupDate = "2018-05-17",
     "Theme" => "Programmation"
 ];
-insertion($bdd, "Competence", $tablo_competence)
-*/
+insertion($bdd, "Competence", $tablo_competence);
+
+$sql = "SELECT ID_Competence FROM Competence WHERE Nom_Competence ='$recupNom' AND Date_Creation = '$recupDate'";
+
+$exec = $bdd->prepare($sql);
+$exec->execute();
+
+$ID_matiere_competence = $exec->fetchAll(PDO::FETCH_ASSOC);
+
+$tablo_matiere_competence = [
+    "ID_matiere_competence" => null,
+    "ID_Matiere" => 3, 
+    "ID_Competence" => $ID_matiere_competence[0]['ID_Competence'],
+    "Professeur" => "HINTZYLE10E"
+];
+insertion($bdd, "matiere_competence", $tablo_matiere_competence);
 
 
 //////////////////////////////////////////INSERTION MATIERE///////////////////////////////////////////
