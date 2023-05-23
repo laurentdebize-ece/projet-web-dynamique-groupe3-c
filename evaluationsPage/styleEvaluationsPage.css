@@ -2,21 +2,26 @@
     text-align: left;
     font-family: "openSansLight";
     font-size: medium;
-    margin-left: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 h7{
     font-style: normal;
+    margin-left: 30px;
+    font-size: larger;
 }
 #promotion{
     font-weight: bolder;
-    margin-left: 30px;
+    margin-left: 50px;
 }
 #groupe{
     font-weight: lighter;
-    margin-left: 30px;
+    margin-left: 50px;
 }
 #etudiant{
-    margin-left: 40px;
+    margin-left: 50px;
+    font-style: italic;
+}
+#promo{
+    margin-left: 70px;
     font-style: italic;
 }

@@ -88,11 +88,14 @@ if ($Type_compte == "Professeur") {
     <div class="login-form3">
     <br> <br>
             <?php
-        if($action=="auto evaluation"){    
+        if($action=="Auto Evaluation"){    
             $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                promo :
+            <section id="titre">
+            <h7>Auto évaluation : <br></h7>
+            <div id="promo"> <br>promo :
                 <select name="choixPromo" id="selectPromo" onchange="showClasses(this.value)">
+        
                     <?php
                     while ($donneespromo = $reponsepromo->fetch()) { 
                         if ($donneespromo['ID_Ecole'] == $ID_Ecole && $donneespromo['ID_Promotion'] != 0) {
@@ -100,14 +103,14 @@ if ($Type_compte == "Professeur") {
                             <option value="<?php echo $donneespromo['ID_Promotion'];?>"><?php echo $donneespromo['Annee_fin'];?>  </option>
                             <?php
                         }
-                    } ?>
+                    } ?></div>
                 </select>
-                classe :
+                <br> <br>classe :
                 <select name="choixClasse" id="selectClasse" >
-                                    <option>choisir</option>
-                        </select>
-                        <input type="hidden" name="choixPromo" value="<?php echo $choixPromo; ?>">
-                        <input type="submit" name="soumettre_evaluation" value="Soumettre">Soumettre</option>
+                        <option>choisir</option>
+                    </select>
+                       <br><br><br>
+                        <input type="submit" name="soumettre_evaluation" value="Soumettre">
                     </form>
                 <?php
                 
@@ -142,51 +145,54 @@ if ($Type_compte == "Professeur") {
                     }
                 }
             }
-        else if($action=="evaluation"){
-            echo "evaluer un etudiant : <br>";
-                            $reponsepromo2 = $bdd->query('SELECT * FROM promotion');
+        else if($action=="Evaluation"){
+            ?><section id="titre">
+        <h7>Evaluer un étudiant : <br></h7>
+    <?php
+                            $reponsepromo2 = $bdd->query('SELECT * FROM promotion');?>
+                            <div id="promotion">
+                            <?php
                             while ($donneespromo2 = $reponsepromo2->fetch()) { 
                                 if ($donneespromo2['ID_Ecole'] == $ID_Ecole && $donneespromo2['ID_Promotion'] != 0) {
                                     $promo=$donneespromo2['ID_Promotion'];
-                                    echo "Promotion : " . $donneespromo2['Annee_fin']." :<br>";
+                                    echo "<br> Promotion : " . $donneespromo2['Annee_fin']."<br>";
                                     
 
                                     $reponseclasse2 = $bdd->prepare('SELECT * FROM classe INNER JOIN promotion ON classe.ID_Promotion = promotion.ID_Promotion WHERE promotion.ID_Promotion = :promo AND promotion.ID_Ecole = :ID_Ecole');
                                     $reponseclasse2->bindParam(':promo', $promo);
                                     $reponseclasse2->bindParam(':ID_Ecole', $ID_Ecole);
-                                    $reponseclasse2->execute();
+                                    $reponseclasse2->execute();?>
+                                    <div id="groupe">
+                                    <?php 
                                     while ($donneesclasse2 = $reponseclasse2->fetch()) { 
                                         if ($donneesclasse2['ID_Promotion'] == $promo && $donneespromo2['ID_Ecole'] == $ID_Ecole) {
                                             $classe=$donneesclasse2['ID_Classe'];
-                                            echo "- Groupe : " . $donneesclasse2['Num_groupe']."<br>";
+                                            echo "<br>Groupe " . $donneesclasse2['Num_groupe']."<br>";
                                             $reponseetudiant = $bdd->prepare('SELECT * FROM compte INNER JOIN compte_classe ON compte.ID_Compte=compte_classe.ID_Compte WHERE compte.ID_Promotion = :promo AND compte.ID_Ecole = :ID_Ecole AND compte.Type_compte = "Etudiant"');
                                             $reponseetudiant->bindParam(':promo', $promo);
                                             $reponseetudiant->bindParam(':ID_Ecole', $ID_Ecole);
-                                            $reponseetudiant->execute();
+                                            $reponseetudiant->execute();?>
+                                            <div id="etudiant">
+                                            <?php 
                                             while ($donneesetudiant = $reponseetudiant->fetch()) { 
                                                 if ($donneesetudiant['ID_Classe'] == $classe && $donneesclasse2['ID_Promotion'] == $promo && $donneespromo2['ID_Ecole'] == $ID_Ecole) {
-                                                    echo "-- Etudiant : " . $donneesetudiant['Nom_Compte'].' '. $donneesetudiant['Prenom'];
                                                     $etudiant = $donneesetudiant['ID_Compte'];
-                                                    
                                                     ?>
-                                                    
-
                                                     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
                                                         <input type="radio" name="etudiant" value="<?php echo $etudiant ?>">
+                                                        <?php echo $donneesetudiant['Nom'].' '. $donneesetudiant['Prenom'];?>
                                                         <br>
                                                     <?php
-                                                
                                                 }
-                                            }
+                                            }?> </div><?php
 
 
                                         }
-                                    }
+                                    }?> </div><?php
 
                                 }
-                            }?>
-                            <input type="submit" name="appreciation" value ="Donner appreciation">Donner appreciation</option>
+                            }?> </div><br><br>
+                            <input type="submit" name="appreciation" value ="Donner appreciation">
                                                     </form>
         <?php                    
         }
