@@ -142,7 +142,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                             <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
                         <?php } ?> 
                     </select><br><br>
-                    Classe : <div id="classeSelectProf"></div><br><br>
+                    Classe : <div id="classeSelectProf"></div><br>
                     Matière : <select name="NewMatiere" id="matiereSelectProf">
                         <option>Choisir</option>
                         <?php $reponseMatiere = $bdd->query('SELECT * FROM matiere');

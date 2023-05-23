@@ -86,11 +86,16 @@ $reponseCreation = $_POST['creerEcolePromoClasse'];?>
     <div class="formulaireModification">
         <div class="login-form2">
             <form method="POST" action="comptesPage.php" id="ajouterCompte">
-                <?php if($reponseCreation == "Créer une école"){ ?>
+                
+            
+            <?php if($reponseCreation == "Créer une école"){ ?>
                 <h3>Ajouter une école</h3>
                 Nom de l'école : <input type="text" name="NewNomEcole" placeholder="Entrez nom"required><br><br>
                 <input type="submit" name="validerAjoutEcole" value="Enregistrer">
                 <?php }
+                
+                
+                
                 if($reponseCreation == "Créer une promo") { ?>
                 <h3>Ajouter une promo</h3>
                 Année de début : <input type="number" name="NewAnneeDebut" placeholder="Entrez annéee début"required min=0><br><br>
@@ -98,15 +103,19 @@ $reponseCreation = $_POST['creerEcolePromoClasse'];?>
                 Ecole : <select name="NewEcole">
                     <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                     while ($donneesEcole = $reponseEcole->fetch()){ ?>
-                    <option value="<?php $donneesEcole['ID_Ecole'] ?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
+                    <option value="<?php echo $donneesEcole['ID_Ecole'] ?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
                     <?php } ?>
                 </select><br><br>
                 <input type="submit" name="validerAjoutPromo" value="Enregistrer">
                 <?php }
+                
+                
+                
+                
+                
                 if($reponseCreation == "Créer une classe") { ?>
                 <h3>Ajouter une classe</h3>
                 Numéro du groupe : <input type="number" name="NewNumGroupe" placeholder="Entrez numéro du groupe"required min=0><br><br>
-                Nombre d'étudiants : <input type="number" name="NewNombreEtudiants" placeholder="Entrez nombre d'étudiants"required min=0><br><br>
                 Ecole : <select name="NewEcole" id="selectEcole" onchange="showPromos(this.value)">
                     <option>Choisir</option>
                     <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');

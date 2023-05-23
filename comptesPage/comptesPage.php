@@ -100,6 +100,29 @@ if(isset($_POST['validerModification'])){
             }
         }
     }
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if(isset($_POST['validerAjoutEcole'])){
+            $sql = "INSERT INTO ecole (Nom_Ecole) VALUES ('".$_POST['NewNomEcole']."')";
+            $bdd->query($sql);
+        }
+        if(isset($_POST['validerAjoutPromo'])){
+            $requete = $bdd->prepare( "INSERT INTO promotion (ID_Ecole, Annee_debut, Annee_fin) VALUES (:NewEcole, :NewDebut, :NewFin)");
+            $requete->bindParam(':NewEcole',$_POST['NewEcole']);
+            $requete->bindParam(':NewDebut', $_POST['NewAnneeDebut']);
+            $requete->bindParam(':NewFin', $_POST['NewAnneeFin']);
+            $requete->execute();
+        }
+        if(isset($_POST['validerAjoutClasse'])){
+
+            $requete = $bdd->prepare( "INSERT INTO classe (Num_groupe, ID_Promotion) VALUES (:Newgroupe, :NewPromo)");
+            $requete->bindParam(':Newgroupe', $_POST['NewNumGroupe']);
+            $requete->bindParam(':NewPromo', $_POST['NewPromotion']);
+            $requete->execute();
+        }
+    }
+
+
+
                                             
 ?>
     <section id="header">
