@@ -30,6 +30,9 @@ if(isset($_POST['selectCompetence'])){
 $reponseModifCompetenceProf = $_POST['modifCompetenceProf'];
 $NomMatiere=$_SESSION['Nom_Matiere_Choisie'];
 $_SESSION['Nom_Matiere_Choisie']=$NomMatiere;
+if(isset($_POST['selectCompetenceProf'])){
+    $_SESSION['Competence_Select'] = $_POST['selectCompetenceProf'];
+}
 require_once('../fonction.php');
 ?>
 
@@ -76,9 +79,19 @@ require_once('../fonction.php');
                     Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
                     Date de création : <input type="date" name="NewDate"><br><br>
                     <input type="submit" name="validerAjoutCompetenceProf" value="Enregistrer">
-            <?php }?>
-                </form>
-            </div>
+            <?php }
+                if($reponseModifCompetenceProf=="Supprimer une compétence"){
+                    if(isset($_POST['selectCompetenceProf'])){?>
+                    <h3>Voulez-vous supprimer la compétence ?</h3>
+                    <input type="submit" name="validerSuppressionCompetenceProf" value="Valider">
+                    <input type="submit" name="validerSuppressionCompetenceProf" value="Annuler">
+                    <?php } else {?>
+                        <h3>Veuillez sélectionner une compétence</h3>
+                        <input type="submit" name="validerSuppressionCompetenceProf" value="Retour">
+                <?php } 
+            } ?>
+        </form>
+        </div>
         </div>        
     </section>
 </body>

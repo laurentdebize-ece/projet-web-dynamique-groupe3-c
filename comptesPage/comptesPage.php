@@ -71,10 +71,19 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       }
                       
                       if($NewTypeCompte=="Professeur") {
-                        //$NewMatiere = $_POST['NewMatiere'];
+                        $NewMatiere = $_POST['NewMatiere'];
                         $NewIDecole=htmlspecialchars($_POST['NewEcoleProf'], ENT_QUOTES, 'UTF-8');
-                        $NewClasse = $_POST['NewClasseProf'];
+                        $NewClasse = 0;
                         $NewPromo = 0;
+
+                        $reponseMatiere = $bdd->query('SELECT ID_Compte FROM compte ORDER BY ID_Compte DESC LIMIT 1');
+                        $donneesMatiere = $reponseMatiere->fetch();
+                        $NewIDCompte= $donneesMatiere['ID_Compte'];
+                        $requete = $bdd->prepare("INSERT INTO compte_matiere (ID_Compte, ID_Matiere) VALUES (:NewIDCompte, :NewMatiere)");
+                        $requete->bindParam(':NewIDCompte', $NewIDCompte);
+                        $requete->bindParam(':NewMatiere', $NewMatiere);
+                        $requete->execute();
+
                       }
                       $requete = $bdd->prepare("INSERT INTO compte (Nom, Prenom, E_mail, MDP,Type_compte, Deja_connecte,ID_Ecole,ID_Promotion) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole, :NewPromo)");
                       $requete->bindParam(':NewNom', $NewNom);
@@ -94,6 +103,8 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       $requete->bindParam(':NewIDCompte', $NewIDCompte);
                       $requete->bindParam(':NewClasse', $NewClasse);
                       $requete->execute();
+
+                      
                     }
                     //Supprimer
                     if(isset($_POST['validerSuppression'])){
