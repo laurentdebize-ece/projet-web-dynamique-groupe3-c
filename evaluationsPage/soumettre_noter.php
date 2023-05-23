@@ -91,7 +91,7 @@ if ($Type_compte == "Professeur") {
                     while ($donneespromo = $reponsepromo->fetch()) { 
                         if ($donneespromo['ID_Ecole'] == $ID_Ecole) {
                             ?>
-                            <option value="<?php echo $donneespromo['ID_Promotion'];?>"><?php echo $donneespromo['Anne_fin'];?> </option>
+                            <option value="<?php echo $donneespromo['ID_Promotion'];?>"><?php echo $donneespromo['Annee_fin'];?> </option>
                             <?php 
                         }
                     } ?>
@@ -161,7 +161,7 @@ if ($Type_compte == "Professeur") {
                             while ($donneespromo2 = $reponsepromo2->fetch()) { 
                                 if ($donneespromo2['ID_Ecole'] == $ID_Ecole) {
                                     $promo=$donneespromo2['ID_Promotion'];
-                                    echo "Promotion : " . $donneespromo2['Anne_fin']." :<br>";
+                                    echo "Promotion : " . $donneespromo2['Annee_fin']." :<br>";
                                     
 
                                     $reponseclasse2 = $bdd->prepare('SELECT * FROM classe INNER JOIN promotion ON classe.ID_Promotion = promotion.ID_Promotion WHERE promotion.ID_Promotion = :promo AND promotion.ID_Ecole = :ID_Ecole');
@@ -172,7 +172,7 @@ if ($Type_compte == "Professeur") {
                                         if ($donneesclasse2['ID_Promotion'] == $promo && $donneespromo2['ID_Ecole'] == $ID_Ecole) {
                                             $classe=$donneesclasse2['ID_Classe'];
                                             echo "- Groupe : " . $donneesclasse2['Num_groupe']."<br>";
-                                            $reponseetudiant = $bdd->prepare('SELECT * FROM compte WHERE ID_Classe = :classe AND ID_Promotion = :promo AND ID_Ecole = :ID_Ecole');
+                                            $reponseetudiant = $bdd->prepare('SELECT * FROM compte WHERE ID_Classe = :classe AND ID_Promotion = :promo AND ID_Ecole = :ID_Ecole AND Type_compte = "Etudiant"');
                                             $reponseetudiant->bindParam(':classe', $classe);
                                             $reponseetudiant->bindParam(':promo', $promo);
                                             $reponseetudiant->bindParam(':ID_Ecole', $ID_Ecole);

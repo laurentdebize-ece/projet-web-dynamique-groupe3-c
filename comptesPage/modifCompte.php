@@ -121,7 +121,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                         <option>Choisir</option>
                         <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                         while ($donneesEcole = $reponseEcole->fetch()){ ?>
-                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom'] ?></option>
+                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
                         <?php } ?> 
                     </select><br><br>
                     Promo : <select name="NewPromo" id="promoSelect" onchange="showClassesPromo(this.value)">
@@ -132,14 +132,14 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                     </select><br><br>
                 </div>
                 <div id="professeurChamps" style="display: none;">
-                    Ecole : <select name="NewEcole" id="ecoleSelect" onchange="showClassesEcole(this.value)" >
+                    Ecole : <select name="NewEcoleProf" id="ecoleSelect" onchange="showClassesEcole(this.value)" >
                         <option>Choisir</option>
                         <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                         while ($donneesEcole = $reponseEcole->fetch()){ ?>
                             <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom'] ?></option>
                         <?php } ?> 
                     </select><br><br>
-                    Classe : <select name="NewClasse" id="classeSelectByEcole">
+                    Classe : <select name="NewClasseProf" id="classeSelectByEcole">
                         <option>Choisir</option>
                     </select><br><br>
                     Matière : <select name="NewMatiere" id="matiereSelect">
