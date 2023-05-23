@@ -103,6 +103,7 @@ if(isset($_POST['selectCompetenceEtudiant'])){
         "Appreciation" => 'Aucune'
     ];
     insertion($bdd,"compte_competence", $tab_compte_competence);
+    header("Location: ".$_SERVER['PHP_SELF']);
 }
 ?>
 
