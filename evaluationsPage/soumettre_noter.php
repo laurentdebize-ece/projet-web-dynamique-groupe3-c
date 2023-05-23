@@ -165,7 +165,7 @@ if ($Type_compte == "Professeur") {
                                             $reponseetudiant->execute();
                                             while ($donneesetudiant = $reponseetudiant->fetch()) { 
                                                 if ($donneesetudiant['ID_Classe'] == $classe && $donneesclasse2['ID_Promotion'] == $promo && $donneespromo2['ID_Ecole'] == $ID_Ecole) {
-                                                    echo "-- Etudiant : " . $donneesetudiant['Nom_Compte'].' '. $donneesetudiant['Prenom'];
+                                                    echo "-- Etudiant : " . $donneesetudiant['Nom'].' '. $donneesetudiant['Prenom'];
                                                     $etudiant = $donneesetudiant['ID_Compte'];
                                                     
                                                     ?>

@@ -64,17 +64,17 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       }
                       if($_POST['NewTypeCompte']=="Etudiant") {
                         $NewPromo = $_POST['NewPromo'];
-                        $NewClasse = $_POST['NewClasse'];
+                        //$NewClasse = $_POST['NewClasse'];
                         $NewIDecole=$_POST['NewEcole'];
                       }
                       
                       if($_POST['NewTypeCompte']=="Professeur") {
                         //$NewMatiere = $_POST['NewMatiere'];
                         $NewIDecole=$_POST['NewEcoleProf'];
-                        $NewClasse = $_POST['NewClasseProf'];
+                        //$NewClasse = $_POST['NewClasseProf'];
                         $NewPromo = 0;
                       }
-                      $requete = $bdd->prepare("INSERT INTO compte (Nom_Compte, Prenom, E_mail, MDP,Type_compte, Deja_connecte,ID_Ecole,ID_Promotion,ID_Classe) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole, :NewPromo, :NewClasse)");
+                      $requete = $bdd->prepare("INSERT INTO compte (Nom_Compte, Prenom, E_mail, MDP,Type_compte, Deja_connecte,ID_Ecole,ID_Promotion) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole, :NewPromo)");
                       $requete->bindParam(':NewNom', $NewNom);
                       $requete->bindParam(':NewPrenom', $NewPrenom);
                       $requete->bindParam(':NewEmail', $NewEmail);
@@ -83,7 +83,6 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       $requete->bindParam(':NewDejaCo', $NewDejaCo);
                       $requete->bindParam(':NewIDecole', $NewIDecole);
                       $requete->bindParam(':NewPromo', $NewPromo);
-                      $requete->bindParam(':NewClasse', $NewClasse);
                       $requete->execute();
                     }
                     //Supprimer
