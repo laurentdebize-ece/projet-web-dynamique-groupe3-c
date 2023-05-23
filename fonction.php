@@ -243,10 +243,6 @@ function modifier_Moyenne_Professeur($PDO, $table, $nouvelleMoyenne, $ID_Profess
 
 
 
-
-
-
-
 ?>
 
 
