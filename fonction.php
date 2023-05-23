@@ -159,6 +159,9 @@ function supprimer($PDO, $table, $where) { //pour les attributs non clés
 
 function supprimer_matiere($PDO, $IDMATIERE) {
     
+
+    /* On doit d'abord supprimer les données dans les tables qui ont une clé étrangère vers la table matière */
+
     $sql2 = "DELETE FROM matiere_competence WHERE ID_Matiere = $IDMATIERE";
     $sql3 = "DELETE FROM compte_matiere WHERE ID_Matiere = $IDMATIERE";
     $sql = "DELETE FROM matiere WHERE ID_Matiere = $IDMATIERE";
@@ -191,7 +194,7 @@ function supprimer_compte($PDO, $ID) {
 function insertion($PDO,$table, $valeur_tableau)
 {
   
-    $donnes = implode(", ", array_keys($valeur_tableau));
+    $donnes = implode(", ", array_keys($valeur_tableau)); //implode transforme un tableau en chaine de caractère
     $valeurs_donnees = ":" . implode(", :", array_keys($valeur_tableau));
     $sql = "INSERT INTO $table ($donnes) VALUES ($valeurs_donnees)";
 
