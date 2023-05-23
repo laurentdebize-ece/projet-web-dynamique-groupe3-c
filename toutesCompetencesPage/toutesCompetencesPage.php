@@ -21,7 +21,9 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
-$recup_ID_Competence=$_SESSION['ID_Competence'];
+if(isset($_SESSION['ID_Competence'])){
+    $recup_ID_Competence=$_SESSION['ID_Competence'];
+}
 require_once('../fonction.php');
 
 if (isset($_POST['selectCompetence'])) {

@@ -78,6 +78,10 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
   $Type_compte = $_SESSION['Type_compte'];
   $_SESSION['ID_Compte'] = $ID;
   $_SESSION['Type_compte'] = $Type_compte;
+  if(isset($_POST['selectCompte'])){
+    $_SESSION['selectCompte'] = $_POST['selectCompte'];
+    echo $_SESSION['selectCompte'];
+  } else{echo 'aaaaa';}
   $reponseModifCompte = $_POST['modifCompte'];?>  
      <section id="header">
         <div class="flex-contain-menu">
@@ -150,12 +154,17 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                 </div>
                 <input type="submit" name="validerAjout" value="Enregistrer">
                 <?php }
-                if($reponseModifCompte=="Supprimer"){?>
-                <h3>Supprimer un compte</h3>
-                Nom : <input type="text" name="NewNom" placeholder="Entrez nom"required><br><br>
-                Prenom : <input type="text" name="NewPrenom" placeholder="Entrez prénom"required><br><br>
-                <input type="submit" name="validerSuppression" value="Enregistrer">
+
+                if($reponseModifCompte=="Supprimer"){
+                if(isset($_POST['selectCompte'])){?>
+                    <h3>Etes vous sur de vouloir supprimer le compte ?</h3>
+                    <input type="submit" name="validerSuppression" value="Valider"> 
+                    <input type="submit" name="validerSuppression" value="Annuler"> 
+                <?php } else {?>
+                    <h3>Veuillez sélectionner un compte à supprimer !</h3>
+                    <input type="submit" name="retourMenu" value="Retour">
                 <?php }
+                }
                 if($reponseModifCompte=="Modifier"){?>
                 <h3>Modifier un compte</h3>
                 Nom : <input type="text" name="NewNom" placeholder="Entrez nom"required><br><br>

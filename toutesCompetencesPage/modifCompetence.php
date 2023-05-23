@@ -82,7 +82,7 @@ $reponseModifCompetence = $_POST['modifCompetence'];
                     <input type="submit" name="validerSuppression" value="Annuler"> 
                 <?php } else {?>
                     <h3>Veuillez sélectionner une compétence à supprimer !</h3>
-                    <input type="submit" name="retourMeni" value="Retour">
+                    <input type="submit" name="retourMenu" value="Retour">
                 <?php }
             }
                 if($reponseModifCompetence=="Modifier"){
