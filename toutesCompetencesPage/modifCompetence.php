@@ -45,7 +45,7 @@ $reponseModifCompetence = $_POST['modifCompetence'];?>
             <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
             <?php if($Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
-            <?php }
+            <?php } ?>
             <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.php" class="lienWhite">Compétences transverses</a></div>
                 <div class="flexboxText-menu"><a href="toutesCompetencesPage.php" class="lienClique">Toutes les compétences</a></div>
@@ -84,13 +84,13 @@ $reponseModifCompetence = $_POST['modifCompetence'];?>
             if($reponseModifCompetence=="Modifier"){
                 if(isset($_POST['selectCompetence'])){?>
                     <h3>Modifier une compétence</h3>
-                    Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
+                    Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"><br><br>
                     Thème : <input type="text" name="NewTheme" placeholder="Entrez thème"><br><br>
                     Date de création : <input type="date" name="NewDate"><br><br>
                    <input type="submit" name="validerModification" value="Enregistrer">
                 <?php } else {?>
                     <h3>Veuillez sélectionner une compétence à supprimer !</h3>
-                    <input type="submit" name="retourMeni" value="Retour">
+                    <input type="submit" name="retourmodif" value="Retour">
                 <?php }
             }?>
                 </form>
