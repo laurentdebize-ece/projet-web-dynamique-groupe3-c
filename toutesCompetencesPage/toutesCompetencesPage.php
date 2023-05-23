@@ -40,19 +40,27 @@ if(isset($_POST['validerAjout'])){
     ];
     insertion($bdd,"competence", $tab_matiere);
 }
-/*
 if(isset($_POST['validerModification'])){
-    if($_POST['NewNom']!=''){
-        $NewNom=$_POST['NewNom'];
-        $modificationMatiere = "UPDATE matiere SET Nom_matiere = '$NewNom' WHERE Nom_matiere='$NomMatiere'";
-		$bdd->query($modificationMatiere);
+    if ($_POST['NewNom']){
+        $newNom = $_POST['NewNom'];
+        echo $newNom;
+        $sql = "UPDATE competence SET Nom_competence = '$newNom' WHERE ID_Competence = '$recup_ID_Competence'";
+        $bdd->query($sql);
     }
-    if($_POST['NewVolumeHoraire']!=''){
-        $NewVolumeHoraire=$_POST['NewVolumeHoraire'];
-        $modificationMatiere = "UPDATE matiere SET Volume_horaire = '$NewVolumeHoraire' WHERE Nom_matiere='$NomMatiere'";
-		$bdd->query($modificationMatiere); 
+    
+    if ($_POST['NewTheme'] != ''){
+        $newTheme = $_POST['NewTheme'];
+        echo $newTheme;
+        $sql = "UPDATE competence SET Theme = '$newTheme' WHERE ID_Competence = '$recup_ID_Competence'";
+        $bdd->query($sql);
     }
-}*/
+    if ($_POST['NewDate'] != ''){
+        $newDate = $_POST['NewDate'];
+        echo $newDate;
+        $sql = "UPDATE competence SET Date_Creation = '$newDate' WHERE ID_Competence = '$recup_ID_Competence'";
+        $bdd->query($sql);
+    }
+}
 if(isset($_POST['validerSuppression'])){
     if($_POST['validerSuppression']=="Valider"){
         $sql1="DELETE FROM compte_competence WHERE ID_Competence=$recup_ID_Competence";
