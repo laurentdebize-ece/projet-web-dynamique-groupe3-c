@@ -80,10 +80,10 @@ while ($donnees = $reponse->fetch()){
 if ($Type_compte == "Professeur") {
     ?>
     <br> <br>
-    
+ <div class="login-form3">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <input type="submit" name="valideaction" value="evaluation">
-        <input type="submit" name="valideaction" value="auto evaluation">
+        <input type="submit" name="valideaction" value="evaluation">Evaluation</option>
+        <input type="submit" name="valideaction" value="auto evaluation">Auto Evaluation</option>
     </form>
     <?php
     if (isset($_POST['valideaction'])) {
@@ -131,6 +131,7 @@ if ($Type_compte == "Professeur") {
     }
 
 ?>
+</div>
 
 
 </body>

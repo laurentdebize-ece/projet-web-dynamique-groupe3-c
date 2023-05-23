@@ -17,6 +17,7 @@
     margin-bottom: 40px;
     display: flex;
     flex-direction: row;
+    margin-left: 60px;
 }
 .flexboxMatieresHP{
     text-align: center;
