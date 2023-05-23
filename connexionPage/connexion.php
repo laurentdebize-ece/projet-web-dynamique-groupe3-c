@@ -33,7 +33,7 @@ $identifiants_corrects = false;
 	}	
 		if($identifiants_corrects) {
 			session_start();
-			$_SESSION['ID_Compte'] = $ID;
+			$_SESSION['ID_Compte'] =htmlspecialchars($ID, ENT_QUOTES, 'UTF-8');
 			header('Location: premiereconnexion.php');
 			exit();
 		}

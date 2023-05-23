@@ -76,19 +76,20 @@ $_SESSION['classe'] = $classe;
     <?php
 $reponseetu = $bdd->query('SELECT * FROM compte');
 ?><div class="login-form3">
-    <section id="titre">
-        <h7>Appréciation : <br></h7>
-       <?php 
+    <section id="titre"><br><br><br><br>
+        <h7>Appréciation : <br><br></h7>
+<?php 
 while ($donneesetu = $reponseetu->fetch()){
     if ($donneesetu['ID_Compte'] == $etudiant) {
-        echo "Vous regardez le compte de l'étudiant : ".$donneesetu['Nom']." ".$donneesetu['Prenom']."";
+        echo '<div style="text-align: center;">Vous regardez le compte de l\'étudiant : '.$donneesetu['Nom'].' '.$donneesetu['Prenom'].'</div>';
     }
 }
 ?><table>
     <tr id="textLigne1">
         <th>Compétence</th>
-        <th>Thème</th>
-        <th>Date de création</th>
+        <th>Note de l'étudiant</th>
+        <th>Appréciation actuelle</th>
+        <th>Nouvelle appréciation</th>
     </tr>
     <?php
     if ($Type_compte=='Professeur'){
@@ -97,8 +98,10 @@ while ($donneesetu = $reponseetu->fetch()){
         if ($donnees['ID_Compte'] == $etudiant && $donnees['ID_Matiere']==$ID_Matiere ) { ?>
             <tr>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <td><?php echo $donnees['Nom_competence' ]."  Note de l'etudiant : ".$donnees['Etat_competence'] . ".            Appreciation : ".$donnees['Appreciation'] ;
-                $idcompet =$donnees['ID_compte_competence']; ?></td>
+                <td><?php echo $donnees['Nom_competence' ] ;?></td>
+                <td><?php echo $donnees['Etat_competence'];?></td>
+                <td><?php echo $donnees['Appreciation'];?></td>
+                <?php $idcompet =$donnees['ID_compte_competence']; ?></td>
                 <td> <input type="text" name=" <?php echo $idcompet; ?>"></td>
                 <br><br>
         <?php

@@ -168,10 +168,42 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                 Prénom : <input type="text" name="NewPrenom" placeholder="Entrez prénom"required><br><br>
                 Email : <input type="text" name="NewEmail" placeholder="Entrez adresse mail"required><br><br>
                 Type de compte:<br>
-                    <input type="radio" name="NewTypeCompte" value="Etudiant"> Etudiant
-                    <input type="radio" name="NewTypeCompte" value="Professeur">Professeur
-                    <input type="radio" name="NewTypeCompte" value="Administrateur">Administrateur
-                <br><br>
+                    <input type="radio" name="NewTypeCompte" value="Etudiant" onclick="showEtudiantChamps()"> Etudiant
+                    <input type="radio" name="NewTypeCompte" value="Professeur" onclick="showProfesseurChamps()">Professeur
+                    <input type="radio" name="NewTypeCompte" value="Administrateur" onclick="cacherExtraChamps()">Administrateur
+                    <br><br>
+                <div id="etudiantChamps" style="display: none;">
+                    Ecole : <select name="NewEcole" id="ecoleSelectEtudiant" onchange="showPromosEtudiant(this.value)" >
+                        <option>Choisir</option>
+                        <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
+                        while ($donneesEcole = $reponseEcole->fetch()){ ?>
+                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
+                        <?php } ?> 
+                    </select><br><br>
+                    Promo : <select name="NewPromo" id="promoSelectEtudiant" onchange="showClassesEtudiant(this.value)">
+                        <option>Choisir</option>
+                    </select><br><br>
+                    Classe : <select name="NewClasse" id="classeSelectEtudiant">
+                        <option>Choisir</option>
+                    </select><br><br>
+                </div>
+                <div id="professeurChamps" style="display: none;">
+                    Ecole : <select name="NewEcole" id="ecoleSelectProf" onchange="showClassesProf(this.value)" >
+                        <option>Choisir</option>
+                        <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
+                        while ($donneesEcole = $reponseEcole->fetch()){ ?>
+                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
+                        <?php } ?> 
+                    </select><br><br>
+                    Classe : <div id="classeSelectProf"></div><br>
+                    Matière : <select name="NewMatiere" id="matiereSelectProf">
+                        <option>Choisir</option>
+                        <?php $reponseMatiere = $bdd->query('SELECT * FROM matiere');
+                        while ($donneesMatiere = $reponseMatiere->fetch()){ ?>
+                            <option value="<?php echo $donneesMatiere['ID_Matiere']?>"><?php echo $donneesMatiere['Nom_matiere'] ?></option>
+                        <?php } ?> 
+                    </select><br><br>
+                </div>
                 <input type="submit" name="validerAjout" value="Enregistrer">
                 <?php }?>
             </form>

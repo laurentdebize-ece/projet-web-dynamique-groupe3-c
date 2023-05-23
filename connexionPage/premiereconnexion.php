@@ -71,8 +71,8 @@ while ($donnees = $reponse->fetch()){
 }
 					if($verif == 1) {
 						session_start();
-						$_SESSION['ID_Compte'] = $ID;
-						$_SESSION['Type_compte'] = $Type_compte;
+						$_SESSION['ID_Compte'] = htmlspecialchars($ID, ENT_QUOTES, 'UTF-8');
+						$_SESSION['Type_compte'] = htmlspecialchars($Type_compte, ENT_QUOTES, 'UTF-8') ;
 						header('Location: ../homePage/homePage.php');						
 						exit();
 					}
@@ -81,11 +81,10 @@ while ($donnees = $reponse->fetch()){
 					}
 				}
 			else if (($donnees['Deja_connecte']=='1')) {
-				
 
 				session_start();
-				$_SESSION['ID_Compte'] = $ID;
-				$_SESSION['Type_compte'] = $Type_compte;
+				$_SESSION['ID_Compte'] = htmlspecialchars($ID, ENT_QUOTES, 'UTF-8');
+				$_SESSION['Type_compte'] = htmlspecialchars($Type_compte, ENT_QUOTES, 'UTF-8');
 				header('Location: ../homePage/homePage.php');
 				exit();
 			}
