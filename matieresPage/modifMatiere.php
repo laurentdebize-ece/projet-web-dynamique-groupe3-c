@@ -40,14 +40,14 @@ $reponseModifMatiere = $_POST['modifMatiere'];
 <body>
 <section id="header">
         <div class="flex-contain-menu">
-            <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
-            <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
-            <?php } ?>
+        <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
             <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
             <?php if($Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
+            <?php }
+            if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.php" class="lienWhite">Compétences transverses</a></div>
+                <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
             <?php }
             if($Type_compte=="Professeur"){ ?>
                 <div class="flexboxText-menu"><a href="../evaluationsPage/evaluationsPage.php" class="lienWhite">Evaluations</a></div>
