@@ -189,7 +189,6 @@ if ($Type_compte == "Professeur") {
 
                                         }
                                     }?> </div><?php
-
                                 }
                             }?> </div><br><br>
                             <input type="submit" name="appreciation" value ="Donner appreciation">
@@ -210,7 +209,7 @@ if ($Type_compte == "Professeur") {
 
 }
 
-?>
+?></section>
 </div>
 <br> <br>
     <footer>
