@@ -30,7 +30,14 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
             INNER JOIN competence ON matiere_competence.ID_competence = competence.ID_competence
             WHERE Nom_matiere LIKE '$Nom_Matiere_Choisie'");
     }
-
+    if($Type_compte=="Professeur"){
+        $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+                INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
+                INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere
+                INNER JOIN matiere_competence ON matiere.ID_Matiere = matiere_competence.ID_Matiere
+                INNER JOIN competence ON matiere_competence.ID_Competence = competence.ID_Competence
+                WHERE compte.ID_Compte = '$ID'");
+    }
     else {
         $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
         INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
@@ -39,7 +46,17 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
         WHERE compte.ID_Compte = '$ID'
         AND matiere.Nom_Matiere = '$Nom_Matiere_Choisie'");
-    }?>
+    }
+if(isset($_POST['validerAjout'])){
+    $tab_competence = [
+        "ID_Competence" => NULL,
+        "Nom_competence" => $_POST['NewNom'],
+        "Date_Creation" => $_POST['NewDate'],
+        "Theme" => $_POST['NewTheme']
+    ];
+    insertion($bdd,"competence", $tab_competence);/*aaaaaaaaaaaaaaaaaledddddddddddddddddddd*/
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -77,7 +94,7 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         <tr id="textLigne1">
             <th>Compétences</th>
             <th>Matière</th>
-            <?php if($Type_compte!="Administrateur"){?>
+            <?php if($Type_compte=="Etudiant"){?>
                 <th>Etat de la compétence</th>
             <?php } ?>
         </tr>
@@ -85,7 +102,7 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         <tr>
             <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
             <td id="textColonne"><?php echo $donneesCompetence['Nom_matiere']?></td>
-            <?php if($Type_compte!="Administrateur"){?>
+            <?php if($Type_compte=="Etudiant"){?>
                 <td class="textColonne"><?php echo $donneesCompetence['Etat_competence']?></td>
             <?php } ?>
         </tr>
@@ -99,7 +116,15 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
                     <input type="submit" name ="modifMatiere" value="Ajouter un professeur">
                 </form>
         <?php }
-        if($Type_compte=="Etudiant"){?>
+        else if($Type_compte=="Professeur"){?>
+            <div class="login-form3">
+                <form method="POST" action="modifCompetenceProf.php">
+                    <input type="submit" name ="modifCompetenceProf" value="Ajouter une compétence">
+                    <input type="submit" name ="modifCompetenceProf" value="Supprimer une compétence">
+                </form>
+            </div>
+        <?php }
+        else if($Type_compte=="Etudiant"){?>
                 <form method="POST" action="../autoEvaluation/autoevaluation.php" id="AutoEval">
                 <input type="submit" name ="faireEval" value="Auto-évaluation">
                 </form>

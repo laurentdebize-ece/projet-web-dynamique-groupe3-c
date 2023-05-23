@@ -154,7 +154,9 @@ if(isset($_POST['validerSuppression'])){
         <th>Compétence</th>
         <th>Thème</th>
         <th>Date de création</th>
+        <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant") { ?>
         <th>Sélection</th>
+        <?php } ?>
     </tr>
     <form method="POST" action="modifCompetence.php">
         <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
@@ -162,7 +164,7 @@ if(isset($_POST['validerSuppression'])){
         <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Theme']?></td>
         <td id="textColonne"><?php echo $donneesCompetence['Date_Creation']?></td>
-        <?php if($Type_compte=="Administrateur" || $Type_compte=="Professeur") { ?>
+        <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant") { ?>
             <td id="textColonneSelection"> <input type="radio" name="selectCompetence" value="<?php echo $donneesCompetence['ID_Competence']?>"></td>
         <?php }
         
