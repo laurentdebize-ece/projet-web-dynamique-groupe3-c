@@ -29,6 +29,9 @@ require_once('../fonction.php');
 if(isset($_POST['modifMatiere'])){
     $reponseModifMatiere = $_POST['modifMatiere'];
 }
+if(isset($_SESSION['Competence_Select'])){
+    $ID_Competence_Select = $_SESSION['Competence_Select'];
+}
 
 
 //CREATION COMPETENCE DANS UNE MATIERE (PROFIL PROF)
@@ -63,6 +66,24 @@ if(isset($_POST['validerAjoutCompetenceProf'])){
     insertion($bdd, "matiere_competence", $tablo_matiere_competence);
     header('Location: matieresPage.php');
 	exit();
+}
+//SUPPRESSION COMPETENCE DANS UNE MATIERE (PROFIL PROF)
+if(isset($_POST['validerSuppressionCompetenceProf'])){
+    if($_POST['validerSuppressionCompetenceProf']=="Retour"){
+        header('Location: matiereChoisie.php');
+        exit();
+    }
+    if($_POST['validerSuppressionCompetenceProf']=="Annuler"){
+        header('Location: matiereChoisie.php');
+        exit();
+    }
+    if($_POST['validerSuppressionCompetenceProf']=="Valider"){
+        $sql="DELETE FROM matiere_competence WHERE ID_Competence=$ID_Competence_Select";
+        $stmt=$bdd->prepare($sql);
+        $stmt->execute();
+        header('Location: matiereChoisie.php');
+        exit();
+    }
 }
 ?>
 
@@ -102,7 +123,8 @@ if(isset($_POST['validerAjoutCompetenceProf'])){
         <div class="formulaireModification">	   
             <div class="login-form2">
             <form method="POST" action="matieresPage.php">
-            <?php if($reponseModifMatiere=="Ajouter"){?>
+            <?php if(isset($_POST['modifMatiere']) ){
+            if($_POST['modifMatiere']=="Ajouter"){?>
 				<h3>Ajouter une nouvelle matière</h3>
                     Nom de la matière : <input type="text" name="NewNom" placeholder="Entrez matière"required><br><br>
                     Volume horaire : <input type="number" name="NewVolumeHoraire" placeholder="Entrez volume horaire"required min="0"><br><br>
@@ -131,7 +153,7 @@ if(isset($_POST['validerAjoutCompetenceProf'])){
                  <br>
                  <input type="submit" name="validerAjoutProf" value="Enregistrer">
                 <input type="submit" name="validerAjoutProf" value="Annuler">
-                <?php } ?>
+                <?php } }?>
                 </form>
                 
             </div>
