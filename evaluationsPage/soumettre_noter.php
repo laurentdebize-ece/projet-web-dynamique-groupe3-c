@@ -71,7 +71,6 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-
 <?php
 $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_matiere ON compte.ID_Compte= compte_matiere.ID_Compte');
 
@@ -84,17 +83,17 @@ while ($donnees = $reponse->fetch()){
 <img src="../img/nyCity.jpg"  alt=" nyCity " id="tailleImgEval"><!--https://www.artheroes.fr/-->
 <?php if ($Type_compte == "Professeur") {
     ?>
-
-    <div class="login-form3">
-    <br> <br>
+    <section id="bodyEvaluationsPage">
+<div id="formAutoEval">
+<div class="login-form2">
             <?php
         //LANCER UNE AUTOEVALUATION EN TANT QUE PROF    
         if($action=="Auto Evaluation"){    
             $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <section id="titre"><br><br><br>
-            <h4>Auto évaluation :</h4>
-            <div id="promo">Promo :
+            <h3>Auto évaluation :</h3>
+            Promo :
                 <select name="choixPromo" id="selectPromo" onchange="showClasses(this.value)">
         
                     <?php
@@ -150,8 +149,8 @@ while ($donnees = $reponse->fetch()){
         //EVALUER UN ETUDIANT EN TANT QUE PROF    
         }
         else if($action=="Evaluation"){
-            ?><section id="titre"><br><br>
-        <h7>Evaluer un étudiant : <br></h7>
+            ?>
+        <h3>Evaluer un étudiant : </h3>
     <?php
                             $reponsepromo2 = $bdd->query('SELECT * FROM promotion');?>
                             <div id="promotion">
@@ -219,9 +218,8 @@ while ($donnees = $reponse->fetch()){
         else if($action=="Ajouter Classe"){
             $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <section id="titre"><br><br><br>
-            <h7>Auto évaluation : <br></h7>
-            <div id="promo"> <br>promo :
+            <h3>Choisissez une classe :</h3>
+            Promo :
                 <select name="choixPromo" id="selectPromo" onchange="showClasses(this.value)">
         
                     <?php
@@ -233,7 +231,7 @@ while ($donnees = $reponse->fetch()){
                         }
                     } ?></div>
                 </select>
-                <br> <br>classe :
+                <br> <br>Classe :
                 <select name="choixClasse" id="selectClasse" >
                         <option>choisir</option>
                     </select>

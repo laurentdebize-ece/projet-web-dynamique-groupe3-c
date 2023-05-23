@@ -75,9 +75,12 @@ if ($Type_compte == "Professeur") { //EVALUATION DES ELEVES PAR LE PROF?>
 <?php if ($Type_compte == "Professeur") {
     ?>
  <div class="zoneBoutonsEval">
+
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <input type="submit" name="valideaction" value="Evaluation" class="boutonEval"><br>
-        <input type="submit" name="valideaction" value="Auto Evaluation" class="boutonEval">
+        <input type="submit" name="valideaction" value="Auto Evaluation" class="boutonEval"><br>
+        <input type="submit" name="valideaction" value="Ajouter Classe" class="boutonEval">
+
     </form>
 </div>
     <?php
