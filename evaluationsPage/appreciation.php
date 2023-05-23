@@ -75,25 +75,39 @@ $_SESSION['classe'] = $classe;
 
     <?php
 $reponseetu = $bdd->query('SELECT * FROM compte');
+?><div class="login-form3">
+    <section id="titre"><br><br><br><br>
+        <h7>Appréciation : <br><br></h7>
+<?php 
 while ($donneesetu = $reponseetu->fetch()){
     if ($donneesetu['ID_Compte'] == $etudiant) {
-        echo "Vous regardez le compte de l'étudiant : ".$donneesetu['Nom_Compte']." ".$donneesetu['Prenom']."";
+        echo '<div style="text-align: center;">Vous regardez le compte de l\'étudiant : '.$donneesetu['Nom'].' '.$donneesetu['Prenom'].'</div>';
     }
 }
-
+?><table>
+    <tr id="textLigne1">
+        <th>Compétence</th>
+        <th>Note de l'étudiant</th>
+        <th>Appréciation actuelle</th>
+        <th>Nouvelle appréciation</th>
+    </tr>
+    <?php
     if ($Type_compte=='Professeur'){
     $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_competence ON Compte.ID_compte = compte_competence.ID_compte INNER JOIN competence ON compte_competence.ID_competence = competence.ID_competence INNER JOIN matiere_competence ON competence.ID_competence = matiere_competence.ID_Competence INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere');
     while ($donnees = $reponse->fetch()){
         if ($donnees['ID_Compte'] == $etudiant && $donnees['ID_Matiere']==$ID_Matiere ) { ?>
             <tr>
                 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <td><?php echo $donnees['Nom_competence' ]."  Note de l'etudiant : ".$donnees['Etat_competence'] . ".            Appreciation :";
-                $idcompet =$donnees['ID_compte_competence']; ?></td>
+                <td><?php echo $donnees['Nom_competence' ] ;?></td>
+                <td><?php echo $donnees['Etat_competence'];?></td>
+                <td><?php echo $donnees['Appreciation'];?></td>
+                <?php $idcompet =$donnees['ID_compte_competence']; ?></td>
                 <td> <input type="text" name=" <?php echo $idcompet; ?>"></td>
                 <br><br>
         <?php
         }
     }?>
+    </table>
         <input type="submit" name="submit" value="Valider">
 </form>
 <?php
@@ -117,6 +131,7 @@ if (isset($_POST['submit'])) {
         <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
     </footer>
     <br> <br>
-
+</section>
+</div>
 </body>
 </html>

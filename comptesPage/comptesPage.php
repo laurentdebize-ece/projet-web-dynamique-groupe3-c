@@ -52,29 +52,29 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       for ($i = 0; $i < 6; $i++) {
                           $NewMDP .= $caracteres[rand(0, strlen($caracteres) - 1)];
                       }
-                      $NewEmail = $_POST['NewEmail'];
-                      $NewTypeCompte = $_POST['NewTypeCompte'];
+                      $NewEmail = htmlspecialchars($_POST['NewEmail'], ENT_QUOTES, 'UTF-8');
+                      $NewTypeCompte = htmlspecialchars($_POST['NewTypeCompte'], ENT_QUOTES, 'UTF-8');
                       $NewDejaCo = 0;
-                      $NewNom = $_POST['NewNom'];
-                      $NewPrenom = $_POST['NewPrenom'];
-                      if($_POST['NewTypeCompte']=="Administrateur") {
+                      $NewNom = htmlspecialchars($_POST['NewNom'], ENT_QUOTES, 'UTF-8');
+                      $NewPrenom = htmlspecialchars($_POST['NewPrenom'], ENT_QUOTES, 'UTF-8');
+                      if($NewTypeCompte =="Administrateur") {
                         $NewIDecole = 0;
                         $NewPromo = 0;
                         $NewClasse = 0;
                       }
-                      if($_POST['NewTypeCompte']=="Etudiant") {
-                        $NewPromo = $_POST['NewPromo'];
+                      if($NewTypeCompte=="Etudiant") {
+                        $NewPromo =htmlspecialchars($_POST['NewPromo'], ENT_QUOTES, 'UTF-8');
                         //$NewClasse = $_POST['NewClasse'];
-                        $NewIDecole=$_POST['NewEcole'];
+                        $NewIDecole=htmlspecialchars($_POST['NewEcole'], ENT_QUOTES, 'UTF-8');
                       }
                       
-                      if($_POST['NewTypeCompte']=="Professeur") {
+                      if($NewTypeCompte=="Professeur") {
                         //$NewMatiere = $_POST['NewMatiere'];
-                        $NewIDecole=$_POST['NewEcoleProf'];
+                        $NewIDecole=htmlspecialchars($_POST['NewEcoleProf'], ENT_QUOTES, 'UTF-8');
                         //$NewClasse = $_POST['NewClasseProf'];
                         $NewPromo = 0;
                       }
-                      $requete = $bdd->prepare("INSERT INTO compte (Nom_Compte, Prenom, E_mail, MDP,Type_compte, Deja_connecte,ID_Ecole,ID_Promotion) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole, :NewPromo)");
+                      $requete = $bdd->prepare("INSERT INTO compte (Nom, Prenom, E_mail, MDP,Type_compte, Deja_connecte,ID_Ecole,ID_Promotion) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole, :NewPromo)");
                       $requete->bindParam(':NewNom', $NewNom);
                       $requete->bindParam(':NewPrenom', $NewPrenom);
                       $requete->bindParam(':NewEmail', $NewEmail);
@@ -91,31 +91,97 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                             supprimer_compte($bdd, $Compte_Select);
                         }                        
                     }
-                    /*
-if(isset($_POST['validerModification'])){
-    //modifier fonction
-}*/
+
+
+
+                    //Modifier
+                    if(isset($_POST['validerModification'])){
+                        if ($_POST['NewEmail']!="") {
+                            $NewEmail = htmlspecialchars($_POST['NewEmail'], ENT_QUOTES, 'UTF-8');
+                            $sql = "UPDATE compte SET E_mail='$NewEmail' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                        }
+                        if($_POST['NewNom']!="") {
+                            $NewNom = htmlspecialchars($_POST['NewNom'], ENT_QUOTES, 'UTF-8');
+                            $sql = "UPDATE compte SET Nom='$NewNom' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                        }
+                        if($_POST['NewPrenom']!="") {
+                            $NewPrenom = htmlspecialchars($_POST['NewPrenom'], ENT_QUOTES, 'UTF-8');
+                            $sql = "UPDATE compte SET Prenom='$NewPrenom' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                        }
+                        if($_POST['NewTypeCompte']!="") {
+                            $NewTypeCompte = $_POST['NewTypeCompte'];
+                            $sql = "UPDATE compte SET Type_compte='$NewTypeCompte' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                        }	
+                        if($NewTypeCompte =="Administrateur") {
+                            $NewIDecole = 0;
+                            $NewPromo = 0;
+                            $NewClasse = 0;
+                            $sql = "UPDATE compte SET ID_Ecole='$NewIDecole' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                            $sql = "UPDATE compte SET ID_Promotion='$NewPromo' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                            $sql = "UPDATE compte SET ID_Classe='$NewClasse' WHERE ID_Compte='$Compte_Select'";
+                            $bdd->query($sql);
+                        }
+                        if($NewTypeCompte=="Etudiant") {
+                            if($_POST['NewEcole']!="") {
+                                $NewIDecole = $_POST['NewEcole'];
+                                $sql = "UPDATE compte SET ID_Ecole='$NewIDecole' WHERE ID_Compte='$Compte_Select'";
+                                $bdd->query($sql);
+                            }
+                            if($_POST['NewPromo']!="") {
+                                $NewPromo = $_POST['NewPromo'];
+                                $sql = "UPDATE compte SET ID_Promotion='$NewPromo' WHERE ID_Compte='$Compte_Select'";
+                                $bdd->query($sql);
+                            }
+                            //$NewClasse = $_POST['NewClasse'];
+                        }
+                      
+                        if($NewTypeCompte=="Professeur") {
+                            if($_POST['NewEcoleProf']!="") {
+                                $NewIDecole = $_POST['NewEcoleProf'];
+                                $sql = "UPDATE compte SET ID_Ecole='$NewIDecole' WHERE ID_Compte='$Compte_Select'";
+                                $bdd->query($sql);
+                            }
+                                $NewPromo = 0;
+                                $sql = "UPDATE compte SET ID_Promotion='$NewPromo' WHERE ID_Compte='$Compte_Select'";
+                                $bdd->query($sql);
+                            
+                
+                        }
+
+
+
+
+
+
+
+}
                 }
             }
         }
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if(isset($_POST['validerAjoutEcole'])){
-            $sql = "INSERT INTO ecole (Nom_Ecole) VALUES ('".$_POST['NewNomEcole']."')";
+            $sql = "INSERT INTO ecole (Nom_Ecole) VALUES ('".htmlspecialchars($_POST['NewNomEcole'], ENT_QUOTES, 'UTF-8' )."')";
             $bdd->query($sql);
         }
         if(isset($_POST['validerAjoutPromo'])){
             $requete = $bdd->prepare( "INSERT INTO promotion (ID_Ecole, Annee_debut, Annee_fin) VALUES (:NewEcole, :NewDebut, :NewFin)");
-            $requete->bindParam(':NewEcole',$_POST['NewEcole']);
-            $requete->bindParam(':NewDebut', $_POST['NewAnneeDebut']);
-            $requete->bindParam(':NewFin', $_POST['NewAnneeFin']);
+            $requete->bindParam(':NewEcole',htmlspecialchars($_POST['NewEcole'], ENT_QUOTES, 'UTF-8' ));
+            $requete->bindParam(':NewDebut',htmlspecialchars($_POST['NewAnneeDebut'], ENT_QUOTES, 'UTF-8' ) );
+            $requete->bindParam(':NewFin',htmlspecialchars($_POST['NewAnneeFin'], ENT_QUOTES, 'UTF-8' ) );
             $requete->execute();
         }
         if(isset($_POST['validerAjoutClasse'])){
 
             $requete = $bdd->prepare( "INSERT INTO classe (Num_groupe, ID_Promotion) VALUES (:Newgroupe, :NewPromo)");
-            $requete->bindParam(':Newgroupe', $_POST['NewNumGroupe']);
-            $requete->bindParam(':NewPromo', $_POST['NewPromotion']);
+            $requete->bindParam(':Newgroupe', htmlspecialchars($_POST['NewNumGroupe'], ENT_QUOTES, 'UTF-8' ));
+            $requete->bindParam(':NewPromo', htmlspecialchars($_POST['NewPromotion'], ENT_QUOTES, 'UTF-8' ));
             $requete->execute();
         }
     }
