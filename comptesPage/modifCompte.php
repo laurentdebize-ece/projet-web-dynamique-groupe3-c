@@ -80,8 +80,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
   $_SESSION['Type_compte'] = $Type_compte;
   if(isset($_POST['selectCompte'])){
     $_SESSION['selectCompte'] = $_POST['selectCompte'];
-    echo $_SESSION['selectCompte'];
-  } else{echo 'aaaaa';}
+  }
   $reponseModifCompte = $_POST['modifCompte'];?>  
      <section id="header">
         <div class="flex-contain-menu">
