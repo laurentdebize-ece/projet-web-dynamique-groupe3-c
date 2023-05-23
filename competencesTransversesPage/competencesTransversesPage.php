@@ -49,7 +49,7 @@ $_SESSION['Type_compte'] = $Type_compte;
                 <div class="flexboxText-menu"><a href="../evaluationsPage/evaluationsPage.php" class="lienWhite">Evaluations</a></div>
             <?php }
             if($Type_compte=="Administrateur"){ ?>
-                <div class="flexboxText-menu"><a href="..comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
+                <div class="flexboxText-menu"><a href="../comptesPage/comptesPage.php" class="lienWhite">Comptes</a></div>
             <?php } ?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>

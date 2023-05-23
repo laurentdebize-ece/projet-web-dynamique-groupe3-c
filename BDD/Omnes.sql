@@ -101,15 +101,15 @@ CREATE TABLE  `compte` (
 INSERT INTO `compte` (`ID_Compte`, `Nom_Compte`, `Prenom`, `E_mail`, `MDP`, `Type_compte`, `Deja_connecte`, `ID_Ecole`, `ID_Promotion`, `ID_Classe`) VALUES
 (1, 'VIRET', 'Pierre', 'pierreviret@gmail.com', '1111','Etudiant',1,1,1,3),
 (2, 'MASSON', 'Charles', 'Charlesmasson@gmail.com', 'xpzcl421','Etudiant',1,1,1,3),
-(3, 'BOJ', 'Lucas', 'pierreviret@gmail.com', 'cpcnifz361q','Etudiant',1,1,2,5),
-(4, 'JSP', 'Noemie', 'pierreviret@gmail.com', '2882ssscsww','Etudiant',1,2,3,8),
-(5, 'BATHEROSSEDSLORTO', 'Emma', 'pierreviret@gmail.com', '852wcdhus','Etudiant',1,2,3,7),
-(6, 'CHAPERON', 'Axel', 'pierreviret@gmail.com', '72ccdid28z8','Etudiant',1,2,1,1),
-(7, 'DEBIZE', 'Laurent', 'pierreviret@gmail.com', '1234','Professeur',1,1,0,0),
-(8, 'BONFILS', 'Anne', 'pierreviret@gmail.com', 'daeb2252c','Professeur',1,1,0,0),
-(9, 'DEDECKER', 'Samira', 'pierreviret@gmail.com', 'zfqju451','Professeur',1,1,0,0),
-(10, 'HINTZY', 'Antoine', 'pierreviret@gmail.com', 'zkeenxsi581','Professeur',1,1,0,0),
-(11, 'DIEU', 'LUKEH', 'pierreviret@gmail.com', '0000','Administrateur',1,1,0,0);
+(3, 'BOJ', 'Lucas', 'Lucasboj@gmail.com', 'cpcnifz361q','Etudiant',1,1,2,5),
+(4, 'RUAT', 'Noemie', 'NoemieRuat@gmail.com', '2882ssscsww','Etudiant',1,2,3,8),
+(5, 'BATHEROSSEDSLORTO', 'Emma', 'EmmaBatherosse@gmail.com', '852wcdhus','Etudiant',1,2,3,7),
+(6, 'CHAPERON', 'Axel', 'AxelChap@gmail.com', '72ccdid28z8','Etudiant',1,2,1,1),
+(7, 'DEBIZE', 'Laurent', 'LaurentDebize@gmail.com', '1234','Professeur',1,1,0,3),
+(8, 'BONFILS', 'Anne', 'AnneBonfils@gmail.com', 'daeb2252c','Professeur',1,1,0,3),
+(9, 'DEDECKER', 'Samira', 'SamiraDedecker@gmail.com', 'zfqju451','Professeur',1,1,0,2),
+(10, 'HINTZY', 'Antoine', 'AntoineLEHintzy@gmail.com', 'zkeenxsi581','Professeur',1,1,0,3),
+(11, 'DIEU', 'LUKEH', 'ALED@gmail.com', '0000','Administrateur',1,1,0,0);
 
 
 
@@ -136,7 +136,7 @@ INSERT INTO `filiere` (`ID_Filiere`, `Nom_filiere`) VALUES
 
 CREATE TABLE  `matiere` (
     `ID_Matiere` int(11) PRIMARY KEY AUTO_INCREMENT,
-    `Nom_Matiere` varchar(50) NOT NULL,
+    `Nom_matiere` varchar(50) NOT NULL,
     `Volume_horaire` int(3)
 );
 
@@ -157,12 +157,12 @@ INSERT INTO `matiere` (`ID_Matiere`, `Nom_matiere`, `Volume_horaire`) VALUES
 
 CREATE TABLE  `competence` (
     `ID_Competence` int(11) PRIMARY KEY AUTO_INCREMENT,
-    `Nom_Competence` varchar(30) NOT NULL,
+    `Nom_competence` varchar(30) NOT NULL,
     `Date_Creation` date NOT NULL,
     `Theme` varchar(30)
 );
 
-INSERT INTO `competence` (`ID_Competence`, `Nom_Competence`, `Date_Creation`, `Theme`) VALUES
+INSERT INTO `competence` (`ID_Competence`, `Nom_competence`, `Date_Creation`, `Theme`) VALUES
 (1, 'Matrices', '2018-01-01', 'Mathematiques'),
 (2, 'Vecteurs', '2018-02-01', 'Physique'),
 (3, 'PCB', '2018-03-01', 'Electronique'),
@@ -242,22 +242,9 @@ INSERT INTO `matiere_competence` (`ID_matiere_competence`, `ID_Matiere`, `ID_Com
 (2, 4, 5, 'DEBIZE'),
 (3, 1, 3, 'BONFILS'),
 (4, 2, 2, 'DEDECKER'),
-(5, 2, 2, 'DEDECKER'),
-(6, 1, 1, 'BONFILS'),
-(7, 4, 5, 'DEBIZE'),
-(8, 4, 5, 'DEBIZE'),
-(9, 4, 4, 'HINTZY'),
-(10, 4, 4, 'HINTZY'),
-(11, 4, 5, 'DEBIZE'),
-(12, 1, 1, 'BONFILS'),
-(13, 1, 9, 'BONFILS'),
-(14, 1, 9, 'BONFILS'),
-(15, 2, 2, 'DEDECKER'),
-(16, 4, 4, 'HINTZY'),
-(17, 2, 2, 'DEDECKER'),
-(18, 4, 4, 'HINTZY'),
-(19, 4, 5, 'DEBIZE'),
-(20, 1, 1, 'BONFILS');
+(5, 1, 1, 'BONFILS'),
+(6, 1, 9, 'BONFILS');
+
 
 
 CREATE TABLE  `compte_competence` (
