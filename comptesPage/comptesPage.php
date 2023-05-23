@@ -64,14 +64,14 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       }
                       if($NewTypeCompte=="Etudiant") {
                         $NewPromo =htmlspecialchars($_POST['NewPromo'], ENT_QUOTES, 'UTF-8');
-                        //$NewClasse = $_POST['NewClasse'];
+                        $NewClasse = $_POST['NewClasse'];
                         $NewIDecole=htmlspecialchars($_POST['NewEcole'], ENT_QUOTES, 'UTF-8');
                       }
                       
                       if($NewTypeCompte=="Professeur") {
                         //$NewMatiere = $_POST['NewMatiere'];
                         $NewIDecole=htmlspecialchars($_POST['NewEcoleProf'], ENT_QUOTES, 'UTF-8');
-                        //$NewClasse = $_POST['NewClasseProf'];
+                        $NewClasse = $_POST['NewClasseProf'];
                         $NewPromo = 0;
                       }
                       $requete = $bdd->prepare("INSERT INTO compte (Nom, Prenom, E_mail, MDP,Type_compte, Deja_connecte,ID_Ecole,ID_Promotion) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole, :NewPromo)");
@@ -83,6 +83,14 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       $requete->bindParam(':NewDejaCo', $NewDejaCo);
                       $requete->bindParam(':NewIDecole', $NewIDecole);
                       $requete->bindParam(':NewPromo', $NewPromo);
+                      $requete->execute();
+
+                      $reponseClasse = $bdd->query('SELECT ID_Compte FROM compte ORDER BY ID_Compte DESC LIMIT 1');
+                      $donneesClasse = $reponseClasse->fetch();
+                      $NewIDCompte= $donneesClasse['ID_Compte'];
+                      $requete = $bdd->prepare("INSERT INTO compte_classe (ID_Compte, ID_Classe) VALUES (:NewIDCompte, :NewClasse)");
+                      $requete->bindParam(':NewIDCompte', $NewIDCompte);
+                      $requete->bindParam(':NewClasse', $NewClasse);
                       $requete->execute();
                     }
                     //Supprimer

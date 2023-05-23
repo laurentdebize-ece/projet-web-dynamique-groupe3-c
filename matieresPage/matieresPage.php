@@ -30,20 +30,20 @@ require_once('../fonction.php');
 if(isset($_POST['validerAjout'])){
     $tab_matiere = [
         "ID_matiere" => NULL,
-        "Nom_matiere" => $_POST['NewNom'],
-        "Volume_horaire" => $_POST['NewVolumeHoraire']
+        "Nom_matiere" => htmlspecialchars($_POST['NewNom'], ENT_QUOTES, 'UTF-8'),
+        "Volume_horaire" => htmlspecialchars($_POST['NewVolumeHoraire'], ENT_QUOTES, 'UTF-8')
     ];
     insertion($bdd,"matiere", $tab_matiere);
 }
 //MODIFIER UNE MATIERE
 if(isset($_POST['validerModification'])){
     if($_POST['NewNom']!=''){
-        $NewNom=$_POST['NewNom'];
+        $NewNom=htmlspecialchars($_POST['NewNom'], ENT_QUOTES, 'UTF-8');
         $modificationMatiere = "UPDATE matiere SET Nom_matiere = '$NewNom' WHERE Nom_matiere='$NomMatiere'";
 		$bdd->query($modificationMatiere);
     }
     if($_POST['NewVolumeHoraire']!=''){
-        $NewVolumeHoraire=$_POST['NewVolumeHoraire'];
+        $NewVolumeHoraire=htmlspecialchars( $_POST['NewVolumeHoraire'], ENT_QUOTES, 'UTF-8');
         $modificationMatiere = "UPDATE matiere SET Volume_horaire = '$NewVolumeHoraire' WHERE Nom_matiere='$NomMatiere'";
 		$bdd->query($modificationMatiere); 
     }
