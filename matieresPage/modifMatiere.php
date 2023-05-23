@@ -44,12 +44,9 @@ $reponseModifMatiere = $_POST['modifMatiere'];
             <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
             <?php }
-            if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
+            <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
+            <?php if($Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
-            <?php }
-            if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.php" class="lienWhite">Compétences transverses</a></div>
-                <div class="flexboxText-menu"><a href="../toutesCompetencesPage/toutesCompetencesPage.php" class="lienWhite">Toutes les compétences</a></div>
             <?php }
             if($Type_compte=="Professeur"){ ?>
                 <div class="flexboxText-menu"><a href="../evaluationsPage/evaluationsPage.php" class="lienWhite">Evaluations</a></div>
@@ -86,9 +83,10 @@ $reponseModifMatiere = $_POST['modifMatiere'];
                     <h3>Sélectionner le professeur à ajouter à la matière <?php echo $Nom_Matiere_Choisie ?></h3>
                     <?php $reponseProfesseurs=$bdd->query("SELECT * FROM compte WHERE Type_compte='Professeur'");
                     while ($donneesProfesseurs = $reponseProfesseurs->fetch()){ ?>
-                        <input type="radio" name="professeurSelect" value="<?php echo $donneesProfesseurs['Nom']?>"><?php echo $donneesProfesseurs['Nom']?><br>
+                        <input type="radio" name="professeurSelect" value="<?php echo $donneesProfesseurs['ID_Compte']?>"><?php echo $donneesProfesseurs['Nom']?><br>
                     <?php } ?>
                     <input type="submit" name="validerAjoutProf" value="Enregistrer">
+                    <input type="submit" name="validerAjoutProf" value="Annuler">
                  <?php } ?>
                 </form>
             </div>

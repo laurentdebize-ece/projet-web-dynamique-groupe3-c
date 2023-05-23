@@ -22,6 +22,7 @@ $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
 $NomMatiere=$_SESSION['Nom_Matiere_Choisie'];
+
 require_once('../fonction.php');
 
 if(isset($_POST['validerAjout'])){
@@ -59,7 +60,22 @@ if($_POST['validerSuppression']=="Valider"){
     $stmt1->execute();
     $stmt2->execute();
     $stmt3->execute();
-}}
+}
+}
+if(isset($_POST['validerAjoutProf'])){
+    if($_POST['validerAjoutProf']=="Valider"){
+        $reponse=$bdd->query("SELECT ID_Matiere FROM matiere WHERE Nom_matiere='$NomMatiere'");
+        while ($donnees = $reponse->fetch()){ 
+            $recupIdMatiere=$donnees['ID_Matiere'];
+        }
+        $tab_compte_matiere = [
+            "ID_compte_matiere" => NULL,
+            "ID_Compte" => $_POST['professeurSelect'],
+            "ID_Matiere" => $recupIdMatiere
+        ];
+        insertion($bdd,"compte_matiere", $tab_compte_matiere);//Au secourssssssss
+    }
+}
 if($Type_compte=="Administrateur"){
     $reponseMatiere = $bdd->query("SELECT Nom_matiere FROM matiere");
 } else {
@@ -85,10 +101,8 @@ if($Type_compte=="Administrateur"){
 <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
-            <?php }
-            if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
+            <div class="flexboxText-menu"><a href="matieresPage.php" class="lienClique">Matières</a></div>
+            <?php if($Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <?php }
             if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
@@ -117,24 +131,8 @@ if($Type_compte=="Administrateur"){
                     <input type="submit" name ="modifMatiere" value="Ajouter" class="boutonModif">
                 </form>
             </div>
-        <?php }?>
-
-
-
-        <?php if($Type_compte=="Prof"){?>
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" id="boutonModif">
-            <?php echo "soumettre une auto-evaluation" ?>
-            <input type="submit" name ="soumettreEval" value="soumettre une auto evaluation" class="boutonAutoEval">
-            </form>
-            <?php }?>
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if ($_POST['soumettreEval']=="soumettre"){
-                //code sql qui notif l'eleve
-            }
-        }
+        <?php }
 ?>
-
 
     <footer>
         <div class="floatLeft">Projet Développement Web</div>
