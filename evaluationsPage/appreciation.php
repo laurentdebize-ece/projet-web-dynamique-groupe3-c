@@ -70,13 +70,6 @@ $_SESSION['classe'] = $classe;
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    
-    <footer>
-        <div class="floatLeft">Projet Développement Web</div>
-        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
-    </footer>
-    <br> <br><br> <br>
-
 
 
 
@@ -118,5 +111,12 @@ if (isset($_POST['submit'])) {
 }
 }
 ?>
+  <br> <br>
+    <footer>
+        <div class="floatLeft">Projet Développement Web</div>
+        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
+    </footer>
+    <br> <br>
+
 </body>
 </html>

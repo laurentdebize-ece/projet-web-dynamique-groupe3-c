@@ -72,14 +72,6 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    
-    <footer>
-        <div class="floatLeft">Projet Développement Web</div>
-        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
-    </footer>
-    <br> <br><br> <br>
-
-
 
 <?php
 $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_matiere ON compte.ID_Compte= compte_matiere.ID_Compte');
@@ -214,5 +206,12 @@ if ($Type_compte == "Professeur") {
 
 ?>
 </div>
+<br> <br>
+    <footer>
+        <div class="floatLeft">Projet Développement Web</div>
+        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
+    </footer>
+    <br> <br>
+
 </body>
 </html>
