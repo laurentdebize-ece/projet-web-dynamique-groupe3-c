@@ -75,12 +75,22 @@ $_SESSION['classe'] = $classe;
 
     <?php
 $reponseetu = $bdd->query('SELECT * FROM compte');
+?><div class="login-form3">
+    <section id="titre">
+        <h7>Appréciation : <br></h7>
+       <?php 
 while ($donneesetu = $reponseetu->fetch()){
     if ($donneesetu['ID_Compte'] == $etudiant) {
         echo "Vous regardez le compte de l'étudiant : ".$donneesetu['Nom']." ".$donneesetu['Prenom']."";
     }
 }
-
+?><table>
+    <tr id="textLigne1">
+        <th>Compétence</th>
+        <th>Thème</th>
+        <th>Date de création</th>
+    </tr>
+    <?php
     if ($Type_compte=='Professeur'){
     $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_competence ON Compte.ID_compte = compte_competence.ID_compte INNER JOIN competence ON compte_competence.ID_competence = competence.ID_competence INNER JOIN matiere_competence ON competence.ID_competence = matiere_competence.ID_Competence INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere');
     while ($donnees = $reponse->fetch()){
@@ -94,6 +104,7 @@ while ($donneesetu = $reponseetu->fetch()){
         <?php
         }
     }?>
+    </table>
         <input type="submit" name="submit" value="Valider">
 </form>
 <?php
@@ -117,6 +128,7 @@ if (isset($_POST['submit'])) {
         <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
     </footer>
     <br> <br>
-
+</section>
+</div>
 </body>
 </html>
