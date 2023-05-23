@@ -59,13 +59,6 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
         </div>
     </section>
     
-    <footer>
-        <div class="floatLeft">Projet Développement Web</div>
-        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
-    </footer>
-    <br> <br><br> <br>
-
-
 
 <?php
 $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_matiere ON compte.ID_Compte= compte_matiere.ID_Compte');
@@ -79,11 +72,11 @@ while ($donnees = $reponse->fetch()){
 
 if ($Type_compte == "Professeur") {
     ?>
-    <br> <br>
+    <br> <br><br><br>
  <div class="login-form3">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <input type="submit" name="valideaction" value="evaluation">Evaluation</option>
-        <input type="submit" name="valideaction" value="auto evaluation">Auto Evaluation</option>
+        <input type="submit" name="valideaction" value="Evaluation">
+        <input type="submit" name="valideaction" value="Auto Evaluation">
     </form>
     <?php
     if (isset($_POST['valideaction'])) {
@@ -95,44 +88,53 @@ if ($Type_compte == "Professeur") {
 				exit();
         }
 
-        echo "liste de vos etudiants : <br>";
-        $reponsepromo2 = $bdd->query('SELECT * FROM promotion');
-        while ($donneespromo2 = $reponsepromo2->fetch()) { 
+        ?><section id="titre">
+        <h7>Liste de vos etudiants : <br></h7>
+    <?php
+        $reponsepromo2 = $bdd->query('SELECT * FROM promotion');?>
+        <div id="promotion">
+        <?php while ($donneespromo2 = $reponsepromo2->fetch()) { 
             if ($donneespromo2['ID_Ecole'] == $ID_Ecole && $donneespromo2['ID_Promotion'] != 0) {
                 $promo=$donneespromo2['ID_Promotion'];
-                echo "Promotion : " . $donneespromo2['Annee_fin']." :<br>";
-                
+                echo "<br>Promotion : " . $donneespromo2['Annee_fin']." <br>";
 
                 $reponseclasse2 = $bdd->prepare('SELECT * FROM classe INNER JOIN promotion ON classe.ID_Promotion = promotion.ID_Promotion WHERE promotion.ID_Promotion = :promo AND promotion.ID_Ecole = :ID_Ecole');
                 $reponseclasse2->bindParam(':promo', $promo);
                 $reponseclasse2->bindParam(':ID_Ecole', $ID_Ecole);
-                $reponseclasse2->execute();
-                while ($donneesclasse2 = $reponseclasse2->fetch()) { 
+                $reponseclasse2->execute();?>
+                <div id="groupe">
+                <?php while ($donneesclasse2 = $reponseclasse2->fetch()) { 
                     if ($donneesclasse2['ID_Promotion'] == $promo && $donneespromo2['ID_Ecole'] == $ID_Ecole) {
                         $classe=$donneesclasse2['ID_Classe'];
-                        echo "- Groupe : " . $donneesclasse2['Num_groupe']."<br>";
+                        echo "<br>Groupe " . $donneesclasse2['Num_groupe']."<br>";
                         $reponseetudiant = $bdd->prepare('SELECT * FROM compte INNER JOIN compte_classe ON compte.ID_Compte=compte_classe.ID_Compte WHERE compte.ID_Promotion = :promo AND compte.ID_Ecole = :ID_Ecole AND compte.Type_compte = "Etudiant"');
                         $reponseetudiant->bindParam(':promo', $promo);
                         $reponseetudiant->bindParam(':ID_Ecole', $ID_Ecole);
-                        $reponseetudiant->execute();
-                        while ($donneesetudiant = $reponseetudiant->fetch()) { 
+                        $reponseetudiant->execute();?>
+                        <div id="etudiant">
+                        <?php while ($donneesetudiant = $reponseetudiant->fetch()) { 
                             if ($donneesetudiant['ID_Classe'] == $classe && $donneesclasse2['ID_Promotion'] == $promo && $donneespromo2['ID_Ecole'] == $ID_Ecole) {
-                                echo "-- Etudiant : " . $donneesetudiant['Nom_Compte'].' '. $donneesetudiant['Prenom'] ."<br>";
+                               echo $donneesetudiant['Nom'].' '. $donneesetudiant['Prenom'] ."<br>";
                             }
-                        }
+                        }?> </div><?php
 
 
                     }
-                }
+                }?> </div><?php
 
             }
-        } 
+        }?> </div><?php
     }
 
 ?>
 </div>
-
-
+</section>
+<br> <br>
+<footer>
+        <div class="floatLeft">Projet Développement Web</div>
+        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
+    </footer>
+    <br> <br>
 </body>
 
 </html>
