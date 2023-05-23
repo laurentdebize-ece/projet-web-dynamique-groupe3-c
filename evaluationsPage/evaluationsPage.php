@@ -68,15 +68,13 @@ while ($donnees = $reponse->fetch()){
     }
 }
 
-if ($Type_compte == "Professeur") {?>
+if ($Type_compte == "Professeur") { //EVALUATION DES ELEVES PAR LE PROF?>
 <img src="../img/nyCity.jpg"  alt=" nyCity " id="tailleImgEval"><!--https://www.artheroes.fr/-->
 <section id="bodyEvaluationsPage">
 <div id="zoneBoutonsEval">
-//EVALUATION DES ELEVES PAR LE PROF
-if ($Type_compte == "Professeur") {
+<?php if ($Type_compte == "Professeur") {
     ?>
-    <br> <br><br><br>
- <div class="login-form3">
+ <div class="zoneBoutonsEval">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <input type="submit" name="valideaction" value="Evaluation" class="boutonEval"><br>
         <input type="submit" name="valideaction" value="Auto Evaluation" class="boutonEval">
@@ -93,6 +91,7 @@ if ($Type_compte == "Professeur") {
         }?>
         </section>
     <?php }
+}
     ?>
 
 <footer>
