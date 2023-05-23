@@ -83,6 +83,13 @@ $reponseModifMatiere = $_POST['modifMatiere'];
                     <h3>Sélectionner le professeur à ajouter à la matière <?php echo $Nom_Matiere_Choisie ?></h3>
                     <?php $reponseProfesseurs=$bdd->query("SELECT * FROM compte WHERE Type_compte='Professeur'");
                     while ($donneesProfesseurs = $reponseProfesseurs->fetch()){ ?>
+                        <label>
+                        <input type="radio" name="professeurSelect" value="<?php echo $donneesProfesseurs['Nom']?>">
+                        <span style="font-family: openSansLight;"><?php echo $donneesProfesseurs['Nom']?></span>
+                        </label>
+                 <?php } ?>
+                 <br>
+                 <input type="submit" name="validerAjoutProf" value="Enregistrer">
                         <input type="radio" name="professeurSelect" value="<?php echo $donneesProfesseurs['ID_Compte']?>"><?php echo $donneesProfesseurs['Nom']?><br>
                     <?php } ?>
                     <input type="submit" name="validerAjoutProf" value="Enregistrer">
