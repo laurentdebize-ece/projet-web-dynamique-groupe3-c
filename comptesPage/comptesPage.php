@@ -11,6 +11,7 @@
 
 <body>
 <?php
+//CONNEXION
 
 try{
     $mdp="root";
@@ -25,6 +26,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {

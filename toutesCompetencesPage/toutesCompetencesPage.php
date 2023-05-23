@@ -138,7 +138,7 @@ if(isset($_POST['selectCompetenceEtudiant'])){
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-
+//SELECTION DU TRI DES COMPETENCES
     <section id="bodyToutesCompetencesPage">
     <div class="login-form3">
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="formChoixTri">

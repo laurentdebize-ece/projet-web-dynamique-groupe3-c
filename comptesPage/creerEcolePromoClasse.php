@@ -34,6 +34,7 @@
 <body>
 <?php
 
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -47,6 +48,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
@@ -85,7 +87,7 @@ $reponseCreation = $_POST['creerEcolePromoClasse'];?>
         <div class="login-form2">
             <form method="POST" action="comptesPage.php" id="ajouterCompte">
                 
-            
+            //CREER UNE ECOLE
             <?php if($reponseCreation == "Créer une école"){ ?>
                 <h3>Ajouter une école</h3>
                 Nom de l'école : <input type="text" name="NewNomEcole" placeholder="Entrez nom"required><br><br>
@@ -93,7 +95,7 @@ $reponseCreation = $_POST['creerEcolePromoClasse'];?>
                 <?php }
                 
                 
-                
+                //CREER UNE PROMO
                 if($reponseCreation == "Créer une promo") { ?>
                 <h3>Ajouter une promo</h3>
                 Année de début : <input type="number" name="NewAnneeDebut" placeholder="Entrez annéee début"required min=0><br><br>
@@ -110,7 +112,7 @@ $reponseCreation = $_POST['creerEcolePromoClasse'];?>
                 
                 
                 
-                
+                //CREER UNE CLASSE
                 if($reponseCreation == "Créer une classe") { ?>
                 <h3>Ajouter une classe</h3>
                 Numéro du groupe : <input type="number" name="NewNumGroupe" placeholder="Entrez numéro du groupe"required min=0><br><br>

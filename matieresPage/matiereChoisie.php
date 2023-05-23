@@ -87,6 +87,7 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
         </div>
     </section>
     <section id="competencesParMatiere">
+<?php if($Type_compte!="Professeur"){ ?>
         <table>
         <tr id="textLigne1">
             <th>Compétences</th>
@@ -106,33 +107,48 @@ $_SESSION['Nom_Matiere_Choisie']=$Nom_Matiere_Choisie;
     <?php } ?>
     </table>
     <div class="login-form3">
-    <?php if($Type_compte=="Administrateur"){?>
+        <?php if($Type_compte=="Administrateur"){?>
                 <form method="POST" action="modifMatiere.php"  id="formModifMatiere">
                     <input type="submit" name ="modifMatiere" value="Supprimer">
                     <input type="submit" name ="modifMatiere" value="Modifier">
                     <input type="submit" name ="modifMatiere" value="Ajouter un professeur">
                 </form>
         <?php }
-       if($Type_compte=="Professeur"){?>
-            <div class="login-form3">
-                <form method="POST" action="modifCompetenceProf.php">
-                    <input type="submit" name ="modifCompetenceProf" value="Ajouter une compétence">
-                    <input type="submit" name ="modifCompetenceProf" value="Supprimer une compétence">
-                </form>
-            </div>
-        <?php }
-        else if($Type_compte=="Etudiant"){?>
+        if($Type_compte=="Etudiant"){?>
                 <form method="POST" action="../autoEvaluation/autoevaluation.php" id="AutoEval">
                 <input type="submit" name ="faireEval" value="Auto-évaluation">
                 </form>
         <?php } ?>
     </div>        
-        </section>
+<?php } else { //INTERFACE PROFESSEUR?>
+    <table>
+        <tr id="textLigne1">
+            <th>Compétences</th>
+            <th>Matière</th>
+            <th>Sélection</th>
+        </tr>
+        <form method="POST" action="modifCompetenceProf.php">
+        <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 
+        <tr>
+            <td id="textColonne1"><?php echo $donneesCompetence['Nom_competence']?></td>
+            <td id="textColonne"><?php echo $donneesCompetence['Nom_matiere']?></td>
+            <td id="textColonneSelection"> <input type="radio" name="selectCompetenceProf" value="<?php echo $donneesCompetence['ID_Competence']?>"></td>
+        </tr>
+        <?php } ?>
+    </table>
+    <div class="login-form3">
+        <input type="submit" name ="modifCompetenceProf" value="Ajouter une compétence">
+        <input type="submit" name ="modifCompetenceProf" value="Supprimer une compétence">
+     </div>
+     </form> 
+<?php } ?>
+</section>
     
-    <footer>
-        <div class="floatLeft">Projet Développement Web</div>
-        <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
-    </footer>
+<footer>
+    <div class="floatLeft">Projet Développement Web</div>
+    <div  class="floatRight">Emma Batherosse, Lucas Boj, Charles Masson et Noémie Ruat</div>
+</footer>
+
 </body>
 
 </html>

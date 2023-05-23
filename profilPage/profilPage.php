@@ -1,4 +1,5 @@
 <?php
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -12,6 +13,8 @@ catch (Exception $e)
 {
 die('Erreur : ' . $e->getMessage());
 }
+
+//RECUPERATION DES DONNEES
 session_start();
 
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
@@ -79,7 +82,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
             $mdp=$donnees['MDP'];
 		}
 }
-?>
+?>//AFFICHAGE DES CHAMPS DU COMPTE
     <section id="bodyProfil">
         <div class="textBoldProfil">Nom</div>
         <div class="textProfil"> <?php echo $nom; ?></div>
