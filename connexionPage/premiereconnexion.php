@@ -26,7 +26,7 @@
     </footer>
 
 <?php
-
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -42,6 +42,8 @@ die('Erreur : ' . $e->getMessage());
 ?>
 
 <?php
+
+//RECUPERATION DES DONNEES
 session_start();
 
 if (!isset($_SESSION['ID_Compte'])) {

@@ -15,6 +15,7 @@ die('Erreur : ' . $e->getMessage());
 }
 ?>
 
+//RECUPERATION DES DONNEES
 <?php
 session_start();
 if (!isset($_SESSION['ID_Compte'])) {
@@ -106,7 +107,7 @@ while ($donnees = $reponse->fetch()){
             <div class="flexboxLogo-menu"><a href="profilPage.php" class="lienClique"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-
+//MODIFICATION DE CHAMPS
 	<section>
 		<img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
 		<div id="formulaireModificationProfil">	

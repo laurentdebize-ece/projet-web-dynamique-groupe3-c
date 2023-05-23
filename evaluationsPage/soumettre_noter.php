@@ -26,7 +26,7 @@
 
 <body>
 <?php
-
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -40,6 +40,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
@@ -88,6 +89,7 @@ if ($Type_compte == "Professeur") {
     <div class="login-form3">
     <br> <br>
             <?php
+        //LANCER UNE AUTOEVALUATION EN TANT QUE PROF    
         if($action=="Auto Evaluation"){    
             $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -146,6 +148,7 @@ if ($Type_compte == "Professeur") {
                     }
                 }
             }
+        //EVALUER UN ETUDIANT EN TANT QUE PROF    
         else if($action=="Evaluation"){
             ?><section id="titre"><br><br>
         <h7>Evaluer un étudiant : <br></h7>

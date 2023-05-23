@@ -61,6 +61,7 @@ $reponseModifCompetence = $_POST['modifCompetence'];?>
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
+    //MODIFICATION DES COMPTENCES
     <section>
         <img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
 		<div class="formulaireModification">	

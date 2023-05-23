@@ -1,4 +1,5 @@
 <?php
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -12,6 +13,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: ../connexionPage/premiereconnexion.php');
@@ -57,7 +59,7 @@ require_once('../fonction.php');
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-
+//TRI DES COMPETENCES
 <section id="bodyMesCompetencesPage">
     <div class="login-form3">
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="formChoixTri">
@@ -153,6 +155,7 @@ require_once('../fonction.php');
         INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
         WHERE compte.ID_Compte = '$ID' ");
 }?>
+//AFFICHAGE DES COMPETENCES
 <table>
     <tr id="textLigne1">
         <th>Compétences</th>
