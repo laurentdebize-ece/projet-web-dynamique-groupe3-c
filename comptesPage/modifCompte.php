@@ -104,14 +104,15 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
             <div class="flexboxLogo-menu"><a href="../profilPage/profilPage.php" class="lienWhite"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    //MODIFIER UN COMPTE
+
 <section>
-    <img src="../img/paris.jpg"  alt=" parisCity " class="tailleImgFormualaire">
+    <img src="../img/paris.jpg"  alt=" parisCity " class="tailleImgFormualaire"><!--http://wikimapia.org/5009811/fr/Paris-->
     <div id="formulaireModificationCompte">
         <div class="login-form2">
             <form method="POST" action="comptesPage.php" id="ajouterCompte">
-                //AJOUTER UN COMPTE
-            <?php if($reponseModifCompte=="Ajouter"){?>
+            <?php //AJOUTER UN COMPTE
+            if($reponseModifCompte=="Ajouter"){?>
+                
 			    <h3>Ajouter un compte</h3>
                 Nom : <input type="text" name="NewNom" placeholder="Entrez nom"required><br><br>
                 Prénom : <input type="text" name="NewPrenom" placeholder="Entrez prénom"required><br><br>

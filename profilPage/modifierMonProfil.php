@@ -109,7 +109,7 @@ while ($donnees = $reponse->fetch()){
     </section>
 //MODIFICATION DE CHAMPS
 	<section>
-		<img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
+		<img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire"><!--http://wikimapia.org/5009811/fr/Paris-->
 		<div id="formulaireModificationProfil">	
 			<div class="login-form2">
 				<h3>Mon compte</h3>

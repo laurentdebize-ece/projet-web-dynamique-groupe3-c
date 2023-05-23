@@ -119,7 +119,7 @@ if(isset($_POST['validerSuppressionCompetenceProf'])){
         </div>
     </section>
     <section>
-        <img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire">
+        <img src="../img/paris.jpg"  alt="parisCity" class="tailleImgFormualaire"><!--http://wikimapia.org/5009811/fr/Paris-->
         <div class="formulaireModification">	   
             <div class="login-form2">
             <form method="POST" action="matieresPage.php">

@@ -155,7 +155,6 @@ require_once('../fonction.php');
         INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
         WHERE compte.ID_Compte = '$ID' ");
 }?>
-//AFFICHAGE DES COMPETENCES
 <table>
     <tr id="textLigne1">
         <th>Compétences</th>

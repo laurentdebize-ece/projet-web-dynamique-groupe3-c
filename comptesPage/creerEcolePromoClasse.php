@@ -82,13 +82,13 @@ $reponseCreation = $_POST['creerEcolePromoClasse'];?>
         </div>
     </section>
     <section>
-    <img src="../img/paris.jpg"  alt=" parisCity " class="tailleImgFormualaire">
+    <img src="../img/paris.jpg"  alt=" parisCity " class="tailleImgFormualaire"><!--http://wikimapia.org/5009811/fr/Paris-->
     <div class="formulaireModification">
         <div class="login-form2">
             <form method="POST" action="comptesPage.php" id="ajouterCompte">
                 
-            //CREER UNE ECOLE
-            <?php if($reponseCreation == "Créer une école"){ ?>
+            <?php //CREER UNE ECOLE
+            if($reponseCreation == "Créer une école"){ ?>
                 <h3>Ajouter une école</h3>
                 Nom de l'école : <input type="text" name="NewNomEcole" placeholder="Entrez nom"required><br><br>
                 <input type="submit" name="validerAjoutEcole" value="Enregistrer">

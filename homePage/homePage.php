@@ -61,7 +61,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
     </section>
     <section id="introHomePage">
         <h1> <img src="../img/omnesSkills.png"  alt=" omnesSkills " id="tailleImgOmnesSkills"> </h1>
-        <img src="../img/HomePageLyon.jpeg"  alt=" lyonHP" id="imgLyonHP">
+        <img src="../img/HomePageLyon.jpeg"  alt=" lyonHP" id="imgLyonHP"><!--https://erasmusu.com/-->
         <div class="intro">
             Ce site web permet aux professeurs de lister les compétences à
             acquérir dans leur matière, tandis que les étudiants pourront 

@@ -61,8 +61,8 @@ $Type_compte=$_SESSION['Type_compte'];
 
 
 <table>
-    //AUTO EVALUATION D'UN ELEVE
-    <?php
+    
+    <?php //AUTO EVALUATION D'UN ELEVE
     $reponse = $bdd->query('SELECT * FROM compte INNER JOIN compte_competence ON Compte.ID_compte = compte_competence.ID_compte INNER JOIN competence ON compte_competence.ID_competence = competence.ID_competence INNER JOIN matiere_competence ON competence.ID_competence = matiere_competence.ID_Competence INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere');
     while ($donnees = $reponse->fetch()){
         if ($donnees['ID_Compte'] == $ID && $donnees['Nom_matiere']==$NomMatiere ) { ?>

@@ -67,7 +67,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
             <div class="flexboxLogo-menu"><a href="profilPage.php" class="lienClique"><img src="../img/profilLogo.png" class="menuLogo" alt=" profilLogo "></a></div>
         </div>
     </section>
-    <img src="../img/lyonCity.jpg"  alt=" lyonCity " id="imgLyonCityProfil">
+    <img src="../img/lyonCity.jpg"  alt=" lyonCity " id="imgLyonCityProfil"><!--https://www.virtuoso.com/-->
 
     <?php 
     
