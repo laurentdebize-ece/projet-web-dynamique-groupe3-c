@@ -72,94 +72,179 @@ $_SESSION['Type_compte'] = $Type_compte;
                 <input type="submit" value="valider">
         </form>
     </div>
-<?php if(isset($_POST['choixTriCompetences'])){
+<?php if($Type_compte=="Etudiant"){
+    if(isset($_POST['choixTriCompetences'])){
+        switch($_POST['choixTriCompetences']) {
+            case 1 : //ordre alphabétique compétences
+                $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+                INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+                INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+                INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+                INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+                WHERE compte.ID_Compte = '$ID'
+                ORDER BY Nom_competence ");
+                break;
+            case 2 : //ordre inalphabétique compétences
+                $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+                INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+                INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+                INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+                INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+                WHERE compte.ID_Compte = '$ID'
+                ORDER BY Nom_competence DESC");
+                break;
+            case 3 : //statut
+                $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+                INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+                INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+                INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+                INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+                WHERE compte.ID_Compte = '$ID'
+                ORDER BY Etat_competence");
+                break;
+            case 4 : //date par ordre croissant
+                $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+                INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+                INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+                INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+                INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+                WHERE compte.ID_Compte = '$ID'
+                ORDER BY Date_Creation ASC");
+                break;
+            case 5 : //date par ordre décroissant
+                $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+                INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+                INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+                INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+                INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+                WHERE compte.ID_Compte = '$ID'
+                ORDER BY Date_Creation DESC");
+                break;
+            case 6 : //matiere
+                $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+                INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+                INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+                INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+                INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+                WHERE compte.ID_Compte = '$ID'
+                ORDER BY matiere.Nom_matiere");
+                break;
+            case 7 : //professseur
+                $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+                INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+                INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+                INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+                INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+                WHERE compte.ID_Compte = '$ID'
+                ORDER BY matiere_competence.professeur");
+                break;
+            default :
+                $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+                INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+                INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+                INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+                INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+                WHERE compte.ID_Compte = '$ID' ");
+                break;
+        }
+    } else {
+        $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
+        INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
+        INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
+        INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
+        INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+        WHERE compte.ID_Compte = '$ID' ");
+    }
+} else if($Type_compte=="Professeur") {
+if(isset($_POST['choixTriCompetences'])){
     switch($_POST['choixTriCompetences']) {
         case 1 : //ordre alphabétique compétences
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
-            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-            INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
-            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
+            INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN matiere_competence ON matiere.ID_Matiere = matiere_competence.ID_Matiere
+            INNER JOIN competence ON matiere_competence.ID_Competence = competence.ID_Competence
             WHERE compte.ID_Compte = '$ID'
             ORDER BY Nom_competence ");
             break;
         case 2 : //ordre inalphabétique compétences
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
-            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-            INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
-            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
+            INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN matiere_competence ON matiere.ID_Matiere = matiere_competence.ID_Matiere
+            INNER JOIN competence ON matiere_competence.ID_Competence = competence.ID_Competence
             WHERE compte.ID_Compte = '$ID'
             ORDER BY Nom_competence DESC");
             break;
         case 3 : //statut
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
-            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-            INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
-            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
+            INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN matiere_competence ON matiere.ID_Matiere = matiere_competence.ID_Matiere
+            INNER JOIN competence ON matiere_competence.ID_Competence = competence.ID_Competence
             WHERE compte.ID_Compte = '$ID'
             ORDER BY Etat_competence");
             break;
         case 4 : //date par ordre croissant
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
-            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-            INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
-            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
+            INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN matiere_competence ON matiere.ID_Matiere = matiere_competence.ID_Matiere
+            INNER JOIN competence ON matiere_competence.ID_Competence = competence.ID_Competence
             WHERE compte.ID_Compte = '$ID'
             ORDER BY Date_Creation ASC");
             break;
         case 5 : //date par ordre décroissant
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
-            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-            INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
-            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
+            INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN matiere_competence ON matiere.ID_Matiere = matiere_competence.ID_Matiere
+            INNER JOIN competence ON matiere_competence.ID_Competence = competence.ID_Competence
             WHERE compte.ID_Compte = '$ID'
             ORDER BY Date_Creation DESC");
             break;
         case 6 : //matiere
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
-            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-            INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
-            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
+            INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN matiere_competence ON matiere.ID_Matiere = matiere_competence.ID_Matiere
+            INNER JOIN competence ON matiere_competence.ID_Competence = competence.ID_Competence
             WHERE compte.ID_Compte = '$ID'
             ORDER BY matiere.Nom_matiere");
             break;
         case 7 : //professseur
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
-            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-            INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
-            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
+            INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN matiere_competence ON matiere.ID_Matiere = matiere_competence.ID_Matiere
+            INNER JOIN competence ON matiere_competence.ID_Competence = competence.ID_Competence
             WHERE compte.ID_Compte = '$ID'
             ORDER BY matiere_competence.professeur");
             break;
         default :
             $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
-            INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-            INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
-            INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-            INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
-            WHERE compte.ID_Compte = '$ID' ");
+            INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
+            INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere
+            INNER JOIN matiere_competence ON matiere.ID_Matiere = matiere_competence.ID_Matiere
+            INNER JOIN competence ON matiere_competence.ID_Competence = competence.ID_Competence
+            WHERE compte.ID_Compte = '$ID'");
             break;
     }
 } else {
     $reponseCompetence = $bdd->query("SELECT DISTINCT * FROM compte 
-    INNER JOIN compte_competence ON compte.ID_Compte = compte_competence.ID_Compte
-    INNER JOIN competence ON compte_competence.ID_Competence = competence.ID_Competence
-    INNER JOIN matiere_competence ON competence.ID_Competence = matiere_competence.ID_Competence
-    INNER JOIN matiere ON matiere_competence.ID_Matiere = matiere.ID_Matiere
-    WHERE compte.ID_Compte = '$ID' ");
+    INNER JOIN compte_matiere ON compte.ID_Compte = compte_matiere.ID_Compte
+    INNER JOIN matiere ON compte_matiere.ID_Matiere = matiere.ID_Matiere
+    INNER JOIN matiere_competence ON matiere.ID_Matiere = matiere_competence.ID_Matiere
+    INNER JOIN competence ON matiere_competence.ID_Competence = competence.ID_Competence
+    WHERE compte.ID_Compte = '$ID'");
+}
 }?>
 <table>
     <tr id="textLigne1">
         <th>Compétences</th>
         <th>Thème</th>
         <th>Date de création</th>
-        <th>Prof</th>
+        <th>Professeur</th>
         <th>Matière</th>
     </tr>
 <?php while ($donneesCompetence = $reponseCompetence->fetch()){ ?> 

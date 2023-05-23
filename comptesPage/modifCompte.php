@@ -7,7 +7,6 @@
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleComptesPage.css" rel="stylesheet" type="text/css">
 
-</head>
 <script>
     function showEtudiantChamps() {
         document.getElementById("etudiantChamps").style.display = "block";
@@ -21,38 +20,39 @@
         document.getElementById("etudiantChamps").style.display = "none";
         document.getElementById("professeurChamps").style.display = "none";
     }
-    function showPromosEcole(idEcole) {
+    function showPromosEtudiant(idEcole) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("promoSelect").innerHTML = this.responseText;
+                document.getElementById("promoSelectEtudiant").innerHTML = this.responseText;
             }
         };
         xhttp.open("GET", "getPromotionsEcole.php?idEcole=" + idEcole, true);
         xhttp.send();
     }
-    function showClassesPromo(idPromo) {
+    function showClassesEtudiant(idPromo) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("classeSelect").innerHTML = this.responseText;
+                document.getElementById("classeSelectEtudiant").innerHTML = this.responseText;
             }
         };
         xhttp.open("GET", "getClassesPromo.php?idPromo=" + idPromo, true);
         xhttp.send();
     }
-    function showClassesEcole(idEcole) {
+    function showClassesProf(idEcole) {
         console.log(idEcole);
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("classeSelectByEcole").innerHTML = this.responseText;
+                document.getElementById("classeSelectProf").innerHTML = this.responseText;
             }
         };
         xhttp.open("GET", "getClassesEcole.php?idEcole=" + idEcole, true);
         xhttp.send();
     }
     </script>
+    </head>
 <body>
 <?php
 
@@ -117,32 +117,30 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                     <input type="radio" name="NewTypeCompte" value="Administrateur" onclick="cacherExtraChamps()">Administrateur
                     <br><br>
                 <div id="etudiantChamps" style="display: none;">
-                    Ecole : <select name="NewEcole" id="ecoleSelect" onchange="showPromosEcole(this.value)" >
+                    Ecole : <select name="NewEcole" id="ecoleSelectEtudiant" onchange="showPromosEtudiant(this.value)" >
                         <option>Choisir</option>
                         <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                         while ($donneesEcole = $reponseEcole->fetch()){ ?>
-                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom'] ?></option>
+                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
                         <?php } ?> 
                     </select><br><br>
-                    Promo : <select name="NewPromo" id="promoSelect" onchange="showClassesPromo(this.value)">
+                    Promo : <select name="NewPromo" id="promoSelectEtudiant" onchange="showClassesEtudiant(this.value)">
                         <option>Choisir</option>
                     </select><br><br>
-                    Classe : <select name="NewClasse" id="classeSelect">
+                    Classe : <select name="NewClasse" id="classeSelectEtudiant">
                         <option>Choisir</option>
                     </select><br><br>
                 </div>
                 <div id="professeurChamps" style="display: none;">
-                    Ecole : <select name="NewEcole" id="ecoleSelect" onchange="showClassesEcole(this.value)" >
+                    Ecole : <select name="NewEcole" id="ecoleSelectProf" onchange="showClassesProf(this.value)" >
                         <option>Choisir</option>
                         <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                         while ($donneesEcole = $reponseEcole->fetch()){ ?>
-                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom'] ?></option>
+                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
                         <?php } ?> 
                     </select><br><br>
-                    Classe : <select name="NewClasse" id="classeSelectByEcole">
-                        <option>Choisir</option>
-                    </select><br><br>
-                    Matière : <select name="NewMatiere" id="matiereSelect">
+                    Classe : <div id="classeSelectProf"></div><br><br>
+                    Matière : <select name="NewMatiere" id="matiereSelectProf">
                         <option>Choisir</option>
                         <?php $reponseMatiere = $bdd->query('SELECT * FROM matiere');
                         while ($donneesMatiere = $reponseMatiere->fetch()){ ?>
