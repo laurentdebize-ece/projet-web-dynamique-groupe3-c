@@ -7,6 +7,21 @@
     <link href="../style.css" rel="stylesheet" type="text/css">
     <link href="styleEvaluationsPage.css" rel="stylesheet" type="text/css">
 
+
+    <script>
+
+    function showClasses(idPromo) {
+        console.log(idPromo);
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("selectClasse").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "getClassesPromo.php?idPromo=" + idPromo, true);
+        xhttp.send();
+    }
+    </script>
 </head>
 
 <body>
@@ -87,7 +102,7 @@ if ($Type_compte == "Professeur") {
             $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                 promo :
-                <select name="choixPromo" id="choix">
+                <select name="choixPromo" id="selectPromo" onchange="showClasses(this.value)">
                     <?php
                     while ($donneespromo = $reponsepromo->fetch()) { 
                         if ($donneespromo['ID_Ecole'] == $ID_Ecole && $donneespromo['ID_Promotion'] != 0) {
@@ -97,34 +112,16 @@ if ($Type_compte == "Professeur") {
                         }
                     } ?>
                 </select>
-                <input type="submit" name="validechoixpromo" value="choisir">
-            </form>
-
-            <?php
-            if (isset($_POST['validechoixpromo'])) {
-                if (isset($_POST['choixPromo'])) {
-                    echo 'classe :';
-                    $choixPromo = $_POST['choixPromo'];
-                    $reponseclasse = $bdd->prepare('SELECT * FROM classe INNER JOIN promotion ON classe.ID_Promotion = promotion.ID_Promotion WHERE promotion.ID_Promotion = :promo');
-                    $reponseclasse->bindParam(':promo', $choixPromo);
-                    $reponseclasse->execute();
-                    ?>
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                        <select name="choixClasse" id="choix">
-                            <?php while ($donneesclasse = $reponseclasse->fetch()) { 
-                                if ($donneesclasse['ID_Promotion'] == $choixPromo ) {
-                                    ?>
-                                    <option value="<?php echo $donneesclasse['ID_Classe'];?>"><?php echo $donneesclasse['Num_groupe'];?> </option>
-                                <?php 
-                                }
-                            } ?>
+                classe :
+                <select name="choixClasse" id="selectClasse" >
+                                    <option>choisir</option>
                         </select>
                         <input type="hidden" name="choixPromo" value="<?php echo $choixPromo; ?>">
                         <input type="submit" name="soumettre_evaluation" value="Soumettre">Soumettre</option>
                     </form>
                 <?php
-                }
-            }
+                
+           }
 
             if (isset($_POST['soumettre_evaluation'])) {
                 if (isset($_POST['choixPromo']) && isset($_POST['choixClasse'])) {
@@ -155,7 +152,7 @@ if ($Type_compte == "Professeur") {
                     }
                 }
             }
-        }else if($action=="evaluation"){
+        else if($action=="evaluation"){
             echo "evaluer un etudiant : <br>";
                             $reponsepromo2 = $bdd->query('SELECT * FROM promotion');
                             while ($donneespromo2 = $reponsepromo2->fetch()) { 
