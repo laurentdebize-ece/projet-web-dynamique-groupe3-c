@@ -122,6 +122,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                         <?php $reponseEcole = $bdd->query('SELECT * FROM ecole');
                         while ($donneesEcole = $reponseEcole->fetch()){ ?>
                             <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
+                            <option value="<?php echo $donneesEcole['ID_Ecole']?>"><?php echo $donneesEcole['Nom_Ecole'] ?></option>
                         <?php } ?> 
                     </select><br><br>
                     Promo : <select name="NewPromo" id="promoSelectEtudiant" onchange="showClassesEtudiant(this.value)">

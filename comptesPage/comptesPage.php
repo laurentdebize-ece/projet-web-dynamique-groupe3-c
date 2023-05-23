@@ -46,7 +46,7 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                     if(isset($_POST['validerAjout'])){ 
                       $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                       $NewMDP = '';
-                      for ($i = 0; $i < 10; $i++) {
+                      for ($i = 0; $i < 6; $i++) {
                           $NewMDP .= $caracteres[rand(0, strlen($caracteres) - 1)];
                       }
                       
@@ -57,18 +57,23 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       $NewPrenom = $_POST['NewPrenom'];
                       if($_POST['NewTypeCompte']=="Administrateur") {
                         $NewIDecole = 0;
-                      } else {
-                        $NewIDecole=$_POST['NewEcole'];
-                      }/*
-                      if($_POST['NewTypeCompte']=="Etudiant") { //MANQUE JOINTURE
+                        $NewPromo = 0;
+                        $NewClasse = 0;
+                      }
+                      if($_POST['NewTypeCompte']=="Etudiant") {
                         $NewPromo = $_POST['NewPromo'];
                         $NewClasse = $_POST['NewClasse'];
-                      } 
-                      if($_POST['NewTypeCompte']=="Professeur") { //MANQUE JOINTURE
-                        $NewMatiere = $_POST['NewMatiere'];
-                      }*/
+                        $NewIDecole=$_POST['NewEcole'];
+                      }
                       
-                      $requete = $bdd->prepare("INSERT INTO compte (Nom_Compte, Prenom, E_mail, MDP,type_compte, Deja_connecte,ID_Ecole) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole)");
+                      if($_POST['NewTypeCompte']=="Professeur") {
+                        //$NewMatiere = $_POST['NewMatiere'];
+                        $NewIDecole=$_POST['NewEcoleProf'];
+                        $NewClasse = $_POST['NewClasseProf'];
+                        $NewPromo = 0;
+                      }
+                      
+                      $requete = $bdd->prepare("INSERT INTO compte (Nom_Compte, Prenom, E_mail, MDP,Type_compte, Deja_connecte,ID_Ecole,ID_Promotion,ID_Classe) VALUES ( :NewNom, :NewPrenom, :NewEmail, :NewMDP,:NewTypeCompte, :NewDejaCo, :NewIDecole, :NewPromo, :NewClasse)");
                       $requete->bindParam(':NewNom', $NewNom);
                       $requete->bindParam(':NewPrenom', $NewPrenom);
                       $requete->bindParam(':NewEmail', $NewEmail);
@@ -76,6 +81,8 @@ if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
                       $requete->bindParam(':NewTypeCompte', $NewTypeCompte);
                       $requete->bindParam(':NewDejaCo', $NewDejaCo);
                       $requete->bindParam(':NewIDecole', $NewIDecole);
+                      $requete->bindParam(':NewPromo', $NewPromo);
+                      $requete->bindParam(':NewClasse', $NewClasse);
                       $requete->execute();
                     }//Mettre le message un message d 'erreur
                     if(isset($_POST['validerSuppression'])){
