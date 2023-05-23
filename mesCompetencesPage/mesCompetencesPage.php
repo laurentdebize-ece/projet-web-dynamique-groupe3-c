@@ -21,6 +21,17 @@ $ID = $_SESSION['ID_Compte'];
 $Type_compte = $_SESSION['Type_compte'];
 $_SESSION['ID_Compte'] = $ID;
 $_SESSION['Type_compte'] = $Type_compte;
+require_once('../fonction.php');
+
+if(isset($_POST['validerAjout'])){
+    $tab_competence = [
+        "ID_Competence" => NULL,
+        "Nom_competence" => $_POST['NewNom'],
+        "Date_Creation" => $_POST['NewDate'],
+        "Theme" => $_POST['NewTheme']
+    ];
+    insertion($bdd,"competence", $tab_competence);
+}
 ?>
 
 
@@ -39,11 +50,9 @@ $_SESSION['Type_compte'] = $Type_compte;
 <section id="header">
         <div class="flex-contain-menu">
             <div class="flexboxLogo-menu"><a href="../homePage/homePage.php" class="lienWhite"><img src="../img/homeLogo.png" class="menuLogo" alt=" homeLogo "></a></div>
-            <?php if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
-            <?php }
-            if($Type_compte=="Professeur" || $Type_compte=="Etudiant"){ ?>
-                <div class="flexboxText-menu"><a href="mesCompetencesPage.php" class="lienClique">Mes compétences</a></div>
+            <div class="flexboxText-menu"><a href="../matieresPage/matieresPage.php" class="lienWhite">Matières</a></div>
+            <?php if($Type_compte=="Etudiant"){ ?>
+                <div class="flexboxText-menu"><a href="../mesCompetencesPage/mesCompetencesPage.php" class="lienWhite">Mes compétences</a></div>
             <?php }
             if($Type_compte=="Administrateur" || $Type_compte=="Etudiant"){ ?>
                 <div class="flexboxText-menu"><a href="../competencesTransversesPage/competencesTransversesPage.php" class="lienWhite">Compétences transverses</a></div>
@@ -257,6 +266,14 @@ if(isset($_POST['choixTriCompetences'])){
     </tr>
 <?php } ?>
 </table>  
+<?php if($Type_compte=="Professeur"){?>
+    <div class="login-form3">
+        <form method="POST" action="modifCompetenceProf.php">
+            <input type="submit" name ="modifCompetenceProf" value="Ajouter une compétence">
+            <input type="submit" name ="modifCompetenceProf" value="Supprimer une compétence">
+        </form>
+    </div>
+<?php }?>
     </section>  
     <footer>
         <div class="floatLeft">Projet Développement Web</div>
