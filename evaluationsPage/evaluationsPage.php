@@ -75,6 +75,8 @@ if ($Type_compte == "Professeur") {
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <input type="submit" name="valideaction" value="Evaluation">
         <input type="submit" name="valideaction" value="Auto Evaluation">
+        <input type="submit" name="valideaction" value="Ajouter Classe">
+
     </form>
     <?php
     if (isset($_POST['valideaction'])) {
