@@ -37,6 +37,16 @@ h2{
     font-weight: bold;
     padding: 5%;
 }
+h4{
+    text-align: left;
+    font-family: "openSansBold";
+    font-weight: bold;
+    font-size: xx-large;
+    color: #002B44;
+    padding-left: 4%;
+    margin-bottom: none;
+    padding-bottom: none;
+}
 
 
 /*Menu*/

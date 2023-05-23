@@ -9,8 +9,7 @@
 
 
     <script>
-
-    function showClasses(idPromo) {
+    function showClasses(idPromo) { //AFFICHAGE DES CLASSES EN FONCTION DES PROMOS
         console.log(idPromo);
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -26,7 +25,7 @@
 
 <body>
 <?php
-
+//CONNEXION
 try{
     $mdp="root";
 	if (strstr($_SERVER['DOCUMENT_ROOT'],"wamp")){
@@ -40,8 +39,8 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
+//RECUPERATION DES DONNEES
 session_start();
-
 if (!isset($_SESSION['ID_Compte']) && !isset($_SESSION['Type_compte'])) {
 	header('Location: evaluationsPage.php');
 	exit();
@@ -81,19 +80,18 @@ while ($donnees = $reponse->fetch()){
     $ID_Ecole=$donnees['ID_Ecole'];
     $ID_Matiere=$donnees['ID_Matiere'];
     }
-}
-
-if ($Type_compte == "Professeur") {
+}?>
+<img src="../img/nyCity.jpg"  alt=" nyCity " id="tailleImgEval"><!--https://www.artheroes.fr/-->
+<?php if ($Type_compte == "Professeur") {
     ?>
+
     <div class="login-form3">
-    <br> <br>
-            <?php
-        if($action=="Auto Evaluation"){    
+    <?php if($action=="Auto Evaluation"){    
             $reponsepromo = $bdd->query('SELECT * FROM promotion'); ?>
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <section id="titre"><br><br><br>
-            <h7>Auto évaluation : <br></h7>
-            <div id="promo"> <br>promo :
+            <h4>Auto évaluation :</h4>
+            <div id="promo">Promo :
                 <select name="choixPromo" id="selectPromo" onchange="showClasses(this.value)">
         
                     <?php
