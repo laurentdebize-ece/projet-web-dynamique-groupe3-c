@@ -150,8 +150,8 @@ INSERT INTO `matiere` (`ID_Matiere`, `Nom_matiere`, `Volume_horaire`) VALUES
 (9, 'Histoire', 10),
 (10, 'Gestion', 50),
 (11, 'Humanite', 5),
-(12, 'SI', 30),
-(13, 'Informatique', 10);
+(12, 'SI', 30);
+
 
 CREATE TABLE  `competence` (
     `ID_Competence` int(11) PRIMARY KEY AUTO_INCREMENT,
@@ -252,7 +252,7 @@ INSERT INTO `compte_matiere` (`ID_compte_matiere`, `ID_Compte`, `ID_Matiere`) VA
 (6,2,5),
 (7,2,6),
 (8,3,1),
-(9,3,13),
+
 (10,5,9),
 (11,6,11),
 (12,6,12),
